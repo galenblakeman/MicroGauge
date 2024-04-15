@@ -15,7 +15,14 @@ public partial class App : Application
     {
         base.OnStart();
 
+        // Unhandled
+        AppDomain.CurrentDomain.UnhandledException += (s, e) =>
+        {
+            Console.WriteLine($"UnhandledException:{e.ExceptionObject}");
+        };
+
         // Restore window position
+        if (DeviceInfo.Current.Platform != DevicePlatform.WinUI) return;
         var window = Current?.Windows.FirstOrDefault();
         if (window == null) return;
         try
@@ -29,15 +36,10 @@ public partial class App : Application
         {
             Console.WriteLine($"Set Position: {ex.Message}");
         }
-
         window.Destroying += Window_Destroying;
 
 
-        // Unhandled
-        AppDomain.CurrentDomain.UnhandledException += (s, e) =>
-        {
-            Console.WriteLine($"UnhandledException:{e.ExceptionObject}");
-        };
+      
     }
    
 

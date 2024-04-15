@@ -56,34 +56,33 @@
     </ContentPage.Resources>
 
     <!-- ReSharper all MarkupAttributeTypo -->
-    <StackLayout BackgroundColor="#0063b1">
-        <Label HorizontalTextAlignment="Center" VerticalTextAlignment="End"
-               Text="MicroGauge .Net Maui Examples" TextColor="White" FontSize="24" Margin="10" />
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="250" />
-                <RowDefinition Height="250" />
-                <RowDefinition Height="180" />
-                <RowDefinition Height="250" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+    <ScrollView>
+        <StackLayout BackgroundColor="#74747c">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="225" />
+                    <RowDefinition Height="225" />
+                    <RowDefinition Height="150" />
+                    <RowDefinition Height="225" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <!--WindSpeed-->
-            <Label Grid.Row="0" Grid.Column="0"
+                <!--WindSpeed-->
+                <Label Grid.Row="0" Grid.Column="0"
                    Style="{StaticResource ChartLabel}"
                    Text="Wind Speed"
                    Margin="0"
                    VerticalTextAlignment="Start" />
-            <Label Grid.Row="0" Grid.Column="0"
+                <Label Grid.Row="0" Grid.Column="0"
                        Style="{StaticResource ChartNote}"
                        Text="(No Tail)"
                        Margin="0,16,0,0"
                        VerticalTextAlignment="Start" />
 
-            <microGauge:MauiGaugeRadial
+                <microGauge:MauiGaugeRadial
                 Grid.Row="0"
                 Grid.Column="0"
                 BackingBrush="{StaticResource RadialGaugeBacking}"
@@ -129,18 +128,18 @@
                 RangeOuterStartExtent ="0.6"
                 RangeOuterEndExtent ="0.71" />
 
-            <!--Humidity (No Minor)-->
-            <Label Grid.Row="0" Grid.Column="1"
+                <!--Humidity (No Minor)-->
+                <Label Grid.Row="0" Grid.Column="1"
                    Style="{StaticResource ChartLabel}"
                    Text="Humidity"
                    Margin="0"
                    VerticalTextAlignment="Start" />
-            <Label Grid.Row="0" Grid.Column="1"
+                <Label Grid.Row="0" Grid.Column="1"
                        Style="{StaticResource ChartNote}"
                        Text="(No Minor)"
                        Margin="0,16,0,0"
                        VerticalTextAlignment="Start" />
-            <microGauge:MauiGaugeRadial
+                <microGauge:MauiGaugeRadial
                 Grid.Row="0"
                 Grid.Column="1"
                 BackingBrush="{StaticResource RadialGaugeBacking}"
@@ -180,18 +179,18 @@
                 RangeOuterStartExtent ="0.6"
                 RangeOuterEndExtent ="0.71" />
 
-            <!--Pressure (Set Indicator)-->
-            <Label Grid.Row="1" Grid.Column="0"
+                <!--Pressure (Set Indicator)-->
+                <Label Grid.Row="1" Grid.Column="0"
                    Style="{StaticResource ChartLabel}"
                    Text="Pressure"
                    Margin="0"
                    VerticalTextAlignment="Start" />
-            <Label Grid.Row="1" Grid.Column="0"
+                <Label Grid.Row="1" Grid.Column="0"
                        Style="{StaticResource ChartNote}"
                        Text="(Set Indicator)"
                        Margin="0,16,0,0"
                        VerticalTextAlignment="Start" />
-            <microGauge:MauiGaugeRadial
+                <microGauge:MauiGaugeRadial
                 Grid.Row="1"
                 Grid.Column="0"
                 BackingBrush="White"
@@ -241,18 +240,18 @@
 
 
 
-            <!--Flow Rate (Notch)-->
-            <Label Grid.Row="1" Grid.Column="1"
+                <!--Flow Rate (Notch)-->
+                <Label Grid.Row="1" Grid.Column="1"
                        Style="{StaticResource ChartLabel}"
                        Text="Flow Rate"
                        Margin="0"
                        VerticalTextAlignment="Start" />
-            <Label Grid.Row="1" Grid.Column="1"
+                <Label Grid.Row="1" Grid.Column="1"
                        Style="{StaticResource ChartNote}"
                        Text="(Notch)"
                        Margin="0,16,0,0"
                        VerticalTextAlignment="Start" />
-            <microGauge:MauiGaugeRadial
+                <microGauge:MauiGaugeRadial
                 Grid.Row="1"
                 Grid.Column="1"
                 RadialStyle="Notch"
@@ -291,18 +290,18 @@
                 NeedleEndExtent="0.71"
                 NeedleEndWidth="3"/>
 
-            <!--Temperature (Half)-->
-            <Label Grid.Row="2" Grid.Column="0"
+                <!--Temperature (Half)-->
+                <Label Grid.Row="2" Grid.Column="0"
                    Style="{StaticResource ChartLabel}"
                    Text="Temperature"
                    Margin="0"
                    VerticalTextAlignment="Start" />
-            <Label Grid.Row="2" Grid.Column="0"
+                <Label Grid.Row="2" Grid.Column="0"
                        Style="{StaticResource ChartNote}"
                        Text="(Half)"
                        Margin="0,16,0,0"
                        VerticalTextAlignment="Start" />
-            <microGauge:MauiGaugeRadial
+                <microGauge:MauiGaugeRadial
                 Grid.Row="2"
                 Grid.Column="0"
                 RadialStyle="Half"
@@ -351,18 +350,18 @@
                 RangeOuterEndExtent ="0.71" />
 
 
-            <!--Battery (Horizontal/Set Indicator)-->
-            <Label Grid.Row="2" Grid.Column="1"
+                <!--Battery (Horizontal/Set Indicator)-->
+                <Label Grid.Row="2" Grid.Column="1"
                    Style="{StaticResource ChartLabel}"
                    Text="Battery"
                    Margin="0"
                    VerticalTextAlignment="Start" />
-            <Label Grid.Row="2" Grid.Column="1"
+                <Label Grid.Row="2" Grid.Column="1"
                        Style="{StaticResource ChartNote}"
                        Text="(Horizontal/Set Indicator)"
                        Margin="0,16,0,0"
                        VerticalTextAlignment="Start" />
-            <microGauge:MauiGaugeLinear
+                <microGauge:MauiGaugeLinear
                 Grid.Row="2"
                 Grid.Column="1"
                 BottomExtent="0.0"
@@ -410,18 +409,18 @@
                 SetNeedleEndWidth="2"
                 ValueBarBrush="{StaticResource BrushBattery}" />
 
-            <!--Valve-->
-            <Label Grid.Row="3" Grid.Column="0"
+                <!--Valve-->
+                <Label Grid.Row="3" Grid.Column="0"
                    Style="{StaticResource ChartLabel}"
                    Text="Valve"
                    Margin="0"
                    VerticalTextAlignment="Start" />
-            <Label Grid.Row="3" Grid.Column="0"
+                <Label Grid.Row="3" Grid.Column="0"
                        Style="{StaticResource ChartNote}"
                        Text="(Vertical)"
                        Margin="0,16,0,0"
                        VerticalTextAlignment="Start" />
-            <microGauge:MauiGaugeLinear
+                <microGauge:MauiGaugeLinear
                 Grid.Row="3"
                 Grid.Column="0"
                 BottomExtent="0.15"
@@ -464,18 +463,18 @@
                 NeedleEndExtent="0.25"
                 ValueBarBrush="#57E700" />
 
-            <!--Wind Direction (360)-->
-            <Label Grid.Row="3" Grid.Column="1"
+                <!--Wind Direction (360)-->
+                <Label Grid.Row="3" Grid.Column="1"
                        Style="{StaticResource ChartLabel}"
                        Text="Wind Direction"
                        Margin="0"
                        VerticalTextAlignment="Start" />
-            <Label Grid.Row="3" Grid.Column="1"
+                <Label Grid.Row="3" Grid.Column="1"
                        Style="{StaticResource ChartNote}"
                        Text="(360)"
                        Margin="0,16,0,0"
                        VerticalTextAlignment="Start" />
-            <microGauge:MauiGaugeRadial
+                <microGauge:MauiGaugeRadial
                 Grid.Row="3"
                 Grid.Column="1"
                 BottomExtent="0.1"
@@ -516,7 +515,8 @@
                 NeedlePivotOutlineBrush="#F28C28"
                 NeedleStartExtent="-0.2"
                 NeedleEndExtent="0.71" />
-        </Grid>
-    </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ScrollView>
 
 </ContentPage>

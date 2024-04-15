@@ -56,7 +56,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <!-- ReSharper all MarkupAttributeTypo -->
-    <StackLayout BackgroundColor="#0063b1">
+    <StackLayout BackgroundColor="#74747c">
         <Label HorizontalTextAlignment="Center" VerticalTextAlignment="End"
                Text="MicroGauge Xamarin.Forms Examples" TextColor="White" FontSize="16" Margin="10,50,10,0" />
         <Grid>
