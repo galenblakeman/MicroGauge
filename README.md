@@ -10,19 +10,19 @@
 ![Gallery](https://github.com/galenblakeman/MicroGauge/blob/master/Gallery.png)
 
 ## Platform Packages
-![NuGet Version](https://img.shields.io/nuget/v/MicroGauge?style=flat-square&logo=nuget&label=MicroGauge) 
+![NuGet Version](https://img.shields.io/nuget/v/MicroGauge?style=flat-square&logo=nuget&label=MicroGauge&link=https%3A%2F%2Fwww.nuget.org%2Fpackages%2FMicroGauge%2F) 
 
 &ensp; [MicroGauge](https://github.com/galenblakeman/MicroGauge/tree/master/Library/MicroGauge) - Base library that you can work with directly
 
-![NuGet Version](https://img.shields.io/nuget/v/MicroGauge.Forms?style=flat-square&logo=nuget&label=MicroGauge.Forms) 
+![NuGet Version](https://img.shields.io/nuget/v/MicroGauge.Forms?style=flat-square&logo=nuget&label=MicroGauge.Forms&link=https%3A%2F%2Fwww.nuget.org%2Fpackages%2FMicroGauge.Forms%2F) 
 
 &ensp; [MicroGauge.Forms](https://github.com/galenblakeman/MicroGauge/tree/master/Library/MicroGauge.Forms) - Xamarina.Forms wrapper library for **MicroGauge** that utilizes SkiaSharp.Views.Forms and BindableProperty bindings
 
-![NuGet Version](https://img.shields.io/nuget/v/MicroGauge.Maui?style=flat-square&logo=nuget&label=MicroGauge.Maui) 
+![NuGet Version](https://img.shields.io/nuget/v/MicroGauge.Maui?style=flat-square&logo=nuget&label=MicroGauge.Maui&link=https%3A%2F%2Fwww.nuget.org%2Fpackages%2FMicroGauge.Maui%2F) 
 
 &ensp; [MicroGauge.Maui](https://github.com/galenblakeman/MicroGauge/tree/master/Library/MicroGauge.Maui) - .Net MAUI wrapper for **MicroGauge** library that utilizes SkiaSharp.Views.Maui.Controls and BindableProperty bindings
 
-![NuGet Version](https://img.shields.io/nuget/v/MicroGauge.Wpf?style=flat-square&logo=nuget&label=MicroGauge.Wpf) 
+![NuGet Version](https://img.shields.io/nuget/v/MicroGauge.Wpf?style=flat-square&logo=nuget&label=MicroGauge.Wpf&link=https%3A%2F%2Fwww.nuget.org%2Fpackages%2FMicroGauge.Wpf%2F) 
 
 &ensp; [MicroGauge.Wpf](https://github.com/galenblakeman/MicroGauge/tree/master/Library/MicroGauge.Wpf) - WPF wrapper library for **MicroGauge** that utilizes SkiaSharp.Views.WPF and DependencyProperty bindings
 
