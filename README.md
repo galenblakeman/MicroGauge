@@ -1,7 +1,8 @@
-## Main Library
-MicroGauge is a basic Radial and Linear Gauge library for .Net that utilizes the [SkiaSharp](https://github.com/mono/SkiaSharp) Library
-This project is inspired by [MicroCharts](https://github.com/microcharts-dotnet/Microcharts) and is a simple and small library to draw gauges on canvas.
-As shown below in the gallery the radial gauge supports full-circle, half-circle, and fitted styles and the linear gauge supports vertical and horizontal styles.
+## About
+* **MicroGauge** is a basic radial and linear gauge library for .Net that utilizes the [SkiaSharp](https://github.com/mono/SkiaSharp) Library.
+* Inspired by [MicroCharts](https://github.com/microcharts-dotnet/Microcharts), it provides a simple and compact way to draw gauges on a canvas.
+* The radial gauge offers full-circle, half-circle, and fitted design styles.
+* The linear gauge offers vertical and horizontal design styles.
 
 ## Gallery
 ![Gallery](https://github.com/galenblakeman/MicroGauge/blob/master/Gallery.png)
@@ -13,9 +14,9 @@ In addition to the base [MicroGauge](https://github.com/galenblakeman/MicroGauge
 * [MicroGauge.Wpf](https://github.com/galenblakeman/MicroGauge/tree/master/Library/MicroGauge.Wpf) - Windows Presentation Foundation library that utilizes SkiaSharp.Views.WPF and DependencyProperty bindings
 
 ## Platform Examples
-* [MicroGauge.Example.Forms](https://github.com/galenblakeman/MicroGauge/tree/master/Library/MicroGauge.Example.Forms) - Xamarina.Forms example, see MainPage.xaml for example bindings
-* [MicroGauge.Example.Maui](https://github.com/galenblakeman/MicroGauge/tree/master/Library/MicroGauge.Example.Maui)- .Net MAUI example, see MainPage.xaml for example bindings
-* [MicroGauge.Example.Wpf](https://github.com/galenblakeman/MicroGauge/tree/master/Library/MicroGauge.Example.Wpf) - Windows example, see MainWindow.xaml for example bindings
+* [MicroGauge.Example.Forms](https://github.com/galenblakeman/MicroGauge/tree/master/Example/MicroGauge.Example.Forms) - Xamarina.Forms example, see [MainPage.xaml](https://github.com/galenblakeman/MicroGauge/blob/master/Example/MicroGauge.Example.Forms/MicroGauge.Example.Forms/MainPage.xaml) for example bindings
+* [MicroGauge.Example.Maui](https://github.com/galenblakeman/MicroGauge/tree/master/Example/MicroGauge.Example.Maui) - .Net MAUI example, see [MainPage.xaml](https://github.com/galenblakeman/MicroGauge/blob/master/Example/MicroGauge.Example.Maui/MainPage.xaml) for example bindings
+* [MicroGauge.Example.Wpf](https://github.com/galenblakeman/MicroGauge/tree/master/Example/MicroGauge.Example.Wpf) - Windows example, see [MainWindow.xaml](https://github.com/galenblakeman/MicroGauge/blob/master/Example/MicroGauge.Example.Wpf/MainWindow.xaml) for example bindings
 
 ## License
 MIT © Galen Blakeman
