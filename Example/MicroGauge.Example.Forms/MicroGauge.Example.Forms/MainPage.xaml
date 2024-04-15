@@ -1,0 +1,512 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:microGauge="clr-namespace:MicroGauge.Forms;assembly=MicroGauge.Forms"
+             x:Class="MicroGauge.Example.Forms.MainPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Color x:Key="RadialGaugeBacking">#333333</Color>
+            <Color x:Key="RadialGaugeBorder">#282828</Color>
+
+            <Style x:Key="ChartLabel" TargetType="Label">
+                <Setter Property="FontFamily" Value="Verdana" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="Padding" Value="0,2" />
+            </Style>
+            <Style x:Key="ChartNote" TargetType="Label">
+                <Setter Property="FontFamily" Value="Verdana" />
+                <Setter Property="FontSize" Value="10" />
+                <Setter Property="FontAttributes" Value="None" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="Padding" Value="0,2" />
+            </Style>
+
+            <LinearGradientBrush x:Key="BrushBlueWhite" StartPoint="0,0.5" EndPoint="1,0.5">
+                <GradientStop Color="#40FFFFFF" Offset="0.0" />
+                <GradientStop Color="#700067E5" Offset="0.5" />
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="BrushPressure" StartPoint="0,0.5" EndPoint="1,0.5">
+                <GradientStop Color="#00FFFFFF" Offset="0" />
+                <GradientStop Color="#FFFF2020" Offset="0.65" />
+                <GradientStop Color="#FFFF2020" Offset="0.8" />
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="BrushGreenYellowRed" StartPoint="0,0.5" EndPoint="1,0.5">
+                <GradientStop Color="#4000E000" Offset="0" />
+                <GradientStop Color="#40E5F000" Offset="0.4" />
+                <GradientStop Color="#40FF2020" Offset="0.8" />
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="BrushIceToSun" StartPoint="0,0.5" EndPoint="1,0.5">
+                <GradientStop Color="#cce5ec" Offset="0.0" />
+                <GradientStop Color="#88abd1" Offset="0.3" />
+                <GradientStop Color="#80a862" Offset="0.5" />
+                <GradientStop Color="#FF2020" Offset="0.8" />
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="BrushBattery" StartPoint="0,0.5" EndPoint="1,0.5">
+                <GradientStop Color="#FF2020" Offset="0" />
+                <GradientStop Color="#E5F000" Offset="0.7" />
+                <GradientStop Color="#00E000 " Offset="1" />
+            </LinearGradientBrush>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <!-- ReSharper all MarkupAttributeTypo -->
+    <StackLayout BackgroundColor="#0063b1">
+        <Label HorizontalTextAlignment="Center" VerticalTextAlignment="End"
+               Text="MicroGauge Xamarin.Forms Examples" TextColor="White" FontSize="16" Margin="10,50,10,0" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="175" />
+                <RowDefinition Height="175" />
+                <RowDefinition Height="110" />
+                <RowDefinition Height="175" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!--WindSpeed-->
+            <Label Grid.Row="0" Grid.Column="0"
+                   Style="{StaticResource ChartLabel}"
+                   Text="Wind Speed"
+                   Margin="0"
+                   VerticalTextAlignment="Start" />
+            <Label Grid.Row="0" Grid.Column="0"
+                       Style="{StaticResource ChartNote}"
+                       Text="(No Tail)"
+                       Margin="0,16,0,0"
+                       VerticalTextAlignment="Start" />
+
+            <microGauge:XfGaugeRadial
+                Grid.Row="0"
+                Grid.Column="0"
+                BackingBrush="{StaticResource RadialGaugeBacking}"
+                BackingOutlineBrush="{StaticResource RadialGaugeBorder}"
+                BackingStrokeWidth="10"
+                Margin="10, 35, 10,0"
+                Value="15"
+                MinValue="0"
+                MaxValue="30"
+                Interval="5"
+                LabelInterval="5"
+                LabelExtent=".85"
+                LabelFontFamily="Arial"
+                LabelFontSize="16"
+                LabelFontBrush="#FFE000"
+                LabelFontWeight="SemiBold"
+                ValueExtent=".60"
+                ValueFormatString="{}{0:N0} MPH"
+                ValueFontFamily="Arial"
+                ValueFontSize="28"
+                ValueFontBrush="#FFE000"
+                ValueFontWeight="SemiBold"
+                ValueLocation="BottomCenter"
+                TickBrush="#FFFFFF"
+                TickStrokeWidth="2"
+                TickStartExtent ="0.6"
+                TickEndExtent ="0.7"
+                MinorTickBrush="#808080"
+                MinorTickStartExtent ="0.65"
+                MinorTickEndExtent ="0.7"
+                MinorTickStrokeWidth="1"
+                ScaleStartAngle="210"
+                ScaleEndAngle="330"
+                NeedleBrush="#FFE000"
+                NeedlePivotBrush="#4d4d4d"
+                NeedlePivotOutlineBrush="#FFE000"
+                NeedlePivotEndExtent="0.15"
+                NeedleEndExtent="0.71"
+                NeedleEndWidth="3"
+                RangeBrush="{StaticResource BrushGreenYellowRed}"
+                RangeInnerStartExtent ="0.6"
+                RangeInnerEndExtent ="0.6"
+                RangeOuterStartExtent ="0.6"
+                RangeOuterEndExtent ="0.71" />
+
+            <!--Humidity (No Minor)-->
+            <Label Grid.Row="0" Grid.Column="1"
+                   Style="{StaticResource ChartLabel}"
+                   Text="Humidity"
+                   Margin="0"
+                   VerticalTextAlignment="Start" />
+            <Label Grid.Row="0" Grid.Column="1"
+                       Style="{StaticResource ChartNote}"
+                       Text="(No Minor)"
+                       Margin="0,16,0,0"
+                       VerticalTextAlignment="Start" />
+            <microGauge:XfGaugeRadial
+                Grid.Row="0"
+                Grid.Column="1"
+                BackingBrush="{StaticResource RadialGaugeBacking}"
+                BackingOutlineBrush="#1E272E"
+                BackingStrokeWidth="7"
+                Margin="10, 35, 10,0"
+                Value="50"
+                MinValue="0"
+                MaxValue="100"
+                Interval="10"
+                MinorInterval="10"
+                LabelInterval="10"
+                LabelExtent=".85"
+                LabelFormatString="{}{0:N0}%"
+                LabelFontSize="16"
+                LabelFontBrush="White"
+                ValueFormatString="{}{0:N0}%"
+                ValueFontSize="28"
+                ValueFontBrush="#00DCFF"
+                ValueFontWeight="SemiBold"
+                TickBrush="White"
+                TickStrokeWidth="1"
+                TickStartExtent ="0.6"
+                TickEndExtent ="0.7"
+                MinorTickBrush="#727272"
+                ScaleStartAngle="210"
+                ScaleEndAngle="330"
+                NeedleBrush="#00DCFF"
+                NeedlePivotBrush="#727272"
+                NeedlePivotOutlineBrush="#00DCFF"
+                NeedleStartExtent="-0.2"
+                RangeBrush="{StaticResource BrushBlueWhite}"
+                RangeInnerStartExtent ="0.6"
+                RangeInnerEndExtent ="0.6"
+                RangeOuterStartExtent ="0.6"
+                RangeOuterEndExtent ="0.71" />
+
+            <!--Pressure (Set Indicator)-->
+            <Label Grid.Row="1" Grid.Column="0"
+                   Style="{StaticResource ChartLabel}"
+                   Text="Pressure"
+                   Margin="0"
+                   VerticalTextAlignment="Start" />
+            <Label Grid.Row="1" Grid.Column="0"
+                       Style="{StaticResource ChartNote}"
+                       Text="(Set Indicator)"
+                       Margin="0,16,0,0"
+                       VerticalTextAlignment="Start" />
+            <microGauge:XfGaugeRadial
+                Grid.Row="1"
+                Grid.Column="0"
+                BackingBrush="White"
+                BackingOutlineBrush="{StaticResource RadialGaugeBorder}"
+                BackingStrokeWidth="10"
+                Margin="10, 35, 10,0"
+                Value="400"
+                MinValue="0"
+                MaxValue="1000"
+                Interval="100"
+                MinorInterval="50"
+                LabelInterval="100"
+                LabelExtent=".79"
+                LabelFontSize="16"
+                LabelFontBrush="Black"
+                ValueFormatString="{}{0:N0} PSI"
+                ValueFontSize="28"
+                ValueFontBrush="Black"
+                ValueFontWeight="SemiBold"
+                TickBrush="Black"
+                TickStrokeWidth="2"
+                TickStartExtent ="0.6"
+                TickEndExtent ="0.7"
+                MinorTickBrush="#808080"
+                MinorTickStartExtent ="0.65"
+                MinorTickEndExtent ="0.7"
+                ScaleStartAngle="210"
+                ScaleEndAngle="330"
+                NeedleBrush="#000000"
+                NeedlePivotBrush="#C0C0C0"
+                NeedlePivotOutlineBrush="#000000"
+                NeedleStartExtent="-0.2"
+                NeedleEndExtent="0.71"
+                SetNeedleValue="700"
+                SetNeedleBrush="#ff0000"
+                SetNeedleStartExtent="0"
+                SetNeedleEndExtent="0.58"
+                SetNeedleStartWidth="3"
+                SetNeedleEndWidth="2"
+                RangeBrush="{StaticResource BrushPressure}"
+                RangeInnerStartExtent ="0.6"
+                RangeInnerEndExtent ="0.6"
+                RangeOuterStartExtent ="0.7"
+                RangeOuterEndExtent ="0.7" />
+
+
+
+            <!--Flow Rate (Notch)-->
+            <Label Grid.Row="1" Grid.Column="1"
+                       Style="{StaticResource ChartLabel}"
+                       Text="Flow Rate"
+                       Margin="0"
+                       VerticalTextAlignment="Start" />
+            <Label Grid.Row="1" Grid.Column="1"
+                       Style="{StaticResource ChartNote}"
+                       Text="(Notch)"
+                       Margin="0,16,0,0"
+                       VerticalTextAlignment="Start" />
+            <microGauge:XfGaugeRadial
+                Grid.Row="1"
+                Grid.Column="1"
+                RadialStyle="Notch"
+                BackingBrush="{StaticResource RadialGaugeBacking}"
+                BackingOutlineBrush="{StaticResource RadialGaugeBorder}"
+                BackingStrokeWidth="10"
+                Margin="10, 35, 10,0"
+                Value="4000"
+                MinValue="0"
+                MaxValue="10000"
+                Interval="1000"
+                MinorInterval="500"
+                LabelInterval="1000"
+                LabelExtent=".8"
+                LabelFontSize="16"
+                LabelFontBrush="#FFFFFF"
+                ValueFormatString="{}{0:N0} LPM"
+                ValueFontSize="28"
+                ValueFontBrush="White"
+                ValueFontWeight="SemiBold"
+                TickBrush="#FFFFFF"
+                TickStrokeWidth="2"
+                TickStartExtent ="0.55"
+                TickEndExtent ="0.65"
+                MinorTickBrush="#808080"
+                MinorTickStartExtent ="0.45"
+                MinorTickEndExtent ="0.65"
+                ScaleStartAngle="210"
+                ScaleEndAngle="330"
+                NeedleBrush="#0096FF"
+                NeedlePivotBrush="#4d4d4d"
+                NeedlePivotOutlineBrush="#0096FF"
+                NeedleStartExtent="-0.2"
+                NeedleEndExtent="0.71"
+                NeedleEndWidth="3"/>
+
+            <!--Temperature (Half)-->
+            <Label Grid.Row="2" Grid.Column="0"
+                   Style="{StaticResource ChartLabel}"
+                   Text="Temperature"
+                   Margin="0"
+                   VerticalTextAlignment="Start" />
+            <Label Grid.Row="2" Grid.Column="0"
+                       Style="{StaticResource ChartNote}"
+                       Text="(Half)"
+                       Margin="0,16,0,0"
+                       VerticalTextAlignment="Start" />
+            <microGauge:XfGaugeRadial
+                Grid.Row="2"
+                Grid.Column="0"
+                RadialStyle="Half"
+                BackingBrush="{StaticResource RadialGaugeBacking}"
+                BackingOutlineBrush="{StaticResource RadialGaugeBorder}"
+                BackingStrokeWidth="10"
+                Margin="10, 35, 10,0"
+                Value="30"
+                MinValue="-20"
+                MaxValue="40"
+                Interval="10"
+                MinorInterval="5"
+                LabelInterval="10"
+                LabelExtent=".85"
+                LabelFormatString="{}{0:N0}°"
+                LabelFontSize="16"
+                LabelFontBrush="#FFFFFF"
+                ValueExtent="-.10"
+                ValueFormatString="{}{0:N0}°"
+                ValueFontFamily="Arial"
+                ValueFontSize="28"
+                ValueFontBrush="#000000"
+                ValueFontWeight="SemiBold"
+                TickBrush="#FFFFFF"
+                TickStrokeWidth="2"
+                TickStartExtent ="0.6"
+                TickEndExtent ="0.7"
+                MinorTickBrush="#808080"
+                MinorTickStartExtent ="0.65"
+                MinorTickEndExtent ="0.7"
+                ScaleStartAngle="180"
+                ScaleEndAngle="360"
+                NeedleBrush="#AAFF00"
+                NeedlePivotBrush="#AAFF00"
+                NeedlePivotOutlineBrush="#AAFF00"
+                NeedlePivotEndExtent="0.25"
+                NeedleStartExtent="0"
+                NeedleEndExtent="0.71"
+                NeedleStartWidth="2"
+                NeedleEndWidth="1"
+                RangeBrush="{StaticResource BrushIceToSun}"
+                RangeInnerStartExtent ="0.6"
+                RangeInnerEndExtent ="0.6"
+                RangeOuterStartExtent ="0.6"
+                RangeOuterEndExtent ="0.71" />
+
+
+            <!--Battery (Horizontal/Set Indicator)-->
+            <Label Grid.Row="2" Grid.Column="1"
+                   Style="{StaticResource ChartLabel}"
+                   Text="Battery"
+                   Margin="0"
+                   VerticalTextAlignment="Start" />
+            <Label Grid.Row="2" Grid.Column="1"
+                       Style="{StaticResource ChartNote}"
+                       Text="(Horizontal/Set Indicator)"
+                       Margin="0,16,0,0"
+                       VerticalTextAlignment="Start" />
+            <microGauge:XfGaugeLinear
+                Grid.Row="2"
+                Grid.Column="1"
+                BottomExtent="0.0"
+                TopExtent="0.0"
+                LeftExtent="0.06"
+                RightExtent="0.06"
+                BackingBrush="{StaticResource RadialGaugeBacking}"
+                BackingOutlineBrush="{StaticResource RadialGaugeBorder}"
+                BackingStrokeWidth="10"
+                Margin="10, 35, 10,0"
+                Value="90"
+                MinValue="0"
+                MaxValue="100"
+                Interval="10"
+                MinorInterval="5"
+                LabelInterval="20"
+                LabelExtent=".74"
+                LabelFormatString="{}{0:N0}%"
+                LabelFontSize="16"
+                LabelFontBrush="White"
+                ValueLocation="BottomCenter"
+                ValueExtent="0.40"
+                ValueFormatString="{}{0:N0}%"
+                ValueFontFamily="Arial"
+                ValueFontSize="28"
+                ValueFontBrush="White"
+                ValueFontWeight="SemiBold"
+                TickBrush="White"
+                TickStrokeWidth="1"
+                MinorTickBrush="#727272"
+                ValueWidthExtent="0.5"
+                TickWidthExtent="0.6"
+                MinorTickWidthExtent="0.5"
+                NeedleBrush="White"
+                NeedleStartWidth="12"
+                NeedleEndWidth="1"
+                NeedleStartExtent="0.15"
+                NeedleEndExtent="0.25"
+                SetNeedleValue="60"
+                SetNeedleBrush="#ff0000"
+                SetNeedleStartExtent="0.2"
+                SetNeedleEndExtent="0.8"
+                SetNeedleStartWidth="2"
+                SetNeedleEndWidth="2"
+                ValueBarBrush="{StaticResource BrushBattery}" />
+
+            <!--Valve-->
+            <Label Grid.Row="3" Grid.Column="0"
+                   Style="{StaticResource ChartLabel}"
+                   Text="Valve"
+                   Margin="0"
+                   VerticalTextAlignment="Start" />
+            <Label Grid.Row="3" Grid.Column="0"
+                       Style="{StaticResource ChartNote}"
+                       Text="(Vertical)"
+                       Margin="0,16,0,0"
+                       VerticalTextAlignment="Start" />
+            <microGauge:XfGaugeLinear
+                Grid.Row="3"
+                Grid.Column="0"
+                BottomExtent="0.15"
+                TopExtent="0.06"
+                LeftExtent="0.0"
+                RightExtent="0.0"
+                BackingBrush="{StaticResource RadialGaugeBacking}"
+                BackingOutlineBrush="{StaticResource RadialGaugeBorder}"
+                BackingStrokeWidth="10"
+                Margin="50, 35, 50,0"
+                Value="95"
+                MinValue="0"
+                MaxValue="100"
+                Interval="10"
+                MinorInterval="5"
+                LabelInterval="10"
+                LabelExtent=".74"
+                LabelFormatString="{}{0:N0}%"
+                LabelFontSize="16"
+                LabelFontBrush="White"
+                ValueLocation="BottomCenter"
+                ValueExtent="0.08"
+                ValueFormatString="{}{0:N0}%"
+                ValueFontFamily="Arial"
+                ValueFontSize="28"
+                ValueFontBrush="White"
+                ValueFontWeight="SemiBold"
+                TickBrush="#FFFDD0"
+                TickStrokeWidth="1"
+                MinorTickBrush="#727272"
+                ValueWidthExtent="0.5"
+                TickWidthExtent="0.6"
+                MinorTickWidthExtent="0.5"
+                IsVertical="True"
+                NeedleBrush="#57E700"
+                NeedleStartWidth="12"
+                NeedleEndWidth="1"
+                NeedleStartExtent="0.1"
+                NeedleEndExtent="0.25"
+                ValueBarBrush="#57E700" />
+
+            <!--Wind Direction (360)-->
+            <Label Grid.Row="3" Grid.Column="1"
+                       Style="{StaticResource ChartLabel}"
+                       Text="Wind Direction"
+                       Margin="0"
+                       VerticalTextAlignment="Start" />
+            <Label Grid.Row="3" Grid.Column="1"
+                       Style="{StaticResource ChartNote}"
+                       Text="(360)"
+                       Margin="0,16,0,0"
+                       VerticalTextAlignment="Start" />
+            <microGauge:XfGaugeRadial
+                Grid.Row="3"
+                Grid.Column="1"
+                BottomExtent="0.1"
+                TopExtent="0.0"
+                LeftExtent="0.0"
+                RightExtent="0.0"
+                BackingBrush="{StaticResource RadialGaugeBacking}"
+                BackingOutlineBrush="{StaticResource RadialGaugeBorder}"
+                BackingStrokeWidth="10"
+                Margin="0, 35, 0,0"
+                Value="45"
+                MinValue="0"
+                MaxValue="360"
+                Interval="22.5"
+                LabelInterval="45"
+                LabelExtent=".8"
+                LabelFormatString="{}{0:N0}°"
+                LabelFontSize="16"
+                LabelFontBrush="#FFFFFF"
+                ValueExtent="1.15"
+                ValueFormatString="{}{0:N0}°"
+                ValueFontFamily="Arial"
+                ValueFontSize="28"
+                ValueFontBrush="#FFFFFF"
+                ValueFontWeight="SemiBold"
+                TickBrush="#F28C28"
+                TickStrokeWidth="2"
+                TickStartExtent ="0.6"
+                TickEndExtent ="0.7"
+                MinorTickBrush="{StaticResource RadialGaugeBacking}"
+                MinorTickStartExtent ="0.65"
+                MinorTickEndExtent ="0.7"
+                ScaleStartAngle="90"
+                ScaleEndAngle="90"
+                NeedleBrush="#F28C28"
+                NeedlePivotBrush="#4d4d4d"
+                NeedlePivotOutlineBrush="#F28C28"
+                NeedleStartExtent="-0.2"
+                NeedleEndExtent="0.71" />
+        </Grid>
+    </StackLayout>
+
+</ContentPage>

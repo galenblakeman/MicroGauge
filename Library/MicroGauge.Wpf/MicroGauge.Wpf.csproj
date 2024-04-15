@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<UseWindowsForms>true</UseWindowsForms>
+		<UseWPF>true</UseWPF>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="SkiaSharp.Views.WPF" Version="2.88.8" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\MicroGauge\MicroGauge.csproj" />
+	</ItemGroup>
+
+</Project>
