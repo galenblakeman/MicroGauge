@@ -23,12 +23,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroGauge.Example.Wpf", "E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroGauge.Example.Maui", "Example\MicroGauge.Example.Maui\MicroGauge.Example.Maui.csproj", "{3A4DB824-656B-4581-B00C-6F3FB7F4E8E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroGauge.Maui", "Library\MicroGauge.Maui\MicroGauge.Maui.csproj", "{996F9DE8-D176-4AF8-A7F9-A7D02CD2E334}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroGauge.Maui", "Library\MicroGauge.Maui\MicroGauge.Maui.csproj", "{996F9DE8-D176-4AF8-A7F9-A7D02CD2E334}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BFBD2C1E-79AA-4BCC-8A85-94FC6155F76F}"
 	ProjectSection(SolutionItems) = preProject
 		Gallery.png = Gallery.png
 		LICENSE = LICENSE
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global

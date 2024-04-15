@@ -1,17 +1,30 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-      <Version>1.0.0.0</Version>
+	<TargetFramework>netstandard2.0</TargetFramework>
+	  <PackageId>MicroGauge.Forms</PackageId>
+	  <Version>1.0.0.1</Version>
+	  <Authors>Galen Blakeman</Authors>
+	  <Company></Company>
+	  <PackageDescription>Xamarin.Forms wrapper library for MicroGauge that utilizes SkiaSharp.Views.Forms and BindableProperty bindings</PackageDescription>
+	  <RepositoryUrl>https://github.com/galenblakeman/MicroGauge</RepositoryUrl>
+	  <PackageReadmeFile>README.md</PackageReadmeFile>
+	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
+	  <PackageTags>skia;skiasharp;c-sharp;dotnet;gauge;xamarin-forms</PackageTags>
+	  <Copyright>Galen Blakeman</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SkiaSharp.Views.Forms" Version="2.88.8" />
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2662" />
+	<PackageReference Include="SkiaSharp.Views.Forms" Version="2.88.8" />
+	<PackageReference Include="Xamarin.Forms" Version="5.0.0.2662" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MicroGauge\MicroGauge.csproj" />
+	<ProjectReference Include="..\MicroGauge\MicroGauge.csproj" />
   </ItemGroup>
+
+	<ItemGroup>
+		<None Include="README.md" Pack="true" PackagePath="\"/>
+	</ItemGroup>
 
 </Project>

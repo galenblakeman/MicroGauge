@@ -6,7 +6,16 @@
 		<UseWPF>true</UseWPF>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<Version>1.0.0.0</Version>
+		<PackageId>MicroGauge.Wpf</PackageId>
+		<Version>1.0.0.1</Version>
+		<Authors>Galen Blakeman</Authors>
+		<Company></Company>
+		<PackageDescription>WPF wrapper library for MicroGauge that utilizes SkiaSharp.Views.WPF and DependencyProperty bindings</PackageDescription>
+		<RepositoryUrl>https://github.com/galenblakeman/MicroGauge</RepositoryUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageTags>skia;skiasharp;c-sharp;dotnet;gauge;wpf-controls</PackageTags>
+		<Copyright>Galen Blakeman</Copyright>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -15,6 +24,10 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\MicroGauge\MicroGauge.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="README.md" Pack="true" PackagePath="\"/>
 	</ItemGroup>
 
 </Project>

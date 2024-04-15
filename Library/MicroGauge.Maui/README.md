@@ -1,0 +1,1 @@
+* MicroGauge.Maui - .Net MAUI wrapper library for **MicroGauge** that utilizes SkiaSharp.Views.Maui.Controls and BindableProperty bindings
