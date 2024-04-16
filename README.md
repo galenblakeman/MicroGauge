@@ -111,8 +111,8 @@ xmlns:microGauge="clr-namespace:MicroGauge.Wpf;assembly=MicroGauge.Wpf"
 
 ---
 ## Tag Reference
-* [Radial Gauge](https://github.com/galenblakeman/MicroGauge/blob/doc/RadialGaugeTag.md)
-* [Linear Gauge](https://github.com/galenblakeman/MicroGauge/blob/doc/LinearGaugeTag.md)
+* [Radial Gauge](https://github.com/galenblakeman/MicroGauge/blob/master/Doc/RadialGaugeTag.md)
+* [Linear Gauge](https://github.com/galenblakeman/MicroGauge/blob/master/Doc/LinearGaugeTag.md)
 
 ---
 ## License
