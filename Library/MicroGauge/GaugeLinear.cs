@@ -16,7 +16,7 @@ namespace MicroGauge
         public bool IsVertical { get; set; }
 
         /// <summary>
-        ///     ValueWidthExtent - percent of bar width for value bar
+        ///     ValueWidthExtent - percent of surface width for value bar
         /// </summary>
         public float ValueWidthExtent { get; set; } = 0.5f;
 
@@ -80,9 +80,9 @@ namespace MicroGauge
             CalcDimensions();
             DrawGaugeArea();
             DrawValueBar();
-            int minorTicks = GaugeHelper.GetTicks(MinValue, MaxValue, MinorInterval);
+            int minorTicks = GaugeHelper.GetTicks(MinValue, MaxValue, MinorTickInterval);
             DrawTicks(minorTicks, false);
-            int majorTicks = GaugeHelper.GetTicks(MinValue, MaxValue, Interval);
+            int majorTicks = GaugeHelper.GetTicks(MinValue, MaxValue, TickInterval);
             DrawTicks(majorTicks, true);
             DrawNeedle();
             if (SetNeedleShader != null)

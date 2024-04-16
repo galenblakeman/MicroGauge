@@ -18,7 +18,7 @@ public static class WpfGaugeHelper
             SolidColorBrush solidColorBrush => SKShader.CreateColor(GetSkColor(solidColorBrush)),
             LinearGradientBrush linearGradientBrush => ConvertToSkiaLinearGradient(linearGradientBrush,
                 surfaceWidth, surfaceHeight),
-            _ => SKShader.CreateColor(SKColors.Red)
+            _ => SKShader.CreateColor(SKColors.Transparent)
         };
     }
 

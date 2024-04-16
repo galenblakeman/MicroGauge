@@ -16,7 +16,7 @@ public static class MauiGaugeHelper
             SolidColorBrush solidColorBrush => SKShader.CreateColor(solidColorBrush.Color.ToSKColor()),
             LinearGradientBrush linearGradientBrush => ConvertToSkiaLinearGradient(linearGradientBrush,
                 surfaceWidth, surfaceHeight),
-            _ => SKShader.CreateColor(SKColors.Red)
+            _ => SKShader.CreateColor(SKColors.Transparent)
         };
     }
 

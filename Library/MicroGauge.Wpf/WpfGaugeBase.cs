@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Windows;
+using System.Windows.Media;
 using MicroGauge.Constant;
 using SkiaSharp;
 using SkiaSharp.Views.Desktop;
@@ -11,6 +12,7 @@ namespace MicroGauge.Wpf;
 public abstract class WpfGaugeBase : SKElement
 {
     protected delegate void GaugePropertyChanged(WpfGaugeBase gaugeBase, object newValue);
+
     public GaugeBase Gauge { get; protected init; } = null!;
 
     #region Draw
@@ -74,7 +76,8 @@ public abstract class WpfGaugeBase : SKElement
         set => SetValue(BottomExtentProperty, value);
     }
 
-    public static readonly DependencyProperty BottomExtentProperty = Create(nameof(BottomExtent), typeof(float),
+    public static readonly DependencyProperty BottomExtentProperty = Create(nameof(BottomExtent),
+        typeof(float), 0.05f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.BottomExtent = (float)newValue; });
 
     /// <summary>
@@ -86,7 +89,8 @@ public abstract class WpfGaugeBase : SKElement
         set => SetValue(TopExtentProperty, value);
     }
 
-    public static readonly DependencyProperty TopExtentProperty = Create(nameof(TopExtent), typeof(float),
+    public static readonly DependencyProperty TopExtentProperty = Create(nameof(TopExtent),
+        typeof(float), 0.05f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.TopExtent = (float)newValue; });
 
     /// <summary>
@@ -98,7 +102,8 @@ public abstract class WpfGaugeBase : SKElement
         set => SetValue(LeftExtentProperty, value);
     }
 
-    public static readonly DependencyProperty LeftExtentProperty = Create(nameof(LeftExtent), typeof(float),
+    public static readonly DependencyProperty LeftExtentProperty = Create(nameof(LeftExtent),
+        typeof(float), 0.05f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.LeftExtent = (float)newValue; });
 
     /// <summary>
@@ -110,7 +115,8 @@ public abstract class WpfGaugeBase : SKElement
         set => SetValue(RightExtentProperty, value);
     }
 
-    public static readonly DependencyProperty RightExtentProperty = Create(nameof(RightExtent), typeof(float),
+    public static readonly DependencyProperty RightExtentProperty = Create(nameof(RightExtent),
+        typeof(float), 0.05f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.RightExtent = (float)newValue; });
 
     /// <summary>
@@ -122,7 +128,8 @@ public abstract class WpfGaugeBase : SKElement
         set => SetValue(ValueProperty, value);
     }
 
-    public static readonly DependencyProperty ValueProperty = Create(nameof(Value), typeof(double),
+    public static readonly DependencyProperty ValueProperty = Create(nameof(Value),
+        typeof(double), 0.0,
         (gaugeBase, newValue) => { gaugeBase.Gauge.Value = (double)newValue; });
 
     /// <summary>
@@ -134,11 +141,9 @@ public abstract class WpfGaugeBase : SKElement
         set => SetValue(BackingBrushProperty, value);
     }
 
-    public static readonly DependencyProperty BackingBrushProperty = Create(nameof(BackingBrush), typeof(Brush),
-        (gaugeBase, newValue) =>
-        {
-            gaugeBase.Gauge.BackingShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
-        });
+    public static readonly DependencyProperty BackingBrushProperty = Create(nameof(BackingBrush),
+        typeof(Brush), new SolidColorBrush(Colors.White),
+        (gaugeBase, newValue) => { gaugeBase.Gauge.BackingShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue); });
 
     /// <summary>
     ///     BackingOutlineBrush
@@ -149,7 +154,8 @@ public abstract class WpfGaugeBase : SKElement
         set => SetValue(BackingOutlineProperty, value);
     }
 
-    public static readonly DependencyProperty BackingOutlineProperty = Create(nameof(BackingOutlineBrush), typeof(Brush),
+    public static readonly DependencyProperty BackingOutlineProperty = Create(nameof(BackingOutlineBrush),
+        typeof(Brush), new SolidColorBrush(Colors.Black),
         (gaugeBase, newValue) =>
         {
             gaugeBase.Gauge.BackingOutlineShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
@@ -165,7 +171,7 @@ public abstract class WpfGaugeBase : SKElement
     }
 
     public static readonly DependencyProperty BackingStrokeWidthProperty = Create(nameof(BackingStrokeWidth),
-        typeof(float),
+        typeof(float), 10f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.BackingStrokeWidth = (float)newValue; });
 
     /// <summary>
@@ -177,7 +183,8 @@ public abstract class WpfGaugeBase : SKElement
         set => SetValue(TickBrushProperty, value);
     }
 
-    public static readonly DependencyProperty TickBrushProperty = Create(nameof(TickBrush), typeof(Brush),
+    public static readonly DependencyProperty TickBrushProperty = Create(nameof(TickBrush),
+        typeof(Brush), new SolidColorBrush(Colors.Black),
         (gaugeBase, newValue) => { gaugeBase.Gauge.TickShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue); });
 
     /// <summary>
@@ -189,7 +196,8 @@ public abstract class WpfGaugeBase : SKElement
         set => SetValue(TickStrokeWidthProperty, value);
     }
 
-    public static readonly DependencyProperty TickStrokeWidthProperty = Create(nameof(TickStrokeWidth), typeof(float),
+    public static readonly DependencyProperty TickStrokeWidthProperty = Create(nameof(TickStrokeWidth),
+        typeof(float), 1f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.TickStrokeWidth = (float)newValue; });
 
     /// <summary>
@@ -201,11 +209,9 @@ public abstract class WpfGaugeBase : SKElement
         set => SetValue(MinorTickBrushProperty, value);
     }
 
-    public static readonly DependencyProperty MinorTickBrushProperty = Create(nameof(MinorTickBrush), typeof(Brush),
-        (gaugeBase, newValue) =>
-        {
-            gaugeBase.Gauge.MinorTickShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
-        });
+    public static readonly DependencyProperty MinorTickBrushProperty = Create(nameof(MinorTickBrush),
+        typeof(Brush), new SolidColorBrush(Colors.LightGray),
+        (gaugeBase, newValue) => { gaugeBase.Gauge.MinorTickShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue); });
 
     /// <summary>
     ///     MinorTickStrokeWidth
@@ -217,32 +223,34 @@ public abstract class WpfGaugeBase : SKElement
     }
 
     public static readonly DependencyProperty MinorTickStrokeWidthProperty = Create(nameof(MinorTickStrokeWidth),
-        typeof(float),
+        typeof(float), 0.5f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.MinorTickStrokeWidth = (float)newValue; });
 
     /// <summary>
-    ///     Interval
+    ///     TickInterval
     /// </summary>
-    public float Interval
+    public float TickInterval
     {
-        get => (float)GetValue(IntervalProperty);
-        set => SetValue(IntervalProperty, value);
+        get => (float)GetValue(TickIntervalProperty);
+        set => SetValue(TickIntervalProperty, value);
     }
 
-    public static readonly DependencyProperty IntervalProperty = Create(nameof(Interval), typeof(float),
-        (gaugeBase, newValue) => { gaugeBase.Gauge.Interval = (float)newValue; });
+    public static readonly DependencyProperty TickIntervalProperty = Create(nameof(TickInterval),
+        typeof(float), 5f,
+        (gaugeBase, newValue) => { gaugeBase.Gauge.TickInterval = (float)newValue; });
 
     /// <summary>
-    ///     MinorInterval
+    ///     MinorTickInterval
     /// </summary>
-    public float MinorInterval
+    public float MinorTickInterval
     {
-        get => (float)GetValue(MinorIntervalProperty);
-        set => SetValue(MinorIntervalProperty, value);
+        get => (float)GetValue(MinorTickIntervalProperty);
+        set => SetValue(MinorTickIntervalProperty, value);
     }
 
-    public static readonly DependencyProperty MinorIntervalProperty = Create(nameof(MinorInterval), typeof(float),
-        (gaugeBase, newValue) => { gaugeBase.Gauge.MinorInterval = (float)newValue; });
+    public static readonly DependencyProperty MinorTickIntervalProperty = Create(nameof(MinorTickInterval),
+        typeof(float), 1f,
+        (gaugeBase, newValue) => { gaugeBase.Gauge.MinorTickInterval = (float)newValue; });
 
     /// <summary>
     ///     MinValue
@@ -253,7 +261,8 @@ public abstract class WpfGaugeBase : SKElement
         set => SetValue(MinValueProperty, value);
     }
 
-    public static readonly DependencyProperty MinValueProperty = Create(nameof(MinValue), typeof(float),
+    public static readonly DependencyProperty MinValueProperty = Create(nameof(MinValue),
+        typeof(float), 0f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.MinValue = (float)newValue; });
 
     /// <summary>
@@ -265,7 +274,8 @@ public abstract class WpfGaugeBase : SKElement
         set => SetValue(MaxValueProperty, value);
     }
 
-    public static readonly DependencyProperty MaxValueProperty = Create(nameof(MaxValue), typeof(float),
+    public static readonly DependencyProperty MaxValueProperty = Create(nameof(MaxValue),
+        typeof(float), 100f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.MaxValue = (float)newValue; });
 
     /// <summary>
@@ -277,7 +287,8 @@ public abstract class WpfGaugeBase : SKElement
         set => SetValue(LabelIntervalProperty, value);
     }
 
-    public static readonly DependencyProperty LabelIntervalProperty = Create(nameof(LabelInterval), typeof(float),
+    public static readonly DependencyProperty LabelIntervalProperty = Create(nameof(LabelInterval),
+        typeof(float), 10f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.LabelInterval = (float)newValue; });
 
     /// <summary>
@@ -289,7 +300,8 @@ public abstract class WpfGaugeBase : SKElement
         set => SetValue(LabelExtentProperty, value);
     }
 
-    public static readonly DependencyProperty LabelExtentProperty = Create(nameof(LabelExtent), typeof(float),
+    public static readonly DependencyProperty LabelExtentProperty = Create(nameof(LabelExtent),
+        typeof(float), 0.85f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.LabelExtent = (float)newValue; });
 
     /// <summary>
@@ -302,7 +314,7 @@ public abstract class WpfGaugeBase : SKElement
     }
 
     public static readonly DependencyProperty LabelFormatStringProperty = Create(nameof(LabelFormatString),
-        typeof(string),
+        typeof(string), "{0:N0}",
         (gaugeBase, newValue) => { gaugeBase.Gauge.LabelFormatString = (string)newValue; });
 
     /// <summary>
@@ -314,7 +326,8 @@ public abstract class WpfGaugeBase : SKElement
         set => SetValue(LabelFontSizeProperty, value);
     }
 
-    public static readonly DependencyProperty LabelFontSizeProperty = Create(nameof(LabelFontSize), typeof(float),
+    public static readonly DependencyProperty LabelFontSizeProperty = Create(nameof(LabelFontSize),
+        typeof(float), 10f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.LabelFontSize = (float)newValue; });
 
     /// <summary>
@@ -326,7 +339,8 @@ public abstract class WpfGaugeBase : SKElement
         set => SetValue(LabelFontWeightProperty, value);
     }
 
-    public static readonly DependencyProperty LabelFontWeightProperty = Create(nameof(LabelFontWeight), typeof(SKFontStyleWeight),
+    public static readonly DependencyProperty LabelFontWeightProperty = Create(nameof(LabelFontWeight),
+        typeof(SKFontStyleWeight), SKFontStyleWeight.Normal,
         (gaugeBase, newValue) => { gaugeBase.Gauge.LabelFontWeight = (SKFontStyleWeight)newValue; });
 
     /// <summary>
@@ -338,7 +352,8 @@ public abstract class WpfGaugeBase : SKElement
         set => SetValue(LabelFontBrushProperty, value);
     }
 
-    public static readonly DependencyProperty LabelFontBrushProperty = Create(nameof(LabelFontBrush), typeof(Brush),
+    public static readonly DependencyProperty LabelFontBrushProperty = Create(nameof(LabelFontBrush),
+        typeof(Brush), new SolidColorBrush(Colors.Black),
         (gaugeBase, newValue) => { gaugeBase.Gauge.LabelFontShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue); });
 
     /// <summary>
@@ -350,7 +365,8 @@ public abstract class WpfGaugeBase : SKElement
         set => SetValue(LabelFontFamilyProperty, value);
     }
 
-    public static readonly DependencyProperty LabelFontFamilyProperty = Create(nameof(LabelFontFamily), typeof(string),
+    public static readonly DependencyProperty LabelFontFamilyProperty = Create(nameof(LabelFontFamily),
+        typeof(string), "verdana",
         (gaugeBase, newValue) => { gaugeBase.Gauge.LabelFontFamily = (string)newValue; });
 
     /// <summary>
@@ -362,7 +378,8 @@ public abstract class WpfGaugeBase : SKElement
         set => SetValue(ValueLocationProperty, value);
     }
 
-    public static readonly DependencyProperty ValueLocationProperty = Create(nameof(ValueLocation), typeof(GaugeValueLocation),
+    public static readonly DependencyProperty ValueLocationProperty = Create(nameof(ValueLocation),
+        typeof(GaugeValueLocation), GaugeValueLocation.BottomCenter,
         (gaugeBase, newValue) => { gaugeBase.Gauge.ValueLocation = (GaugeValueLocation)newValue; });
 
     /// <summary>
@@ -374,7 +391,8 @@ public abstract class WpfGaugeBase : SKElement
         set => SetValue(ValueExtentProperty, value);
     }
 
-    public static readonly DependencyProperty ValueExtentProperty = Create(nameof(ValueExtent), typeof(float),
+    public static readonly DependencyProperty ValueExtentProperty = Create(nameof(ValueExtent),
+        typeof(float), 0.60f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.ValueExtent = (float)newValue; });
 
     /// <summary>
@@ -387,7 +405,7 @@ public abstract class WpfGaugeBase : SKElement
     }
 
     public static readonly DependencyProperty ValueFormatStringProperty = Create(nameof(ValueFormatString),
-        typeof(string),
+        typeof(string), "{0:N0}",
         (gaugeBase, newValue) => { gaugeBase.Gauge.ValueFormatString = (string)newValue; });
 
     /// <summary>
@@ -399,7 +417,8 @@ public abstract class WpfGaugeBase : SKElement
         set => SetValue(ValueFontSizeProperty, value);
     }
 
-    public static readonly DependencyProperty ValueFontSizeProperty = Create(nameof(ValueFontSize), typeof(float),
+    public static readonly DependencyProperty ValueFontSizeProperty = Create(nameof(ValueFontSize),
+        typeof(float), 20f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.ValueFontSize = (float)newValue; });
 
     /// <summary>
@@ -411,7 +430,8 @@ public abstract class WpfGaugeBase : SKElement
         set => SetValue(ValueFontWeightProperty, value);
     }
 
-    public static readonly DependencyProperty ValueFontWeightProperty = Create(nameof(ValueFontWeight), typeof(SKFontStyleWeight),
+    public static readonly DependencyProperty ValueFontWeightProperty = Create(nameof(ValueFontWeight),
+        typeof(SKFontStyleWeight), SKFontStyleWeight.Normal,
         (gaugeBase, newValue) => { gaugeBase.Gauge.ValueFontWeight = (SKFontStyleWeight)newValue; });
 
     /// <summary>
@@ -423,7 +443,8 @@ public abstract class WpfGaugeBase : SKElement
         set => SetValue(ValueFontBrushProperty, value);
     }
 
-    public static readonly DependencyProperty ValueFontBrushProperty = Create(nameof(ValueFontBrush), typeof(Brush),
+    public static readonly DependencyProperty ValueFontBrushProperty = Create(nameof(ValueFontBrush),
+        typeof(Brush), new SolidColorBrush(Colors.Black),
         (gaugeBase, newValue) => { gaugeBase.Gauge.ValueFontShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue); });
 
     /// <summary>
@@ -435,7 +456,8 @@ public abstract class WpfGaugeBase : SKElement
         set => SetValue(ValueFontFamilyProperty, value);
     }
 
-    public static readonly DependencyProperty ValueFontFamilyProperty = Create(nameof(ValueFontFamily), typeof(string),
+    public static readonly DependencyProperty ValueFontFamilyProperty = Create(nameof(ValueFontFamily),
+        typeof(string), "verdana",
         (gaugeBase, newValue) => { gaugeBase.Gauge.ValueFontFamily = (string)newValue; });
 
     /// <summary>
@@ -447,11 +469,9 @@ public abstract class WpfGaugeBase : SKElement
         set => SetValue(NeedleBrushProperty, value);
     }
 
-    public static readonly DependencyProperty NeedleBrushProperty = Create(nameof(NeedleBrush), typeof(Brush),
-        (gaugeBase, newValue) =>
-        {
-            gaugeBase.Gauge.NeedleShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
-        });
+    public static readonly DependencyProperty NeedleBrushProperty = Create(nameof(NeedleBrush),
+        typeof(Brush), new SolidColorBrush(Colors.Black),
+        (gaugeBase, newValue) => { gaugeBase.Gauge.NeedleShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue); });
 
     /// <summary>
     ///     NeedleStartWidth
@@ -462,7 +482,8 @@ public abstract class WpfGaugeBase : SKElement
         set => SetValue(NeedleStartWidthProperty, value);
     }
 
-    public static readonly DependencyProperty NeedleStartWidthProperty = Create(nameof(NeedleStartWidth), typeof(float),
+    public static readonly DependencyProperty NeedleStartWidthProperty = Create(nameof(NeedleStartWidth),
+        typeof(float), 6f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.NeedleStartWidth = (float)newValue; });
 
     /// <summary>
@@ -474,7 +495,8 @@ public abstract class WpfGaugeBase : SKElement
         set => SetValue(NeedleEndWidthProperty, value);
     }
 
-    public static readonly DependencyProperty NeedleEndWidthProperty = Create(nameof(NeedleEndWidth), typeof(float),
+    public static readonly DependencyProperty NeedleEndWidthProperty = Create(nameof(NeedleEndWidth),
+        typeof(float), 3f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.NeedleEndWidth = (float)newValue; });
 
     /// <summary>
@@ -487,7 +509,7 @@ public abstract class WpfGaugeBase : SKElement
     }
 
     public static readonly DependencyProperty NeedleStartExtentProperty = Create(nameof(NeedleStartExtent),
-        typeof(float),
+        typeof(float), 0f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.NeedleStartExtent = (float)newValue; });
 
     /// <summary>
@@ -499,7 +521,8 @@ public abstract class WpfGaugeBase : SKElement
         set => SetValue(NeedleEndExtentProperty, value);
     }
 
-    public static readonly DependencyProperty NeedleEndExtentProperty = Create(nameof(NeedleEndExtent), typeof(float),
+    public static readonly DependencyProperty NeedleEndExtentProperty = Create(nameof(NeedleEndExtent),
+        typeof(float), 0.71f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.NeedleEndExtent = (float)newValue; });
 
     /// <summary>
@@ -511,7 +534,8 @@ public abstract class WpfGaugeBase : SKElement
         set => SetValue(SetNeedleValueProperty, value);
     }
 
-    public static readonly DependencyProperty SetNeedleValueProperty = Create(nameof(SetNeedleValue), typeof(float),
+    public static readonly DependencyProperty SetNeedleValueProperty = Create(nameof(SetNeedleValue),
+        typeof(float), 0f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.SetNeedleValue = (float)newValue; });
 
     /// <summary>
@@ -523,11 +547,9 @@ public abstract class WpfGaugeBase : SKElement
         set => SetValue(SetNeedleBrushProperty, value);
     }
 
-    public static readonly DependencyProperty SetNeedleBrushProperty = Create(nameof(SetNeedleBrush), typeof(Brush),
-        (gaugeBase, newValue) =>
-        {
-            gaugeBase.Gauge.SetNeedleShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
-        });
+    public static readonly DependencyProperty SetNeedleBrushProperty = Create(nameof(SetNeedleBrush),
+        typeof(Brush), new SolidColorBrush(Colors.Transparent),
+        (gaugeBase, newValue) => { gaugeBase.Gauge.SetNeedleShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue); });
 
     /// <summary>
     ///     SetNeedleStartWidth
@@ -539,7 +561,7 @@ public abstract class WpfGaugeBase : SKElement
     }
 
     public static readonly DependencyProperty SetNeedleStartWidthProperty = Create(nameof(SetNeedleStartWidth),
-        typeof(float),
+        typeof(float), 6f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.SetNeedleStartWidth = (float)newValue; });
 
     /// <summary>
@@ -552,7 +574,7 @@ public abstract class WpfGaugeBase : SKElement
     }
 
     public static readonly DependencyProperty SetNeedleEndWidthProperty = Create(nameof(SetNeedleEndWidth),
-        typeof(float),
+        typeof(float), 3f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.SetNeedleEndWidth = (float)newValue; });
 
     /// <summary>
@@ -565,7 +587,7 @@ public abstract class WpfGaugeBase : SKElement
     }
 
     public static readonly DependencyProperty SetNeedleStartExtentProperty = Create(nameof(SetNeedleStartExtent),
-        typeof(float),
+        typeof(float), 0f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.SetNeedleStartExtent = (float)newValue; });
 
     /// <summary>
@@ -578,7 +600,7 @@ public abstract class WpfGaugeBase : SKElement
     }
 
     public static readonly DependencyProperty SetNeedleEndExtentProperty = Create(nameof(SetNeedleEndExtent),
-        typeof(float),
+        typeof(float), 0.71f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.SetNeedleEndExtent = (float)newValue; });
 
     #endregion
@@ -597,13 +619,13 @@ public abstract class WpfGaugeBase : SKElement
     ///     Create - wrapper Register against this control
     /// </summary>
     protected static DependencyProperty Create(string propertyName, Type propertyType,
-        GaugePropertyChanged propertyChanged)
+        object defaultValue, GaugePropertyChanged propertyChanged)
     {
         return DependencyProperty.Register(
             propertyName,
             propertyType,
             typeof(WpfGaugeBase),
-            new FrameworkPropertyMetadata((bindObj, e) =>
+            new FrameworkPropertyMetadata(defaultValue, (bindObj, e) =>
             {
                 WpfGaugeBase? gauge = (WpfGaugeBase)bindObj;
                 propertyChanged(gauge, e.NewValue);

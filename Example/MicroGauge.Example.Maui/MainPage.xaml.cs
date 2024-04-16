@@ -1,11 +1,10 @@
-﻿namespace MicroGauge.Example.Maui
+﻿namespace MicroGauge.Example.Maui;
+
+public partial class MainPage
 {
-    public partial class MainPage
+    public MainPage()
     {
-        public MainPage()
-        {
-            InitializeComponent();
+        InitializeComponent();
             
-        }
     }
 }

@@ -11,49 +11,224 @@ namespace MicroGauge
     {
         #region Properties
 
+        /// <summary>
+        /// 	Canvas - Skia Drawing Surface
+        /// </summary>
         public SKCanvas Canvas { get; set; }
+
+        /// <summary>
+        /// 	SurfaceWidth - Measured width of the surface
+        /// </summary>
         public int SurfaceWidth { get; set; } = 400;
+
+        /// <summary>
+        /// 	SurfaceHeight - Measured height of the surface
+        /// </summary>
         public int SurfaceHeight { get; set; } = 400;
+
+        /// <summary>
+        /// 	BottomExtent - bottom padding extent of surface height
+        /// </summary>
         public float BottomExtent { get; set; }
+
+        /// <summary>
+        /// 	TopExtent - top padding extent of surface height
+        /// </summary>
         public float TopExtent { get; set; }
+
+        /// <summary>
+        /// 	LeftExtent - left padding extent of surface width
+        /// </summary>
         public float LeftExtent { get; set; }
+
+        /// <summary>
+        /// 	RightExtent - right padding extent of surface width
+        /// </summary>
         public float RightExtent { get; set; }
-        public double Value { get; set; }
+
+        /// <summary>
+        /// 	BackingShader - Backing solid or linear gradient shader
+        /// </summary>
         public SKShader BackingShader { get; set; } = SKShader.CreateColor(SKColors.Black);
-        public SKShader BackingOutlineShader { get; set; } = SKShader.CreateColor(SKColors.Black);
-        public float BackingStrokeWidth { get; set; } = 20f;
-        public SKShader TickShader { get; set; } = SKShader.CreateColor(SKColors.White);
+
+        /// <summary>
+        /// 	BackingOutlineShader - Backing outline solid or linear gradient shader
+        /// </summary>
+        public SKShader BackingOutlineShader { get; set; } = SKShader.CreateColor(SKColors.White);
+
+        /// <summary>
+        /// 	BackingStrokeWidth - Back stroke with for backing edge
+        /// </summary>
+        public float BackingStrokeWidth { get; set; } = 10f;
+
+        /// <summary>
+        /// 	TickShader - Tick solid or linear gradient shader
+        /// </summary>
+        public SKShader TickShader { get; set; } = SKShader.CreateColor(SKColors.Black);
+
+        /// <summary>
+        /// 	TickStrokeWidth - Tick Width
+        /// </summary>
         public float TickStrokeWidth { get; set; } = 1f;
+
+        /// <summary>
+        /// 	MinorTickShader - Minor Tick solid or linear gradient shader
+        /// </summary>
         public SKShader MinorTickShader { get; set; } = SKShader.CreateColor(SKColors.LightGray);
+
+        /// <summary>
+        /// 	MinorTickStrokeWidth - Minor Tick Width
+        /// </summary>
         public float MinorTickStrokeWidth { get; set; } = 0.5f;
-        public float Interval { get; set; } = 5f;
-        public float MinorInterval { get; set; } = 1f;
+
+        /// <summary>
+        /// 	TickInterval - Tick Interval
+        /// </summary>
+        public float TickInterval { get; set; } = 5f;
+
+        /// <summary>
+        /// 	MinorTickInterval - Minor Tick Interval
+        /// </summary>
+        public float MinorTickInterval { get; set; } = 1f;
+
+        /// <summary>
+        /// 	Value - Current Value for scale
+        /// </summary>
+        public double Value { get; set; }
+
+        /// <summary>
+        /// 	MinValue - Min value that corresponds to start
+        /// </summary>
         public float MinValue { get; set; }
+
+        /// <summary>
+        /// 	MaxValue - Max value that corresponds to start
+        /// </summary>
         public float MaxValue { get; set; } = 100f;
+
+        /// <summary>
+        /// 	LabelInterval - Label interval
+        /// </summary>
         public float LabelInterval { get; set; } = 10f;
+
+        /// <summary>
+        /// 	LabelExtent - Label extent from center
+        /// </summary>
         public float LabelExtent { get; set; } = 0.85f;
+
+        /// <summary>
+        /// 	LabelFormatString - Format string applied to label values, ex. "{0:N0}"
+        /// </summary>
         public string LabelFormatString { get; set; } = "{0:N0}";
-        public float LabelFontSize { get; set; } = 16f;
+
+        /// <summary>
+        /// 	LabelFontSize - Label Font Size
+        /// </summary>
+        public float LabelFontSize { get; set; } = 10f;
+
+        /// <summary>
+        /// 	LabelFontWeight - SKFontStyleWeight for Label (Light, Normal, Bold, etc.)
+        /// </summary>
         public SKFontStyleWeight LabelFontWeight { get; set; } = SKFontStyleWeight.Normal;
+
+        /// <summary>
+        /// 	LabelFontShader - Label font solid or linear gradient shader
+        /// </summary>
         public SKShader LabelFontShader { get; set; } = SKShader.CreateColor(SKColors.White);
+
+        /// <summary>
+        /// 	LabelFontFamily - Label Font Family Name
+        /// </summary>
         public string LabelFontFamily { get; set; } = "verdana";
+
+        /// <summary>
+        /// 	ValueLocation - Value location on gauge (TopCenter, BottomCenter, LeftCenter, RightCenter)
+        /// </summary>
         public GaugeValueLocation ValueLocation { get; set; }
+
+        /// <summary>
+        /// 	ValueExtent - Value extent from center in direction of value location
+        /// </summary>
         public float ValueExtent { get; set; } = 0.60f;
+
+        /// <summary>
+        /// 	ValueFormatString - Format string applied to Value values, ex. "{0:N0}"
+        /// </summary>
         public string ValueFormatString { get; set; } = "{0:N0}";
+
+        /// <summary>
+        /// 	ValueFontSize - Value Font Size
+        /// </summary>
         public float ValueFontSize { get; set; } = 20f;
+
+        /// <summary>
+        /// 	ValueFontWeight - SKFontStyleWeight for Value (Light, Normal, Bold, etc.)
+        /// </summary>
         public SKFontStyleWeight ValueFontWeight { get; set; } = SKFontStyleWeight.Normal;
-        public SKShader ValueFontShader { get; set; } = SKShader.CreateColor(SKColors.Transparent);
+
+        /// <summary>
+        /// 	ValueFontShader - Value font solid or linear gradient shader
+        /// </summary>
+        public SKShader ValueFontShader { get; set; } = SKShader.CreateColor(SKColors.Black);
+
+        /// <summary>
+        /// 	ValueFontFamily - Value Font Family Name
+        /// </summary>
         public string ValueFontFamily { get; set; } = "verdana";
+
+        /// <summary>
+        /// 	NeedleShader - Needle solid or linear gradient shader
+        /// </summary>
         public SKShader NeedleShader { get; set; } = SKShader.CreateColor(SKColors.LightBlue);
+
+        /// <summary>
+        /// 	NeedleStartWidth - width of needle at start
+        /// </summary>
         public float NeedleStartWidth { get; set; } = 6f;
+
+        /// <summary>
+        /// 	NeedleEndWidth - width of needle at end
+        /// </summary>
         public float NeedleEndWidth { get; set; } = 3f;
-        public float NeedleStartExtent { get; set; } = 0f;
+
+        /// <summary>
+        /// 	NeedleStartExtent - needle start as extent of radius or width
+        /// </summary>
+        public float NeedleStartExtent { get; set; }
+
+        /// <summary>
+        /// 	NeedleEndExtent - needle end as extent of radius or width
+        /// </summary>
         public float NeedleEndExtent { get; set; } = 0.71f;
+
+        /// <summary>
+        /// 	SetNeedleValue - Set Needle Value
+        /// </summary>
         public float SetNeedleValue { get; set; }
+
+        /// <summary>
+        /// 	SetNeedleShader - set needle solid or linear gradient shader
+        /// </summary>
         public SKShader SetNeedleShader { get; set; }
+
+        /// <summary>
+        /// 	SetNeedleStartWidth - width of set needle at start
+        /// </summary>
         public float SetNeedleStartWidth { get; set; } = 6f;
+
+        /// <summary>
+        /// 	SetNeedleEndWidth - width of set needle at end
+        /// </summary>
         public float SetNeedleEndWidth { get; set; } = 3f;
-        public float SetNeedleStartExtent { get; set; } = 0f;
+
+        /// <summary>
+        /// 	SetNeedleStartExtent - set needle start as extent of radius or width
+        /// </summary>
+        public float SetNeedleStartExtent { get; set; }
+
+        /// <summary>
+        /// 	SetNeedleEndExtent - needle at end as extent of radius or width
+        /// </summary>
         public float SetNeedleEndExtent { get; set; } = 0.71f;
 
         #endregion
@@ -68,7 +243,6 @@ namespace MicroGauge
         }
 
         #endregion
-
 
         #region Helpers
 

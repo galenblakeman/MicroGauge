@@ -26,7 +26,8 @@ public class MauiGaugeRadial : MauiGaugeBase
         set => SetValue(RadialStyleProperty, value);
     }
 
-    public static readonly BindableProperty RadialStyleProperty = Create(nameof(RadialStyle), typeof(GaugeRadialStyle),
+    public static readonly BindableProperty RadialStyleProperty = Create(nameof(RadialStyle),
+        typeof(GaugeRadialStyle), GaugeRadialStyle.Full,
         (gaugeBase, newValue) => { GetRadial(gaugeBase).RadialStyle = (GaugeRadialStyle)newValue; });
 
     /// <summary>
@@ -38,7 +39,8 @@ public class MauiGaugeRadial : MauiGaugeBase
         set => SetValue(ScaleStartAngleProperty, value);
     }
 
-    public static readonly BindableProperty ScaleStartAngleProperty = Create(nameof(ScaleStartAngle), typeof(float),
+    public static readonly BindableProperty ScaleStartAngleProperty = Create(nameof(ScaleStartAngle),
+        typeof(float), 210f,
         (gaugeBase, newValue) => { GetRadial(gaugeBase).ScaleStartAngle = (float)newValue; });
 
     /// <summary>
@@ -50,7 +52,8 @@ public class MauiGaugeRadial : MauiGaugeBase
         set => SetValue(ScaleEndAngleProperty, value);
     }
 
-    public static readonly BindableProperty ScaleEndAngleProperty = Create(nameof(ScaleEndAngle), typeof(float),
+    public static readonly BindableProperty ScaleEndAngleProperty = Create(nameof(ScaleEndAngle),
+        typeof(float), 330f,
         (gaugeBase, newValue) => { GetRadial(gaugeBase).ScaleEndAngle = (float)newValue; });
 
     /// <summary>
@@ -62,7 +65,8 @@ public class MauiGaugeRadial : MauiGaugeBase
         set => SetValue(TickStartExtentProperty, value);
     }
 
-    public static readonly BindableProperty TickStartExtentProperty = Create(nameof(TickStartExtent), typeof(float),
+    public static readonly BindableProperty TickStartExtentProperty = Create(nameof(TickStartExtent),
+        typeof(float), 0.6f,
         (gaugeBase, newValue) => { GetRadial(gaugeBase).TickStartExtent = (float)newValue; });
 
     /// <summary>
@@ -74,7 +78,8 @@ public class MauiGaugeRadial : MauiGaugeBase
         set => SetValue(TickEndExtentProperty, value);
     }
 
-    public static readonly BindableProperty TickEndExtentProperty = Create(nameof(TickEndExtent), typeof(float),
+    public static readonly BindableProperty TickEndExtentProperty = Create(nameof(TickEndExtent),
+        typeof(float), 0.7f,
         (gaugeBase, newValue) => { GetRadial(gaugeBase).TickEndExtent = (float)newValue; });
 
     /// <summary>
@@ -86,7 +91,8 @@ public class MauiGaugeRadial : MauiGaugeBase
         set => SetValue(MinorTickStartExtentProperty, value);
     }
 
-    public static readonly BindableProperty MinorTickStartExtentProperty = Create(nameof(MinorTickStartExtent), typeof(float),
+    public static readonly BindableProperty MinorTickStartExtentProperty = Create(nameof(MinorTickStartExtent),
+        typeof(float), 0.65f,
         (gaugeBase, newValue) => { GetRadial(gaugeBase).MinorTickStartExtent = (float)newValue; });
 
     /// <summary>
@@ -98,7 +104,8 @@ public class MauiGaugeRadial : MauiGaugeBase
         set => SetValue(MinorTickEndExtentProperty, value);
     }
 
-    public static readonly BindableProperty MinorTickEndExtentProperty = Create(nameof(MinorTickEndExtent), typeof(float),
+    public static readonly BindableProperty MinorTickEndExtentProperty = Create(nameof(MinorTickEndExtent),
+        typeof(float), 0.7f,
         (gaugeBase, newValue) => { GetRadial(gaugeBase).MinorTickEndExtent = (float)newValue; });
 
     /// <summary>
@@ -110,7 +117,8 @@ public class MauiGaugeRadial : MauiGaugeBase
         set => SetValue(NeedlePivotEndExtentProperty, value);
     }
 
-    public static readonly BindableProperty NeedlePivotEndExtentProperty = Create(nameof(NeedlePivotEndExtent), typeof(float),
+    public static readonly BindableProperty NeedlePivotEndExtentProperty = Create(nameof(NeedlePivotEndExtent),
+        typeof(float), 0.1f,
         (gaugeBase, newValue) => { GetRadial(gaugeBase).NeedlePivotEndExtent = (float)newValue; });
 
     /// <summary>
@@ -123,14 +131,14 @@ public class MauiGaugeRadial : MauiGaugeBase
     }
 
     public static readonly BindableProperty NeedlePivotBrushProperty = Create(nameof(NeedlePivotBrush),
-        typeof(Brush),
+        typeof(Brush), new SolidColorBrush(Colors.LightGray),
         (gaugeBase, newValue) =>
         {
             GetRadial(gaugeBase).NeedlePivotShader = GetSkShader(GetRadial(gaugeBase), (Brush)newValue);
         });
 
     /// <summary>
-    ///     NeedlePivotOutlineBrush
+    ///     NeedlePivotOutline
     /// </summary>
     public Brush NeedlePivotOutlineBrush
     {
@@ -139,7 +147,7 @@ public class MauiGaugeRadial : MauiGaugeBase
     }
 
     public static readonly BindableProperty NeedlePivotOutlineBrushProperty = Create(nameof(NeedlePivotOutlineBrush),
-        typeof(Brush),
+        typeof(Brush), new SolidColorBrush(Colors.Black),
         (gaugeBase, newValue) =>
         {
             GetRadial(gaugeBase).NeedlePivotOutlineShader = GetSkShader(GetRadial(gaugeBase), (Brush)newValue);
@@ -154,7 +162,8 @@ public class MauiGaugeRadial : MauiGaugeBase
         set => SetValue(RangeBrushProperty, value);
     }
 
-    public static readonly BindableProperty RangeBrushProperty = Create(nameof(RangeBrush), typeof(Brush),
+    public static readonly BindableProperty RangeBrushProperty = Create(nameof(RangeBrush),
+        typeof(Brush), new SolidColorBrush(Colors.Transparent),
         (gaugeBase, newValue) =>
         {
             GetRadial(gaugeBase).RangeShader = GetSkShader(GetRadial(gaugeBase), (Brush)newValue);
@@ -169,7 +178,8 @@ public class MauiGaugeRadial : MauiGaugeBase
         set => SetValue(RangeInnerStartExtentProperty, value);
     }
 
-    public static readonly BindableProperty RangeInnerStartExtentProperty = Create(nameof(RangeInnerStartExtent), typeof(float),
+    public static readonly BindableProperty RangeInnerStartExtentProperty = Create(nameof(RangeInnerStartExtent),
+        typeof(float), 0f,
         (gaugeBase, newValue) => { GetRadial(gaugeBase).RangeInnerStartExtent = (float)newValue; });
 
     /// <summary>
@@ -181,7 +191,8 @@ public class MauiGaugeRadial : MauiGaugeBase
         set => SetValue(RangeInnerEndExtentProperty, value);
     }
 
-    public static readonly BindableProperty RangeInnerEndExtentProperty = Create(nameof(RangeInnerEndExtent), typeof(float),
+    public static readonly BindableProperty RangeInnerEndExtentProperty = Create(nameof(RangeInnerEndExtent),
+        typeof(float), 0f,
         (gaugeBase, newValue) => { GetRadial(gaugeBase).RangeInnerEndExtent = (float)newValue; });
 
     /// <summary>
@@ -193,7 +204,8 @@ public class MauiGaugeRadial : MauiGaugeBase
         set => SetValue(RangeOuterStartExtentProperty, value);
     }
 
-    public static readonly BindableProperty RangeOuterStartExtentProperty = Create(nameof(RangeOuterStartExtent), typeof(float),
+    public static readonly BindableProperty RangeOuterStartExtentProperty = Create(nameof(RangeOuterStartExtent),
+        typeof(float), 0f,
         (gaugeBase, newValue) => { GetRadial(gaugeBase).RangeOuterStartExtent = (float)newValue; });
 
     /// <summary>
@@ -205,11 +217,12 @@ public class MauiGaugeRadial : MauiGaugeBase
         set => SetValue(RangeOuterEndExtentProperty, value);
     }
 
-    public static readonly BindableProperty RangeOuterEndExtentProperty = Create(nameof(RangeOuterEndExtent), typeof(float),
+    public static readonly BindableProperty RangeOuterEndExtentProperty = Create(nameof(RangeOuterEndExtent),
+        typeof(float), 0f,
         (gaugeBase, newValue) => { GetRadial(gaugeBase).RangeOuterEndExtent = (float)newValue; });
 
     #endregion
-       
+
     #region Helper
 
     /// <summary>

@@ -2,7 +2,7 @@
 
 namespace MicroGauge.Example.Maui;
 
-public partial class App : Application
+public partial class App
 {
     public App()
     {
@@ -16,14 +16,14 @@ public partial class App : Application
         base.OnStart();
 
         // Unhandled
-        AppDomain.CurrentDomain.UnhandledException += (s, e) =>
+        AppDomain.CurrentDomain.UnhandledException += (_, e) =>
         {
             Console.WriteLine($"UnhandledException:{e.ExceptionObject}");
         };
 
         // Restore window position
         if (DeviceInfo.Current.Platform != DevicePlatform.WinUI) return;
-        var window = Current?.Windows.FirstOrDefault();
+        Window? window = Current?.Windows.FirstOrDefault();
         if (window == null) return;
         try
         {
@@ -43,10 +43,10 @@ public partial class App : Application
     }
    
 
-    private void Window_Destroying(object? sender, EventArgs e)
+    private static void Window_Destroying(object? sender, EventArgs e)
     {
         // Save window position
-        var window = Current?.Windows.FirstOrDefault();
+        Window? window = Current?.Windows.FirstOrDefault();
         if (window == null) return;
         Preferences.Set("WindowX", window.X);
         Preferences.Set("WindowY", window.Y);

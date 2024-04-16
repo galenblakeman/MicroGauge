@@ -3,7 +3,7 @@
   <PropertyGroup>
 	<TargetFramework>netstandard2.0</TargetFramework>
 	  <PackageId>MicroGauge</PackageId>
-	  <Version>1.0.0.1</Version>
+	  <Version>1.0.0.2</Version>
 	  <Authors>Galen Blakeman</Authors>
 	  <Company></Company>
 	  <PackageDescription>MicroGauge is a basic radial and linear gauge library</PackageDescription>

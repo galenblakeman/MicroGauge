@@ -21,7 +21,7 @@ namespace MicroGauge.Forms
                 case LinearGradientBrush linearGradientBrush:
                     return ConvertToSkiaLinearGradient(linearGradientBrush, surfaceWidth, surfaceHeight);
                 default:
-                    return SKShader.CreateColor(SKColors.Red);
+                    return SKShader.CreateColor(SKColors.Transparent);
             }
         }
 

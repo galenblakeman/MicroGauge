@@ -1,10 +1,9 @@
-﻿namespace MicroGauge.Example.Maui
+﻿namespace MicroGauge.Example.Maui;
+
+public partial class AppShell
 {
-    public partial class AppShell : Shell
+    public AppShell()
     {
-        public AppShell()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

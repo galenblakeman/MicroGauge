@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Media;
 using Brush = System.Windows.Media.Brush;
 
 namespace MicroGauge.Wpf;
@@ -16,6 +17,7 @@ public class WpfGaugeLinear : WpfGaugeBase
     #endregion
 
     #region Draw
+
     /// <summary>
     ///     OnRenderSizeChanged - calculate shaders (in case linear gradient) and redraw
     /// </summary>
@@ -24,7 +26,8 @@ public class WpfGaugeLinear : WpfGaugeBase
         GaugeLinear linearGauge = (GaugeLinear)Gauge;
         linearGauge.ValueBarShader = GetSkShader(Gauge, ValueBarBrush);
         base.OnRenderSizeChanged(sizeInfo);
-    } 
+    }
+
     #endregion
 
     #region Gauge Specific Properties
@@ -38,7 +41,8 @@ public class WpfGaugeLinear : WpfGaugeBase
         set => SetValue(IsVerticalProperty, value);
     }
 
-    public static readonly DependencyProperty IsVerticalProperty = Create(nameof(IsVertical), typeof(bool),
+    public static readonly DependencyProperty IsVerticalProperty = Create(nameof(IsVertical),
+        typeof(bool), false,
         (gaugeBase, newValue) => { GetLinear(gaugeBase).IsVertical = (bool)newValue; });
 
     /// <summary>
@@ -50,7 +54,8 @@ public class WpfGaugeLinear : WpfGaugeBase
         set => SetValue(ValueWidthExtentProperty, value);
     }
 
-    public static readonly DependencyProperty ValueWidthExtentProperty = Create(nameof(ValueWidthExtent), typeof(float),
+    public static readonly DependencyProperty ValueWidthExtentProperty = Create(nameof(ValueWidthExtent),
+        typeof(float), 0.5f,
         (gaugeBase, newValue) => { GetLinear(gaugeBase).ValueWidthExtent = (float)newValue; });
 
     /// <summary>
@@ -62,7 +67,8 @@ public class WpfGaugeLinear : WpfGaugeBase
         set => SetValue(TickWidthExtentProperty, value);
     }
 
-    public static readonly DependencyProperty TickWidthExtentProperty = Create(nameof(TickWidthExtent), typeof(float),
+    public static readonly DependencyProperty TickWidthExtentProperty = Create(nameof(TickWidthExtent),
+        typeof(float), 0.7f,
         (gaugeBase, newValue) => { GetLinear(gaugeBase).TickWidthExtent = (float)newValue; });
 
     /// <summary>
@@ -75,7 +81,7 @@ public class WpfGaugeLinear : WpfGaugeBase
     }
 
     public static readonly DependencyProperty MinorTickWidthExtentProperty = Create(nameof(MinorTickWidthExtent),
-        typeof(float),
+        typeof(float), 0.5f,
         (gaugeBase, newValue) => { GetLinear(gaugeBase).MinorTickWidthExtent = (float)newValue; });
 
     /// <summary>
@@ -87,14 +93,15 @@ public class WpfGaugeLinear : WpfGaugeBase
         set => SetValue(ValueBarBrushProperty, value);
     }
 
-    public static readonly DependencyProperty ValueBarBrushProperty = Create(nameof(ValueBarBrush), typeof(Brush),
+    public static readonly DependencyProperty ValueBarBrushProperty = Create(nameof(ValueBarBrush),
+        typeof(Brush), new SolidColorBrush(Colors.Black),
         (gaugeBase, newValue) =>
         {
             GetLinear(gaugeBase).ValueBarShader = GetSkShader(GetLinear(gaugeBase), (Brush)newValue);
         });
 
     #endregion
-   
+
 
     #region Helper
 

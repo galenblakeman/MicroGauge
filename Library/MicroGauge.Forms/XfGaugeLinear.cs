@@ -13,7 +13,7 @@ namespace MicroGauge.Forms
         }
 
         #endregion
-     
+
 
         #region Gauge Specific Properties
 
@@ -26,9 +26,10 @@ namespace MicroGauge.Forms
             set => SetValue(IsVerticalProperty, value);
         }
 
-        public static readonly BindableProperty IsVerticalProperty = Create(nameof(IsVertical), typeof(bool),
+        public static readonly BindableProperty IsVerticalProperty = Create(nameof(IsVertical),
+            typeof(bool), false,
             (gaugeBase, newValue) => { GetLinear(gaugeBase).IsVertical = (bool)newValue; });
-      
+
         /// <summary>
         ///     ValueWidthExtent
         /// </summary>
@@ -39,7 +40,7 @@ namespace MicroGauge.Forms
         }
 
         public static readonly BindableProperty ValueWidthExtentProperty = Create(nameof(ValueWidthExtent),
-            typeof(float),
+            typeof(float), 0.5f,
             (gaugeBase, newValue) => { GetLinear(gaugeBase).ValueWidthExtent = (float)newValue; });
 
         /// <summary>
@@ -51,7 +52,8 @@ namespace MicroGauge.Forms
             set => SetValue(TickWidthExtentProperty, value);
         }
 
-        public static readonly BindableProperty TickWidthExtentProperty = Create(nameof(TickWidthExtent), typeof(float),
+        public static readonly BindableProperty TickWidthExtentProperty = Create(nameof(TickWidthExtent),
+            typeof(float), 0.7f,
             (gaugeBase, newValue) => { GetLinear(gaugeBase).TickWidthExtent = (float)newValue; });
 
         /// <summary>
@@ -64,7 +66,7 @@ namespace MicroGauge.Forms
         }
 
         public static readonly BindableProperty MinorTickWidthExtentProperty = Create(nameof(MinorTickWidthExtent),
-            typeof(float),
+            typeof(float), 0.5f,
             (gaugeBase, newValue) => { GetLinear(gaugeBase).MinorTickWidthExtent = (float)newValue; });
 
         /// <summary>
@@ -76,14 +78,15 @@ namespace MicroGauge.Forms
             set => SetValue(ValueBarBrushProperty, value);
         }
 
-        public static readonly BindableProperty ValueBarBrushProperty = Create(nameof(ValueBarBrush), typeof(Brush),
+        public static readonly BindableProperty ValueBarBrushProperty = Create(nameof(ValueBarBrush),
+            typeof(Brush), new SolidColorBrush(Color.Black),
             (gaugeBase, newValue) =>
             {
                 GetLinear(gaugeBase).ValueBarShader = GetSkShader(GetLinear(gaugeBase), (Brush)newValue);
             });
 
         #endregion
-        
+
         #region Helper
 
         /// <summary>

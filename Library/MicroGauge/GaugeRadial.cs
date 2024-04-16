@@ -58,7 +58,7 @@ namespace MicroGauge
         /// <summary>
         /// 	NeedlePivotOutlineShader - background of needle pivot outline
         /// </summary>
-        public SKShader NeedlePivotOutlineShader { get; set; } = SKShader.CreateColor(SKColors.LightBlue);
+        public SKShader NeedlePivotOutlineShader { get; set; } = SKShader.CreateColor(SKColors.Black);
 
         /// <summary>
         /// 	RangeShader - background drawn behind tick scale
@@ -66,22 +66,22 @@ namespace MicroGauge
         public SKShader RangeShader { get; set; } = SKShader.CreateColor(SKColors.Transparent);
 
         /// <summary>
-        /// 	RangeInnerStartExtent - when drawing range inner boundary start at extent of _radius
+        /// 	RangeInnerStartExtent - Drawing range inner boundary start at extent of _radius
         /// </summary>
         public float RangeInnerStartExtent { get; set; }
 
         /// <summary>
-        /// 	RangeInnerEndExtent - when drawing range inner boundary end at extent of _radius
+        /// 	RangeInnerEndExtent - Drawing range inner boundary end at extent of _radius
         /// </summary>
         public float RangeInnerEndExtent { get; set; }
 
         /// <summary>
-        /// 	RangeOuterStartExtent - when drawing range outer boundary start at extent of _radius
+        /// 	RangeOuterStartExtent - Drawing range outer boundary start at extent of _radius
         /// </summary>
         public float RangeOuterStartExtent { get; set; }
 
         /// <summary>
-        /// 	RangeOuterEndExtent - when drawing range outer boundary end at extent of _radius
+        /// 	RangeOuterEndExtent - Drawing range outer boundary end at extent of _radius
         /// </summary>
         public float RangeOuterEndExtent { get; set; }
 
@@ -114,9 +114,9 @@ namespace MicroGauge
             CalcDimensions();
             DrawGaugeArea();
             DrawRange();
-            int minorTicks = GaugeHelper.GetTicks(MinValue, MaxValue, MinorInterval);
+            int minorTicks = GaugeHelper.GetTicks(MinValue, MaxValue, MinorTickInterval);
             DrawTicks(minorTicks, false);
-            int majorTicks = GaugeHelper.GetTicks(MinValue, MaxValue, Interval);
+            int majorTicks = GaugeHelper.GetTicks(MinValue, MaxValue, TickInterval);
             DrawTicks(majorTicks, true);
             DrawNeedle();
             DrawLabelNumbers();

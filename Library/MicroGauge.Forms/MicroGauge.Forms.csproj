@@ -3,7 +3,7 @@
   <PropertyGroup>
 	<TargetFramework>netstandard2.0</TargetFramework>
 	  <PackageId>MicroGauge.Forms</PackageId>
-	  <Version>1.0.0.1</Version>
+	  <Version>1.0.0.2</Version>
 	  <Authors>Galen Blakeman</Authors>
 	  <Company></Company>
 	  <PackageDescription>Xamarin.Forms wrapper library for MicroGauge that utilizes SkiaSharp.Views.Forms and BindableProperty bindings</PackageDescription>

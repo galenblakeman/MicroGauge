@@ -3,6 +3,7 @@ using MicroGauge.Constant;
 using SkiaSharp;
 using SkiaSharp.Views.Maui;
 using SkiaSharp.Views.Maui.Controls;
+// ReSharper disable SuggestBaseTypeForParameter
 
 
 namespace MicroGauge.Maui;
@@ -10,7 +11,7 @@ namespace MicroGauge.Maui;
 public abstract class MauiGaugeBase: SKCanvasView
 {
     protected delegate void GaugePropertyChanged(MauiGaugeBase gaugeBase, object newValue);
-    public GaugeBase Gauge { get; protected set; } = null!;
+    public GaugeBase Gauge { get; protected init; } = null!;
 
     #region Draw
 
@@ -36,7 +37,7 @@ public abstract class MauiGaugeBase: SKCanvasView
     /// <summary>
     ///     ReDraw - Invalidate surface and redraw
     /// </summary>
-    private static void ReDraw(ISKCanvasView gaugeBase)
+    private static void ReDraw(MauiGaugeBase gaugeBase)
     {
         gaugeBase.InvalidateSurface();
     }
@@ -55,7 +56,8 @@ public abstract class MauiGaugeBase: SKCanvasView
         set => SetValue(BottomExtentProperty, value);
     }
 
-    public static readonly BindableProperty BottomExtentProperty = Create(nameof(BottomExtent), typeof(float),
+    public static readonly BindableProperty BottomExtentProperty = Create(nameof(BottomExtent),
+        typeof(float), 0.05f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.BottomExtent = (float)newValue; });
 
     /// <summary>
@@ -67,7 +69,8 @@ public abstract class MauiGaugeBase: SKCanvasView
         set => SetValue(TopExtentProperty, value);
     }
 
-    public static readonly BindableProperty TopExtentProperty = Create(nameof(TopExtent), typeof(float),
+    public static readonly BindableProperty TopExtentProperty = Create(nameof(TopExtent),
+        typeof(float), 0.05f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.TopExtent = (float)newValue; });
 
     /// <summary>
@@ -79,7 +82,8 @@ public abstract class MauiGaugeBase: SKCanvasView
         set => SetValue(LeftExtentProperty, value);
     }
 
-    public static readonly BindableProperty LeftExtentProperty = Create(nameof(LeftExtent), typeof(float),
+    public static readonly BindableProperty LeftExtentProperty = Create(nameof(LeftExtent),
+        typeof(float), 0.05f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.LeftExtent = (float)newValue; });
 
     /// <summary>
@@ -91,7 +95,8 @@ public abstract class MauiGaugeBase: SKCanvasView
         set => SetValue(RightExtentProperty, value);
     }
 
-    public static readonly BindableProperty RightExtentProperty = Create(nameof(RightExtent), typeof(float),
+    public static readonly BindableProperty RightExtentProperty = Create(nameof(RightExtent),
+        typeof(float), 0.05f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.RightExtent = (float)newValue; });
 
     /// <summary>
@@ -103,11 +108,12 @@ public abstract class MauiGaugeBase: SKCanvasView
         set => SetValue(ValueProperty, value);
     }
 
-    public static readonly BindableProperty ValueProperty = Create(nameof(Value), typeof(double),
+    public static readonly BindableProperty ValueProperty = Create(nameof(Value),
+        typeof(double), 0.0,
         (gaugeBase, newValue) => { gaugeBase.Gauge.Value = (double)newValue; });
 
     /// <summary>
-    ///     BackingBrush
+    ///     BackingShader
     /// </summary>
     public Brush BackingBrush
     {
@@ -115,11 +121,9 @@ public abstract class MauiGaugeBase: SKCanvasView
         set => SetValue(BackingBrushProperty, value);
     }
 
-    public static readonly BindableProperty BackingBrushProperty = Create(nameof(BackingBrush), typeof(Brush),
-        (gaugeBase, newValue) =>
-        {
-            gaugeBase.Gauge.BackingShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
-        });
+    public static readonly BindableProperty BackingBrushProperty = Create(nameof(BackingBrush),
+        typeof(Brush), new SolidColorBrush(Colors.White),
+        (gaugeBase, newValue) => { gaugeBase.Gauge.BackingShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue); });
 
     /// <summary>
     ///     BackingOutlineBrush
@@ -130,7 +134,8 @@ public abstract class MauiGaugeBase: SKCanvasView
         set => SetValue(BackingOutlineBrushProperty, value);
     }
 
-    public static readonly BindableProperty BackingOutlineBrushProperty = Create(nameof(BackingOutlineBrush), typeof(Brush),
+    public static readonly BindableProperty BackingOutlineBrushProperty = Create(nameof(BackingOutlineBrush),
+        typeof(Brush), new SolidColorBrush(Colors.Black),
         (gaugeBase, newValue) =>
         {
             gaugeBase.Gauge.BackingOutlineShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
@@ -146,11 +151,11 @@ public abstract class MauiGaugeBase: SKCanvasView
     }
 
     public static readonly BindableProperty BackingStrokeWidthProperty = Create(nameof(BackingStrokeWidth),
-        typeof(float),
+        typeof(float), 10f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.BackingStrokeWidth = (float)newValue; });
 
     /// <summary>
-    ///     TickBrush
+    ///     TickShader
     /// </summary>
     public Brush TickBrush
     {
@@ -158,7 +163,8 @@ public abstract class MauiGaugeBase: SKCanvasView
         set => SetValue(TickBrushProperty, value);
     }
 
-    public static readonly BindableProperty TickBrushProperty = Create(nameof(TickBrush), typeof(Brush),
+    public static readonly BindableProperty TickBrushProperty = Create(nameof(TickBrush),
+        typeof(Brush), new SolidColorBrush(Colors.Black),
         (gaugeBase, newValue) => { gaugeBase.Gauge.TickShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue); });
 
     /// <summary>
@@ -170,7 +176,8 @@ public abstract class MauiGaugeBase: SKCanvasView
         set => SetValue(TickStrokeWidthProperty, value);
     }
 
-    public static readonly BindableProperty TickStrokeWidthProperty = Create(nameof(TickStrokeWidth), typeof(float),
+    public static readonly BindableProperty TickStrokeWidthProperty = Create(nameof(TickStrokeWidth),
+        typeof(float), 1f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.TickStrokeWidth = (float)newValue; });
 
     /// <summary>
@@ -182,11 +189,9 @@ public abstract class MauiGaugeBase: SKCanvasView
         set => SetValue(MinorTickBrushProperty, value);
     }
 
-    public static readonly BindableProperty MinorTickBrushProperty = Create(nameof(MinorTickBrush), typeof(Brush),
-        (gaugeBase, newValue) =>
-        {
-            gaugeBase.Gauge.MinorTickShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
-        });
+    public static readonly BindableProperty MinorTickBrushProperty = Create(nameof(MinorTickBrush),
+        typeof(Brush), new SolidColorBrush(Colors.LightGray),
+        (gaugeBase, newValue) => { gaugeBase.Gauge.MinorTickShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue); });
 
     /// <summary>
     ///     MinorTickStrokeWidth
@@ -198,32 +203,34 @@ public abstract class MauiGaugeBase: SKCanvasView
     }
 
     public static readonly BindableProperty MinorTickStrokeWidthProperty = Create(nameof(MinorTickStrokeWidth),
-        typeof(float),
+        typeof(float), 0.5f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.MinorTickStrokeWidth = (float)newValue; });
 
     /// <summary>
-    ///     Interval
+    ///     TickInterval
     /// </summary>
-    public float Interval
+    public float TickInterval
     {
-        get => (float)GetValue(IntervalProperty);
-        set => SetValue(IntervalProperty, value);
+        get => (float)GetValue(TickIntervalProperty);
+        set => SetValue(TickIntervalProperty, value);
     }
 
-    public static readonly BindableProperty IntervalProperty = Create(nameof(Interval), typeof(float),
-        (gaugeBase, newValue) => { gaugeBase.Gauge.Interval = (float)newValue; });
+    public static readonly BindableProperty TickIntervalProperty = Create(nameof(TickInterval),
+        typeof(float), 5f,
+        (gaugeBase, newValue) => { gaugeBase.Gauge.TickInterval = (float)newValue; });
 
     /// <summary>
-    ///     MinorInterval
+    ///     MinorTickInterval
     /// </summary>
-    public float MinorInterval
+    public float MinorTickInterval
     {
-        get => (float)GetValue(MinorIntervalProperty);
-        set => SetValue(MinorIntervalProperty, value);
+        get => (float)GetValue(MinorTickIntervalProperty);
+        set => SetValue(MinorTickIntervalProperty, value);
     }
 
-    public static readonly BindableProperty MinorIntervalProperty = Create(nameof(MinorInterval), typeof(float),
-        (gaugeBase, newValue) => { gaugeBase.Gauge.MinorInterval = (float)newValue; });
+    public static readonly BindableProperty MinorTickIntervalProperty = Create(nameof(MinorTickInterval),
+        typeof(float), 1f,
+        (gaugeBase, newValue) => { gaugeBase.Gauge.MinorTickInterval = (float)newValue; });
 
     /// <summary>
     ///     MinValue
@@ -234,7 +241,8 @@ public abstract class MauiGaugeBase: SKCanvasView
         set => SetValue(MinValueProperty, value);
     }
 
-    public static readonly BindableProperty MinValueProperty = Create(nameof(MinValue), typeof(float),
+    public static readonly BindableProperty MinValueProperty = Create(nameof(MinValue),
+        typeof(float), 0f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.MinValue = (float)newValue; });
 
     /// <summary>
@@ -246,7 +254,8 @@ public abstract class MauiGaugeBase: SKCanvasView
         set => SetValue(MaxValueProperty, value);
     }
 
-    public static readonly BindableProperty MaxValueProperty = Create(nameof(MaxValue), typeof(float),
+    public static readonly BindableProperty MaxValueProperty = Create(nameof(MaxValue),
+        typeof(float), 100f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.MaxValue = (float)newValue; });
 
     /// <summary>
@@ -258,7 +267,8 @@ public abstract class MauiGaugeBase: SKCanvasView
         set => SetValue(LabelIntervalProperty, value);
     }
 
-    public static readonly BindableProperty LabelIntervalProperty = Create(nameof(LabelInterval), typeof(float),
+    public static readonly BindableProperty LabelIntervalProperty = Create(nameof(LabelInterval),
+        typeof(float), 10f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.LabelInterval = (float)newValue; });
 
     /// <summary>
@@ -270,7 +280,8 @@ public abstract class MauiGaugeBase: SKCanvasView
         set => SetValue(LabelExtentProperty, value);
     }
 
-    public static readonly BindableProperty LabelExtentProperty = Create(nameof(LabelExtent), typeof(float),
+    public static readonly BindableProperty LabelExtentProperty = Create(nameof(LabelExtent),
+        typeof(float), 0.85f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.LabelExtent = (float)newValue; });
 
     /// <summary>
@@ -283,7 +294,7 @@ public abstract class MauiGaugeBase: SKCanvasView
     }
 
     public static readonly BindableProperty LabelFormatStringProperty = Create(nameof(LabelFormatString),
-        typeof(string),
+        typeof(string), "{0:N0}",
         (gaugeBase, newValue) => { gaugeBase.Gauge.LabelFormatString = (string)newValue; });
 
     /// <summary>
@@ -295,7 +306,8 @@ public abstract class MauiGaugeBase: SKCanvasView
         set => SetValue(LabelFontSizeProperty, value);
     }
 
-    public static readonly BindableProperty LabelFontSizeProperty = Create(nameof(LabelFontSize), typeof(float),
+    public static readonly BindableProperty LabelFontSizeProperty = Create(nameof(LabelFontSize),
+        typeof(float), 10f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.LabelFontSize = (float)newValue; });
 
     /// <summary>
@@ -307,11 +319,12 @@ public abstract class MauiGaugeBase: SKCanvasView
         set => SetValue(LabelFontWeightProperty, value);
     }
 
-    public static readonly BindableProperty LabelFontWeightProperty = Create(nameof(LabelFontWeight), typeof(SKFontStyleWeight),
+    public static readonly BindableProperty LabelFontWeightProperty = Create(nameof(LabelFontWeight),
+        typeof(SKFontStyleWeight), SKFontStyleWeight.Normal,
         (gaugeBase, newValue) => { gaugeBase.Gauge.LabelFontWeight = (SKFontStyleWeight)newValue; });
 
     /// <summary>
-    ///     LabelFontBrush
+    ///     FontBrush
     /// </summary>
     public Brush LabelFontBrush
     {
@@ -319,7 +332,8 @@ public abstract class MauiGaugeBase: SKCanvasView
         set => SetValue(LabelFontBrushProperty, value);
     }
 
-    public static readonly BindableProperty LabelFontBrushProperty = Create(nameof(LabelFontBrush), typeof(Brush),
+    public static readonly BindableProperty LabelFontBrushProperty = Create(nameof(LabelFontBrush),
+        typeof(Brush), new SolidColorBrush(Colors.Black),
         (gaugeBase, newValue) => { gaugeBase.Gauge.LabelFontShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue); });
 
     /// <summary>
@@ -331,7 +345,8 @@ public abstract class MauiGaugeBase: SKCanvasView
         set => SetValue(LabelFontFamilyProperty, value);
     }
 
-    public static readonly BindableProperty LabelFontFamilyProperty = Create(nameof(LabelFontFamily), typeof(string),
+    public static readonly BindableProperty LabelFontFamilyProperty = Create(nameof(LabelFontFamily),
+        typeof(string), "verdana",
         (gaugeBase, newValue) => { gaugeBase.Gauge.LabelFontFamily = (string)newValue; });
 
     /// <summary>
@@ -343,7 +358,8 @@ public abstract class MauiGaugeBase: SKCanvasView
         set => SetValue(ValueLocationProperty, value);
     }
 
-    public static readonly BindableProperty ValueLocationProperty = Create(nameof(ValueLocation), typeof(GaugeValueLocation),
+    public static readonly BindableProperty ValueLocationProperty = Create(nameof(ValueLocation),
+        typeof(GaugeValueLocation), GaugeValueLocation.BottomCenter,
         (gaugeBase, newValue) => { gaugeBase.Gauge.ValueLocation = (GaugeValueLocation)newValue; });
 
     /// <summary>
@@ -355,7 +371,8 @@ public abstract class MauiGaugeBase: SKCanvasView
         set => SetValue(ValueExtentProperty, value);
     }
 
-    public static readonly BindableProperty ValueExtentProperty = Create(nameof(ValueExtent), typeof(float),
+    public static readonly BindableProperty ValueExtentProperty = Create(nameof(ValueExtent),
+        typeof(float), 0.60f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.ValueExtent = (float)newValue; });
 
     /// <summary>
@@ -368,7 +385,7 @@ public abstract class MauiGaugeBase: SKCanvasView
     }
 
     public static readonly BindableProperty ValueFormatStringProperty = Create(nameof(ValueFormatString),
-        typeof(string),
+        typeof(string), "{0:N0}",
         (gaugeBase, newValue) => { gaugeBase.Gauge.ValueFormatString = (string)newValue; });
 
     /// <summary>
@@ -380,7 +397,8 @@ public abstract class MauiGaugeBase: SKCanvasView
         set => SetValue(ValueFontSizeProperty, value);
     }
 
-    public static readonly BindableProperty ValueFontSizeProperty = Create(nameof(ValueFontSize), typeof(float),
+    public static readonly BindableProperty ValueFontSizeProperty = Create(nameof(ValueFontSize),
+        typeof(float), 20f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.ValueFontSize = (float)newValue; });
 
     /// <summary>
@@ -392,7 +410,8 @@ public abstract class MauiGaugeBase: SKCanvasView
         set => SetValue(ValueFontWeightProperty, value);
     }
 
-    public static readonly BindableProperty ValueFontWeightProperty = Create(nameof(ValueFontWeight), typeof(SKFontStyleWeight),
+    public static readonly BindableProperty ValueFontWeightProperty = Create(nameof(ValueFontWeight),
+        typeof(SKFontStyleWeight), SKFontStyleWeight.Normal,
         (gaugeBase, newValue) => { gaugeBase.Gauge.ValueFontWeight = (SKFontStyleWeight)newValue; });
 
     /// <summary>
@@ -404,7 +423,8 @@ public abstract class MauiGaugeBase: SKCanvasView
         set => SetValue(ValueFontBrushProperty, value);
     }
 
-    public static readonly BindableProperty ValueFontBrushProperty = Create(nameof(ValueFontBrush), typeof(Brush),
+    public static readonly BindableProperty ValueFontBrushProperty = Create(nameof(ValueFontBrush),
+        typeof(Brush), new SolidColorBrush(Colors.Black),
         (gaugeBase, newValue) => { gaugeBase.Gauge.ValueFontShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue); });
 
     /// <summary>
@@ -416,7 +436,8 @@ public abstract class MauiGaugeBase: SKCanvasView
         set => SetValue(ValueFontFamilyProperty, value);
     }
 
-    public static readonly BindableProperty ValueFontFamilyProperty = Create(nameof(ValueFontFamily), typeof(string),
+    public static readonly BindableProperty ValueFontFamilyProperty = Create(nameof(ValueFontFamily),
+        typeof(string), "verdana",
         (gaugeBase, newValue) => { gaugeBase.Gauge.ValueFontFamily = (string)newValue; });
 
     /// <summary>
@@ -428,11 +449,9 @@ public abstract class MauiGaugeBase: SKCanvasView
         set => SetValue(NeedleBrushProperty, value);
     }
 
-    public static readonly BindableProperty NeedleBrushProperty = Create(nameof(NeedleBrush), typeof(Brush),
-        (gaugeBase, newValue) =>
-        {
-            gaugeBase.Gauge.NeedleShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
-        });
+    public static readonly BindableProperty NeedleBrushProperty = Create(nameof(NeedleBrush),
+        typeof(Brush), new SolidColorBrush(Colors.Black),
+        (gaugeBase, newValue) => { gaugeBase.Gauge.NeedleShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue); });
 
     /// <summary>
     ///     NeedleStartWidth
@@ -443,7 +462,8 @@ public abstract class MauiGaugeBase: SKCanvasView
         set => SetValue(NeedleStartWidthProperty, value);
     }
 
-    public static readonly BindableProperty NeedleStartWidthProperty = Create(nameof(NeedleStartWidth), typeof(float),
+    public static readonly BindableProperty NeedleStartWidthProperty = Create(nameof(NeedleStartWidth),
+        typeof(float), 6f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.NeedleStartWidth = (float)newValue; });
 
     /// <summary>
@@ -455,7 +475,8 @@ public abstract class MauiGaugeBase: SKCanvasView
         set => SetValue(NeedleEndWidthProperty, value);
     }
 
-    public static readonly BindableProperty NeedleEndWidthProperty = Create(nameof(NeedleEndWidth), typeof(float),
+    public static readonly BindableProperty NeedleEndWidthProperty = Create(nameof(NeedleEndWidth),
+        typeof(float), 3f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.NeedleEndWidth = (float)newValue; });
 
     /// <summary>
@@ -468,7 +489,7 @@ public abstract class MauiGaugeBase: SKCanvasView
     }
 
     public static readonly BindableProperty NeedleStartExtentProperty = Create(nameof(NeedleStartExtent),
-        typeof(float),
+        typeof(float), 0f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.NeedleStartExtent = (float)newValue; });
 
     /// <summary>
@@ -480,7 +501,8 @@ public abstract class MauiGaugeBase: SKCanvasView
         set => SetValue(NeedleEndExtentProperty, value);
     }
 
-    public static readonly BindableProperty NeedleEndExtentProperty = Create(nameof(NeedleEndExtent), typeof(float),
+    public static readonly BindableProperty NeedleEndExtentProperty = Create(nameof(NeedleEndExtent),
+        typeof(float), 0.71f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.NeedleEndExtent = (float)newValue; });
 
     /// <summary>
@@ -492,7 +514,8 @@ public abstract class MauiGaugeBase: SKCanvasView
         set => SetValue(SetNeedleValueProperty, value);
     }
 
-    public static readonly BindableProperty SetNeedleValueProperty = Create(nameof(SetNeedleValue), typeof(float),
+    public static readonly BindableProperty SetNeedleValueProperty = Create(nameof(SetNeedleValue),
+        typeof(float), 0f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.SetNeedleValue = (float)newValue; });
 
     /// <summary>
@@ -504,11 +527,9 @@ public abstract class MauiGaugeBase: SKCanvasView
         set => SetValue(SetNeedleBrushProperty, value);
     }
 
-    public static readonly BindableProperty SetNeedleBrushProperty = Create(nameof(SetNeedleBrush), typeof(Brush),
-        (gaugeBase, newValue) =>
-        {
-            gaugeBase.Gauge.SetNeedleShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
-        });
+    public static readonly BindableProperty SetNeedleBrushProperty = Create(nameof(SetNeedleBrush),
+        typeof(Brush), new SolidColorBrush(Colors.Transparent),
+        (gaugeBase, newValue) => { gaugeBase.Gauge.SetNeedleShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue); });
 
     /// <summary>
     ///     SetNeedleStartWidth
@@ -520,7 +541,7 @@ public abstract class MauiGaugeBase: SKCanvasView
     }
 
     public static readonly BindableProperty SetNeedleStartWidthProperty = Create(nameof(SetNeedleStartWidth),
-        typeof(float),
+        typeof(float), 6f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.SetNeedleStartWidth = (float)newValue; });
 
     /// <summary>
@@ -533,7 +554,7 @@ public abstract class MauiGaugeBase: SKCanvasView
     }
 
     public static readonly BindableProperty SetNeedleEndWidthProperty = Create(nameof(SetNeedleEndWidth),
-        typeof(float),
+        typeof(float), 3f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.SetNeedleEndWidth = (float)newValue; });
 
     /// <summary>
@@ -546,7 +567,7 @@ public abstract class MauiGaugeBase: SKCanvasView
     }
 
     public static readonly BindableProperty SetNeedleStartExtentProperty = Create(nameof(SetNeedleStartExtent),
-        typeof(float),
+        typeof(float), 0f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.SetNeedleStartExtent = (float)newValue; });
 
     /// <summary>
@@ -559,7 +580,7 @@ public abstract class MauiGaugeBase: SKCanvasView
     }
 
     public static readonly BindableProperty SetNeedleEndExtentProperty = Create(nameof(SetNeedleEndExtent),
-        typeof(float),
+        typeof(float), 0.71f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.SetNeedleEndExtent = (float)newValue; });
 
     #endregion
@@ -578,9 +599,9 @@ public abstract class MauiGaugeBase: SKCanvasView
     ///     Create - wrapper Register against this control
     /// </summary>
     protected static BindableProperty Create(string propertyName, Type propertyType,
-        GaugePropertyChanged propertyChanged)
+        object defaultValue, GaugePropertyChanged propertyChanged)
     {
-        return BindableProperty.Create(propertyName, propertyType, typeof(GaugeBase),
+        return BindableProperty.Create(propertyName, propertyType, typeof(GaugeBase), defaultValue,
             propertyChanged: (bindObj, _, newValue) =>
             {
                 MauiGaugeBase canvasGauge = (MauiGaugeBase)bindObj;

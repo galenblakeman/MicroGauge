@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Media;
 using MicroGauge.Constant;
 using Brush = System.Windows.Media.Brush;
 
@@ -6,7 +7,6 @@ namespace MicroGauge.Wpf;
 
 public class WpfGaugeRadial : WpfGaugeBase
 {
-
     #region Constructor
 
     public WpfGaugeRadial()
@@ -19,6 +19,7 @@ public class WpfGaugeRadial : WpfGaugeBase
 
 
     #region Draw
+
     /// <summary>
     ///     OnRenderSizeChanged - calculate shaders (in case linear gradient) and redraw
     /// </summary>
@@ -30,10 +31,10 @@ public class WpfGaugeRadial : WpfGaugeBase
         radialGauge.RangeShader = GetSkShader(Gauge, RangeBrush);
         base.OnRenderSizeChanged(sizeInfo);
     }
+
     #endregion
 
     #region Gauge Specific Properties
-
 
     /// <summary>
     ///     RadialStyle
@@ -44,7 +45,8 @@ public class WpfGaugeRadial : WpfGaugeBase
         set => SetValue(RadialStyleProperty, value);
     }
 
-    public static readonly DependencyProperty RadialStyleProperty = Create(nameof(RadialStyle), typeof(GaugeRadialStyle),
+    public static readonly DependencyProperty RadialStyleProperty = Create(nameof(RadialStyle),
+        typeof(GaugeRadialStyle), GaugeRadialStyle.Full,
         (gaugeBase, newValue) => { GetRadial(gaugeBase).RadialStyle = (GaugeRadialStyle)newValue; });
 
     /// <summary>
@@ -56,7 +58,8 @@ public class WpfGaugeRadial : WpfGaugeBase
         set => SetValue(ScaleStartAngleProperty, value);
     }
 
-    public static readonly DependencyProperty ScaleStartAngleProperty = Create(nameof(ScaleStartAngle), typeof(float),
+    public static readonly DependencyProperty ScaleStartAngleProperty = Create(nameof(ScaleStartAngle),
+        typeof(float), 210f,
         (gaugeBase, newValue) => { GetRadial(gaugeBase).ScaleStartAngle = (float)newValue; });
 
     /// <summary>
@@ -68,7 +71,8 @@ public class WpfGaugeRadial : WpfGaugeBase
         set => SetValue(ScaleEndAngleProperty, value);
     }
 
-    public static readonly DependencyProperty ScaleEndAngleProperty = Create(nameof(ScaleEndAngle), typeof(float),
+    public static readonly DependencyProperty ScaleEndAngleProperty = Create(nameof(ScaleEndAngle),
+        typeof(float), 330f,
         (gaugeBase, newValue) => { GetRadial(gaugeBase).ScaleEndAngle = (float)newValue; });
 
     /// <summary>
@@ -80,7 +84,8 @@ public class WpfGaugeRadial : WpfGaugeBase
         set => SetValue(TickStartExtentProperty, value);
     }
 
-    public static readonly DependencyProperty TickStartExtentProperty = Create(nameof(TickStartExtent), typeof(float),
+    public static readonly DependencyProperty TickStartExtentProperty = Create(nameof(TickStartExtent),
+        typeof(float), 0.6f,
         (gaugeBase, newValue) => { GetRadial(gaugeBase).TickStartExtent = (float)newValue; });
 
     /// <summary>
@@ -92,7 +97,8 @@ public class WpfGaugeRadial : WpfGaugeBase
         set => SetValue(TickEndExtentProperty, value);
     }
 
-    public static readonly DependencyProperty TickEndExtentProperty = Create(nameof(TickEndExtent), typeof(float),
+    public static readonly DependencyProperty TickEndExtentProperty = Create(nameof(TickEndExtent),
+        typeof(float), 0.7f,
         (gaugeBase, newValue) => { GetRadial(gaugeBase).TickEndExtent = (float)newValue; });
 
     /// <summary>
@@ -104,7 +110,8 @@ public class WpfGaugeRadial : WpfGaugeBase
         set => SetValue(MinorTickStartExtentProperty, value);
     }
 
-    public static readonly DependencyProperty MinorTickStartExtentProperty = Create(nameof(MinorTickStartExtent), typeof(float),
+    public static readonly DependencyProperty MinorTickStartExtentProperty = Create(nameof(MinorTickStartExtent),
+        typeof(float), 0.65f,
         (gaugeBase, newValue) => { GetRadial(gaugeBase).MinorTickStartExtent = (float)newValue; });
 
     /// <summary>
@@ -116,7 +123,8 @@ public class WpfGaugeRadial : WpfGaugeBase
         set => SetValue(MinorTickEndExtentProperty, value);
     }
 
-    public static readonly DependencyProperty MinorTickEndExtentProperty = Create(nameof(MinorTickEndExtent), typeof(float),
+    public static readonly DependencyProperty MinorTickEndExtentProperty = Create(nameof(MinorTickEndExtent),
+        typeof(float), 0.7f,
         (gaugeBase, newValue) => { GetRadial(gaugeBase).MinorTickEndExtent = (float)newValue; });
 
     /// <summary>
@@ -128,7 +136,8 @@ public class WpfGaugeRadial : WpfGaugeBase
         set => SetValue(NeedlePivotEndExtentProperty, value);
     }
 
-    public static readonly DependencyProperty NeedlePivotEndExtentProperty = Create(nameof(NeedlePivotEndExtent), typeof(float),
+    public static readonly DependencyProperty NeedlePivotEndExtentProperty = Create(nameof(NeedlePivotEndExtent),
+        typeof(float), 0.1f,
         (gaugeBase, newValue) => { GetRadial(gaugeBase).NeedlePivotEndExtent = (float)newValue; });
 
     /// <summary>
@@ -140,7 +149,8 @@ public class WpfGaugeRadial : WpfGaugeBase
         set => SetValue(NeedlePivotBrushProperty, value);
     }
 
-    public static readonly DependencyProperty NeedlePivotBrushProperty = Create(nameof(NeedlePivotBrush), typeof(Brush),
+    public static readonly DependencyProperty NeedlePivotBrushProperty = Create(nameof(NeedlePivotBrush),
+        typeof(Brush), new SolidColorBrush(Colors.LightGray),
         (gaugeBase, newValue) =>
         {
             GetRadial(gaugeBase).NeedlePivotShader = GetSkShader(GetRadial(gaugeBase), (Brush)newValue);
@@ -156,7 +166,7 @@ public class WpfGaugeRadial : WpfGaugeBase
     }
 
     public static readonly DependencyProperty NeedlePivotOutlineProperty = Create(nameof(NeedlePivotOutlineBrush),
-        typeof(Brush),
+        typeof(Brush), new SolidColorBrush(Colors.Black),
         (gaugeBase, newValue) =>
         {
             GetRadial(gaugeBase).NeedlePivotOutlineShader = GetSkShader(GetRadial(gaugeBase), (Brush)newValue);
@@ -171,7 +181,8 @@ public class WpfGaugeRadial : WpfGaugeBase
         set => SetValue(RangeBrushProperty, value);
     }
 
-    public static readonly DependencyProperty RangeBrushProperty = Create(nameof(RangeBrush), typeof(Brush),
+    public static readonly DependencyProperty RangeBrushProperty = Create(nameof(RangeBrush),
+        typeof(Brush), new SolidColorBrush(Colors.Transparent),
         (gaugeBase, newValue) =>
         {
             GetRadial(gaugeBase).RangeShader = GetSkShader(GetRadial(gaugeBase), (Brush)newValue);
@@ -186,7 +197,8 @@ public class WpfGaugeRadial : WpfGaugeBase
         set => SetValue(RangeInnerStartExtentProperty, value);
     }
 
-    public static readonly DependencyProperty RangeInnerStartExtentProperty = Create(nameof(RangeInnerStartExtent), typeof(float),
+    public static readonly DependencyProperty RangeInnerStartExtentProperty = Create(nameof(RangeInnerStartExtent),
+        typeof(float), 0f,
         (gaugeBase, newValue) => { GetRadial(gaugeBase).RangeInnerStartExtent = (float)newValue; });
 
     /// <summary>
@@ -198,7 +210,8 @@ public class WpfGaugeRadial : WpfGaugeBase
         set => SetValue(RangeInnerEndExtentProperty, value);
     }
 
-    public static readonly DependencyProperty RangeInnerEndExtentProperty = Create(nameof(RangeInnerEndExtent), typeof(float),
+    public static readonly DependencyProperty RangeInnerEndExtentProperty = Create(nameof(RangeInnerEndExtent),
+        typeof(float), 0f,
         (gaugeBase, newValue) => { GetRadial(gaugeBase).RangeInnerEndExtent = (float)newValue; });
 
     /// <summary>
@@ -210,7 +223,8 @@ public class WpfGaugeRadial : WpfGaugeBase
         set => SetValue(RangeOuterStartExtentProperty, value);
     }
 
-    public static readonly DependencyProperty RangeOuterStartExtentProperty = Create(nameof(RangeOuterStartExtent), typeof(float),
+    public static readonly DependencyProperty RangeOuterStartExtentProperty = Create(nameof(RangeOuterStartExtent),
+        typeof(float), 0f,
         (gaugeBase, newValue) => { GetRadial(gaugeBase).RangeOuterStartExtent = (float)newValue; });
 
     /// <summary>
@@ -222,7 +236,8 @@ public class WpfGaugeRadial : WpfGaugeBase
         set => SetValue(RangeOuterEndExtentProperty, value);
     }
 
-    public static readonly DependencyProperty RangeOuterEndExtentProperty = Create(nameof(RangeOuterEndExtent), typeof(float),
+    public static readonly DependencyProperty RangeOuterEndExtentProperty = Create(nameof(RangeOuterEndExtent),
+        typeof(float), 0f,
         (gaugeBase, newValue) => { GetRadial(gaugeBase).RangeOuterEndExtent = (float)newValue; });
 
     #endregion
@@ -239,5 +254,4 @@ public class WpfGaugeRadial : WpfGaugeBase
     }
 
     #endregion
-
 }
