@@ -33,33 +33,33 @@ WPF wrapper library for **MicroGauge** that utilizes SkiaSharp.Views.WPF and Dep
 [[Source](https://github.com/galenblakeman/MicroGauge/tree/master/Library/MicroGauge.Wpf)]
 
 ---
-## Usage
+## Tag Reference
 
-### Tag Reference
 * [Radial Gauge](https://github.com/galenblakeman/MicroGauge/blob/master/Doc/RadialGaugeTag.md)
 * [Linear Gauge](https://github.com/galenblakeman/MicroGauge/blob/master/Doc/LinearGaugeTag.md)
 
-###  Xamarin.Forms
-####  Install Package CLI
+---
+##  Xamarin.Forms Usage
+###  Nuget Package Install
 
 ```Dotenv
 dotnet add package MicroGauge.Forms
 ```
 
-####  Add Namespace Attribute
+###  Namespace Attribute
 
 ```XAML
 xmlns:microGauge="clr-namespace:MicroGauge.Forms;assembly=MicroGauge.Forms"
 ```
 
-####  XAML
+###  XAML
 
 ```XAML
 <microGauge:XfGaugeRadial Value="15"  NeedleBrush="#008000" />
 <microGauge:XfGaugeLinear Value="15"  NeedleBrush="#008000" />
 ```
 
-####  C#
+###  C#
 
 ```C#
 XfGaugeRadial radialGauge = new XfGaugeRadial
@@ -72,32 +72,32 @@ XfGaugeLinear linearGauge = new XfGaugeLinear
 };
 ```
 
-####  Examples
+###  Examples
 * Project: [MicroGauge.Example.Forms](https://github.com/galenblakeman/MicroGauge/tree/master/Example/MicroGauge.Example.Forms)
 * Bindings: [MainPage.xaml](https://github.com/galenblakeman/MicroGauge/blob/master/Example/MicroGauge.Example.Forms/MicroGauge.Example.Forms/MainPage.xaml)  
+---
 
-
-###  .Net MAUI
-####  Install Package CLI
+##  .Net MAUI Usage
+###  Nuget Package Install
 
 ```Dotenv
 dotnet add package MicroGauge.Maui
 ```
 
-####  Add Namespace Attribute
+###  Namespace Attribute
 
 ```XAML
 xmlns:microGauge="clr-namespace:MicroGauge.Maui;assembly=MicroGauge.Maui"
 ```
 
-####  XAML
+###  XAML
 
 ```XAML
 <microGauge:MauiGaugeRadial Value="15" NeedleBrush="#008000" />
 <microGauge:MauiGaugeLinear Value="15" NeedleBrush="#008000" />
 ```
 
-####  C#
+###  C#
 
 ```C#
 MauiGaugeRadial radialGauge = new MauiGaugeRadial
@@ -113,29 +113,29 @@ MauiGaugeLinear linearGauge = new MauiGaugeLinear
 ####  Examples
 * Project: [MicroGauge.Example.Maui](https://github.com/galenblakeman/MicroGauge/tree/master/Example/MicroGauge.Example.Maui)
 * Bindings: [MainPage.xaml](https://github.com/galenblakeman/MicroGauge/blob/master/Example/MicroGauge.Example.Maui/MainPage.xaml)
+---
 
-
-###  Windows Presentation Foundation (WPF)
-####  Install Package CLI
+##  WPF Usage
+###  Nuget Package Install
 
 ```Dotenv
 dotnet add package MicroGauge.Wpf
 ```
 
-####  Add Namespace Attribute
+###  Namespace Attribute
 
 ```XAML
 xmlns:microGauge="clr-namespace:MicroGauge.Wpf;assembly=MicroGauge.Wpf"
 ```
 
-####  XAML
+###  XAML
 
 ```XAML
 <microGauge:WpfGaugeRadial Value="15" NeedleBrush="#008000" />
 <microGauge:WpfGaugeLinear Value="15" NeedleBrush="#008000" />
 ```
 
-####  C#
+###  C#
 
 ```C#
 WpfGaugeRadial radialGauge = new WpfGaugeRadial
@@ -148,7 +148,7 @@ WpfGaugeLinear linearGauge = new WpfGaugeLinear
 };
 ```
 
-####  Examples
+###  Examples
 * Project: [MicroGauge.Example.Wpf](https://github.com/galenblakeman/MicroGauge/tree/master/Example/MicroGauge.Example.Wpf)
 * Bindings: [MainWindow.xaml](https://github.com/galenblakeman/MicroGauge/blob/master/Example/MicroGauge.Example.Wpf/MainWindow.xaml)  
 
