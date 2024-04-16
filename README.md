@@ -1,20 +1,20 @@
 # MicroGauge
-**MicroGauge** is a simple radial and linear gauge library for .Net
+**MicroGauge** is a radial and linear gauge library for .Net
 
-* **MicroGauge** utilizes the [SkiaSharp](https://github.com/mono/SkiaSharp) Library to draw radial and linear gauge (see examples below)
+* **MicroGauge** utilizes the [SkiaSharp](https://github.com/mono/SkiaSharp) Library to draw radial and linear gauges (see examples below)
 * Inspired by [MicroCharts](https://github.com/microcharts-dotnet/Microcharts), it provides a simple and compact way to draw gauges on a canvas.
 * The radial gauge offers full-circle, half-circle, and fitted design styles.
 * The linear gauge offers vertical and horizontal design styles.
 
 ---
 ## Gallery
-![Gallery](https://github.com/galenblakeman/MicroGauge/blob/master/Gallery.png)
+![Gallery](https://github.com/galenblakeman/MicroGauge/blob/master/Doc/Gallery.png)
 
 ---
 ## Packages
 [![NuGet Version](https://img.shields.io/nuget/v/MicroGauge?style=flat-square&logo=nuget&label=MicroGauge)](https://www.nuget.org/packages/MicroGauge/)
 
-Base library that you can work with directly 
+The base library that you can work with directly 
 [[Source](https://github.com/galenblakeman/MicroGauge/tree/master/Library/MicroGauge)]
 
 [![NuGet Version](https://img.shields.io/nuget/v/MicroGauge.Forms?style=flat-square&logo=nuget&label=MicroGauge.Forms)](https://www.nuget.org/packages/MicroGauge.Forms/)
@@ -51,8 +51,8 @@ xmlns:microGauge="clr-namespace:MicroGauge.Forms;assembly=MicroGauge.Forms"
 ####  Use Tags
 
 ```XAML
-<microGauge:XfGaugeRadial Value="15" MinValue="0" MaxValue="30" />
-<microGauge:XfGaugeLinear Value="15" MinValue="0" MaxValue="30" />
+<microGauge:XfGaugeRadial Value="15"  NeedleBrush="#FFE000" />
+<microGauge:XfGaugeLinear Value="15"  NeedleBrush="#FFE000" />
 ```
 
 ####  Examples
@@ -76,8 +76,8 @@ xmlns:microGauge="clr-namespace:MicroGauge.Maui;assembly=MicroGauge.Maui"
 ####  Use Tags
 
 ```XAML
-<microGauge:MauiGaugeRadial Value="15" MinValue="0" MaxValue="30" />
-<microGauge:MauiGaugeLinear Value="15" MinValue="0" MaxValue="30" />
+<microGauge:MauiGaugeRadial Value="15" NeedleBrush="#FFE000" />
+<microGauge:MauiGaugeLinear Value="15" NeedleBrush="#FFE000" />
 ```
 
 ####  Examples
@@ -101,8 +101,8 @@ xmlns:microGauge="clr-namespace:MicroGauge.Wpf;assembly=MicroGauge.Wpf"
 ####  Use Tags
 
 ```XAML
-<microGauge:WpfGaugeRadial Value="15" MinValue="0" MaxValue="30" />
-<microGauge:WpfGaugeLinear Value="15" MinValue="0" MaxValue="30" />
+<microGauge:WpfGaugeRadial Value="15" NeedleBrush="#FFE000" />
+<microGauge:WpfGaugeLinear Value="15" NeedleBrush="#FFE000" />
 ```
 
 ####  Examples
