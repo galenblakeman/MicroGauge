@@ -49,12 +49,12 @@ namespace MicroGauge
         /// <summary>
         /// 	BackingShader - Backing solid or linear gradient shader
         /// </summary>
-        public SKShader BackingShader { get; set; } = SKShader.CreateColor(SKColors.Black);
+        public SKShader BackingShader { get; set; } = SKShader.CreateColor(SKColors.White);
 
         /// <summary>
         /// 	BackingOutlineShader - Backing outline solid or linear gradient shader
         /// </summary>
-        public SKShader BackingOutlineShader { get; set; } = SKShader.CreateColor(SKColors.White);
+        public SKShader BackingOutlineShader { get; set; } = SKShader.CreateColor(SKColors.Black);
 
         /// <summary>
         /// 	BackingStrokeWidth - Back stroke with for backing edge
@@ -134,7 +134,7 @@ namespace MicroGauge
         /// <summary>
         /// 	LabelFontShader - Label font solid or linear gradient shader
         /// </summary>
-        public SKShader LabelFontShader { get; set; } = SKShader.CreateColor(SKColors.White);
+        public SKShader LabelFontShader { get; set; } = SKShader.CreateColor(SKColors.Black);
 
         /// <summary>
         /// 	LabelFontFamily - Label Font Family Name
@@ -179,7 +179,7 @@ namespace MicroGauge
         /// <summary>
         /// 	NeedleShader - Needle solid or linear gradient shader
         /// </summary>
-        public SKShader NeedleShader { get; set; } = SKShader.CreateColor(SKColors.LightBlue);
+        public SKShader NeedleShader { get; set; } = SKShader.CreateColor(SKColors.Black);
 
         /// <summary>
         /// 	NeedleStartWidth - width of needle at start
@@ -209,7 +209,7 @@ namespace MicroGauge
         /// <summary>
         /// 	SetNeedleShader - set needle solid or linear gradient shader
         /// </summary>
-        public SKShader SetNeedleShader { get; set; }
+        public SKShader SetNeedleShader { get; set; } = SKShader.CreateColor(SKColors.Transparent);
 
         /// <summary>
         /// 	SetNeedleStartWidth - width of set needle at start

@@ -35,8 +35,12 @@ WPF wrapper library for **MicroGauge** that utilizes SkiaSharp.Views.WPF and Dep
 ---
 ## Usage
 
+### Tag Reference
+* [Radial Gauge](https://github.com/galenblakeman/MicroGauge/blob/master/Doc/RadialGaugeTag.md)
+* [Linear Gauge](https://github.com/galenblakeman/MicroGauge/blob/master/Doc/LinearGaugeTag.md)
+
 ###  Xamarin.Forms
-####  Install Package
+####  Install Package CLI
 
 ```Dotenv
 dotnet add package MicroGauge.Forms
@@ -48,11 +52,24 @@ dotnet add package MicroGauge.Forms
 xmlns:microGauge="clr-namespace:MicroGauge.Forms;assembly=MicroGauge.Forms"
 ```
 
-####  Use Tags
+####  XAML
 
 ```XAML
-<microGauge:XfGaugeRadial Value="15"  NeedleBrush="#FFE000" />
-<microGauge:XfGaugeLinear Value="15"  NeedleBrush="#FFE000" />
+<microGauge:XfGaugeRadial Value="15"  NeedleBrush="#008000" />
+<microGauge:XfGaugeLinear Value="15"  NeedleBrush="#008000" />
+```
+
+####  C#
+
+```C#
+XfGaugeRadial radialGauge = new XfGaugeRadial
+{
+    Value = 15.0, NeedleBrush = new SolidColorBrush(Color.Green)
+};
+XfGaugeLinear linearGauge = new XfGaugeLinear
+{
+    Value = 15.0, NeedleBrush = new SolidColorBrush(Color.Green)
+};
 ```
 
 ####  Examples
@@ -61,7 +78,7 @@ xmlns:microGauge="clr-namespace:MicroGauge.Forms;assembly=MicroGauge.Forms"
 
 
 ###  .Net MAUI
-####  Install Package
+####  Install Package CLI
 
 ```Dotenv
 dotnet add package MicroGauge.Maui
@@ -73,11 +90,24 @@ dotnet add package MicroGauge.Maui
 xmlns:microGauge="clr-namespace:MicroGauge.Maui;assembly=MicroGauge.Maui"
 ```
 
-####  Use Tags
+####  XAML
 
 ```XAML
-<microGauge:MauiGaugeRadial Value="15" NeedleBrush="#FFE000" />
-<microGauge:MauiGaugeLinear Value="15" NeedleBrush="#FFE000" />
+<microGauge:MauiGaugeRadial Value="15" NeedleBrush="#008000" />
+<microGauge:MauiGaugeLinear Value="15" NeedleBrush="#008000" />
+```
+
+####  C#
+
+```C#
+MauiGaugeRadial radialGauge = new MauiGaugeRadial
+{
+    Value = 15.0, NeedleBrush = new SolidColorBrush(Colors.Green)
+};
+MauiGaugeLinear linearGauge = new MauiGaugeLinear
+{
+    Value = 15.0, NeedleBrush = new SolidColorBrush(Colors.Green)
+};
 ```
 
 ####  Examples
@@ -86,7 +116,7 @@ xmlns:microGauge="clr-namespace:MicroGauge.Maui;assembly=MicroGauge.Maui"
 
 
 ###  Windows Presentation Foundation (WPF)
-####  Install Package
+####  Install Package CLI
 
 ```Dotenv
 dotnet add package MicroGauge.Wpf
@@ -98,21 +128,29 @@ dotnet add package MicroGauge.Wpf
 xmlns:microGauge="clr-namespace:MicroGauge.Wpf;assembly=MicroGauge.Wpf"
 ```
 
-####  Use Tags
+####  XAML
 
 ```XAML
-<microGauge:WpfGaugeRadial Value="15" NeedleBrush="#FFE000" />
-<microGauge:WpfGaugeLinear Value="15" NeedleBrush="#FFE000" />
+<microGauge:WpfGaugeRadial Value="15" NeedleBrush="#008000" />
+<microGauge:WpfGaugeLinear Value="15" NeedleBrush="#008000" />
+```
+
+####  C#
+
+```C#
+WpfGaugeRadial radialGauge = new WpfGaugeRadial
+{
+    Value = 15.0, NeedleBrush = new SolidColorBrush(Colors.Green)
+};
+WpfGaugeLinear linearGauge = new WpfGaugeLinear
+{
+    Value = 15.0, NeedleBrush = new SolidColorBrush(Colors.Green)
+};
 ```
 
 ####  Examples
 * Project: [MicroGauge.Example.Wpf](https://github.com/galenblakeman/MicroGauge/tree/master/Example/MicroGauge.Example.Wpf)
 * Bindings: [MainWindow.xaml](https://github.com/galenblakeman/MicroGauge/blob/master/Example/MicroGauge.Example.Wpf/MainWindow.xaml)  
-
----
-## Tag Reference
-* [Radial Gauge](https://github.com/galenblakeman/MicroGauge/blob/master/Doc/RadialGaugeTag.md)
-* [Linear Gauge](https://github.com/galenblakeman/MicroGauge/blob/master/Doc/LinearGaugeTag.md)
 
 ---
 ## License
