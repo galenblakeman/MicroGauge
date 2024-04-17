@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Runtime;
 using Xamarin.Forms.Platform.Android;
 using Platform = Xamarin.Essentials.Platform;
+
 // ReSharper disable UnusedMember.Global
 
 namespace MicroGauge.Example.Forms.Droid

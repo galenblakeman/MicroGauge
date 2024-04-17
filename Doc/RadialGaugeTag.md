@@ -56,6 +56,10 @@
 * NeedleEndExtent - Needle end as extent of width
 * NeedlePivotEndExtent - Pivot end extent of radius
 * NeedlePivotBrush - Solid or linear gradient brush for of needle pivot
+* NeedlePivotOutlineWidth - width of needle pivot outline
+* NeedleOutlineWidth - Width of needle outline
+* NeedleOutlineBrush  Needle outline solid or linear gradient shader
+
 
 ## Set Needle (Indicator Needle)
 * SetNeedleValue - Set Needle Value
@@ -64,6 +68,8 @@
 * SetNeedleEndWidth - Width of set needle at end
 * SetNeedleStartExtent - Set needle start as extent of width
 * SetNeedleEndExtent - Set needle end as extent of width
+* SetNeedleOutlineWidth - Width of set needle outline
+* SetNeedleOutlineBrush  - Set needle outline solid or linear gradient shader
 
 ## Range (Shown behind scale)
 * RangeBrush - Solid or linear gradient brush drawn behind tick scale

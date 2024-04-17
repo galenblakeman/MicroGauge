@@ -3,14 +3,16 @@ using MicroGauge.Constant;
 using SkiaSharp;
 using SkiaSharp.Views.Maui;
 using SkiaSharp.Views.Maui.Controls;
+
 // ReSharper disable SuggestBaseTypeForParameter
 
 
 namespace MicroGauge.Maui;
 
-public abstract class MauiGaugeBase: SKCanvasView
+public abstract class MauiGaugeBase : SKCanvasView
 {
     protected delegate void GaugePropertyChanged(MauiGaugeBase gaugeBase, object newValue);
+
     public GaugeBase Gauge { get; protected init; } = null!;
 
     #region Draw
@@ -506,6 +508,35 @@ public abstract class MauiGaugeBase: SKCanvasView
         (gaugeBase, newValue) => { gaugeBase.Gauge.NeedleEndExtent = (float)newValue; });
 
     /// <summary>
+    ///     NeedleOutlineWidth
+    /// </summary>
+    public float NeedleOutlineWidth
+    {
+        get => (float)GetValue(NeedleOutlineWidthProperty);
+        set => SetValue(NeedleOutlineWidthProperty, value);
+    }
+
+    public static readonly BindableProperty NeedleOutlineWidthProperty = Create(nameof(NeedleOutlineWidth),
+        typeof(float), 0.71f,
+        (gaugeBase, newValue) => { gaugeBase.Gauge.NeedleOutlineWidth = (float)newValue; });
+
+    /// <summary>
+    ///     NeedleOutlineBrush
+    /// </summary>
+    public Brush NeedleOutlineBrush
+    {
+        get => (Brush)GetValue(NeedleOutlineBrushProperty);
+        set => SetValue(NeedleOutlineBrushProperty, value);
+    }
+
+    public static readonly BindableProperty NeedleOutlineBrushProperty = Create(nameof(NeedleOutlineBrush),
+        typeof(Brush), new SolidColorBrush(Colors.Transparent),
+        (gaugeBase, newValue) =>
+        {
+            gaugeBase.Gauge.NeedleOutlineShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
+        });
+
+    /// <summary>
     ///     SetValue
     /// </summary>
     public float SetNeedleValue
@@ -530,6 +561,35 @@ public abstract class MauiGaugeBase: SKCanvasView
     public static readonly BindableProperty SetNeedleBrushProperty = Create(nameof(SetNeedleBrush),
         typeof(Brush), new SolidColorBrush(Colors.Transparent),
         (gaugeBase, newValue) => { gaugeBase.Gauge.SetNeedleShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue); });
+
+    /// <summary>
+    ///     SetNeedleOutlineWidth
+    /// </summary>
+    public float SetNeedleOutlineWidth
+    {
+        get => (float)GetValue(SetNeedleOutlineWidthProperty);
+        set => SetValue(SetNeedleOutlineWidthProperty, value);
+    }
+
+    public static readonly BindableProperty SetNeedleOutlineWidthProperty = Create(nameof(SetNeedleOutlineWidth),
+        typeof(float), 0.71f,
+        (gaugeBase, newValue) => { gaugeBase.Gauge.SetNeedleOutlineWidth = (float)newValue; });
+
+    /// <summary>
+    ///     SetNeedleOutlineBrush
+    /// </summary>
+    public Brush SetNeedleOutlineBrush
+    {
+        get => (Brush)GetValue(SetNeedleOutlineBrushProperty);
+        set => SetValue(SetNeedleOutlineBrushProperty, value);
+    }
+
+    public static readonly BindableProperty SetNeedleOutlineBrushProperty = Create(nameof(SetNeedleOutlineBrush),
+        typeof(Brush), new SolidColorBrush(Colors.Transparent),
+        (gaugeBase, newValue) =>
+        {
+            gaugeBase.Gauge.SetNeedleOutlineShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
+        });
 
     /// <summary>
     ///     SetNeedleStartWidth
@@ -604,7 +664,7 @@ public abstract class MauiGaugeBase: SKCanvasView
         return BindableProperty.Create(propertyName, propertyType, typeof(GaugeBase), defaultValue,
             propertyChanged: (bindObj, _, newValue) =>
             {
-                MauiGaugeBase canvasGauge = (MauiGaugeBase)bindObj;
+                var canvasGauge = (MauiGaugeBase)bindObj;
                 propertyChanged(canvasGauge, newValue);
                 ReDraw(canvasGauge);
             });

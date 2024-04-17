@@ -49,8 +49,7 @@ public abstract class WpfGaugeBase : SKElement
         Gauge.LabelFontShader = GetSkShader(Gauge, LabelFontBrush);
         Gauge.ValueFontShader = GetSkShader(Gauge, ValueFontBrush);
         Gauge.NeedleShader = GetSkShader(Gauge, NeedleBrush);
-        if (Gauge.SetNeedleShader != null && SetNeedleBrush != null)
-            Gauge.SetNeedleShader = GetSkShader(Gauge, SetNeedleBrush);
+        Gauge.SetNeedleShader = GetSkShader(Gauge, SetNeedleBrush);
         ReDraw(this);
     }
 
@@ -526,6 +525,35 @@ public abstract class WpfGaugeBase : SKElement
         (gaugeBase, newValue) => { gaugeBase.Gauge.NeedleEndExtent = (float)newValue; });
 
     /// <summary>
+    ///     NeedleOutlineWidth
+    /// </summary>
+    public float NeedleOutlineWidth
+    {
+        get => (float)GetValue(NeedleOutlineWidthProperty);
+        set => SetValue(NeedleOutlineWidthProperty, value);
+    }
+
+    public static readonly DependencyProperty NeedleOutlineWidthProperty = Create(nameof(NeedleOutlineWidth),
+        typeof(float), 0.71f,
+        (gaugeBase, newValue) => { gaugeBase.Gauge.NeedleOutlineWidth = (float)newValue; });
+
+    /// <summary>
+    ///     NeedleOutlineBrush
+    /// </summary>
+    public Brush NeedleOutlineBrush
+    {
+        get => (Brush)GetValue(NeedleOutlineBrushProperty);
+        set => SetValue(NeedleOutlineBrushProperty, value);
+    }
+
+    public static readonly DependencyProperty NeedleOutlineBrushProperty = Create(nameof(NeedleOutlineBrush),
+        typeof(Brush), new SolidColorBrush(Colors.Transparent),
+        (gaugeBase, newValue) =>
+        {
+            gaugeBase.Gauge.NeedleOutlineShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
+        });
+
+    /// <summary>
     ///     SetValue
     /// </summary>
     public float SetNeedleValue
@@ -541,7 +569,7 @@ public abstract class WpfGaugeBase : SKElement
     /// <summary>
     ///     SetNeedleBrush
     /// </summary>
-    public Brush? SetNeedleBrush
+    public Brush SetNeedleBrush
     {
         get => (Brush)GetValue(SetNeedleBrushProperty);
         set => SetValue(SetNeedleBrushProperty, value);
@@ -550,6 +578,35 @@ public abstract class WpfGaugeBase : SKElement
     public static readonly DependencyProperty SetNeedleBrushProperty = Create(nameof(SetNeedleBrush),
         typeof(Brush), new SolidColorBrush(Colors.Transparent),
         (gaugeBase, newValue) => { gaugeBase.Gauge.SetNeedleShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue); });
+
+    /// <summary>
+    ///     SetNeedleOutlineWidth
+    /// </summary>
+    public float SetNeedleOutlineWidth
+    {
+        get => (float)GetValue(SetNeedleOutlineWidthProperty);
+        set => SetValue(SetNeedleOutlineWidthProperty, value);
+    }
+
+    public static readonly DependencyProperty SetNeedleOutlineWidthProperty = Create(nameof(SetNeedleOutlineWidth),
+        typeof(float), 0.71f,
+        (gaugeBase, newValue) => { gaugeBase.Gauge.SetNeedleOutlineWidth = (float)newValue; });
+
+    /// <summary>
+    ///     SetNeedleOutlineBrush
+    /// </summary>
+    public Brush SetNeedleOutlineBrush
+    {
+        get => (Brush)GetValue(SetNeedleOutlineBrushProperty);
+        set => SetValue(SetNeedleOutlineBrushProperty, value);
+    }
+
+    public static readonly DependencyProperty SetNeedleOutlineBrushProperty = Create(nameof(SetNeedleOutlineBrush),
+        typeof(Brush), new SolidColorBrush(Colors.Transparent),
+        (gaugeBase, newValue) =>
+        {
+            gaugeBase.Gauge.SetNeedleOutlineShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
+        });
 
     /// <summary>
     ///     SetNeedleStartWidth
@@ -627,7 +684,7 @@ public abstract class WpfGaugeBase : SKElement
             typeof(WpfGaugeBase),
             new FrameworkPropertyMetadata(defaultValue, (bindObj, e) =>
             {
-                WpfGaugeBase? gauge = (WpfGaugeBase)bindObj;
+                var gauge = (WpfGaugeBase)bindObj;
                 propertyChanged(gauge, e.NewValue);
                 ReDraw(gauge);
             }));

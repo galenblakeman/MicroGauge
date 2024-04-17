@@ -7,9 +7,10 @@ using Xamarin.Forms;
 
 namespace MicroGauge.Forms
 {
-    public abstract class XfGaugeBase: SKCanvasView
+    public abstract class XfGaugeBase : SKCanvasView
     {
         protected delegate void GaugePropertyChanged(XfGaugeBase gaugeBase, object newValue);
+
         public GaugeBase Gauge { get; protected set; }
 
         #region Draw
@@ -122,7 +123,10 @@ namespace MicroGauge.Forms
 
         public static readonly BindableProperty BackingBrushProperty = Create(nameof(BackingBrush),
             typeof(Brush), new SolidColorBrush(Color.White),
-            (gaugeBase, newValue) => { gaugeBase.Gauge.BackingShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue); });
+            (gaugeBase, newValue) =>
+            {
+                gaugeBase.Gauge.BackingShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
+            });
 
         /// <summary>
         ///     BackingOutlineBrush
@@ -190,7 +194,10 @@ namespace MicroGauge.Forms
 
         public static readonly BindableProperty MinorTickBrushProperty = Create(nameof(MinorTickBrush),
             typeof(Brush), new SolidColorBrush(Color.LightGray),
-            (gaugeBase, newValue) => { gaugeBase.Gauge.MinorTickShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue); });
+            (gaugeBase, newValue) =>
+            {
+                gaugeBase.Gauge.MinorTickShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
+            });
 
         /// <summary>
         ///     MinorTickStrokeWidth
@@ -333,7 +340,10 @@ namespace MicroGauge.Forms
 
         public static readonly BindableProperty LabelFontBrushProperty = Create(nameof(LabelFontBrush),
             typeof(Brush), new SolidColorBrush(Color.Black),
-            (gaugeBase, newValue) => { gaugeBase.Gauge.LabelFontShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue); });
+            (gaugeBase, newValue) =>
+            {
+                gaugeBase.Gauge.LabelFontShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
+            });
 
         /// <summary>
         ///     LabelFontFamily
@@ -424,7 +434,10 @@ namespace MicroGauge.Forms
 
         public static readonly BindableProperty ValueFontBrushProperty = Create(nameof(ValueFontBrush),
             typeof(Brush), new SolidColorBrush(Color.Black),
-            (gaugeBase, newValue) => { gaugeBase.Gauge.ValueFontShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue); });
+            (gaugeBase, newValue) =>
+            {
+                gaugeBase.Gauge.ValueFontShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
+            });
 
         /// <summary>
         ///     ValueFontFamily
@@ -505,6 +518,35 @@ namespace MicroGauge.Forms
             (gaugeBase, newValue) => { gaugeBase.Gauge.NeedleEndExtent = (float)newValue; });
 
         /// <summary>
+        ///     NeedleOutlineWidth
+        /// </summary>
+        public float NeedleOutlineWidth
+        {
+            get => (float)GetValue(NeedleOutlineWidthProperty);
+            set => SetValue(NeedleOutlineWidthProperty, value);
+        }
+
+        public static readonly BindableProperty NeedleOutlineWidthProperty = Create(nameof(NeedleOutlineWidth),
+            typeof(float), 0.71f,
+            (gaugeBase, newValue) => { gaugeBase.Gauge.NeedleOutlineWidth = (float)newValue; });
+
+        /// <summary>
+        ///     NeedleOutlineBrush
+        /// </summary>
+        public Brush NeedleOutlineBrush
+        {
+            get => (Brush)GetValue(NeedleOutlineBrushProperty);
+            set => SetValue(NeedleOutlineBrushProperty, value);
+        }
+
+        public static readonly BindableProperty NeedleOutlineBrushProperty = Create(nameof(NeedleOutlineBrush),
+            typeof(Brush), new SolidColorBrush(Color.Transparent),
+            (gaugeBase, newValue) =>
+            {
+                gaugeBase.Gauge.NeedleOutlineShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
+            });
+
+        /// <summary>
         ///     SetValue
         /// </summary>
         public float SetNeedleValue
@@ -528,7 +570,39 @@ namespace MicroGauge.Forms
 
         public static readonly BindableProperty SetNeedleBrushProperty = Create(nameof(SetNeedleBrush),
             typeof(Brush), new SolidColorBrush(Color.Transparent),
-            (gaugeBase, newValue) => { gaugeBase.Gauge.SetNeedleShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue); });
+            (gaugeBase, newValue) =>
+            {
+                gaugeBase.Gauge.SetNeedleShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
+            });
+
+        /// <summary>
+        ///     SetNeedleOutlineWidth
+        /// </summary>
+        public float SetNeedleOutlineWidth
+        {
+            get => (float)GetValue(SetNeedleOutlineWidthProperty);
+            set => SetValue(SetNeedleOutlineWidthProperty, value);
+        }
+
+        public static readonly BindableProperty SetNeedleOutlineWidthProperty = Create(nameof(SetNeedleOutlineWidth),
+            typeof(float), 0.71f,
+            (gaugeBase, newValue) => { gaugeBase.Gauge.SetNeedleOutlineWidth = (float)newValue; });
+
+        /// <summary>
+        ///     SetNeedleOutlineBrush
+        /// </summary>
+        public Brush SetNeedleOutlineBrush
+        {
+            get => (Brush)GetValue(SetNeedleOutlineBrushProperty);
+            set => SetValue(SetNeedleOutlineBrushProperty, value);
+        }
+
+        public static readonly BindableProperty SetNeedleOutlineBrushProperty = Create(nameof(SetNeedleOutlineBrush),
+            typeof(Brush), new SolidColorBrush(Color.Transparent),
+            (gaugeBase, newValue) =>
+            {
+                gaugeBase.Gauge.SetNeedleOutlineShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
+            });
 
         /// <summary>
         ///     SetNeedleStartWidth
@@ -603,7 +677,7 @@ namespace MicroGauge.Forms
             return BindableProperty.Create(propertyName, propertyType, typeof(GaugeBase), defaultValue,
                 propertyChanged: (bindObj, _, newValue) =>
                 {
-                    XfGaugeBase canvasGauge = (XfGaugeBase)bindObj;
+                    var canvasGauge = (XfGaugeBase)bindObj;
                     propertyChanged(canvasGauge, newValue);
                     ReDraw(canvasGauge);
                 });

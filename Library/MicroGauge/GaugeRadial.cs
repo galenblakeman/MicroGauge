@@ -16,87 +16,92 @@ namespace MicroGauge
         public GaugeRadialStyle RadialStyle { get; set; }
 
         /// <summary>
-        /// 	ScaleStartAngle - start angle of scale
+        ///     ScaleStartAngle - start angle of scale
         /// </summary>
         public float ScaleStartAngle { get; set; } = 210f;
 
         /// <summary>
-        /// 	ScaleEndAngle - stop angle of scale
+        ///     ScaleEndAngle - stop angle of scale
         /// </summary>
         public float ScaleEndAngle { get; set; } = 330f;
 
         /// <summary>
-        /// 	TickStartExtent - tick start extent of _radius
+        ///     TickStartExtent - tick start extent of _radius
         /// </summary>
         public float TickStartExtent { get; set; } = 0.6f;
 
         /// <summary>
-        /// 	TickEndExtent - tick end extent of _radius
+        ///     TickEndExtent - tick end extent of _radius
         /// </summary>
         public float TickEndExtent { get; set; } = 0.7f;
 
         /// <summary>
-        /// 	MinorTickStartExtent - minor tick start extent of _radius
+        ///     MinorTickStartExtent - minor tick start extent of _radius
         /// </summary>
         public float MinorTickStartExtent { get; set; } = 0.65f;
 
         /// <summary>
-        /// 	MinorTickEndExtent - minor tick end extent of _radius
+        ///     MinorTickEndExtent - minor tick end extent of _radius
         /// </summary>
         public float MinorTickEndExtent { get; set; } = 0.7f;
 
         /// <summary>
-        /// 	NeedlePivotEndExtent - pivot end extent of _radius
+        ///     NeedlePivotEndExtent - pivot end extent of _radius
         /// </summary>
         public float NeedlePivotEndExtent { get; set; } = 0.1f;
 
         /// <summary>
-        /// 	NeedlePivotShader - background of needle pivot
+        ///     NeedlePivotShader - background of needle pivot
         /// </summary>
         public SKShader NeedlePivotShader { get; set; } = SKShader.CreateColor(SKColors.LightGray);
 
         /// <summary>
-        /// 	NeedlePivotOutlineShader - background of needle pivot outline
+        ///     NeedlePivotOutlineShader - background of needle pivot outline
         /// </summary>
         public SKShader NeedlePivotOutlineShader { get; set; } = SKShader.CreateColor(SKColors.Black);
 
         /// <summary>
-        /// 	RangeShader - background drawn behind tick scale
+        ///     NeedlePivotOutlineWidth - width of needle pivot outline
+        /// </summary>
+        public float NeedlePivotOutlineWidth { get; set; } = 2f;
+
+        /// <summary>
+        ///     RangeShader - background drawn behind tick scale
         /// </summary>
         public SKShader RangeShader { get; set; } = SKShader.CreateColor(SKColors.Transparent);
 
         /// <summary>
-        /// 	RangeInnerStartExtent - Drawing range inner boundary start at extent of _radius
+        ///     RangeInnerStartExtent - Drawing range inner boundary start at extent of _radius
         /// </summary>
         public float RangeInnerStartExtent { get; set; }
 
         /// <summary>
-        /// 	RangeInnerEndExtent - Drawing range inner boundary end at extent of _radius
+        ///     RangeInnerEndExtent - Drawing range inner boundary end at extent of _radius
         /// </summary>
         public float RangeInnerEndExtent { get; set; }
 
         /// <summary>
-        /// 	RangeOuterStartExtent - Drawing range outer boundary start at extent of _radius
+        ///     RangeOuterStartExtent - Drawing range outer boundary start at extent of _radius
         /// </summary>
         public float RangeOuterStartExtent { get; set; }
 
         /// <summary>
-        /// 	RangeOuterEndExtent - Drawing range outer boundary end at extent of _radius
+        ///     RangeOuterEndExtent - Drawing range outer boundary end at extent of _radius
         /// </summary>
         public float RangeOuterEndExtent { get; set; }
 
         /// <summary>
-        /// 	Fidelity - fidelity of radial angles
+        ///     Fidelity - fidelity of radial angles
         /// </summary>
         private const double Fidelity = 1;
 
         /// <summary>
-        /// 	_center - if half, bottom center, else center with extend adjustments 
+        ///     _center - if half, bottom center, else center with extend adjustments
         /// </summary>
         private SKPoint _center;
 
         /// <summary>
-        /// 	_radius - If half, min of surface width or height, else min of surface width or height / 2
+        ///     _radius - If half, min of surface width or height, else min of surface width or height / 2
         /// </summary>
         private float _radius;
 
@@ -114,9 +119,9 @@ namespace MicroGauge
             CalcDimensions();
             DrawGaugeArea();
             DrawRange();
-            int minorTicks = GaugeHelper.GetTicks(MinValue, MaxValue, MinorTickInterval);
+            var minorTicks = GaugeHelper.GetTicks(MinValue, MaxValue, MinorTickInterval);
             DrawTicks(minorTicks, false);
-            int majorTicks = GaugeHelper.GetTicks(MinValue, MaxValue, TickInterval);
+            var majorTicks = GaugeHelper.GetTicks(MinValue, MaxValue, TickInterval);
             DrawTicks(majorTicks, true);
             DrawNeedle();
             DrawLabelNumbers();
@@ -128,7 +133,7 @@ namespace MicroGauge
         /// </summary>
         private void DrawGaugeArea()
         {
-            using (SKPaint paint = new SKPaint())
+            using (var paint = new SKPaint())
             {
                 paint.Style = SKPaintStyle.Fill;
                 paint.IsAntialias = true;
@@ -150,9 +155,9 @@ namespace MicroGauge
                     DrawGaugeFitted(paint, radius, 0);
                     break;
                 case GaugeRadialStyle.Notch:
-                    float leftAngle = Math.Abs(ScaleStartAngle - 180);
-                    float rightAngle = Math.Abs(360 - ScaleEndAngle);
-                    float maxAngle = Math.Max(leftAngle, rightAngle);
+                    var leftAngle = Math.Abs(ScaleStartAngle - 180);
+                    var rightAngle = Math.Abs(360 - ScaleEndAngle);
+                    var maxAngle = Math.Max(leftAngle, rightAngle);
                     DrawGaugeFitted(paint, radius, maxAngle / 2);
                     break;
                 case GaugeRadialStyle.Full:
@@ -164,13 +169,13 @@ namespace MicroGauge
 
         private void DrawGaugeFitted(SKPaint paint, float radius, float anglePadding)
         {
-            using (SKPath path = new SKPath())
+            using (var path = new SKPath())
             {
-                double startAngle = GetValueAngle(MinValue);
-                double endAngle = GetValueAngle(MaxValue);
-                double angleRange = Math.Abs(startAngle - endAngle);
+                var startAngle = GetValueAngle(MinValue);
+                var endAngle = GetValueAngle(MaxValue);
+                var angleRange = Math.Abs(startAngle - endAngle);
                 double angleDelta = 0;
-                double angle = startAngle;
+                var angle = startAngle;
                 SKPoint point;
                 if (anglePadding > 0)
                 {
@@ -198,6 +203,7 @@ namespace MicroGauge
                     DrawFittedNotch(radius, anglePadding, angle, path, startAngle);
                     DrawFittedNotchLine(radius, anglePadding, angle, startAngle);
                 }
+
                 path.Close();
                 Canvas.DrawPath(path, paint);
             }
@@ -205,25 +211,24 @@ namespace MicroGauge
 
         private void DrawFittedNotch(float radius, float anglePadding, double angle, SKPath path, double startAngle)
         {
-            SKPoint point = GaugeHelper.GetRadialPoint(_center, Convert.ToSingle(radius), angle - anglePadding);
+            var point = GaugeHelper.GetRadialPoint(_center, Convert.ToSingle(radius), angle - anglePadding);
             path.LineTo(point);
             point = GaugeHelper.GetRadialPoint(_center, Convert.ToSingle(radius / 2), angle - anglePadding);
             path.LineTo(point);
             point = GaugeHelper.GetRadialPoint(_center, Convert.ToSingle(radius / 2), startAngle + anglePadding);
             path.LineTo(point);
-
         }
 
         private void DrawFittedNotchLine(float radius, float anglePadding, double angle, double startAngle)
         {
-            using (SKPaint paint = new SKPaint())
+            using (var paint = new SKPaint())
             {
                 paint.Style = SKPaintStyle.Fill;
                 paint.IsAntialias = true;
                 paint.Shader = BackingOutlineShader;
                 paint.StrokeWidth = BackingStrokeWidth;
-                SKPoint startPoint = GaugeHelper.GetRadialPoint(_center, Convert.ToSingle(radius), angle - anglePadding);
-                SKPoint endPoint = GaugeHelper.GetRadialPoint(_center, Convert.ToSingle(radius / 2), angle - anglePadding);
+                var startPoint = GaugeHelper.GetRadialPoint(_center, Convert.ToSingle(radius), angle - anglePadding);
+                var endPoint = GaugeHelper.GetRadialPoint(_center, Convert.ToSingle(radius / 2), angle - anglePadding);
                 Canvas.DrawLine(startPoint, endPoint, paint);
                 startPoint = endPoint;
                 endPoint = GaugeHelper.GetRadialPoint(_center, Convert.ToSingle(radius / 2), startAngle + anglePadding);
@@ -239,18 +244,18 @@ namespace MicroGauge
         /// </summary>
         private void DrawRange()
         {
-            using (SKPaint paint = new SKPaint())
+            using (var paint = new SKPaint())
             {
                 paint.Style = SKPaintStyle.Fill;
                 paint.IsAntialias = true;
                 paint.Shader = RangeShader;
-                using (SKPath path = new SKPath())
+                using (var path = new SKPath())
                 {
-                    double startAngle = GetValueAngle(MinValue);
-                    double endAngle = GetValueAngle(MaxValue);
-                    double angleRange = Math.Abs(startAngle - endAngle);
+                    var startAngle = GetValueAngle(MinValue);
+                    var endAngle = GetValueAngle(MaxValue);
+                    var angleRange = Math.Abs(startAngle - endAngle);
                     double angleDelta = 0;
-                    double angle = startAngle;
+                    var angle = startAngle;
                     DrawRangeInner(path, angleRange, ref angle, ref angleDelta);
                     angle += Fidelity;
                     angleDelta -= Fidelity;
@@ -266,14 +271,14 @@ namespace MicroGauge
         /// </summary>
         private void DrawRangeInner(SKPath path, double angleRange, ref double angle, ref double angleDelta)
         {
-            double innerRatio = (RangeInnerStartExtent - RangeInnerEndExtent) / angleRange;
-            double calcExtent = RangeInnerStartExtent + angleDelta * innerRatio;
-            SKPoint start = GaugeHelper.GetRadialPoint(_center, Convert.ToSingle(_radius * calcExtent), angle);
+            var innerRatio = (RangeInnerStartExtent - RangeInnerEndExtent) / angleRange;
+            var calcExtent = RangeInnerStartExtent + angleDelta * innerRatio;
+            var start = GaugeHelper.GetRadialPoint(_center, Convert.ToSingle(_radius * calcExtent), angle);
             path.MoveTo(start);
             while (angleDelta <= angleRange)
             {
                 calcExtent = RangeInnerStartExtent + angleDelta * innerRatio;
-                SKPoint point = GaugeHelper.GetRadialPoint(_center, Convert.ToSingle(_radius * calcExtent), angle);
+                var point = GaugeHelper.GetRadialPoint(_center, Convert.ToSingle(_radius * calcExtent), angle);
                 path.LineTo(point);
                 angle -= Fidelity;
                 angleDelta += Fidelity;
@@ -285,13 +290,13 @@ namespace MicroGauge
         /// </summary>
         private void DrawRangeOuter(SKPath path, double angleRange, ref double angle, ref double angleDelta)
         {
-            double outerRatio = (RangeOuterStartExtent - RangeOuterEndExtent) / angleRange;
+            var outerRatio = (RangeOuterStartExtent - RangeOuterEndExtent) / angleRange;
             while (angleDelta >= 0)
             {
-                double calcExtent = RangeOuterStartExtent - angleDelta * outerRatio;
+                var calcExtent = RangeOuterStartExtent - angleDelta * outerRatio;
                 if (calcExtent > 0)
                 {
-                    SKPoint point = GaugeHelper.GetRadialPoint(_center, Convert.ToSingle(_radius * calcExtent), angle);
+                    var point = GaugeHelper.GetRadialPoint(_center, Convert.ToSingle(_radius * calcExtent), angle);
                     path.LineTo(point);
                 }
 
@@ -305,15 +310,15 @@ namespace MicroGauge
         /// </summary>
         private void DrawTicks(int tickCount, bool isMajor)
         {
-            using (SKPaint paint = new SKPaint())
+            using (var paint = new SKPaint())
             {
                 paint.Style = SKPaintStyle.Stroke;
                 paint.StrokeWidth = isMajor ? TickStrokeWidth : MinorTickStrokeWidth;
                 paint.StrokeCap = SKStrokeCap.Round;
                 paint.Shader = isMajor ? TickShader : MinorTickShader;
                 paint.IsAntialias = true;
-                double sliceAngle = GetAngleRange(ScaleStartAngle, ScaleEndAngle) / (tickCount - 1);
-                for (int i = 0; i < tickCount; i++) DrawTick(paint, sliceAngle, i, isMajor);
+                var sliceAngle = GetAngleRange(ScaleStartAngle, ScaleEndAngle) / (tickCount - 1);
+                for (var i = 0; i < tickCount; i++) DrawTick(paint, sliceAngle, i, isMajor);
             }
         }
 
@@ -322,12 +327,12 @@ namespace MicroGauge
         /// </summary>
         private void DrawTick(SKPaint paint, double sliceAngle, int i, bool isMajor)
         {
-            double angle = ScaleStartAngle - i * sliceAngle; //Always clockwise
+            var angle = ScaleStartAngle - i * sliceAngle; //Always clockwise
             if (angle < 0) angle += 360;
-            float startExtent = isMajor ? TickStartExtent : MinorTickStartExtent;
-            float endExtent = isMajor ? TickEndExtent : MinorTickEndExtent;
-            SKPoint start = GaugeHelper.GetRadialPoint(_center, _radius * startExtent, angle);
-            SKPoint end = GaugeHelper.GetRadialPoint(_center, _radius * endExtent, angle);
+            var startExtent = isMajor ? TickStartExtent : MinorTickStartExtent;
+            var endExtent = isMajor ? TickEndExtent : MinorTickEndExtent;
+            var start = GaugeHelper.GetRadialPoint(_center, _radius * startExtent, angle);
+            var end = GaugeHelper.GetRadialPoint(_center, _radius * endExtent, angle);
             Canvas.DrawLine(start, end, paint);
         }
 
@@ -336,12 +341,23 @@ namespace MicroGauge
         /// </summary>
         private void DrawNeedle()
         {
-            using (SKPaint paint = new SKPaint())
+            using (var paint = new SKPaint())
             {
                 paint.IsAntialias = true;
-                DrawNeedleArm(paint);
-                if (SetNeedleShader != null)
-                    DrawSetNeedleArm(paint);
+                paint.Style = SKPaintStyle.Fill;
+                paint.Shader = NeedleShader;
+                DrawNeedleArm(paint); // Main Needle
+                paint.StrokeWidth = NeedleOutlineWidth;
+                paint.Style = SKPaintStyle.Stroke;
+                paint.Shader = NeedleOutlineShader;
+                DrawNeedleArm(paint); // Main Needle Outline
+                paint.Style = SKPaintStyle.Fill;
+                paint.Shader = SetNeedleShader;
+                DrawSetNeedleArm(paint); // Set Needle
+                paint.StrokeWidth = SetNeedleOutlineWidth;
+                paint.Style = SKPaintStyle.Stroke;
+                paint.Shader = SetNeedleOutlineShader;
+                DrawSetNeedleArm(paint); // Set Needle Outline
                 DrawNeedlePivot(paint);
             }
         }
@@ -351,11 +367,9 @@ namespace MicroGauge
         /// </summary>
         private void DrawNeedleArm(SKPaint paint)
         {
-            double angle = GetValueAngle(Value);
-            SKPoint start = GaugeHelper.GetRadialPoint(_center, _radius * NeedleStartExtent, angle);
-            SKPoint end = GaugeHelper.GetRadialPoint(_center, _radius * NeedleEndExtent, angle);
-            paint.Style = SKPaintStyle.Fill;
-            paint.Shader = NeedleShader;
+            var angle = GetValueAngle(Value);
+            var start = GaugeHelper.GetRadialPoint(_center, _radius * NeedleStartExtent, angle);
+            var end = GaugeHelper.GetRadialPoint(_center, _radius * NeedleEndExtent, angle);
             DrawNeedlePoly(paint, start, end, NeedleStartWidth, NeedleEndWidth, angle);
         }
 
@@ -364,11 +378,9 @@ namespace MicroGauge
         /// </summary>
         private void DrawSetNeedleArm(SKPaint paint)
         {
-            double angle = GetValueAngle(SetNeedleValue);
-            SKPoint start = GaugeHelper.GetRadialPoint(_center, _radius * SetNeedleStartExtent, angle);
-            SKPoint end = GaugeHelper.GetRadialPoint(_center, _radius * SetNeedleEndExtent, angle);
-            paint.Style = SKPaintStyle.Fill;
-            paint.Shader = SetNeedleShader;
+            var angle = GetValueAngle(SetNeedleValue);
+            var start = GaugeHelper.GetRadialPoint(_center, _radius * SetNeedleStartExtent, angle);
+            var end = GaugeHelper.GetRadialPoint(_center, _radius * SetNeedleEndExtent, angle);
             DrawNeedlePoly(paint, start, end, SetNeedleStartWidth, SetNeedleEndWidth, angle);
         }
 
@@ -377,12 +389,12 @@ namespace MicroGauge
         /// </summary>
         private void DrawNeedlePivot(SKPaint paint)
         {
-            float pivotRadius = _radius * NeedlePivotEndExtent;
+            var pivotRadius = _radius * NeedlePivotEndExtent;
             paint.Style = SKPaintStyle.Fill;
             paint.Shader = NeedlePivotShader;
             Canvas.DrawCircle(_center, pivotRadius, paint);
             paint.Style = SKPaintStyle.Stroke;
-            paint.StrokeWidth = 2;
+            paint.StrokeWidth = NeedlePivotOutlineWidth;
             paint.Shader = NeedlePivotOutlineShader;
             Canvas.DrawCircle(_center, pivotRadius, paint);
         }
@@ -392,12 +404,12 @@ namespace MicroGauge
         /// </summary>
         private void DrawLabelNumbers()
         {
-            int majorTicks = GaugeHelper.GetTicks(MinValue, MaxValue, LabelInterval);
-            double sliceAngle = GetAngleRange(ScaleStartAngle, ScaleEndAngle) / (majorTicks - 1);
-            using (SKPaint paint = new SKPaint())
+            var majorTicks = GaugeHelper.GetTicks(MinValue, MaxValue, LabelInterval);
+            var sliceAngle = GetAngleRange(ScaleStartAngle, ScaleEndAngle) / (majorTicks - 1);
+            using (var paint = new SKPaint())
             {
                 SetLabelPaint(paint);
-                for (int i = 0; i < majorTicks; i++)
+                for (var i = 0; i < majorTicks; i++)
                     if (DrawLabelNumber(paint, sliceAngle, i))
                         break;
             }
@@ -408,14 +420,14 @@ namespace MicroGauge
         /// </summary>
         private bool DrawLabelNumber(SKPaint paint, double sliceAngle, int i)
         {
-            double angle = ScaleStartAngle - i * sliceAngle; //Always clockwise
+            var angle = ScaleStartAngle - i * sliceAngle; //Always clockwise
             if (angle < 0) angle += 360;
             if (i > 0 && Math.Abs(angle - ScaleStartAngle) < 0.01) return true;
-            SKPoint labelPoint = GaugeHelper.GetRadialPoint(_center, _radius * LabelExtent, angle);
-            string label = GetLabelFormattedValue(MinValue + i * LabelInterval);
+            var labelPoint = GaugeHelper.GetRadialPoint(_center, _radius * LabelExtent, angle);
+            var label = GetLabelFormattedValue(MinValue + i * LabelInterval);
             if (RadialStyle != GaugeRadialStyle.Half)
                 labelPoint.Y += GaugeHelper.GetTextBounds(paint, label).Height / 2;
-            else 
+            else
                 labelPoint.Y -= GaugeHelper.GetTextBounds(paint, label).Height / 2;
             Canvas.DrawText(label, labelPoint, paint);
             return false;
@@ -426,7 +438,7 @@ namespace MicroGauge
         /// </summary>
         private void DrawValueLabel()
         {
-            using (SKPaint paint = new SKPaint())
+            using (var paint = new SKPaint())
             {
                 SetValuePaint(paint);
                 SKPoint point;
@@ -446,7 +458,8 @@ namespace MicroGauge
                         point = GaugeHelper.GetRadialPoint(_center, _radius * ValueExtent, 270);
                         break;
                 }
-                string valueStr = GetValueFormattedValue(Convert.ToSingle(Value));
+
+                var valueStr = GetValueFormattedValue(Convert.ToSingle(Value));
                 point.Y += GaugeHelper.GetTextBounds(paint, valueStr).Height / 2;
                 Canvas.DrawText(valueStr, point, paint);
             }
@@ -461,9 +474,9 @@ namespace MicroGauge
         /// </summary>
         private void CalcDimensions()
         {
-            float verticalPadding = SurfaceHeight * TopExtent + SurfaceHeight * BottomExtent;
-            float horizontalPadding = SurfaceWidth * LeftExtent + SurfaceHeight * RightExtent;
-            float maxPadding = Math.Max(verticalPadding, horizontalPadding);
+            var verticalPadding = SurfaceHeight * TopExtent + SurfaceHeight * BottomExtent;
+            var horizontalPadding = SurfaceWidth * LeftExtent + SurfaceHeight * RightExtent;
+            var maxPadding = Math.Max(verticalPadding, horizontalPadding);
             if (RadialStyle != GaugeRadialStyle.Half)
             {
                 _radius = Convert.ToSingle(Math.Min(SurfaceWidth, SurfaceHeight)) / 2;
@@ -472,8 +485,8 @@ namespace MicroGauge
             }
             else //Half
             {
-                float vertical = Convert.ToSingle(SurfaceHeight);
-                float horizontal = Convert.ToSingle(SurfaceWidth) / 2;
+                var vertical = Convert.ToSingle(SurfaceHeight);
+                var horizontal = Convert.ToSingle(SurfaceWidth) / 2;
                 _radius = Math.Min(horizontal, vertical);
                 _radius -= maxPadding / 2;
                 _center = new SKPoint(SurfaceWidth / 2,
@@ -494,8 +507,8 @@ namespace MicroGauge
             if (value < MinValue) return ScaleStartAngle;
             if (value > MaxValue) return ScaleEndAngle;
             double valueRange = MaxValue - MinValue;
-            double angleRange = GetAngleRange(ScaleStartAngle, ScaleEndAngle);
-            double valueRatio = (value - MinValue) / valueRange;
+            var angleRange = GetAngleRange(ScaleStartAngle, ScaleEndAngle);
+            var valueRatio = (value - MinValue) / valueRange;
             return ScaleStartAngle - valueRatio * angleRange; //Always clockwise
         }
 

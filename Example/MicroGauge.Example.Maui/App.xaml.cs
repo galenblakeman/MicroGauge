@@ -23,7 +23,7 @@ public partial class App
 
         // Restore window position
         if (DeviceInfo.Current.Platform != DevicePlatform.WinUI) return;
-        Window? window = Current?.Windows.FirstOrDefault();
+        var window = Current?.Windows.FirstOrDefault();
         if (window == null) return;
         try
         {
@@ -36,17 +36,15 @@ public partial class App
         {
             Console.WriteLine($"Set Position: {ex.Message}");
         }
+
         window.Destroying += Window_Destroying;
-
-
-      
     }
-   
+
 
     private static void Window_Destroying(object? sender, EventArgs e)
     {
         // Save window position
-        Window? window = Current?.Windows.FirstOrDefault();
+        var window = Current?.Windows.FirstOrDefault();
         if (window == null) return;
         Preferences.Set("WindowX", window.X);
         Preferences.Set("WindowY", window.Y);

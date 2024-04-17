@@ -1,4 +1,7 @@
 ﻿// ReSharper disable UnusedMember.Global
+
+using System.ComponentModel;
+
 namespace MicroGauge.Example.Wpf;
 
 /// <summary>
@@ -16,7 +19,7 @@ public partial class MainWindow
         Height = Properties.Default.WindowHeight;
     }
 
-    private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+    private void Window_Closing(object sender, CancelEventArgs e)
     {
         Properties.Default.WindowLeft = Left;
         Properties.Default.WindowTop = Top;

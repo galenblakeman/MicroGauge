@@ -37,32 +37,32 @@ namespace MicroGauge
 
 
         /// <summary>
-        /// 	_start - If vertical middle height, else middle width
+        ///     _start - If vertical middle height, else middle width
         /// </summary>
         private SKPoint _start;
 
         /// <summary>
-        /// 	_barStart - If vertical bottom center, else left center
+        ///     _barStart - If vertical bottom center, else left center
         /// </summary>
         private SKPoint _barStart;
 
         /// <summary>
-        /// 	_horizontal - surface width as float
+        ///     _horizontal - surface width as float
         /// </summary>
         private float _horizontal;
 
         /// <summary>
-        /// 	_vertical - surface height as float
+        ///     _vertical - surface height as float
         /// </summary>
         private float _vertical;
 
         /// <summary>
-        /// 	_barWidth - If vertical _horizontal, else _vertical minus extents
+        ///     _barWidth - If vertical _horizontal, else _vertical minus extents
         /// </summary>
         private float _barWidth;
 
         /// <summary>
-        /// 	_barLength - If vertical _vertical, else _horizontal minus extents
+        ///     _barLength - If vertical _vertical, else _horizontal minus extents
         /// </summary>
         private float _barLength;
 
@@ -80,9 +80,9 @@ namespace MicroGauge
             CalcDimensions();
             DrawGaugeArea();
             DrawValueBar();
-            int minorTicks = GaugeHelper.GetTicks(MinValue, MaxValue, MinorTickInterval);
+            var minorTicks = GaugeHelper.GetTicks(MinValue, MaxValue, MinorTickInterval);
             DrawTicks(minorTicks, false);
-            int majorTicks = GaugeHelper.GetTicks(MinValue, MaxValue, TickInterval);
+            var majorTicks = GaugeHelper.GetTicks(MinValue, MaxValue, TickInterval);
             DrawTicks(majorTicks, true);
             DrawNeedle();
             if (SetNeedleShader != null)
@@ -96,15 +96,15 @@ namespace MicroGauge
         /// </summary>
         private void DrawGaugeArea()
         {
-            using (SKPaint paint = new SKPaint())
+            using (var paint = new SKPaint())
             {
                 paint.Style = SKPaintStyle.Stroke;
                 paint.StrokeWidth = BackingStrokeWidth;
                 paint.Shader = BackingOutlineShader;
                 paint.IsAntialias = true;
-                float width = IsVertical ? Convert.ToSingle(SurfaceWidth) : Convert.ToSingle(SurfaceHeight);
-                float length = IsVertical ? Convert.ToSingle(SurfaceHeight) : Convert.ToSingle(SurfaceWidth);
-                SKPoint start = new SKPoint(_start.X, _start.Y);
+                var width = IsVertical ? Convert.ToSingle(SurfaceWidth) : Convert.ToSingle(SurfaceHeight);
+                var length = IsVertical ? Convert.ToSingle(SurfaceHeight) : Convert.ToSingle(SurfaceWidth);
+                var start = new SKPoint(_start.X, _start.Y);
                 DrawBar(paint, start, width, length);
                 if (IsVertical)
                     start.Y -= BackingStrokeWidth / 2;
@@ -121,7 +121,7 @@ namespace MicroGauge
 
         private void DrawValueBar()
         {
-            using (SKPaint paint = new SKPaint())
+            using (var paint = new SKPaint())
             {
                 paint.Style = SKPaintStyle.Fill;
                 paint.Shader = ValueBarShader;
@@ -131,22 +131,22 @@ namespace MicroGauge
 
         private void DrawBar(SKPaint paint, SKPoint start, float width, float length)
         {
-            using (SKPath path = new SKPath())
+            using (var path = new SKPath())
             {
                 if (IsVertical)
                 {
-                    SKPoint p1 = GaugeHelper.GetRadialPoint(start, width / 2, 180);
-                    SKPoint p2 = GaugeHelper.GetRadialPoint(p1, length, 90);
-                    SKPoint p3 = GaugeHelper.GetRadialPoint(p2, width, 0);
-                    SKPoint p4 = GaugeHelper.GetRadialPoint(p3, length, 270);
+                    var p1 = GaugeHelper.GetRadialPoint(start, width / 2, 180);
+                    var p2 = GaugeHelper.GetRadialPoint(p1, length, 90);
+                    var p3 = GaugeHelper.GetRadialPoint(p2, width, 0);
+                    var p4 = GaugeHelper.GetRadialPoint(p3, length, 270);
                     DrawPoly(paint, path, p1, p2, p3, p4);
                 }
                 else
                 {
-                    SKPoint p1 = GaugeHelper.GetRadialPoint(start, width / 2, 90);
-                    SKPoint p2 = GaugeHelper.GetRadialPoint(p1, length, 0);
-                    SKPoint p3 = GaugeHelper.GetRadialPoint(p2, width, 270);
-                    SKPoint p4 = GaugeHelper.GetRadialPoint(p3, length, 180);
+                    var p1 = GaugeHelper.GetRadialPoint(start, width / 2, 90);
+                    var p2 = GaugeHelper.GetRadialPoint(p1, length, 0);
+                    var p3 = GaugeHelper.GetRadialPoint(p2, width, 270);
+                    var p4 = GaugeHelper.GetRadialPoint(p3, length, 180);
                     DrawPoly(paint, path, p1, p2, p3, p4);
                 }
             }
@@ -157,7 +157,7 @@ namespace MicroGauge
         /// </summary>
         private void DrawTicks(int numberTicks, bool isMajor)
         {
-            using (SKPaint paint = new SKPaint())
+            using (var paint = new SKPaint())
             {
                 paint.Style = SKPaintStyle.Stroke;
                 paint.StrokeWidth = isMajor ? TickStrokeWidth : MinorTickStrokeWidth;
@@ -165,7 +165,7 @@ namespace MicroGauge
                 paint.Shader = isMajor ? TickShader : MinorTickShader;
                 paint.IsAntialias = true;
                 double tickSpacing = _barLength / (numberTicks - 1);
-                for (int i = 0; i < numberTicks; i++) DrawTick(paint, tickSpacing, i, isMajor);
+                for (var i = 0; i < numberTicks; i++) DrawTick(paint, tickSpacing, i, isMajor);
             }
         }
 
@@ -174,11 +174,11 @@ namespace MicroGauge
         /// </summary>
         private void DrawTick(SKPaint paint, double tickSpacing, int i, bool isMajor)
         {
-            float angle = GetBarAngle();
-            SKPoint point = GetTickPoint(tickSpacing, i);
-            float extent = isMajor ? TickWidthExtent : MinorTickWidthExtent;
-            SKPoint start = GaugeHelper.GetRadialPoint(point, _barWidth * extent / 2, angle);
-            SKPoint end = GaugeHelper.GetRadialPoint(point, -_barWidth * extent / 2, angle);
+            var angle = GetBarAngle();
+            var point = GetTickPoint(tickSpacing, i);
+            var extent = isMajor ? TickWidthExtent : MinorTickWidthExtent;
+            var start = GaugeHelper.GetRadialPoint(point, _barWidth * extent / 2, angle);
+            var end = GaugeHelper.GetRadialPoint(point, -_barWidth * extent / 2, angle);
             Canvas.DrawLine(start, end, paint);
         }
 
@@ -187,13 +187,13 @@ namespace MicroGauge
         /// </summary>
         private void DrawNeedle()
         {
-            float location = Convert.ToSingle(GetValuePosition(Value));
-            float angle = GetBarAngle();
-            SKPoint point = GetBarStartCenterPoint(location);
+            var location = Convert.ToSingle(GetValuePosition(Value));
+            var angle = GetBarAngle();
+            var point = GetBarStartCenterPoint(location);
 
-            SKPoint start = GaugeHelper.GetRadialPoint(point, _barWidth * NeedleStartExtent, angle);
-            SKPoint end = GaugeHelper.GetRadialPoint(point, _barWidth * NeedleEndExtent, angle);
-            using (SKPaint paint = new SKPaint())
+            var start = GaugeHelper.GetRadialPoint(point, _barWidth * NeedleStartExtent, angle);
+            var end = GaugeHelper.GetRadialPoint(point, _barWidth * NeedleEndExtent, angle);
+            using (var paint = new SKPaint())
             {
                 paint.Style = SKPaintStyle.Fill;
                 paint.IsAntialias = true;
@@ -207,13 +207,13 @@ namespace MicroGauge
         /// </summary>
         private void DrawSetNeedle()
         {
-            float location = Convert.ToSingle(GetValuePosition(SetNeedleValue));
-            float angle = GetBarAngle();
-            SKPoint point = GetBarStartCenterPoint(location);
+            var location = Convert.ToSingle(GetValuePosition(SetNeedleValue));
+            var angle = GetBarAngle();
+            var point = GetBarStartCenterPoint(location);
 
-            SKPoint start = GaugeHelper.GetRadialPoint(point, _barWidth * SetNeedleStartExtent, angle);
-            SKPoint end = GaugeHelper.GetRadialPoint(point, _barWidth * SetNeedleEndExtent, angle);
-            using (SKPaint paint = new SKPaint())
+            var start = GaugeHelper.GetRadialPoint(point, _barWidth * SetNeedleStartExtent, angle);
+            var end = GaugeHelper.GetRadialPoint(point, _barWidth * SetNeedleEndExtent, angle);
+            using (var paint = new SKPaint())
             {
                 paint.Style = SKPaintStyle.Fill;
                 paint.IsAntialias = true;
@@ -228,13 +228,13 @@ namespace MicroGauge
         /// </summary>
         private void DrawLabelNumbers()
         {
-            int majorTicks = GaugeHelper.GetTicks(MinValue, MaxValue, LabelInterval);
+            var majorTicks = GaugeHelper.GetTicks(MinValue, MaxValue, LabelInterval);
             double tickSpacing = _barLength / (majorTicks - 1);
 
-            using (SKPaint paint = new SKPaint())
+            using (var paint = new SKPaint())
             {
                 SetLabelPaint(paint);
-                for (int i = 0; i < majorTicks; i++) DrawLabelNumber(paint, tickSpacing, i);
+                for (var i = 0; i < majorTicks; i++) DrawLabelNumber(paint, tickSpacing, i);
             }
         }
 
@@ -243,11 +243,11 @@ namespace MicroGauge
         /// </summary>
         private void DrawLabelNumber(SKPaint paint, double tickSpacing, int i)
         {
-            float angle = GetBarAngle();
-            SKPoint point = GetTickPoint(tickSpacing, i);
-            string label = GetLabelFormattedValue(MinValue + i * LabelInterval);
+            var angle = GetBarAngle();
+            var point = GetTickPoint(tickSpacing, i);
+            var label = GetLabelFormattedValue(MinValue + i * LabelInterval);
             point.Y += GaugeHelper.GetTextBounds(paint, label).Height / 2;
-            SKPoint labelPoint = GaugeHelper.GetRadialPoint(point, _barWidth * LabelExtent / 2, angle);
+            var labelPoint = GaugeHelper.GetRadialPoint(point, _barWidth * LabelExtent / 2, angle);
             Canvas.DrawText(label, labelPoint, paint);
         }
 
@@ -256,14 +256,13 @@ namespace MicroGauge
         /// </summary>
         private void DrawValueLabel()
         {
-            using (SKPaint paint = new SKPaint())
+            using (var paint = new SKPaint())
             {
                 SetValuePaint(paint);
-                SKPoint point = new SKPoint(_start.X, _start.Y);
+                var point = new SKPoint(_start.X, _start.Y);
                 //DebugCircleAtPoint(point, SKColors.Red);
 
                 if (IsVertical)
-                {
                     switch (ValueLocation)
                     {
                         case GaugeValueLocation.TopCenter:
@@ -271,7 +270,7 @@ namespace MicroGauge
                             break;
                         case GaugeValueLocation.LeftCenter:
                             point.X -= _horizontal * ValueExtent;
-                            point.Y -= _vertical /2;
+                            point.Y -= _vertical / 2;
                             break;
                         case GaugeValueLocation.RightCenter:
                             point.X += _horizontal * ValueExtent;
@@ -282,9 +281,7 @@ namespace MicroGauge
                             point.Y -= _vertical * ValueExtent;
                             break;
                     }
-                }
                 else
-                {
                     switch (ValueLocation)
                     {
                         case GaugeValueLocation.TopCenter:
@@ -303,9 +300,8 @@ namespace MicroGauge
                             point.Y += _vertical * ValueExtent;
                             break;
                     }
-                }
 
-                string valueStr = GetValueFormattedValue(Convert.ToSingle(Value));
+                var valueStr = GetValueFormattedValue(Convert.ToSingle(Value));
                 point.Y += GaugeHelper.GetTextBounds(paint, valueStr).Height / 2;
                 Canvas.DrawText(valueStr, point, paint);
             }
@@ -334,7 +330,7 @@ namespace MicroGauge
                 _start = new SKPoint(0, SurfaceHeight / 2);
                 _barWidth = _vertical - _vertical * TopExtent - _vertical * BottomExtent;
                 _barLength = _horizontal - _horizontal * LeftExtent - _horizontal * RightExtent;
-                _barStart = new SKPoint(_start.X + _horizontal* LeftExtent, _start.Y);
+                _barStart = new SKPoint(_start.X + _horizontal * LeftExtent, _start.Y);
             }
         }
 
@@ -344,7 +340,7 @@ namespace MicroGauge
         private double GetValuePosition(double value)
         {
             double valueRange = MaxValue - MinValue;
-            double valueRatio = (value - MinValue) / valueRange;
+            var valueRatio = (value - MinValue) / valueRange;
             return _barLength * valueRatio;
         }
 
@@ -353,7 +349,7 @@ namespace MicroGauge
         /// </summary>
         private SKPoint GetBarStartCenterPoint(float location)
         {
-            SKPoint point = new SKPoint(_barStart.X, _barStart.Y);
+            var point = new SKPoint(_barStart.X, _barStart.Y);
             if (IsVertical)
             {
                 point.X -= _barWidth / 2;
@@ -373,21 +369,17 @@ namespace MicroGauge
         /// </summary>
         private SKPoint GetTickPoint(double tickSpacing, int i)
         {
-            SKPoint point = new SKPoint(_barStart.X, _barStart.Y);
+            var point = new SKPoint(_barStart.X, _barStart.Y);
             if (IsVertical)
-            {
                 point.Y -= Convert.ToSingle(tickSpacing * i);
-            }
             else
-            {
                 point.X += Convert.ToSingle(tickSpacing * i);
-            }
 
             return point;
         }
 
         /// <summary>
-        ///      GetBarAngle - 0 if IsVertical, else 90
+        ///     GetBarAngle - 0 if IsVertical, else 90
         /// </summary>
         /// <returns></returns>
         private float GetBarAngle()

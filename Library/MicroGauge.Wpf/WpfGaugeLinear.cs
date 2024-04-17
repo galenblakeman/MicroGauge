@@ -23,7 +23,7 @@ public class WpfGaugeLinear : WpfGaugeBase
     /// </summary>
     protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
     {
-        GaugeLinear linearGauge = (GaugeLinear)Gauge;
+        var linearGauge = (GaugeLinear)Gauge;
         linearGauge.ValueBarShader = GetSkShader(Gauge, ValueBarBrush);
         base.OnRenderSizeChanged(sizeInfo);
     }

@@ -25,7 +25,7 @@ public class WpfGaugeRadial : WpfGaugeBase
     /// </summary>
     protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
     {
-        GaugeRadial radialGauge = (GaugeRadial)Gauge;
+        var radialGauge = (GaugeRadial)Gauge;
         radialGauge.NeedlePivotShader = GetSkShader(Gauge, NeedlePivotBrush);
         radialGauge.NeedlePivotOutlineShader = GetSkShader(Gauge, NeedlePivotOutlineBrush);
         radialGauge.RangeShader = GetSkShader(Gauge, RangeBrush);
@@ -171,6 +171,19 @@ public class WpfGaugeRadial : WpfGaugeBase
         {
             GetRadial(gaugeBase).NeedlePivotOutlineShader = GetSkShader(GetRadial(gaugeBase), (Brush)newValue);
         });
+
+    /// <summary>
+    ///     NeedlePivotOutlineWidth
+    /// </summary>
+    public float NeedlePivotOutlineWidth
+    {
+        get => (float)GetValue(NeedlePivotOutlineWidthProperty);
+        set => SetValue(NeedlePivotOutlineWidthProperty, value);
+    }
+
+    public static readonly DependencyProperty NeedlePivotOutlineWidthProperty = Create(nameof(NeedlePivotOutlineWidth),
+        typeof(float), 2f,
+        (gaugeBase, newValue) => { GetRadial(gaugeBase).NeedlePivotOutlineWidth = (float)newValue; });
 
     /// <summary>
     ///     RangeBrush

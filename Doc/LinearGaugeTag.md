@@ -52,6 +52,8 @@
 * NeedleEndWidth - Width of needle at end
 * NeedleStartExtent - Needle start as extent of width
 * NeedleEndExtent - Needle end as extent of width
+* NeedleOutlineWidth - Width of needle outline
+* NeedleOutlineBrush  Needle outline solid or linear gradient shader
 
 ## Set Needle (Indicator Needle)
 * SetNeedleValue - Set Needle Value
@@ -60,3 +62,5 @@
 * SetNeedleEndWidth - Width of set needle at end
 * SetNeedleStartExtent - Set needle start as extent of width
 * SetNeedleEndExtent - Set needle end as extent of width
+* SetNeedleOutlineWidth - Width of set needle outline
+* SetNeedleOutlineBrush  - Set needle outline solid or linear gradient shader

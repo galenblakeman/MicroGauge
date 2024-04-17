@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using SkiaSharp.Views.Maui.Controls.Hosting;
+
 // ReSharper disable StringLiteralTypo
 
 namespace MicroGauge.Example.Maui;
@@ -8,7 +9,7 @@ public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()
     {
-        MauiAppBuilder builder = MauiApp.CreateBuilder();
+        var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
             .UseSkiaSharp()

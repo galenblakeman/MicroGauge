@@ -28,14 +28,14 @@ public static class WpfGaugeHelper
     private static SKShader ConvertToSkiaLinearGradient(LinearGradientBrush linearBrush,
         float surfaceWidth, float surfaceHeight)
     {
-        double startX = linearBrush.StartPoint.X * surfaceWidth;
-        double startY = linearBrush.StartPoint.Y * surfaceHeight;
-        double endX = linearBrush.EndPoint.X * surfaceWidth;
-        double endY = linearBrush.EndPoint.Y * surfaceHeight;
+        var startX = linearBrush.StartPoint.X * surfaceWidth;
+        var startY = linearBrush.StartPoint.Y * surfaceHeight;
+        var endX = linearBrush.EndPoint.X * surfaceWidth;
+        var endY = linearBrush.EndPoint.Y * surfaceHeight;
 
-        SKColor[] colors = linearBrush.GradientStops.Select(stop => stop.Color.ToSKColor()).ToArray();
-        double[] offsets = linearBrush.GradientStops.Select(stop => stop.Offset).ToArray();
-        float[] positions = Array.ConvertAll(offsets, item => (float)item);
+        var colors = linearBrush.GradientStops.Select(stop => stop.Color.ToSKColor()).ToArray();
+        var offsets = linearBrush.GradientStops.Select(stop => stop.Offset).ToArray();
+        var positions = Array.ConvertAll(offsets, item => (float)item);
 
         return SKShader.CreateLinearGradient(
             new SKPoint(Convert.ToSingle(startX), Convert.ToSingle(startY)),

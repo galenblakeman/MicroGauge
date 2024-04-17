@@ -78,10 +78,10 @@
                    Margin="0"
                    VerticalTextAlignment="Start" />
             <Label Grid.Row="0" Grid.Column="0"
-                       Style="{StaticResource ChartNote}"
-                       Text="(No Tail)"
-                       Margin="0,16,0,0"
-                       VerticalTextAlignment="Start" />
+                   Style="{StaticResource ChartNote}"
+                   Text="(No Tail)"
+                   Margin="0,16,0,0"
+                   VerticalTextAlignment="Start" />
 
             <microGauge:XfGaugeRadial
                 Grid.Row="0"
@@ -109,11 +109,11 @@
                 ValueLocation="BottomCenter"
                 TickBrush="#FFFFFF"
                 TickStrokeWidth="2"
-                TickStartExtent ="0.6"
-                TickEndExtent ="0.7"
+                TickStartExtent="0.6"
+                TickEndExtent="0.7"
                 MinorTickBrush="#808080"
-                MinorTickStartExtent ="0.65"
-                MinorTickEndExtent ="0.7"
+                MinorTickStartExtent="0.65"
+                MinorTickEndExtent="0.7"
                 MinorTickStrokeWidth="1"
                 ScaleStartAngle="210"
                 ScaleEndAngle="330"
@@ -124,10 +124,10 @@
                 NeedleEndExtent="0.71"
                 NeedleEndWidth="3"
                 RangeBrush="{StaticResource BrushGreenYellowRed}"
-                RangeInnerStartExtent ="0.6"
-                RangeInnerEndExtent ="0.6"
-                RangeOuterStartExtent ="0.6"
-                RangeOuterEndExtent ="0.71" />
+                RangeInnerStartExtent="0.6"
+                RangeInnerEndExtent="0.6"
+                RangeOuterStartExtent="0.6"
+                RangeOuterEndExtent="0.71" />
 
             <!--Humidity (No Minor)-->
             <Label Grid.Row="0" Grid.Column="1"
@@ -136,10 +136,10 @@
                    Margin="0"
                    VerticalTextAlignment="Start" />
             <Label Grid.Row="0" Grid.Column="1"
-                       Style="{StaticResource ChartNote}"
-                       Text="(No Minor)"
-                       Margin="0,16,0,0"
-                       VerticalTextAlignment="Start" />
+                   Style="{StaticResource ChartNote}"
+                   Text="(No Minor)"
+                   Margin="0,16,0,0"
+                   VerticalTextAlignment="Start" />
             <microGauge:XfGaugeRadial
                 Grid.Row="0"
                 Grid.Column="1"
@@ -159,24 +159,28 @@
                 LabelFontBrush="White"
                 ValueFormatString="{}{0:N0}%"
                 ValueFontSize="28"
-                ValueFontBrush="#00DCFF"
+                ValueFontBrush="#FAF9F6"
                 ValueFontWeight="SemiBold"
                 TickBrush="White"
                 TickStrokeWidth="1"
-                TickStartExtent ="0.6"
-                TickEndExtent ="0.7"
+                TickStartExtent="0.6"
+                TickEndExtent="0.7"
                 MinorTickBrush="#727272"
                 ScaleStartAngle="210"
                 ScaleEndAngle="330"
-                NeedleBrush="#00DCFF"
-                NeedlePivotBrush="#727272"
-                NeedlePivotOutlineBrush="#00DCFF"
+                NeedleBrush="#0096ff"
+                NeedlePivotBrush="#0096ff"
+                NeedlePivotOutlineBrush="#ffffff"
+                NeedleOutlineBrush="#ffffff"
+                NeedleOutlineWidth="2"
                 NeedleStartExtent="-0.2"
+                NeedleStartWidth="4"
+                NeedleEndWidth="2"
                 RangeBrush="{StaticResource BrushBlueWhite}"
-                RangeInnerStartExtent ="0.6"
-                RangeInnerEndExtent ="0.6"
-                RangeOuterStartExtent ="0.6"
-                RangeOuterEndExtent ="0.71" />
+                RangeInnerStartExtent="0.6"
+                RangeInnerEndExtent="0.6"
+                RangeOuterStartExtent="0.6"
+                RangeOuterEndExtent="0.71" />
 
             <!--Pressure (Set Indicator)-->
             <Label Grid.Row="1" Grid.Column="0"
@@ -185,10 +189,10 @@
                    Margin="0"
                    VerticalTextAlignment="Start" />
             <Label Grid.Row="1" Grid.Column="0"
-                       Style="{StaticResource ChartNote}"
-                       Text="(Set Indicator)"
-                       Margin="0,16,0,0"
-                       VerticalTextAlignment="Start" />
+                   Style="{StaticResource ChartNote}"
+                   Text="(Set Indicator)"
+                   Margin="0,16,0,0"
+                   VerticalTextAlignment="Start" />
             <microGauge:XfGaugeRadial
                 Grid.Row="1"
                 Grid.Column="0"
@@ -211,11 +215,11 @@
                 ValueFontWeight="SemiBold"
                 TickBrush="#000000"
                 TickStrokeWidth="2"
-                TickStartExtent ="0.6"
-                TickEndExtent ="0.7"
+                TickStartExtent="0.6"
+                TickEndExtent="0.7"
                 MinorTickBrush="#808080"
-                MinorTickStartExtent ="0.65"
-                MinorTickEndExtent ="0.7"
+                MinorTickStartExtent="0.65"
+                MinorTickEndExtent="0.7"
                 ScaleStartAngle="210"
                 ScaleEndAngle="330"
                 NeedleBrush="#000000"
@@ -224,30 +228,31 @@
                 NeedleStartExtent="-0.2"
                 NeedleEndExtent="0.71"
                 SetNeedleValue="700"
-                SetNeedleBrush="#ff0000"
+                SetNeedleBrush="#ffff00"
+                SetNeedleOutlineWidth="2"
+                SetNeedleOutlineBrush="#000000"
                 SetNeedleStartExtent="0"
-                SetNeedleEndExtent="0.58"
+                SetNeedleEndExtent="0.7"
                 SetNeedleStartWidth="3"
                 SetNeedleEndWidth="2"
                 RangeBrush="{StaticResource BrushPressure}"
-                RangeInnerStartExtent ="0.6"
-                RangeInnerEndExtent ="0.6"
-                RangeOuterStartExtent ="0.7"
-                RangeOuterEndExtent ="0.7" />
-
+                RangeInnerStartExtent="0.6"
+                RangeInnerEndExtent="0.6"
+                RangeOuterStartExtent="0.7"
+                RangeOuterEndExtent="0.7" />
 
 
             <!--Flow Rate (Notch)-->
             <Label Grid.Row="1" Grid.Column="1"
-                       Style="{StaticResource ChartLabel}"
-                       Text="Flow Rate"
-                       Margin="0"
-                       VerticalTextAlignment="Start" />
+                   Style="{StaticResource ChartLabel}"
+                   Text="Flow Rate"
+                   Margin="0"
+                   VerticalTextAlignment="Start" />
             <Label Grid.Row="1" Grid.Column="1"
-                       Style="{StaticResource ChartNote}"
-                       Text="(Notch)"
-                       Margin="0,16,0,0"
-                       VerticalTextAlignment="Start" />
+                   Style="{StaticResource ChartNote}"
+                   Text="(Notch)"
+                   Margin="0,16,0,0"
+                   VerticalTextAlignment="Start" />
             <microGauge:XfGaugeRadial
                 Grid.Row="1"
                 Grid.Column="1"
@@ -271,11 +276,11 @@
                 ValueFontWeight="SemiBold"
                 TickBrush="#FFFFFF"
                 TickStrokeWidth="2"
-                TickStartExtent ="0.55"
-                TickEndExtent ="0.65"
+                TickStartExtent="0.55"
+                TickEndExtent="0.65"
                 MinorTickBrush="#808080"
-                MinorTickStartExtent ="0.45"
-                MinorTickEndExtent ="0.65"
+                MinorTickStartExtent="0.45"
+                MinorTickEndExtent="0.65"
                 ScaleStartAngle="210"
                 ScaleEndAngle="330"
                 NeedleBrush="#0096FF"
@@ -283,7 +288,7 @@
                 NeedlePivotOutlineBrush="#0096FF"
                 NeedleStartExtent="-0.2"
                 NeedleEndExtent="0.71"
-                NeedleEndWidth="3"/>
+                NeedleEndWidth="3" />
 
             <!--Temperature (Half)-->
             <Label Grid.Row="2" Grid.Column="0"
@@ -292,10 +297,10 @@
                    Margin="0"
                    VerticalTextAlignment="Start" />
             <Label Grid.Row="2" Grid.Column="0"
-                       Style="{StaticResource ChartNote}"
-                       Text="(Half)"
-                       Margin="0,16,0,0"
-                       VerticalTextAlignment="Start" />
+                   Style="{StaticResource ChartNote}"
+                   Text="(Half)"
+                   Margin="0,16,0,0"
+                   VerticalTextAlignment="Start" />
             <microGauge:XfGaugeRadial
                 Grid.Row="2"
                 Grid.Column="0"
@@ -322,11 +327,11 @@
                 ValueFontWeight="SemiBold"
                 TickBrush="#FFFFFF"
                 TickStrokeWidth="2"
-                TickStartExtent ="0.6"
-                TickEndExtent ="0.7"
+                TickStartExtent="0.6"
+                TickEndExtent="0.7"
                 MinorTickBrush="#808080"
-                MinorTickStartExtent ="0.65"
-                MinorTickEndExtent ="0.7"
+                MinorTickStartExtent="0.65"
+                MinorTickEndExtent="0.7"
                 ScaleStartAngle="180"
                 ScaleEndAngle="360"
                 NeedleBrush="#AAFF00"
@@ -338,10 +343,10 @@
                 NeedleStartWidth="2"
                 NeedleEndWidth="1"
                 RangeBrush="{StaticResource BrushIceToSun}"
-                RangeInnerStartExtent ="0.6"
-                RangeInnerEndExtent ="0.6"
-                RangeOuterStartExtent ="0.6"
-                RangeOuterEndExtent ="0.71" />
+                RangeInnerStartExtent="0.6"
+                RangeInnerEndExtent="0.6"
+                RangeOuterStartExtent="0.6"
+                RangeOuterEndExtent="0.71" />
 
 
             <!--Battery (Horizontal/Set Indicator)-->
@@ -351,10 +356,10 @@
                    Margin="0"
                    VerticalTextAlignment="Start" />
             <Label Grid.Row="2" Grid.Column="1"
-                       Style="{StaticResource ChartNote}"
-                       Text="(Horizontal/Set Indicator)"
-                       Margin="0,16,0,0"
-                       VerticalTextAlignment="Start" />
+                   Style="{StaticResource ChartNote}"
+                   Text="(Horizontal/Set Indicator)"
+                   Margin="0,16,0,0"
+                   VerticalTextAlignment="Start" />
             <microGauge:XfGaugeLinear
                 Grid.Row="2"
                 Grid.Column="1"
@@ -409,10 +414,10 @@
                    Margin="0"
                    VerticalTextAlignment="Start" />
             <Label Grid.Row="3" Grid.Column="0"
-                       Style="{StaticResource ChartNote}"
-                       Text="(Vertical)"
-                       Margin="0,16,0,0"
-                       VerticalTextAlignment="Start" />
+                   Style="{StaticResource ChartNote}"
+                   Text="(Vertical)"
+                   Margin="0,16,0,0"
+                   VerticalTextAlignment="Start" />
             <microGauge:XfGaugeLinear
                 Grid.Row="3"
                 Grid.Column="0"
@@ -457,15 +462,15 @@
 
             <!--Wind Direction (360)-->
             <Label Grid.Row="3" Grid.Column="1"
-                       Style="{StaticResource ChartLabel}"
-                       Text="Wind Direction"
-                       Margin="0"
-                       VerticalTextAlignment="Start" />
+                   Style="{StaticResource ChartLabel}"
+                   Text="Wind Direction"
+                   Margin="0"
+                   VerticalTextAlignment="Start" />
             <Label Grid.Row="3" Grid.Column="1"
-                       Style="{StaticResource ChartNote}"
-                       Text="(360)"
-                       Margin="0,16,0,0"
-                       VerticalTextAlignment="Start" />
+                   Style="{StaticResource ChartNote}"
+                   Text="(360)"
+                   Margin="0,16,0,0"
+                   VerticalTextAlignment="Start" />
             <microGauge:XfGaugeRadial
                 Grid.Row="3"
                 Grid.Column="1"
@@ -494,11 +499,11 @@
                 ValueFontWeight="SemiBold"
                 TickBrush="#F28C28"
                 TickStrokeWidth="2"
-                TickStartExtent ="0.6"
-                TickEndExtent ="0.7"
+                TickStartExtent="0.6"
+                TickEndExtent="0.7"
                 MinorTickBrush="{StaticResource RadialGaugeBacking}"
-                MinorTickStartExtent ="0.65"
-                MinorTickEndExtent ="0.7"
+                MinorTickStartExtent="0.65"
+                MinorTickEndExtent="0.7"
                 ScaleStartAngle="90"
                 ScaleEndAngle="90"
                 NeedleBrush="#F28C28"

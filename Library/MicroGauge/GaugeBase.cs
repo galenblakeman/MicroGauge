@@ -12,222 +12,242 @@ namespace MicroGauge
         #region Properties
 
         /// <summary>
-        /// 	Canvas - Skia Drawing Surface
+        ///     Canvas - Skia Drawing Surface
         /// </summary>
         public SKCanvas Canvas { get; set; }
 
         /// <summary>
-        /// 	SurfaceWidth - Measured width of the surface
+        ///     SurfaceWidth - Measured width of the surface
         /// </summary>
         public int SurfaceWidth { get; set; } = 400;
 
         /// <summary>
-        /// 	SurfaceHeight - Measured height of the surface
+        ///     SurfaceHeight - Measured height of the surface
         /// </summary>
         public int SurfaceHeight { get; set; } = 400;
 
         /// <summary>
-        /// 	BottomExtent - bottom padding extent of surface height
+        ///     BottomExtent - bottom padding extent of surface height
         /// </summary>
         public float BottomExtent { get; set; }
 
         /// <summary>
-        /// 	TopExtent - top padding extent of surface height
+        ///     TopExtent - top padding extent of surface height
         /// </summary>
         public float TopExtent { get; set; }
 
         /// <summary>
-        /// 	LeftExtent - left padding extent of surface width
+        ///     LeftExtent - left padding extent of surface width
         /// </summary>
         public float LeftExtent { get; set; }
 
         /// <summary>
-        /// 	RightExtent - right padding extent of surface width
+        ///     RightExtent - right padding extent of surface width
         /// </summary>
         public float RightExtent { get; set; }
 
         /// <summary>
-        /// 	BackingShader - Backing solid or linear gradient shader
+        ///     BackingShader - Backing solid or linear gradient shader
         /// </summary>
         public SKShader BackingShader { get; set; } = SKShader.CreateColor(SKColors.White);
 
         /// <summary>
-        /// 	BackingOutlineShader - Backing outline solid or linear gradient shader
+        ///     BackingOutlineShader - Backing outline solid or linear gradient shader
         /// </summary>
         public SKShader BackingOutlineShader { get; set; } = SKShader.CreateColor(SKColors.Black);
 
         /// <summary>
-        /// 	BackingStrokeWidth - Back stroke with for backing edge
+        ///     BackingStrokeWidth - Back stroke with for backing edge
         /// </summary>
         public float BackingStrokeWidth { get; set; } = 10f;
 
         /// <summary>
-        /// 	TickShader - Tick solid or linear gradient shader
+        ///     TickShader - Tick solid or linear gradient shader
         /// </summary>
         public SKShader TickShader { get; set; } = SKShader.CreateColor(SKColors.Black);
 
         /// <summary>
-        /// 	TickStrokeWidth - Tick Width
+        ///     TickStrokeWidth - Tick Width
         /// </summary>
         public float TickStrokeWidth { get; set; } = 1f;
 
         /// <summary>
-        /// 	MinorTickShader - Minor Tick solid or linear gradient shader
+        ///     MinorTickShader - Minor Tick solid or linear gradient shader
         /// </summary>
         public SKShader MinorTickShader { get; set; } = SKShader.CreateColor(SKColors.LightGray);
 
         /// <summary>
-        /// 	MinorTickStrokeWidth - Minor Tick Width
+        ///     MinorTickStrokeWidth - Minor Tick Width
         /// </summary>
         public float MinorTickStrokeWidth { get; set; } = 0.5f;
 
         /// <summary>
-        /// 	TickInterval - Tick Interval
+        ///     TickInterval - Tick Interval
         /// </summary>
         public float TickInterval { get; set; } = 5f;
 
         /// <summary>
-        /// 	MinorTickInterval - Minor Tick Interval
+        ///     MinorTickInterval - Minor Tick Interval
         /// </summary>
         public float MinorTickInterval { get; set; } = 1f;
 
         /// <summary>
-        /// 	Value - Current Value for scale
+        ///     Value - Current Value for scale
         /// </summary>
         public double Value { get; set; }
 
         /// <summary>
-        /// 	MinValue - Min value that corresponds to start
+        ///     MinValue - Min value that corresponds to start
         /// </summary>
         public float MinValue { get; set; }
 
         /// <summary>
-        /// 	MaxValue - Max value that corresponds to start
+        ///     MaxValue - Max value that corresponds to start
         /// </summary>
         public float MaxValue { get; set; } = 100f;
 
         /// <summary>
-        /// 	LabelInterval - Label interval
+        ///     LabelInterval - Label interval
         /// </summary>
         public float LabelInterval { get; set; } = 10f;
 
         /// <summary>
-        /// 	LabelExtent - Label extent from center
+        ///     LabelExtent - Label extent from center
         /// </summary>
         public float LabelExtent { get; set; } = 0.85f;
 
         /// <summary>
-        /// 	LabelFormatString - Format string applied to label values, ex. "{0:N0}"
+        ///     LabelFormatString - Format string applied to label values, ex. "{0:N0}"
         /// </summary>
         public string LabelFormatString { get; set; } = "{0:N0}";
 
         /// <summary>
-        /// 	LabelFontSize - Label Font Size
+        ///     LabelFontSize - Label Font Size
         /// </summary>
         public float LabelFontSize { get; set; } = 10f;
 
         /// <summary>
-        /// 	LabelFontWeight - SKFontStyleWeight for Label (Light, Normal, Bold, etc.)
+        ///     LabelFontWeight - SKFontStyleWeight for Label (Light, Normal, Bold, etc.)
         /// </summary>
         public SKFontStyleWeight LabelFontWeight { get; set; } = SKFontStyleWeight.Normal;
 
         /// <summary>
-        /// 	LabelFontShader - Label font solid or linear gradient shader
+        ///     LabelFontShader - Label font solid or linear gradient shader
         /// </summary>
         public SKShader LabelFontShader { get; set; } = SKShader.CreateColor(SKColors.Black);
 
         /// <summary>
-        /// 	LabelFontFamily - Label Font Family Name
+        ///     LabelFontFamily - Label Font Family Name
         /// </summary>
         public string LabelFontFamily { get; set; } = "verdana";
 
         /// <summary>
-        /// 	ValueLocation - Value location on gauge (TopCenter, BottomCenter, LeftCenter, RightCenter)
+        ///     ValueLocation - Value location on gauge (TopCenter, BottomCenter, LeftCenter, RightCenter)
         /// </summary>
         public GaugeValueLocation ValueLocation { get; set; }
 
         /// <summary>
-        /// 	ValueExtent - Value extent from center in direction of value location
+        ///     ValueExtent - Value extent from center in direction of value location
         /// </summary>
         public float ValueExtent { get; set; } = 0.60f;
 
         /// <summary>
-        /// 	ValueFormatString - Format string applied to Value values, ex. "{0:N0}"
+        ///     ValueFormatString - Format string applied to Value values, ex. "{0:N0}"
         /// </summary>
         public string ValueFormatString { get; set; } = "{0:N0}";
 
         /// <summary>
-        /// 	ValueFontSize - Value Font Size
+        ///     ValueFontSize - Value Font Size
         /// </summary>
         public float ValueFontSize { get; set; } = 20f;
 
         /// <summary>
-        /// 	ValueFontWeight - SKFontStyleWeight for Value (Light, Normal, Bold, etc.)
+        ///     ValueFontWeight - SKFontStyleWeight for Value (Light, Normal, Bold, etc.)
         /// </summary>
         public SKFontStyleWeight ValueFontWeight { get; set; } = SKFontStyleWeight.Normal;
 
         /// <summary>
-        /// 	ValueFontShader - Value font solid or linear gradient shader
+        ///     ValueFontShader - Value font solid or linear gradient shader
         /// </summary>
         public SKShader ValueFontShader { get; set; } = SKShader.CreateColor(SKColors.Black);
 
         /// <summary>
-        /// 	ValueFontFamily - Value Font Family Name
+        ///     ValueFontFamily - Value Font Family Name
         /// </summary>
         public string ValueFontFamily { get; set; } = "verdana";
 
         /// <summary>
-        /// 	NeedleShader - Needle solid or linear gradient shader
+        ///     NeedleShader - Needle solid or linear gradient shader
         /// </summary>
         public SKShader NeedleShader { get; set; } = SKShader.CreateColor(SKColors.Black);
 
         /// <summary>
-        /// 	NeedleStartWidth - width of needle at start
+        ///     NeedleStartWidth - width of needle at start
         /// </summary>
         public float NeedleStartWidth { get; set; } = 6f;
 
         /// <summary>
-        /// 	NeedleEndWidth - width of needle at end
+        ///     NeedleEndWidth - width of needle at end
         /// </summary>
         public float NeedleEndWidth { get; set; } = 3f;
 
         /// <summary>
-        /// 	NeedleStartExtent - needle start as extent of radius or width
+        ///     NeedleStartExtent - needle start as extent of radius or width
         /// </summary>
         public float NeedleStartExtent { get; set; }
 
         /// <summary>
-        /// 	NeedleEndExtent - needle end as extent of radius or width
+        ///     NeedleEndExtent - needle end as extent of radius or width
         /// </summary>
         public float NeedleEndExtent { get; set; } = 0.71f;
 
         /// <summary>
-        /// 	SetNeedleValue - Set Needle Value
+        ///     NeedleOutlineWidth - width of needle outline
+        /// </summary>
+        public float NeedleOutlineWidth { get; set; } = 1f;
+
+        /// <summary>
+        ///     NeedleOutlineShader - Needle outline solid or linear gradient shader
+        /// </summary>
+        public SKShader NeedleOutlineShader { get; set; } = SKShader.CreateColor(SKColors.Transparent);
+
+        /// <summary>
+        ///     SetNeedleValue - Set Needle Value
         /// </summary>
         public float SetNeedleValue { get; set; }
 
         /// <summary>
-        /// 	SetNeedleShader - set needle solid or linear gradient shader
+        ///     SetNeedleOutlineWidth - width of set needle outline
+        /// </summary>
+        public float SetNeedleOutlineWidth { get; set; } = 1f;
+
+        /// <summary>
+        ///     SetNeedleShader - set needle solid or linear gradient shader
         /// </summary>
         public SKShader SetNeedleShader { get; set; } = SKShader.CreateColor(SKColors.Transparent);
 
         /// <summary>
-        /// 	SetNeedleStartWidth - width of set needle at start
+        ///     SetNeedleOutlineShader - set needle outline solid or linear gradient shader
+        /// </summary>
+        public SKShader SetNeedleOutlineShader { get; set; } = SKShader.CreateColor(SKColors.Transparent);
+
+        /// <summary>
+        ///     SetNeedleStartWidth - width of set needle at start
         /// </summary>
         public float SetNeedleStartWidth { get; set; } = 6f;
 
         /// <summary>
-        /// 	SetNeedleEndWidth - width of set needle at end
+        ///     SetNeedleEndWidth - width of set needle at end
         /// </summary>
         public float SetNeedleEndWidth { get; set; } = 3f;
 
         /// <summary>
-        /// 	SetNeedleStartExtent - set needle start as extent of radius or width
+        ///     SetNeedleStartExtent - set needle start as extent of radius or width
         /// </summary>
         public float SetNeedleStartExtent { get; set; }
 
         /// <summary>
-        /// 	SetNeedleEndExtent - needle at end as extent of radius or width
+        ///     SetNeedleEndExtent - needle at end as extent of radius or width
         /// </summary>
         public float SetNeedleEndExtent { get; set; } = 0.71f;
 
@@ -252,7 +272,7 @@ namespace MicroGauge
         // ReSharper disable once UnusedMember.Global
         protected void DebugFillCanvas(SKColor color)
         {
-            using (SKPaint paint = new SKPaint())
+            using (var paint = new SKPaint())
             {
                 paint.Color = color;
                 Canvas.DrawPaint(paint);
@@ -265,7 +285,7 @@ namespace MicroGauge
         // ReSharper disable once UnusedMember.Global
         protected void DebugCircleAtPoint(SKPoint point, SKColor color)
         {
-            using (SKPaint paint = new SKPaint())
+            using (var paint = new SKPaint())
             {
                 paint.Style = SKPaintStyle.Stroke;
                 paint.StrokeWidth = 2;
@@ -283,12 +303,12 @@ namespace MicroGauge
         {
             if (startWidth < 0.25) startWidth = 0.25f;
             if (endWidth < 0.25) endWidth = 0.25f;
-            using (SKPath path = new SKPath())
+            using (var path = new SKPath())
             {
-                SKPoint p1 = GaugeHelper.GetRadialPoint(start, startWidth, angle + 90);
-                SKPoint p2 = GaugeHelper.GetRadialPoint(start, startWidth, angle - 90);
-                SKPoint p3 = GaugeHelper.GetRadialPoint(end, endWidth, angle - 90);
-                SKPoint p4 = GaugeHelper.GetRadialPoint(end, endWidth, angle + 90);
+                var p1 = GaugeHelper.GetRadialPoint(start, startWidth, angle + 90);
+                var p2 = GaugeHelper.GetRadialPoint(start, startWidth, angle - 90);
+                var p3 = GaugeHelper.GetRadialPoint(end, endWidth, angle - 90);
+                var p4 = GaugeHelper.GetRadialPoint(end, endWidth, angle + 90);
                 DrawPoly(paint, path, p1, p2, p3, p4);
             }
         }
@@ -342,13 +362,12 @@ namespace MicroGauge
         {
             try
             {
-                return LabelFormatString == null ?
-                    Convert.ToString(value, CultureInfo.InvariantCulture) :
-                    string.Format(LabelFormatString, value);
+                return LabelFormatString == null
+                    ? Convert.ToString(value, CultureInfo.InvariantCulture)
+                    : string.Format(LabelFormatString, value);
             }
             catch (Exception ex)
             {
-
                 return ex.Message;
             }
         }
@@ -361,13 +380,12 @@ namespace MicroGauge
         {
             try
             {
-                return ValueFormatString == null ? 
-                    Convert.ToString(value, CultureInfo.InvariantCulture) : 
-                    string.Format(ValueFormatString, value);
+                return ValueFormatString == null
+                    ? Convert.ToString(value, CultureInfo.InvariantCulture)
+                    : string.Format(ValueFormatString, value);
             }
             catch (Exception ex)
             {
-
                 return ex.Message;
             }
         }

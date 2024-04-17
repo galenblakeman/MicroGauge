@@ -26,13 +26,13 @@ public static class MauiGaugeHelper
     private static SKShader ConvertToSkiaLinearGradient(LinearGradientBrush xamarinBrush,
         float surfaceWidth, float surfaceHeight)
     {
-        double startX = xamarinBrush.StartPoint.X * surfaceWidth;
-        double startY = xamarinBrush.StartPoint.Y * surfaceHeight;
-        double endX = xamarinBrush.EndPoint.X * surfaceWidth;
-        double endY = xamarinBrush.EndPoint.Y * surfaceHeight;
+        var startX = xamarinBrush.StartPoint.X * surfaceWidth;
+        var startY = xamarinBrush.StartPoint.Y * surfaceHeight;
+        var endX = xamarinBrush.EndPoint.X * surfaceWidth;
+        var endY = xamarinBrush.EndPoint.Y * surfaceHeight;
 
-        SKColor[] colors = xamarinBrush.GradientStops.Select(stop => stop.Color.ToSKColor()).ToArray();
-        float[] positions = xamarinBrush.GradientStops.Select(stop => stop.Offset).ToArray();
+        var colors = xamarinBrush.GradientStops.Select(stop => stop.Color.ToSKColor()).ToArray();
+        var positions = xamarinBrush.GradientStops.Select(stop => stop.Offset).ToArray();
 
         return SKShader.CreateLinearGradient(
             new SKPoint(Convert.ToSingle(startX), Convert.ToSingle(startY)),

@@ -2,8 +2,6 @@
 {
     public enum GaugeValueLocation
     {
-
-        ///
         /// <summary>
         ///     BottomCenter - Below the gauge center
         /// </summary>
@@ -14,13 +12,11 @@
         /// </summary>
         TopCenter,
 
-        ///
         /// <summary>
         ///     LeftCenter - Left of the gauge center
         /// </summary>
         LeftCenter,
 
-        ///
         /// <summary>
         ///     RightCenter - Right of the gauge center
         /// </summary>

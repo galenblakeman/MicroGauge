@@ -1,6 +1,5 @@
 ﻿using MicroGauge.Constant;
 
-
 namespace MicroGauge.Maui;
 
 public class MauiGaugeRadial : MauiGaugeBase
@@ -152,6 +151,19 @@ public class MauiGaugeRadial : MauiGaugeBase
         {
             GetRadial(gaugeBase).NeedlePivotOutlineShader = GetSkShader(GetRadial(gaugeBase), (Brush)newValue);
         });
+
+    /// <summary>
+    ///     NeedlePivotOutlineWidth
+    /// </summary>
+    public float NeedlePivotOutlineWidth
+    {
+        get => (float)GetValue(NeedlePivotOutlineWidthProperty);
+        set => SetValue(NeedlePivotOutlineWidthProperty, value);
+    }
+
+    public static readonly BindableProperty NeedlePivotOutlineWidthProperty = Create(nameof(NeedlePivotOutlineWidth),
+        typeof(float), 2f,
+        (gaugeBase, newValue) => { GetRadial(gaugeBase).NeedlePivotOutlineWidth = (float)newValue; });
 
     /// <summary>
     ///     RangeBrush
