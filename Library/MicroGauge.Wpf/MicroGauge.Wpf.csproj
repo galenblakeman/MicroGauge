@@ -11,7 +11,7 @@
 		<Authors>Galen Blakeman</Authors>
 		<Company></Company>
 		<PackageDescription>WPF wrapper library for MicroGauge that utilizes SkiaSharp.Views.WPF and DependencyProperty bindings</PackageDescription>
-		<RepositoryUrl>https://github.com/galenblakeman/MicroGauge</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/galenblakeman/MicroGauge</PackageProjectUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageTags>skia;skiasharp;c-sharp;dotnet;gauge;wpf-controls</PackageTags>

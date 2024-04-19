@@ -7,7 +7,7 @@
 	  <Authors>Galen Blakeman</Authors>
 	  <Company></Company>
 	  <PackageDescription>MicroGauge is a basic radial and linear gauge library</PackageDescription>
-	  <RepositoryUrl>https://github.com/galenblakeman/MicroGauge</RepositoryUrl>
+	  <PackageProjectUrl>https://github.com/galenblakeman/MicroGauge</PackageProjectUrl>
 	  <PackageReadmeFile>README.md</PackageReadmeFile>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
 	  <PackageTags>skia;skiasharp;c-sharp;dotnet;gauge</PackageTags>

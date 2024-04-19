@@ -14,7 +14,7 @@
 		<Authors>Galen Blakeman</Authors>
 		<Company></Company>
 		<PackageDescription>.Net MAUI wrapper library for MicroGauge that utilizes SkiaSharp.Views.Maui.Controls and BindableProperty bindings</PackageDescription>
-		<RepositoryUrl>https://github.com/galenblakeman/MicroGauge</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/galenblakeman/MicroGauge</PackageProjectUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageTags>skia;skiasharp;c-sharp;dotnet;gauge;maui</PackageTags>
