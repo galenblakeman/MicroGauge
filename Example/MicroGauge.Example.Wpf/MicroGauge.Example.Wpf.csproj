@@ -6,7 +6,12 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>gauge.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="gauge.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Library\MicroGauge.Wpf\MicroGauge.Wpf.csproj" />
