@@ -10,7 +10,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<PackageId>MicroGauge.Maui</PackageId>
-		<Version>1.0.0.3</Version>
+		<Version>1.0.0.4</Version>
 		<Authors>Galen Blakeman</Authors>
 		<Company></Company>
 		<PackageDescription>.Net MAUI wrapper library for MicroGauge that utilizes SkiaSharp.Views.Maui.Controls and BindableProperty bindings</PackageDescription>
