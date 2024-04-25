@@ -10,7 +10,24 @@ namespace MicroGauge.Forms
         public XfGaugeRadial()
         {
             Gauge = new GaugeRadial();
+            Gauge.DimensionsUpdated += OnDimensionsUpdated;
             PaintSurface += OnPaintCanvas;
+        }
+
+        #endregion
+
+        #region Dimensions Update
+
+        /// <summary>
+        ///     OnDimensionsUpdated - calculate shaders (in case linear gradient)
+        /// </summary>
+        private void OnDimensionsUpdated()
+        {
+            var radialGauge = (GaugeRadial)Gauge;
+            radialGauge.NeedlePivotShader = GetSkShader(Gauge, NeedlePivotBrush);
+            radialGauge.NeedlePivotOutlineShader = GetSkShader(Gauge, NeedlePivotOutlineBrush);
+            radialGauge.RangeShader = GetSkShader(Gauge, RangeBrush);
+            UpdateShaders(radialGauge);
         }
 
         #endregion

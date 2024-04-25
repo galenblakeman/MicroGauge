@@ -11,6 +11,8 @@ namespace MicroGauge
     {
         #region Properties
 
+        public Action DimensionsUpdated{ get; set; }
+
         /// <summary>
         ///     Canvas - Skia Drawing Surface
         /// </summary>
@@ -25,6 +27,22 @@ namespace MicroGauge
         ///     SurfaceHeight - Measured height of the surface
         /// </summary>
         public int SurfaceHeight { get; set; } = 400;
+
+
+        /// <summary>
+        ///     GradientOffset -  Offset for linear gradient
+        /// </summary>
+        public SKPoint GradientOffset { get; set; } = new SKPoint();
+
+        /// <summary>
+        ///     GradientWidth -  Width for linear gradient
+        /// </summary>
+        public float GradientWidth { get; set; } = 200;
+
+        /// <summary>
+        ///     GradientHeight -  Height for linear gradient
+        /// </summary>
+        public float GradientHeight { get; set; } = 200;
 
         /// <summary>
         ///     BottomExtent - bottom padding extent of surface height
@@ -260,6 +278,14 @@ namespace MicroGauge
         /// </summary>
         public virtual void DrawContent()
         {
+        }
+
+        /// <summary>
+        ///     DimensionsUpdate
+        /// </summary>
+        protected void DimensionsUpdate()
+        {
+            DimensionsUpdated?.Invoke();
         }
 
         #endregion

@@ -497,6 +497,12 @@ namespace MicroGauge
             _center.X -= SurfaceWidth * RightExtent / 2;
             _center.Y += SurfaceHeight * TopExtent / 2;
             _center.Y -= SurfaceHeight * BottomExtent / 2;
+
+            var offsetX = _center.X - _radius;
+            var offSetY = _center.Y - _radius;
+            GradientOffset = new SKPoint(offsetX, offSetY);
+            GradientWidth = GradientHeight = _radius * 2;
+            DimensionsUpdate();
         }
 
         /// <summary>

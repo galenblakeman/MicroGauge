@@ -12,24 +12,25 @@ public class WpfGaugeRadial : WpfGaugeBase
     public WpfGaugeRadial()
     {
         Gauge = new GaugeRadial();
+        Gauge.DimensionsUpdated += OnDimensionsUpdated;
         PaintSurface += OnPaintCanvas;
     }
 
     #endregion
 
 
-    #region Draw
+    #region Dimensions Update
 
     /// <summary>
-    ///     OnRenderSizeChanged - calculate shaders (in case linear gradient) and redraw
+    ///     OnDimensionsUpdated - calculate shaders (in case linear gradient)
     /// </summary>
-    protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
+    private void OnDimensionsUpdated()
     {
         var radialGauge = (GaugeRadial)Gauge;
         radialGauge.NeedlePivotShader = GetSkShader(Gauge, NeedlePivotBrush);
         radialGauge.NeedlePivotOutlineShader = GetSkShader(Gauge, NeedlePivotOutlineBrush);
         radialGauge.RangeShader = GetSkShader(Gauge, RangeBrush);
-        base.OnRenderSizeChanged(sizeInfo);
+        UpdateShaders(radialGauge);
     }
 
     #endregion

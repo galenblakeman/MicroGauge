@@ -11,21 +11,22 @@ public class WpfGaugeLinear : WpfGaugeBase
     public WpfGaugeLinear()
     {
         Gauge = new GaugeLinear();
+        Gauge.DimensionsUpdated += OnDimensionsUpdated;
         PaintSurface += OnPaintCanvas;
     }
 
     #endregion
 
-    #region Draw
+    #region Dimensions Update
 
     /// <summary>
-    ///     OnRenderSizeChanged - calculate shaders (in case linear gradient) and redraw
+    ///     OnDimensionsUpdated - calculate shaders (in case linear gradient)
     /// </summary>
-    protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
+    private void OnDimensionsUpdated()
     {
         var linearGauge = (GaugeLinear)Gauge;
         linearGauge.ValueBarShader = GetSkShader(Gauge, ValueBarBrush);
-        base.OnRenderSizeChanged(sizeInfo);
+        UpdateShaders(linearGauge);
     }
 
     #endregion

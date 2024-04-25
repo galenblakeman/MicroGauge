@@ -9,13 +9,13 @@ public static class MauiGaugeHelper
     ///     GetSkShader
     /// </summary>
     public static SKShader GetSkShader(Brush sourceBrush,
-        float surfaceWidth, float surfaceHeight)
+        SKPoint offset, float width, float height)
     {
         return sourceBrush switch
         {
             SolidColorBrush solidColorBrush => SKShader.CreateColor(solidColorBrush.Color.ToSKColor()),
             LinearGradientBrush linearGradientBrush => ConvertToSkiaLinearGradient(linearGradientBrush,
-                surfaceWidth, surfaceHeight),
+                offset, width, height),
             _ => SKShader.CreateColor(SKColors.Transparent)
         };
     }
@@ -23,16 +23,16 @@ public static class MauiGaugeHelper
     /// <summary>
     ///     ConvertToSkiaLinearGradient
     /// </summary>
-    private static SKShader ConvertToSkiaLinearGradient(LinearGradientBrush xamarinBrush,
-        float surfaceWidth, float surfaceHeight)
+    private static SKShader ConvertToSkiaLinearGradient(LinearGradientBrush platformBrush,
+        SKPoint offset, float width, float height)
     {
-        var startX = xamarinBrush.StartPoint.X * surfaceWidth;
-        var startY = xamarinBrush.StartPoint.Y * surfaceHeight;
-        var endX = xamarinBrush.EndPoint.X * surfaceWidth;
-        var endY = xamarinBrush.EndPoint.Y * surfaceHeight;
+        var startX = offset.X + platformBrush.StartPoint.X * width;
+        var startY = offset.Y + platformBrush.StartPoint.Y * height;
+        var endX = offset.X + platformBrush.EndPoint.X * width;
+        var endY = offset.Y + platformBrush.EndPoint.Y * height;
 
-        var colors = xamarinBrush.GradientStops.Select(stop => stop.Color.ToSKColor()).ToArray();
-        var positions = xamarinBrush.GradientStops.Select(stop => stop.Offset).ToArray();
+        var colors = platformBrush.GradientStops.Select(stop => stop.Color.ToSKColor()).ToArray();
+        var positions = platformBrush.GradientStops.Select(stop => stop.Offset).ToArray();
 
         return SKShader.CreateLinearGradient(
             new SKPoint(Convert.ToSingle(startX), Convert.ToSingle(startY)),

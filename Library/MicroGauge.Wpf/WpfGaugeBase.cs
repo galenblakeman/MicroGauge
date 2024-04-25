@@ -37,23 +37,6 @@ public abstract class WpfGaugeBase : SKElement
     }
 
     /// <summary>
-    ///     OnRenderSizeChanged - calculate shaders (in case linear gradient) and redraw
-    /// </summary>
-    protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
-    {
-        base.OnRenderSizeChanged(sizeInfo);
-        Gauge.BackingShader = GetSkShader(Gauge, BackingBrush);
-        Gauge.BackingOutlineShader = GetSkShader(Gauge, BackingOutlineBrush);
-        Gauge.TickShader = GetSkShader(Gauge, TickBrush);
-        Gauge.MinorTickShader = GetSkShader(Gauge, MinorTickBrush);
-        Gauge.LabelFontShader = GetSkShader(Gauge, LabelFontBrush);
-        Gauge.ValueFontShader = GetSkShader(Gauge, ValueFontBrush);
-        Gauge.NeedleShader = GetSkShader(Gauge, NeedleBrush);
-        Gauge.SetNeedleShader = GetSkShader(Gauge, SetNeedleBrush);
-        ReDraw(this);
-    }
-
-    /// <summary>
     ///     ReDraw - Invalidate surface and redraw
     /// </summary>
     private static void ReDraw(UIElement gaugeBase)
@@ -669,7 +652,22 @@ public abstract class WpfGaugeBase : SKElement
     /// </summary>
     protected static SKShader GetSkShader(GaugeBase gauge, Brush brush)
     {
-        return WpfGaugeHelper.GetSkShader(brush, gauge.SurfaceWidth, gauge.SurfaceHeight);
+        return WpfGaugeHelper.GetSkShader(brush, gauge.GradientOffset, gauge.GradientWidth, gauge.GradientHeight);
+    }
+
+    /// <summary>
+    ///     UpdateShaders - update base shaders to adjust linear gradients
+    /// </summary>
+    protected void UpdateShaders(GaugeBase gauge)
+    {
+        gauge.BackingShader = GetSkShader(gauge, BackingBrush);
+        gauge.BackingOutlineShader = GetSkShader(gauge, BackingOutlineBrush);
+        gauge.TickShader = GetSkShader(gauge, TickBrush);
+        gauge.MinorTickShader = GetSkShader(gauge, MinorTickBrush);
+        gauge.LabelFontShader = GetSkShader(gauge, LabelFontBrush);
+        gauge.ValueFontShader = GetSkShader(gauge, ValueFontBrush);
+        gauge.NeedleShader = GetSkShader(gauge, NeedleBrush);
+        gauge.SetNeedleShader = GetSkShader(gauge, SetNeedleBrush);
     }
 
     /// <summary>

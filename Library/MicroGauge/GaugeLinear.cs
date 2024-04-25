@@ -332,6 +332,11 @@ namespace MicroGauge
                 _barLength = _horizontal - _horizontal * LeftExtent - _horizontal * RightExtent;
                 _barStart = new SKPoint(_start.X + _horizontal * LeftExtent, _start.Y);
             }
+
+            GradientOffset = _barStart;
+            GradientWidth = _barWidth;
+            GradientHeight = _barLength;
+            DimensionsUpdate();
         }
 
         /// <summary>

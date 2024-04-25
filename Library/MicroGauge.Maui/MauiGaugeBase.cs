@@ -652,7 +652,22 @@ public abstract class MauiGaugeBase : SKCanvasView
     /// </summary>
     protected static SKShader GetSkShader(GaugeBase gauge, Brush brush)
     {
-        return MauiGaugeHelper.GetSkShader(brush, gauge.SurfaceWidth, gauge.SurfaceHeight);
+        return MauiGaugeHelper.GetSkShader(brush, gauge.GradientOffset, gauge.GradientWidth, gauge.GradientHeight);
+    }
+
+    /// <summary>
+    ///     UpdateShaders - update base shaders to adjust linear gradients
+    /// </summary>
+    protected void UpdateShaders(GaugeBase gauge)
+    {
+        gauge.BackingShader = GetSkShader(gauge, BackingBrush);
+        gauge.BackingOutlineShader = GetSkShader(gauge, BackingOutlineBrush);
+        gauge.TickShader = GetSkShader(gauge, TickBrush);
+        gauge.MinorTickShader = GetSkShader(gauge, MinorTickBrush);
+        gauge.LabelFontShader = GetSkShader(gauge, LabelFontBrush);
+        gauge.ValueFontShader = GetSkShader(gauge, ValueFontBrush);
+        gauge.NeedleShader = GetSkShader(gauge, NeedleBrush);
+        gauge.SetNeedleShader = GetSkShader(gauge, SetNeedleBrush);
     }
 
     /// <summary>

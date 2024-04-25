@@ -9,11 +9,25 @@ namespace MicroGauge.Forms
         public XfGaugeLinear()
         {
             Gauge = new GaugeLinear();
+            Gauge.DimensionsUpdated += OnDimensionsUpdated;
             PaintSurface += OnPaintCanvas;
         }
 
         #endregion
 
+        #region Dimensions Update
+
+        /// <summary>
+        ///     OnDimensionsUpdated - calculate shaders (in case linear gradient)
+        /// </summary>
+        private void OnDimensionsUpdated()
+        {
+            var linearGauge = (GaugeLinear)Gauge;
+            linearGauge.ValueBarShader = GetSkShader(Gauge, ValueBarBrush);
+            UpdateShaders(linearGauge);
+        }
+
+        #endregion
 
         #region Gauge Specific Properties
 

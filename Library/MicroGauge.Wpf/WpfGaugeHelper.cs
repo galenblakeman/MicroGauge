@@ -11,13 +11,13 @@ public static class WpfGaugeHelper
     ///     GetSkShader
     /// </summary>
     public static SKShader GetSkShader(Brush sourceBrush,
-        float surfaceWidth, float surfaceHeight)
+        SKPoint offset, float width, float height)
     {
         return sourceBrush switch
         {
             SolidColorBrush solidColorBrush => SKShader.CreateColor(GetSkColor(solidColorBrush)),
             LinearGradientBrush linearGradientBrush => ConvertToSkiaLinearGradient(linearGradientBrush,
-                surfaceWidth, surfaceHeight),
+                offset, width, height),
             _ => SKShader.CreateColor(SKColors.Transparent)
         };
     }
@@ -25,16 +25,16 @@ public static class WpfGaugeHelper
     /// <summary>
     ///     ConvertToSkiaLinearGradient
     /// </summary>
-    private static SKShader ConvertToSkiaLinearGradient(LinearGradientBrush linearBrush,
-        float surfaceWidth, float surfaceHeight)
+    private static SKShader ConvertToSkiaLinearGradient(LinearGradientBrush platformBrush,
+        SKPoint offset, float width, float height)
     {
-        var startX = linearBrush.StartPoint.X * surfaceWidth;
-        var startY = linearBrush.StartPoint.Y * surfaceHeight;
-        var endX = linearBrush.EndPoint.X * surfaceWidth;
-        var endY = linearBrush.EndPoint.Y * surfaceHeight;
+        var startX = offset.X + platformBrush.StartPoint.X * width;
+        var startY = offset.Y + platformBrush.StartPoint.Y * height;
+        var endX = offset.X + platformBrush.EndPoint.X * width;
+        var endY = offset.Y + platformBrush.EndPoint.Y * height;
 
-        var colors = linearBrush.GradientStops.Select(stop => stop.Color.ToSKColor()).ToArray();
-        var offsets = linearBrush.GradientStops.Select(stop => stop.Offset).ToArray();
+        var colors = platformBrush.GradientStops.Select(stop => stop.Color.ToSKColor()).ToArray();
+        var offsets = platformBrush.GradientStops.Select(stop => stop.Offset).ToArray();
         var positions = Array.ConvertAll(offsets, item => (float)item);
 
         return SKShader.CreateLinearGradient(
