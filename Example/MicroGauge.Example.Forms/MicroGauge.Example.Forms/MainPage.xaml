@@ -61,10 +61,10 @@
                Text="MicroGauge Xamarin.Forms Examples" TextColor="White" FontSize="16" Margin="10,50,10,0" />
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="175" />
-                <RowDefinition Height="175" />
-                <RowDefinition Height="110" />
-                <RowDefinition Height="175" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -86,6 +86,8 @@
             <microGauge:XfGaugeRadial
                 Grid.Row="0"
                 Grid.Column="0"
+                HorizontalOptions="Center" VerticalOptions="Center"
+                HeightRequest="175" WidthRequest="175"
                 BackingBrush="{StaticResource RadialGaugeBacking}"
                 BackingOutlineBrush="{StaticResource RadialGaugeBorder}"
                 BackingStrokeWidth="10"
@@ -143,6 +145,8 @@
             <microGauge:XfGaugeRadial
                 Grid.Row="0"
                 Grid.Column="1"
+                HorizontalOptions="Center" VerticalOptions="Center"
+                HeightRequest="175" WidthRequest="175"
                 BackingBrush="{StaticResource RadialGaugeBacking}"
                 BackingOutlineBrush="#1E272E"
                 BackingStrokeWidth="7"
@@ -196,6 +200,8 @@
             <microGauge:XfGaugeRadial
                 Grid.Row="1"
                 Grid.Column="0"
+                HorizontalOptions="Center" VerticalOptions="Center"
+                HeightRequest="175" WidthRequest="175"
                 BackingBrush="#FFFFFF"
                 BackingOutlineBrush="{StaticResource RadialGaugeBorder}"
                 BackingStrokeWidth="10"
@@ -256,6 +262,8 @@
             <microGauge:XfGaugeRadial
                 Grid.Row="1"
                 Grid.Column="1"
+                HorizontalOptions="Center" VerticalOptions="Center"
+                HeightRequest="175" WidthRequest="175"
                 RadialStyle="Notch"
                 BackingBrush="{StaticResource RadialGaugeBacking}"
                 BackingOutlineBrush="{StaticResource RadialGaugeBorder}"
@@ -304,6 +312,8 @@
             <microGauge:XfGaugeRadial
                 Grid.Row="2"
                 Grid.Column="0"
+                HorizontalOptions="Center" VerticalOptions="Start"
+                HeightRequest="150" WidthRequest="300"
                 RadialStyle="Half"
                 BackingBrush="{StaticResource RadialGaugeBacking}"
                 BackingOutlineBrush="{StaticResource RadialGaugeBorder}"
@@ -315,12 +325,12 @@
                 TickInterval="10"
                 MinorTickInterval="5"
                 LabelInterval="10"
-                LabelExtent=".85"
-                LabelFormatString="{}{0:N0}°"
+                LabelExtent=".80"
+                LabelFormatString="{}{0:N0}°C"
                 LabelFontSize="16"
                 LabelFontBrush="#FFFFFF"
                 ValueExtent="-.10"
-                ValueFormatString="{}{0:N0}°"
+                ValueFormatString="{}{0:N0}°C"
                 ValueFontFamily="Arial"
                 ValueFontSize="28"
                 ValueFontBrush="#000000"
@@ -363,6 +373,8 @@
             <microGauge:XfGaugeLinear
                 Grid.Row="2"
                 Grid.Column="1"
+                HorizontalOptions="Center" VerticalOptions="Center"
+                HeightRequest="150" WidthRequest="500"
                 BottomExtent="0.0"
                 TopExtent="0.0"
                 LeftExtent="0.06"
@@ -421,6 +433,8 @@
             <microGauge:XfGaugeLinear
                 Grid.Row="3"
                 Grid.Column="0"
+                HorizontalOptions="Center" VerticalOptions="Center"
+                WidthRequest="200" HeightRequest="175"
                 BottomExtent="0.15"
                 TopExtent="0.06"
                 LeftExtent="0.0"
@@ -474,6 +488,8 @@
             <microGauge:XfGaugeRadial
                 Grid.Row="3"
                 Grid.Column="1"
+                HorizontalOptions="Center" VerticalOptions="Center"
+                HeightRequest="175" WidthRequest="175"
                 BottomExtent="0.1"
                 TopExtent="0.0"
                 LeftExtent="0.0"
