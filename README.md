@@ -1,12 +1,12 @@
 # MicroGauge
-**MicroGauge** is a minimalist radial and linear gauge library for .Net
+**MicroGauge** is a .Net library for easily creating customizable radial and linear gauges. Inspired by [MicroCharts](https://github.com/microcharts-dotnet/Microcharts), it minimalist library designed just for gauges. It uses the [SkiaSharp](https://github.com/mono/SkiaSharp) graphics library to deliver sharp and efficient visuals.
 
-* Utilizes the [SkiaSharp](https://github.com/mono/SkiaSharp) Library to draw radial and linear gauges
-* Inspired by [MicroCharts](https://github.com/microcharts-dotnet/Microcharts), it provides a simple way to draw gauges on a canvas.
-* The radial gauge offers full-circle, half-circle, and fitted design styles.
-* The linear gauge offers vertical and horizontal design styles.
-* Xamarin, Maui, and WPF tag libraries with bindings provided
-* If you need something more complex I would recommend [LiveCharts2](https://github.com/beto-rodriguez/LiveCharts2) Angular Pie Chart
+## Key Features
+* Radial Gauges: Choose from full-circle, half-circle, and fitted styles to meet design aesthetics. 
+* Linear Gauges: Implement vertical or horizontal orientations to meet interface needs. 
+* Customization: Configure backing, scale, tick (minor/major), label, value, needle, and range via attributes. 
+* Cross-Platform Compatibility: Works with all the platforms that [SkiaSharp](https://github.com/mono/SkiaSharp) supports. 
+* Framework Libraries: Xamarin, Maui, and WPF view libraries are provided with tags and bindings for customization.
 
 ---
 ## Gallery
