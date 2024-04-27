@@ -3,10 +3,16 @@ using Xamarin.Forms;
 
 namespace MicroGauge.Forms
 {
+    /// <summary>
+    ///     XfGaugeRadial - Radial Gauge with tags and bindings for Xamarin Forms
+    /// </summary>
     public class XfGaugeRadial : XfGaugeBase
     {
         #region Constructor
 
+        /// <summary>
+        ///     Constructor
+        /// </summary>
         public XfGaugeRadial()
         {
             Gauge = new GaugeRadial();

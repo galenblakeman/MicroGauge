@@ -5,6 +5,9 @@ using Xamarin.Forms;
 
 namespace MicroGauge.Forms
 {
+    /// <summary>
+    ///     XfGaugeHelper - static helper methods for Xamarin
+    /// </summary>
     public static class XfGaugeHelper
     {
         /// <summary>

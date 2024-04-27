@@ -1,8 +1,12 @@
 ﻿using SkiaSharp;
+
 // ReSharper disable all
 
 namespace MicroGauge
 {
+    /// <summary>
+    ///     GaugeBrushes - Standard brushes
+    /// </summary>
     public struct GaugeBrushes
     {
         public static GaugeBrush Empty => new GaugeBrush(new SKColor(0x00000000));

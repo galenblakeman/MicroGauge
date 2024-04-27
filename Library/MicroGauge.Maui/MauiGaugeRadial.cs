@@ -2,10 +2,16 @@
 
 namespace MicroGauge.Maui;
 
+/// <summary>
+///     MauiGaugeRadial - Radial Gauge with tags and bindings for Maui
+/// </summary>
 public class MauiGaugeRadial : MauiGaugeBase
 {
     #region Constructor
 
+    /// <summary>
+    ///     Constructor
+    /// </summary>
     public MauiGaugeRadial()
     {
         Gauge = new GaugeRadial();

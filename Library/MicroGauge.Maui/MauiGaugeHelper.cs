@@ -3,6 +3,9 @@ using SkiaSharp.Views.Maui;
 
 namespace MicroGauge.Maui;
 
+/// <summary>
+///     MauiGaugeHelper - static helper methods for Maui
+/// </summary>
 public static class MauiGaugeHelper
 {
     /// <summary>

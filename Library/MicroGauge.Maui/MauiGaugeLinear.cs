@@ -1,9 +1,15 @@
 ﻿namespace MicroGauge.Maui;
 
+/// <summary>
+///     MauiGaugeLinear - Linear Gauge with tags and bindings for Maui
+/// </summary>
 public class MauiGaugeLinear : MauiGaugeBase
 {
     #region Constructor
 
+    /// <summary>
+    ///     Constructor
+    /// </summary>
     public MauiGaugeLinear()
     {
         Gauge = new GaugeLinear();

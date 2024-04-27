@@ -9,10 +9,19 @@ using SkiaSharp.Views.Blazor;
 
 namespace MicroGauge.Blazor;
 
+/// <summary>
+///     BlazorGaugeBase - abstract class with shared common properties and methods
+/// </summary>
 public abstract class BlazorGaugeBase : SKGLView
 {
+    /// <summary>
+    ///     Gauge - Wrapped MicroGauge
+    /// </summary>
     public GaugeBase Gauge { get; protected init; } = null!;
 
+    /// <summary>
+    ///     Constructor
+    /// </summary>
     protected BlazorGaugeBase()
     {
         OnPaintSurface += DrawContent;

@@ -6,6 +6,9 @@ using SkiaSharp;
 
 namespace MicroGauge
 {
+    /// <summary>
+    ///     GaugeLinear - Linear Gauge with vertical or horizontal orientation
+    /// </summary>
     public class GaugeLinear : GaugeBase
     {
         #region Properties
@@ -119,6 +122,9 @@ namespace MicroGauge
             }
         }
 
+        /// <summary>
+        ///     DrawValueBar - Draw bar used to represent progress to value
+        /// </summary>
         private void DrawValueBar()
         {
             using (var paint = new SKPaint())
@@ -129,6 +135,9 @@ namespace MicroGauge
             }
         }
 
+        /// <summary>
+        ///     DrawBar - Draw bar representing gauge area
+        /// </summary>
         private void DrawBar(SKPaint paint, SKPoint start, float width, float length)
         {
             using (var path = new SKPath())

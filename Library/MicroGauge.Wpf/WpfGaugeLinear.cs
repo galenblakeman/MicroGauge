@@ -4,10 +4,16 @@ using Brush = System.Windows.Media.Brush;
 
 namespace MicroGauge.Wpf;
 
+/// <summary>
+///     WpfGaugeLinear - Linear Gauge with tags and bindings for WPF
+/// </summary>
 public class WpfGaugeLinear : WpfGaugeBase
 {
     #region Constructor
 
+    /// <summary>
+    ///     Constructor
+    /// </summary>
     public WpfGaugeLinear()
     {
         Gauge = new GaugeLinear();

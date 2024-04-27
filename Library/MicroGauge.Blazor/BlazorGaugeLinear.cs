@@ -2,10 +2,16 @@
 
 namespace MicroGauge.Blazor;
 
+/// <summary>
+///     BlazorGaugeLinear - Linear Gauge with tags and bindings for Blazor
+/// </summary>
 public class BlazorGaugeLinear : BlazorGaugeBase
 {
     #region Constructor
 
+    /// <summary>
+    ///     Constructor
+    /// </summary>
     public BlazorGaugeLinear()
     {
         Gauge = new GaugeLinear();

@@ -7,6 +7,9 @@ using SkiaSharp;
 
 namespace MicroGauge
 {
+    /// <summary>
+    ///     GaugeBase - abstract class with shared common properties and methods
+    /// </summary>
     public abstract class GaugeBase
     {
         #region Properties

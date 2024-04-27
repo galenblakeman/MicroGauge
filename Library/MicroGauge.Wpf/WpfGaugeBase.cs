@@ -9,10 +9,19 @@ using Brush = System.Windows.Media.Brush;
 
 namespace MicroGauge.Wpf;
 
+/// <summary>
+///     WpfGaugeBase - abstract class with shared common properties and methods
+/// </summary>
 public abstract class WpfGaugeBase : SKElement
 {
+    /// <summary>
+    ///     GaugePropertyChanged - delegate used to propagate changes
+    /// </summary>
     protected delegate void GaugePropertyChanged(WpfGaugeBase gaugeBase, object newValue);
 
+    /// <summary>
+    ///     Gauge - Wrapped MicroGauge
+    /// </summary>
     public GaugeBase Gauge { get; protected init; } = null!;
 
     #region Draw

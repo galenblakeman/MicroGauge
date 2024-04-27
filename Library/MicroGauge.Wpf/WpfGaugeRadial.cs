@@ -5,10 +5,16 @@ using Brush = System.Windows.Media.Brush;
 
 namespace MicroGauge.Wpf;
 
+/// <summary>
+///     WpfGaugeRadial - Radial Gauge with tags and bindings for WPF
+/// </summary>
 public class WpfGaugeRadial : WpfGaugeBase
 {
     #region Constructor
 
+    /// <summary>
+    ///     Constructor
+    /// </summary>
     public WpfGaugeRadial()
     {
         Gauge = new GaugeRadial();

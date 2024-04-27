@@ -2,10 +2,26 @@
 
 namespace MicroGauge
 {
+    /// <summary>
+    ///     GaugeBrushStop - Color stop for gradient brushes
+    /// </summary>
     public class GaugeBrushStop
     {
+        #region Properties
+
+        /// <summary>
+        ///     Color - Stop Color
+        /// </summary>
         public SKColor Color { get; set; }
+
+        /// <summary>
+        ///     Offset - Stop offset
+        /// </summary>
         public float Offset { get; set; }
+
+        #endregion
+
+        #region Constructor
 
         /// <summary>
         ///     Constructor - Empty
@@ -22,5 +38,7 @@ namespace MicroGauge
             Color = color;
             Offset = offset;
         }
+
+        #endregion
     }
 }

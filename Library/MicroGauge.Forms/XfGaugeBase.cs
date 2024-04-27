@@ -7,10 +7,19 @@ using Xamarin.Forms;
 
 namespace MicroGauge.Forms
 {
+    /// <summary>
+    ///     XfGaugeBase - abstract class with shared common properties and methods
+    /// </summary>
     public abstract class XfGaugeBase : SKCanvasView
     {
+        /// <summary>
+        ///     GaugePropertyChanged - delegate used to propagate changes
+        /// </summary>
         protected delegate void GaugePropertyChanged(XfGaugeBase gaugeBase, object newValue);
 
+        /// <summary>
+        ///     Gauge - Wrapped MicroGauge
+        /// </summary>
         public GaugeBase Gauge { get; protected set; }
 
         #region Draw

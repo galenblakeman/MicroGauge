@@ -6,6 +6,9 @@ using SkiaSharp;
 
 namespace MicroGauge
 {
+    /// <summary>
+    ///     GaugeRadial - Radial Gauge Drawing with full-circle, half-circle, and fitted styles
+    /// </summary>
     public class GaugeRadial : GaugeBase
     {
         #region Properties
@@ -167,6 +170,9 @@ namespace MicroGauge
             }
         }
 
+        /// <summary>
+        ///     DrawGaugeFitted - Draw fitted gauge area
+        /// </summary>
         private void DrawGaugeFitted(SKPaint paint, float radius, float anglePadding)
         {
             using (var path = new SKPath())
@@ -209,6 +215,9 @@ namespace MicroGauge
             }
         }
 
+        /// <summary>
+        ///     DrawFittedNotch - Notch portion of fitted gauge
+        /// </summary>
         private void DrawFittedNotch(float radius, float anglePadding, double angle, SKPath path, double startAngle)
         {
             var point = GaugeHelper.GetRadialPoint(_center, Convert.ToSingle(radius), angle - anglePadding);
@@ -219,6 +228,9 @@ namespace MicroGauge
             path.LineTo(point);
         }
 
+        /// <summary>
+        ///     DrawFittedNotchLine - Notch line portion of fitted gauge
+        /// </summary>
         private void DrawFittedNotchLine(float radius, float anglePadding, double angle, double startAngle)
         {
             using (var paint = new SKPaint())

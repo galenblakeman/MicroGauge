@@ -5,11 +5,31 @@ using SkiaSharp;
 
 namespace MicroGauge
 {
+    /// <summary>
+    ///     GaugeBrush - Cross-platform brush that supports solid and linear brushes
+    /// </summary>
     public class GaugeBrush
     {
+        #region Properties
+
+        /// <summary>
+        ///     StartPoint - Start point used for linear gradient
+        /// </summary>
         public SKPoint StartPoint { get; set; } = new SKPoint(0, 0);
+
+        /// <summary>
+        ///     EndPoint - End point used for linear gradient
+        /// </summary>
         public SKPoint EndPoint { get; set; } = new SKPoint(1, 0);
+
+        /// <summary>
+        ///     GradientStops - Used for gradient brushes to define color stops
+        /// </summary>
         public List<GaugeBrushStop> GradientStops { get; set; } = new List<GaugeBrushStop>();
+
+        #endregion
+
+        #region Constructor
 
         /// <summary>
         ///     Constructor - Empty
@@ -55,5 +75,7 @@ namespace MicroGauge
             GradientStops.Add(gradientStop);
             return this;
         }
+
+        #endregion
     }
 }

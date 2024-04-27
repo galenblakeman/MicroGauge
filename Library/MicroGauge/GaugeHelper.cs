@@ -4,6 +4,9 @@ using SkiaSharp;
 
 namespace MicroGauge
 {
+    /// <summary>
+    ///     GaugeHelper - Common static helper methods
+    /// </summary>
     public static class GaugeHelper
     {
         /// <summary>
@@ -39,16 +42,16 @@ namespace MicroGauge
         /// <summary>
         ///     ConvertToSkiaLinearGradient
         /// </summary>
-        public static SKShader ConvertToSkShader(GaugeBrush platformBrush,
+        public static SKShader ConvertToSkShader(GaugeBrush gaugeBrush,
             SKPoint offset, float width, float height)
         {
-            var startX = offset.X + platformBrush.StartPoint.X * width;
-            var startY = offset.Y + platformBrush.StartPoint.Y * height;
-            var endX = offset.X + platformBrush.EndPoint.X * width;
-            var endY = offset.Y + platformBrush.EndPoint.Y * height;
+            var startX = offset.X + gaugeBrush.StartPoint.X * width;
+            var startY = offset.Y + gaugeBrush.StartPoint.Y * height;
+            var endX = offset.X + gaugeBrush.EndPoint.X * width;
+            var endY = offset.Y + gaugeBrush.EndPoint.Y * height;
 
-            var colors = platformBrush.GradientStops.Select(stop => stop.Color).ToArray();
-            var positions = platformBrush.GradientStops.Select(stop => stop.Offset).ToArray();
+            var colors = gaugeBrush.GradientStops.Select(stop => stop.Color).ToArray();
+            var positions = gaugeBrush.GradientStops.Select(stop => stop.Offset).ToArray();
 
             return SKShader.CreateLinearGradient(
                 new SKPoint(Convert.ToSingle(startX), Convert.ToSingle(startY)),

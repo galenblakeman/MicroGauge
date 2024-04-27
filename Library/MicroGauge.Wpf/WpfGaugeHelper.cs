@@ -5,6 +5,9 @@ using Brush = System.Windows.Media.Brush;
 
 namespace MicroGauge.Wpf;
 
+/// <summary>
+///     WpfGaugeHelper - static helper methods for WPF
+/// </summary>
 public static class WpfGaugeHelper
 {
     /// <summary>

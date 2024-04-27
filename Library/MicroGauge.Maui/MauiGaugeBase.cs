@@ -9,10 +9,19 @@ using SkiaSharp.Views.Maui.Controls;
 
 namespace MicroGauge.Maui;
 
+/// <summary>
+///     MauiGaugeBase - abstract class with shared common properties and methods
+/// </summary>
 public abstract class MauiGaugeBase : SKCanvasView
 {
+    /// <summary>
+    ///     GaugePropertyChanged - delegate used to propagate changes
+    /// </summary>
     protected delegate void GaugePropertyChanged(MauiGaugeBase gaugeBase, object newValue);
 
+    /// <summary>
+    ///     Gauge - Wrapped MicroGauge
+    /// </summary>
     public GaugeBase Gauge { get; protected init; } = null!;
 
     #region Draw

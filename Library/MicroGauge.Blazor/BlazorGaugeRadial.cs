@@ -3,10 +3,16 @@ using Microsoft.AspNetCore.Components;
 
 namespace MicroGauge.Blazor;
 
+/// <summary>
+///     BlazorGaugeRadial - Radial Gauge with tags and bindings for Blazor
+/// </summary>
 public class BlazorGaugeRadial : BlazorGaugeBase
 {
     #region Constructor
 
+    /// <summary>
+    ///     Constructor
+    /// </summary>
     public BlazorGaugeRadial()
     {
         Gauge = new GaugeRadial();
