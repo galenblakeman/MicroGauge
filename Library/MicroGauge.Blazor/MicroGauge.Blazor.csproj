@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <PackageId>MicroGauge.Blazor</PackageId>
+        <Version>1.0.0.4</Version>
+        <Authors>Galen Blakeman</Authors>
+        <Company></Company>
+        <PackageDescription>MicroGauge.Blazor is a MicroGauge view library with tags and bindings for customization</PackageDescription>
+        <PackageProjectUrl>https://github.com/galenblakeman/MicroGauge</PackageProjectUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageTags>skia;skiasharp;c-sharp;dotnet;gauge;blazor</PackageTags>
+        <Copyright>Galen Blakeman</Copyright>
+
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="SkiaSharp.Views.Blazor" Version="2.88.8" />
+      <PackageReference Include="System.Drawing.Common" Version="8.0.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\MicroGauge\MicroGauge.csproj" />
+    </ItemGroup>
+
+</Project>

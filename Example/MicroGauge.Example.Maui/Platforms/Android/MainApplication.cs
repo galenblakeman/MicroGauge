@@ -1,5 +1,6 @@
 ﻿using Android.App;
 using Android.Runtime;
+// ReSharper disable all
 
 namespace MicroGauge.Example.Maui
 {

@@ -347,6 +347,7 @@
                 NeedleBrush="#AAFF00"
                 NeedlePivotBrush="#AAFF00"
                 NeedlePivotOutlineBrush="#AAFF00"
+                NeedlePivotOutlineWidth="0"
                 NeedlePivotEndExtent="0.25"
                 NeedleStartExtent="0"
                 NeedleEndExtent="0.71"
