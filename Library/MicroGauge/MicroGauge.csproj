@@ -6,7 +6,7 @@
 	  <Version>1.0.0.4</Version>
 	  <Authors>Galen Blakeman</Authors>
 	  <Company></Company>
-	  <PackageDescription>MicroGauge is a basic radial and linear gauge library</PackageDescription>
+	  <PackageDescription>MicroGauge is a .Net library for easily creating customizable radial and linear gauges</PackageDescription>
 	  <PackageProjectUrl>https://github.com/galenblakeman/MicroGauge</PackageProjectUrl>
 	  <PackageReadmeFile>README.md</PackageReadmeFile>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -19,7 +19,7 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<None Include="README.md" Pack="true" PackagePath="\"/>
+		<None Include="README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 </Project>

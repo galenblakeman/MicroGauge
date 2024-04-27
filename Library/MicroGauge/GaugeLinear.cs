@@ -31,9 +31,9 @@ namespace MicroGauge
         public float MinorTickWidthExtent { get; set; } = 0.5f;
 
         /// <summary>
-        ///     ValueBarShader - shader for value bar
+        ///     ValueBarBrush - shader for value bar
         /// </summary>
-        public SKShader ValueBarShader { get; set; } = SKShader.CreateColor(SKColors.Black);
+        public GaugeBrush ValueBarBrush { get; set; } = new GaugeBrush(SKColors.Black);
 
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace MicroGauge
             var majorTicks = GaugeHelper.GetTicks(MinValue, MaxValue, TickInterval);
             DrawTicks(majorTicks, true);
             DrawNeedle();
-            if (SetNeedleShader != null)
+            if (SetNeedleBrush != null)
                 DrawSetNeedle();
             DrawLabelNumbers();
             DrawValueLabel();
@@ -100,7 +100,7 @@ namespace MicroGauge
             {
                 paint.Style = SKPaintStyle.Stroke;
                 paint.StrokeWidth = BackingStrokeWidth;
-                paint.Shader = BackingOutlineShader;
+                paint.Shader = GetSkShader(BackingOutlineBrush);
                 paint.IsAntialias = true;
                 var width = IsVertical ? Convert.ToSingle(SurfaceWidth) : Convert.ToSingle(SurfaceHeight);
                 var length = IsVertical ? Convert.ToSingle(SurfaceHeight) : Convert.ToSingle(SurfaceWidth);
@@ -113,7 +113,7 @@ namespace MicroGauge
                 width -= BackingStrokeWidth;
                 length -= BackingStrokeWidth;
                 paint.Style = SKPaintStyle.Fill;
-                paint.Shader = BackingShader;
+                paint.Shader = GetSkShader(BackingBrush);
                 DrawBar(paint, start, width, length);
                 //DebugCircleAtPoint(start, SKColors.White);
             }
@@ -124,7 +124,7 @@ namespace MicroGauge
             using (var paint = new SKPaint())
             {
                 paint.Style = SKPaintStyle.Fill;
-                paint.Shader = ValueBarShader;
+                paint.Shader = GetSkShader(ValueBarBrush);
                 DrawBar(paint, _barStart, _barWidth * ValueWidthExtent, Convert.ToSingle(GetValuePosition(Value)));
             }
         }
@@ -162,7 +162,7 @@ namespace MicroGauge
                 paint.Style = SKPaintStyle.Stroke;
                 paint.StrokeWidth = isMajor ? TickStrokeWidth : MinorTickStrokeWidth;
                 paint.StrokeCap = SKStrokeCap.Round;
-                paint.Shader = isMajor ? TickShader : MinorTickShader;
+                paint.Shader = isMajor ? GetSkShader(TickBrush) : GetSkShader(MinorTickBrush);
                 paint.IsAntialias = true;
                 double tickSpacing = _barLength / (numberTicks - 1);
                 for (var i = 0; i < numberTicks; i++) DrawTick(paint, tickSpacing, i, isMajor);
@@ -197,7 +197,7 @@ namespace MicroGauge
             {
                 paint.Style = SKPaintStyle.Fill;
                 paint.IsAntialias = true;
-                paint.Shader = NeedleShader;
+                paint.Shader = GetSkShader(NeedleBrush);
                 DrawNeedlePoly(paint, start, end, NeedleStartWidth, NeedleEndWidth, angle);
             }
         }
@@ -217,7 +217,7 @@ namespace MicroGauge
             {
                 paint.Style = SKPaintStyle.Fill;
                 paint.IsAntialias = true;
-                paint.Shader = SetNeedleShader;
+                paint.Shader = GetSkShader(SetNeedleBrush);
                 DrawNeedlePoly(paint, start, end, SetNeedleStartWidth, SetNeedleEndWidth, angle);
             }
         }
@@ -336,7 +336,6 @@ namespace MicroGauge
             GradientOffset = _barStart;
             GradientWidth = _barWidth;
             GradientHeight = _barLength;
-            DimensionsUpdate();
         }
 
         /// <summary>

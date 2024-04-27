@@ -10,27 +10,11 @@ namespace MicroGauge.Forms
         public XfGaugeRadial()
         {
             Gauge = new GaugeRadial();
-            Gauge.DimensionsUpdated += OnDimensionsUpdated;
             PaintSurface += OnPaintCanvas;
         }
 
         #endregion
-
-        #region Dimensions Update
-
-        /// <summary>
-        ///     OnDimensionsUpdated - calculate shaders (in case linear gradient)
-        /// </summary>
-        private void OnDimensionsUpdated()
-        {
-            var radialGauge = (GaugeRadial)Gauge;
-            radialGauge.NeedlePivotShader = GetSkShader(Gauge, NeedlePivotBrush);
-            radialGauge.NeedlePivotOutlineShader = GetSkShader(Gauge, NeedlePivotOutlineBrush);
-            radialGauge.RangeShader = GetSkShader(Gauge, RangeBrush);
-            UpdateShaders(radialGauge);
-        }
-
-        #endregion
+   
 
         #region Gauge Specific Properties
 
@@ -151,7 +135,7 @@ namespace MicroGauge.Forms
             typeof(Brush), new SolidColorBrush(Color.LightGray),
             (gaugeBase, newValue) =>
             {
-                GetRadial(gaugeBase).NeedlePivotShader = GetSkShader(GetRadial(gaugeBase), (Brush)newValue);
+                GetRadial(gaugeBase).NeedlePivotBrush = XfGaugeHelper.GetGaugeBrush( (Brush)newValue);
             });
 
         /// <summary>
@@ -168,7 +152,7 @@ namespace MicroGauge.Forms
             typeof(Brush), new SolidColorBrush(Color.Black),
             (gaugeBase, newValue) =>
             {
-                GetRadial(gaugeBase).NeedlePivotOutlineShader = GetSkShader(GetRadial(gaugeBase), (Brush)newValue);
+                GetRadial(gaugeBase).NeedlePivotOutlineBrush = XfGaugeHelper.GetGaugeBrush( (Brush)newValue);
             });
 
 
@@ -199,7 +183,7 @@ namespace MicroGauge.Forms
             typeof(Brush), new SolidColorBrush(Color.Transparent),
             (gaugeBase, newValue) =>
             {
-                GetRadial(gaugeBase).RangeShader = GetSkShader(GetRadial(gaugeBase), (Brush)newValue);
+                GetRadial(gaugeBase).RangeBrush = XfGaugeHelper.GetGaugeBrush((Brush)newValue);
             });
 
         /// <summary>

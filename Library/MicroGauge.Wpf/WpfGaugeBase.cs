@@ -115,7 +115,7 @@ public abstract class WpfGaugeBase : SKElement
         (gaugeBase, newValue) => { gaugeBase.Gauge.Value = (double)newValue; });
 
     /// <summary>
-    ///     BackingShader
+    ///     BackingBrush
     /// </summary>
     public Brush BackingBrush
     {
@@ -125,7 +125,7 @@ public abstract class WpfGaugeBase : SKElement
 
     public static readonly DependencyProperty BackingBrushProperty = Create(nameof(BackingBrush),
         typeof(Brush), new SolidColorBrush(Colors.White),
-        (gaugeBase, newValue) => { gaugeBase.Gauge.BackingShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue); });
+        (gaugeBase, newValue) => { gaugeBase.Gauge.BackingBrush = WpfGaugeHelper.GetGaugeBrush( (Brush)newValue); });
 
     /// <summary>
     ///     BackingOutlineBrush
@@ -140,7 +140,7 @@ public abstract class WpfGaugeBase : SKElement
         typeof(Brush), new SolidColorBrush(Colors.Black),
         (gaugeBase, newValue) =>
         {
-            gaugeBase.Gauge.BackingOutlineShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
+            gaugeBase.Gauge.BackingOutlineBrush = WpfGaugeHelper.GetGaugeBrush( (Brush)newValue);
         });
 
     /// <summary>
@@ -157,7 +157,7 @@ public abstract class WpfGaugeBase : SKElement
         (gaugeBase, newValue) => { gaugeBase.Gauge.BackingStrokeWidth = (float)newValue; });
 
     /// <summary>
-    ///     TickShader
+    ///     TickBrush
     /// </summary>
     public Brush TickBrush
     {
@@ -167,7 +167,7 @@ public abstract class WpfGaugeBase : SKElement
 
     public static readonly DependencyProperty TickBrushProperty = Create(nameof(TickBrush),
         typeof(Brush), new SolidColorBrush(Colors.Black),
-        (gaugeBase, newValue) => { gaugeBase.Gauge.TickShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue); });
+        (gaugeBase, newValue) => { gaugeBase.Gauge.TickBrush = WpfGaugeHelper.GetGaugeBrush( (Brush)newValue); });
 
     /// <summary>
     ///     TickStrokeWidth
@@ -193,7 +193,7 @@ public abstract class WpfGaugeBase : SKElement
 
     public static readonly DependencyProperty MinorTickBrushProperty = Create(nameof(MinorTickBrush),
         typeof(Brush), new SolidColorBrush(Colors.LightGray),
-        (gaugeBase, newValue) => { gaugeBase.Gauge.MinorTickShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue); });
+        (gaugeBase, newValue) => { gaugeBase.Gauge.MinorTickBrush = WpfGaugeHelper.GetGaugeBrush( (Brush)newValue); });
 
     /// <summary>
     ///     MinorTickStrokeWidth
@@ -336,7 +336,7 @@ public abstract class WpfGaugeBase : SKElement
 
     public static readonly DependencyProperty LabelFontBrushProperty = Create(nameof(LabelFontBrush),
         typeof(Brush), new SolidColorBrush(Colors.Black),
-        (gaugeBase, newValue) => { gaugeBase.Gauge.LabelFontShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue); });
+        (gaugeBase, newValue) => { gaugeBase.Gauge.LabelFontBrush = WpfGaugeHelper.GetGaugeBrush( (Brush)newValue); });
 
     /// <summary>
     ///     LabelFontFamily
@@ -427,7 +427,7 @@ public abstract class WpfGaugeBase : SKElement
 
     public static readonly DependencyProperty ValueFontBrushProperty = Create(nameof(ValueFontBrush),
         typeof(Brush), new SolidColorBrush(Colors.Black),
-        (gaugeBase, newValue) => { gaugeBase.Gauge.ValueFontShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue); });
+        (gaugeBase, newValue) => { gaugeBase.Gauge.ValueFontBrush = WpfGaugeHelper.GetGaugeBrush( (Brush)newValue); });
 
     /// <summary>
     ///     ValueFontFamily
@@ -453,7 +453,7 @@ public abstract class WpfGaugeBase : SKElement
 
     public static readonly DependencyProperty NeedleBrushProperty = Create(nameof(NeedleBrush),
         typeof(Brush), new SolidColorBrush(Colors.Black),
-        (gaugeBase, newValue) => { gaugeBase.Gauge.NeedleShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue); });
+        (gaugeBase, newValue) => { gaugeBase.Gauge.NeedleBrush = WpfGaugeHelper.GetGaugeBrush( (Brush)newValue); });
 
     /// <summary>
     ///     NeedleStartWidth
@@ -533,7 +533,7 @@ public abstract class WpfGaugeBase : SKElement
         typeof(Brush), new SolidColorBrush(Colors.Transparent),
         (gaugeBase, newValue) =>
         {
-            gaugeBase.Gauge.NeedleOutlineShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
+            gaugeBase.Gauge.NeedleOutlineBrush = WpfGaugeHelper.GetGaugeBrush( (Brush)newValue);
         });
 
     /// <summary>
@@ -560,7 +560,7 @@ public abstract class WpfGaugeBase : SKElement
 
     public static readonly DependencyProperty SetNeedleBrushProperty = Create(nameof(SetNeedleBrush),
         typeof(Brush), new SolidColorBrush(Colors.Transparent),
-        (gaugeBase, newValue) => { gaugeBase.Gauge.SetNeedleShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue); });
+        (gaugeBase, newValue) => { gaugeBase.Gauge.SetNeedleBrush = WpfGaugeHelper.GetGaugeBrush( (Brush)newValue); });
 
     /// <summary>
     ///     SetNeedleOutlineWidth
@@ -588,7 +588,7 @@ public abstract class WpfGaugeBase : SKElement
         typeof(Brush), new SolidColorBrush(Colors.Transparent),
         (gaugeBase, newValue) =>
         {
-            gaugeBase.Gauge.SetNeedleOutlineShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
+            gaugeBase.Gauge.SetNeedleOutlineBrush = WpfGaugeHelper.GetGaugeBrush( (Brush)newValue);
         });
 
     /// <summary>
@@ -646,29 +646,6 @@ public abstract class WpfGaugeBase : SKElement
     #endregion
 
     #region Helper
-
-    /// <summary>
-    ///     GetSkShader - wrapper GetSkShader against this control
-    /// </summary>
-    protected static SKShader GetSkShader(GaugeBase gauge, Brush brush)
-    {
-        return WpfGaugeHelper.GetSkShader(brush, gauge.GradientOffset, gauge.GradientWidth, gauge.GradientHeight);
-    }
-
-    /// <summary>
-    ///     UpdateShaders - update base shaders to adjust linear gradients
-    /// </summary>
-    protected void UpdateShaders(GaugeBase gauge)
-    {
-        gauge.BackingShader = GetSkShader(gauge, BackingBrush);
-        gauge.BackingOutlineShader = GetSkShader(gauge, BackingOutlineBrush);
-        gauge.TickShader = GetSkShader(gauge, TickBrush);
-        gauge.MinorTickShader = GetSkShader(gauge, MinorTickBrush);
-        gauge.LabelFontShader = GetSkShader(gauge, LabelFontBrush);
-        gauge.ValueFontShader = GetSkShader(gauge, ValueFontBrush);
-        gauge.NeedleShader = GetSkShader(gauge, NeedleBrush);
-        gauge.SetNeedleShader = GetSkShader(gauge, SetNeedleBrush);
-    }
 
     /// <summary>
     ///     Create - wrapper Register against this control

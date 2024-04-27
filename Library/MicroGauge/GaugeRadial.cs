@@ -51,14 +51,14 @@ namespace MicroGauge
         public float NeedlePivotEndExtent { get; set; } = 0.1f;
 
         /// <summary>
-        ///     NeedlePivotShader - background of needle pivot
+        ///     NeedlePivotBrush - background of needle pivot
         /// </summary>
-        public SKShader NeedlePivotShader { get; set; } = SKShader.CreateColor(SKColors.LightGray);
+        public GaugeBrush NeedlePivotBrush { get; set; } = new GaugeBrush(SKColors.LightGray);
 
         /// <summary>
-        ///     NeedlePivotOutlineShader - background of needle pivot outline
+        ///     NeedlePivotOutlineBrush - background of needle pivot outline
         /// </summary>
-        public SKShader NeedlePivotOutlineShader { get; set; } = SKShader.CreateColor(SKColors.Black);
+        public GaugeBrush NeedlePivotOutlineBrush { get; set; } = new GaugeBrush(SKColors.Black);
 
         /// <summary>
         ///     NeedlePivotOutlineWidth - width of needle pivot outline
@@ -66,9 +66,9 @@ namespace MicroGauge
         public float NeedlePivotOutlineWidth { get; set; } = 2f;
 
         /// <summary>
-        ///     RangeShader - background drawn behind tick scale
+        ///     RangeBrush - background drawn behind tick scale
         /// </summary>
-        public SKShader RangeShader { get; set; } = SKShader.CreateColor(SKColors.Transparent);
+        public GaugeBrush RangeBrush { get; set; } = new GaugeBrush(SKColors.Transparent);
 
         /// <summary>
         ///     RangeInnerStartExtent - Drawing range inner boundary start at extent of _radius
@@ -137,9 +137,9 @@ namespace MicroGauge
             {
                 paint.Style = SKPaintStyle.Fill;
                 paint.IsAntialias = true;
-                paint.Shader = BackingOutlineShader;
+                paint.Shader = GetSkShader(BackingOutlineBrush);
                 DrawGaugeArea(paint, _radius);
-                paint.Shader = BackingShader;
+                paint.Shader = GetSkShader(BackingBrush);
                 DrawGaugeArea(paint, _radius - BackingStrokeWidth);
             }
         }
@@ -225,7 +225,7 @@ namespace MicroGauge
             {
                 paint.Style = SKPaintStyle.Fill;
                 paint.IsAntialias = true;
-                paint.Shader = BackingOutlineShader;
+                paint.Shader = GetSkShader(BackingOutlineBrush);
                 paint.StrokeWidth = BackingStrokeWidth;
                 var startPoint = GaugeHelper.GetRadialPoint(_center, Convert.ToSingle(radius), angle - anglePadding);
                 var endPoint = GaugeHelper.GetRadialPoint(_center, Convert.ToSingle(radius / 2), angle - anglePadding);
@@ -248,7 +248,7 @@ namespace MicroGauge
             {
                 paint.Style = SKPaintStyle.Fill;
                 paint.IsAntialias = true;
-                paint.Shader = RangeShader;
+                paint.Shader = GetSkShader(RangeBrush);
                 using (var path = new SKPath())
                 {
                     var startAngle = GetValueAngle(MinValue);
@@ -315,7 +315,7 @@ namespace MicroGauge
                 paint.Style = SKPaintStyle.Stroke;
                 paint.StrokeWidth = isMajor ? TickStrokeWidth : MinorTickStrokeWidth;
                 paint.StrokeCap = SKStrokeCap.Round;
-                paint.Shader = isMajor ? TickShader : MinorTickShader;
+                paint.Shader = isMajor ? GetSkShader(TickBrush) : GetSkShader(MinorTickBrush);
                 paint.IsAntialias = true;
                 var sliceAngle = GetAngleRange(ScaleStartAngle, ScaleEndAngle) / (tickCount - 1);
                 for (var i = 0; i < tickCount; i++) DrawTick(paint, sliceAngle, i, isMajor);
@@ -345,18 +345,18 @@ namespace MicroGauge
             {
                 paint.IsAntialias = true;
                 paint.Style = SKPaintStyle.Fill;
-                paint.Shader = NeedleShader;
+                paint.Shader = GetSkShader(NeedleBrush);
                 DrawNeedleArm(paint); // Main Needle
                 paint.StrokeWidth = NeedleOutlineWidth;
                 paint.Style = SKPaintStyle.Stroke;
-                paint.Shader = NeedleOutlineShader;
+                paint.Shader = GetSkShader(NeedleOutlineBrush);
                 DrawNeedleArm(paint); // Main Needle Outline
                 paint.Style = SKPaintStyle.Fill;
-                paint.Shader = SetNeedleShader;
+                paint.Shader = GetSkShader(SetNeedleBrush);
                 DrawSetNeedleArm(paint); // Set Needle
                 paint.StrokeWidth = SetNeedleOutlineWidth;
                 paint.Style = SKPaintStyle.Stroke;
-                paint.Shader = SetNeedleOutlineShader;
+                paint.Shader = GetSkShader(SetNeedleOutlineBrush);
                 DrawSetNeedleArm(paint); // Set Needle Outline
                 DrawNeedlePivot(paint);
             }
@@ -391,11 +391,11 @@ namespace MicroGauge
         {
             var pivotRadius = _radius * NeedlePivotEndExtent;
             paint.Style = SKPaintStyle.Fill;
-            paint.Shader = NeedlePivotShader;
+            paint.Shader = GetSkShader(NeedlePivotBrush);
             Canvas.DrawCircle(_center, pivotRadius, paint);
             paint.Style = SKPaintStyle.Stroke;
             paint.StrokeWidth = NeedlePivotOutlineWidth;
-            paint.Shader = NeedlePivotOutlineShader;
+            paint.Shader = GetSkShader(NeedlePivotOutlineBrush);
             Canvas.DrawCircle(_center, pivotRadius, paint);
         }
 
@@ -502,7 +502,6 @@ namespace MicroGauge
             var offSetY = _center.Y - _radius;
             GradientOffset = new SKPoint(offsetX, offSetY);
             GradientWidth = GradientHeight = _radius * 2;
-            DimensionsUpdate();
         }
 
         /// <summary>

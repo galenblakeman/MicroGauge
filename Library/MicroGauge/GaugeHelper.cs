@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using SkiaSharp;
 
 namespace MicroGauge
@@ -33,6 +34,28 @@ namespace MicroGauge
             var textBounds = new SKRect();
             paint.MeasureText(text, ref textBounds);
             return textBounds;
+        }
+
+        /// <summary>
+        ///     ConvertToSkiaLinearGradient
+        /// </summary>
+        public static SKShader ConvertToSkShader(GaugeBrush platformBrush,
+            SKPoint offset, float width, float height)
+        {
+            var startX = offset.X + platformBrush.StartPoint.X * width;
+            var startY = offset.Y + platformBrush.StartPoint.Y * height;
+            var endX = offset.X + platformBrush.EndPoint.X * width;
+            var endY = offset.Y + platformBrush.EndPoint.Y * height;
+
+            var colors = platformBrush.GradientStops.Select(stop => stop.Color).ToArray();
+            var positions = platformBrush.GradientStops.Select(stop => stop.Offset).ToArray();
+
+            return SKShader.CreateLinearGradient(
+                new SKPoint(Convert.ToSingle(startX), Convert.ToSingle(startY)),
+                new SKPoint(Convert.ToSingle(endX), Convert.ToSingle(endY)),
+                colors,
+                positions,
+                SKShaderTileMode.Clamp);
         }
     }
 }

@@ -113,7 +113,7 @@ namespace MicroGauge.Forms
             (gaugeBase, newValue) => { gaugeBase.Gauge.Value = (double)newValue; });
 
         /// <summary>
-        ///     BackingShader
+        ///     BackingBrush
         /// </summary>
         public Brush BackingBrush
         {
@@ -125,7 +125,7 @@ namespace MicroGauge.Forms
             typeof(Brush), new SolidColorBrush(Color.White),
             (gaugeBase, newValue) =>
             {
-                gaugeBase.Gauge.BackingShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
+                gaugeBase.Gauge.BackingBrush = XfGaugeHelper.GetGaugeBrush( (Brush)newValue);
             });
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace MicroGauge.Forms
             typeof(Brush), new SolidColorBrush(Color.Black),
             (gaugeBase, newValue) =>
             {
-                gaugeBase.Gauge.BackingOutlineShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
+                gaugeBase.Gauge.BackingOutlineBrush = XfGaugeHelper.GetGaugeBrush( (Brush)newValue);
             });
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace MicroGauge.Forms
             (gaugeBase, newValue) => { gaugeBase.Gauge.BackingStrokeWidth = (float)newValue; });
 
         /// <summary>
-        ///     TickShader
+        ///     TickBrush
         /// </summary>
         public Brush TickBrush
         {
@@ -168,7 +168,7 @@ namespace MicroGauge.Forms
 
         public static readonly BindableProperty TickBrushProperty = Create(nameof(TickBrush),
             typeof(Brush), new SolidColorBrush(Color.Black),
-            (gaugeBase, newValue) => { gaugeBase.Gauge.TickShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue); });
+            (gaugeBase, newValue) => { gaugeBase.Gauge.TickBrush = XfGaugeHelper.GetGaugeBrush( (Brush)newValue); });
 
         /// <summary>
         ///     TickStrokeWidth
@@ -196,7 +196,7 @@ namespace MicroGauge.Forms
             typeof(Brush), new SolidColorBrush(Color.LightGray),
             (gaugeBase, newValue) =>
             {
-                gaugeBase.Gauge.MinorTickShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
+                gaugeBase.Gauge.MinorTickBrush = XfGaugeHelper.GetGaugeBrush( (Brush)newValue);
             });
 
         /// <summary>
@@ -342,7 +342,7 @@ namespace MicroGauge.Forms
             typeof(Brush), new SolidColorBrush(Color.Black),
             (gaugeBase, newValue) =>
             {
-                gaugeBase.Gauge.LabelFontShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
+                gaugeBase.Gauge.LabelFontBrush = XfGaugeHelper.GetGaugeBrush( (Brush)newValue);
             });
 
         /// <summary>
@@ -436,7 +436,7 @@ namespace MicroGauge.Forms
             typeof(Brush), new SolidColorBrush(Color.Black),
             (gaugeBase, newValue) =>
             {
-                gaugeBase.Gauge.ValueFontShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
+                gaugeBase.Gauge.ValueFontBrush = XfGaugeHelper.GetGaugeBrush( (Brush)newValue);
             });
 
         /// <summary>
@@ -463,7 +463,7 @@ namespace MicroGauge.Forms
 
         public static readonly BindableProperty NeedleBrushProperty = Create(nameof(NeedleBrush),
             typeof(Brush), new SolidColorBrush(Color.Black),
-            (gaugeBase, newValue) => { gaugeBase.Gauge.NeedleShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue); });
+            (gaugeBase, newValue) => { gaugeBase.Gauge.NeedleBrush = XfGaugeHelper.GetGaugeBrush( (Brush)newValue); });
 
         /// <summary>
         ///     NeedleStartWidth
@@ -543,7 +543,7 @@ namespace MicroGauge.Forms
             typeof(Brush), new SolidColorBrush(Color.Transparent),
             (gaugeBase, newValue) =>
             {
-                gaugeBase.Gauge.NeedleOutlineShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
+                gaugeBase.Gauge.NeedleOutlineBrush = XfGaugeHelper.GetGaugeBrush( (Brush)newValue);
             });
 
         /// <summary>
@@ -572,7 +572,7 @@ namespace MicroGauge.Forms
             typeof(Brush), new SolidColorBrush(Color.Transparent),
             (gaugeBase, newValue) =>
             {
-                gaugeBase.Gauge.SetNeedleShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
+                gaugeBase.Gauge.SetNeedleBrush = XfGaugeHelper.GetGaugeBrush( (Brush)newValue);
             });
 
         /// <summary>
@@ -601,7 +601,7 @@ namespace MicroGauge.Forms
             typeof(Brush), new SolidColorBrush(Color.Transparent),
             (gaugeBase, newValue) =>
             {
-                gaugeBase.Gauge.SetNeedleOutlineShader = GetSkShader(gaugeBase.Gauge, (Brush)newValue);
+                gaugeBase.Gauge.SetNeedleOutlineBrush = XfGaugeHelper.GetGaugeBrush( (Brush)newValue);
             });
 
         /// <summary>
@@ -659,29 +659,6 @@ namespace MicroGauge.Forms
         #endregion
 
         #region Helper
-
-        /// <summary>
-        ///     GetSkShader - wrapper GetSkShader against this control
-        /// </summary>
-        protected static SKShader GetSkShader(GaugeBase gauge, Brush brush)
-        {
-            return XfGaugeHelper.GetSkShader(brush, gauge.GradientOffset, gauge.GradientWidth, gauge.GradientHeight);
-        }
-
-        /// <summary>
-        ///     UpdateShaders - update base shaders to adjust linear gradients
-        /// </summary>
-        protected void UpdateShaders(GaugeBase gauge)
-        {
-            gauge.BackingShader = GetSkShader(gauge, BackingBrush);
-            gauge.BackingOutlineShader = GetSkShader(gauge, BackingOutlineBrush);
-            gauge.TickShader = GetSkShader(gauge, TickBrush);
-            gauge.MinorTickShader = GetSkShader(gauge, MinorTickBrush);
-            gauge.LabelFontShader = GetSkShader(gauge, LabelFontBrush);
-            gauge.ValueFontShader = GetSkShader(gauge, ValueFontBrush);
-            gauge.NeedleShader = GetSkShader(gauge, NeedleBrush);
-            gauge.SetNeedleShader = GetSkShader(gauge, SetNeedleBrush);
-        }
 
         /// <summary>
         ///     Create - wrapper Register against this control

@@ -11,8 +11,6 @@ namespace MicroGauge
     {
         #region Properties
 
-        public Action DimensionsUpdated{ get; set; }
-
         /// <summary>
         ///     Canvas - Skia Drawing Surface
         /// </summary>
@@ -32,7 +30,7 @@ namespace MicroGauge
         /// <summary>
         ///     GradientOffset -  Offset for linear gradient
         /// </summary>
-        public SKPoint GradientOffset { get; set; } = new SKPoint();
+        public SKPoint GradientOffset { get; set; }
 
         /// <summary>
         ///     GradientWidth -  Width for linear gradient
@@ -65,24 +63,24 @@ namespace MicroGauge
         public float RightExtent { get; set; }
 
         /// <summary>
-        ///     BackingShader - Backing solid or linear gradient shader
+        ///     BackingBrush - Backing solid or linear gradient shader
         /// </summary>
-        public SKShader BackingShader { get; set; } = SKShader.CreateColor(SKColors.White);
+        public GaugeBrush BackingBrush { get; set; } = new GaugeBrush(SKColors.White);
 
         /// <summary>
-        ///     BackingOutlineShader - Backing outline solid or linear gradient shader
+        ///     BackingOutlineBrush - Backing outline solid or linear gradient shader
         /// </summary>
-        public SKShader BackingOutlineShader { get; set; } = SKShader.CreateColor(SKColors.Black);
+        public GaugeBrush BackingOutlineBrush { get; set; } = new GaugeBrush(SKColors.Black);
 
         /// <summary>
         ///     BackingStrokeWidth - Back stroke with for backing edge
         /// </summary>
-        public float BackingStrokeWidth { get; set; } = 10f;
+        public float BackingStrokeWidth { get; set; } = 1f;
 
         /// <summary>
-        ///     TickShader - Tick solid or linear gradient shader
+        ///     TickBrush - Tick solid or linear gradient shader
         /// </summary>
-        public SKShader TickShader { get; set; } = SKShader.CreateColor(SKColors.Black);
+        public GaugeBrush TickBrush { get; set; } = new GaugeBrush(SKColors.Black);
 
         /// <summary>
         ///     TickStrokeWidth - Tick Width
@@ -90,9 +88,9 @@ namespace MicroGauge
         public float TickStrokeWidth { get; set; } = 1f;
 
         /// <summary>
-        ///     MinorTickShader - Minor Tick solid or linear gradient shader
+        ///     MinorTickBrush - Minor Tick solid or linear gradient shader
         /// </summary>
-        public SKShader MinorTickShader { get; set; } = SKShader.CreateColor(SKColors.LightGray);
+        public GaugeBrush MinorTickBrush { get; set; } = new GaugeBrush(SKColors.LightGray);
 
         /// <summary>
         ///     MinorTickStrokeWidth - Minor Tick Width
@@ -150,9 +148,9 @@ namespace MicroGauge
         public SKFontStyleWeight LabelFontWeight { get; set; } = SKFontStyleWeight.Normal;
 
         /// <summary>
-        ///     LabelFontShader - Label font solid or linear gradient shader
+        ///     LabelFontBrush - Label font solid or linear gradient shader
         /// </summary>
-        public SKShader LabelFontShader { get; set; } = SKShader.CreateColor(SKColors.Black);
+        public GaugeBrush LabelFontBrush { get; set; } = new GaugeBrush(SKColors.Black);
 
         /// <summary>
         ///     LabelFontFamily - Label Font Family Name
@@ -185,9 +183,9 @@ namespace MicroGauge
         public SKFontStyleWeight ValueFontWeight { get; set; } = SKFontStyleWeight.Normal;
 
         /// <summary>
-        ///     ValueFontShader - Value font solid or linear gradient shader
+        ///     ValueFontBrush - Value font solid or linear gradient shader
         /// </summary>
-        public SKShader ValueFontShader { get; set; } = SKShader.CreateColor(SKColors.Black);
+        public GaugeBrush ValueFontBrush { get; set; } = new GaugeBrush(SKColors.Black);
 
         /// <summary>
         ///     ValueFontFamily - Value Font Family Name
@@ -195,9 +193,9 @@ namespace MicroGauge
         public string ValueFontFamily { get; set; } = "verdana";
 
         /// <summary>
-        ///     NeedleShader - Needle solid or linear gradient shader
+        ///     NeedleBrush - Needle solid or linear gradient shader
         /// </summary>
-        public SKShader NeedleShader { get; set; } = SKShader.CreateColor(SKColors.Black);
+        public GaugeBrush NeedleBrush { get; set; } = new GaugeBrush(SKColors.Black);
 
         /// <summary>
         ///     NeedleStartWidth - width of needle at start
@@ -225,9 +223,9 @@ namespace MicroGauge
         public float NeedleOutlineWidth { get; set; } = 1f;
 
         /// <summary>
-        ///     NeedleOutlineShader - Needle outline solid or linear gradient shader
+        ///     NeedleOutlineBrush - Needle outline solid or linear gradient shader
         /// </summary>
-        public SKShader NeedleOutlineShader { get; set; } = SKShader.CreateColor(SKColors.Transparent);
+        public GaugeBrush NeedleOutlineBrush { get; set; } = new GaugeBrush(SKColors.Transparent);
 
         /// <summary>
         ///     SetNeedleValue - Set Needle Value
@@ -240,14 +238,14 @@ namespace MicroGauge
         public float SetNeedleOutlineWidth { get; set; } = 1f;
 
         /// <summary>
-        ///     SetNeedleShader - set needle solid or linear gradient shader
+        ///     SetNeedleBrush - set needle solid or linear gradient shader
         /// </summary>
-        public SKShader SetNeedleShader { get; set; } = SKShader.CreateColor(SKColors.Transparent);
+        public GaugeBrush SetNeedleBrush { get; set; } = new GaugeBrush(SKColors.Transparent);
 
         /// <summary>
-        ///     SetNeedleOutlineShader - set needle outline solid or linear gradient shader
+        ///     SetNeedleOutlineBrush - set needle outline solid or linear gradient shader
         /// </summary>
-        public SKShader SetNeedleOutlineShader { get; set; } = SKShader.CreateColor(SKColors.Transparent);
+        public GaugeBrush SetNeedleOutlineBrush { get; set; } = new GaugeBrush(SKColors.Transparent);
 
         /// <summary>
         ///     SetNeedleStartWidth - width of set needle at start
@@ -280,17 +278,18 @@ namespace MicroGauge
         {
         }
 
-        /// <summary>
-        ///     DimensionsUpdate
-        /// </summary>
-        protected void DimensionsUpdate()
-        {
-            DimensionsUpdated?.Invoke();
-        }
-
         #endregion
 
         #region Helpers
+
+
+        /// <summary>
+        ///     GetSkShader - wrapper GetSkShader against this control
+        /// </summary>
+        protected SKShader GetSkShader(GaugeBrush brush)
+        {
+            return GaugeHelper.ConvertToSkShader(brush, GradientOffset, GradientWidth, GradientHeight);
+        }
 
         /// <summary>
         ///     DebugFillCanvas
@@ -359,7 +358,7 @@ namespace MicroGauge
         protected void SetLabelPaint(SKPaint paint)
         {
             paint.IsAntialias = true;
-            paint.Shader = LabelFontShader;
+            paint.Shader = GetSkShader(LabelFontBrush);
             paint.IsStroke = false;
             paint.TextAlign = SKTextAlign.Center;
             paint.TextSize = LabelFontSize;
@@ -373,7 +372,7 @@ namespace MicroGauge
         protected void SetValuePaint(SKPaint paint)
         {
             paint.IsAntialias = true;
-            paint.Shader = ValueFontShader;
+            paint.Shader = GetSkShader(ValueFontBrush);
             paint.IsStroke = false;
             paint.TextAlign = SKTextAlign.Center;
             paint.TextSize = ValueFontSize;
