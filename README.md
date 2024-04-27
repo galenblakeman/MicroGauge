@@ -6,7 +6,7 @@
 * Linear Gauges: Implement vertical or horizontal orientations to meet interface needs. 
 * Customization: Configure backing, scale, tick (minor/major), label, value, needle, and range via attributes. 
 * Cross-Platform Compatibility: Works with all the platforms that [SkiaSharp](https://github.com/mono/SkiaSharp) supports. 
-* Framework Libraries: Xamarin, Maui, and WPF view libraries are provided with tags and bindings for customization.
+* Framework: Xamarin, Maui, WPF, and Blazor libraries are provided with tags and bindings for customization.
 
 ---
 ## Gallery
@@ -21,6 +21,8 @@
 [![NuGet Version](https://img.shields.io/nuget/v/MicroGauge.Maui?style=flat-square&logo=nuget&label=MicroGauge.Maui)](https://www.nuget.org/packages/MicroGauge.Maui/)
 
 [![NuGet Version](https://img.shields.io/nuget/v/MicroGauge.Wpf?style=flat-square&logo=nuget&label=MicroGauge.Wpf)](https://www.nuget.org/packages/MicroGauge.Wpf/)
+
+[![NuGet Version](https://img.shields.io/nuget/v/MicroGauge.Blazor?style=flat-square&logo=nuget&label=MicroGauge.Blazor)](https://www.nuget.org/packages/MicroGauge.Blazor/)
 
 ---
 ## Tag Reference
@@ -38,13 +40,13 @@ dotnet add package MicroGauge.Forms
 
 ###  Namespace Attribute
 
-```XAML
+```XML
 xmlns:microGauge="clr-namespace:MicroGauge.Forms;assembly=MicroGauge.Forms"
 ```
 
 ###  XAML
 
-```XAML
+```XML
 <microGauge:XfGaugeRadial Value="15"  NeedleBrush="#008000" />
 <microGauge:XfGaugeLinear Value="15"  NeedleBrush="#008000" />
 ```
@@ -76,13 +78,13 @@ dotnet add package MicroGauge.Maui
 
 ###  Namespace Attribute
 
-```XAML
+```XML
 xmlns:microGauge="clr-namespace:MicroGauge.Maui;assembly=MicroGauge.Maui"
 ```
 
 ###  XAML
 
-```XAML
+```XML
 <microGauge:MauiGaugeRadial Value="15" NeedleBrush="#008000" />
 <microGauge:MauiGaugeLinear Value="15" NeedleBrush="#008000" />
 ```
@@ -114,13 +116,13 @@ dotnet add package MicroGauge.Wpf
 
 ###  Namespace Attribute
 
-```XAML
+```XML
 xmlns:microGauge="clr-namespace:MicroGauge.Wpf;assembly=MicroGauge.Wpf"
 ```
 
 ###  XAML
 
-```XAML
+```HTML
 <microGauge:WpfGaugeRadial Value="15" NeedleBrush="#008000" />
 <microGauge:WpfGaugeLinear Value="15" NeedleBrush="#008000" />
 ```
@@ -143,5 +145,45 @@ WpfGaugeLinear linearGauge = new WpfGaugeLinear
 * Bindings: [MainWindow.xaml](https://github.com/galenblakeman/MicroGauge/blob/master/Example/MicroGauge.Example.Wpf/MainWindow.xaml)  
 
 ---
+---
+
+##  Blazor Usage
+###  Nuget Package Install
+
+```Dotenv
+dotnet add package MicroGauge.Blazor
+```
+
+###  Namespace Using 
+
+```XML
+@using MicroGauge.Blazor
+```
+
+###  Razor
+
+```XML
+<BlazorGaugeRadial Value="15" NeedleBrush="GaugeBrushes.Green" />
+<BlazorGaugeLinear Value="15" NeedleBrush="GaugeBrushes.Green" />
+```
+
+###  C#
+
+```C#
+BlazorGaugeRadial radialGauge = new BlazorGaugeRadial
+{
+    Value = 15.0, NeedleBrush = GaugeBrushes.Green
+};
+BlazorGaugeLinear linearGauge = new BlazorGaugeLinear
+{
+    Value = 15.0, NeedleBrush = GaugeBrushes.Green
+};
+}
+```
+
+###  Examples
+* Project: [MicroGauge.Example.Blazor](https://github.com/galenblakeman/MicroGauge/tree/master/Example/MicroGauge.Example.Blazor)
+* Bindings: [Home.razor](https://github.com/galenblakeman/MicroGauge/blob/develop/Example/MicroGauge.Example.Blazor/Pages/Home.razor)  
+
 ## License
 MIT © Galen Blakeman
