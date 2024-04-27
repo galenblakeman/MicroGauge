@@ -123,10 +123,7 @@ namespace MicroGauge.Forms
 
         public static readonly BindableProperty BackingBrushProperty = Create(nameof(BackingBrush),
             typeof(Brush), new SolidColorBrush(Color.White),
-            (gaugeBase, newValue) =>
-            {
-                gaugeBase.Gauge.BackingBrush = XfGaugeHelper.GetGaugeBrush( (Brush)newValue);
-            });
+            (gaugeBase, newValue) => { gaugeBase.Gauge.BackingBrush = XfGaugeHelper.GetGaugeBrush((Brush)newValue); });
 
         /// <summary>
         ///     BackingOutlineBrush
@@ -141,7 +138,7 @@ namespace MicroGauge.Forms
             typeof(Brush), new SolidColorBrush(Color.Black),
             (gaugeBase, newValue) =>
             {
-                gaugeBase.Gauge.BackingOutlineBrush = XfGaugeHelper.GetGaugeBrush( (Brush)newValue);
+                gaugeBase.Gauge.BackingOutlineBrush = XfGaugeHelper.GetGaugeBrush((Brush)newValue);
             });
 
         /// <summary>
@@ -168,7 +165,7 @@ namespace MicroGauge.Forms
 
         public static readonly BindableProperty TickBrushProperty = Create(nameof(TickBrush),
             typeof(Brush), new SolidColorBrush(Color.Black),
-            (gaugeBase, newValue) => { gaugeBase.Gauge.TickBrush = XfGaugeHelper.GetGaugeBrush( (Brush)newValue); });
+            (gaugeBase, newValue) => { gaugeBase.Gauge.TickBrush = XfGaugeHelper.GetGaugeBrush((Brush)newValue); });
 
         /// <summary>
         ///     TickStrokeWidth
@@ -196,7 +193,7 @@ namespace MicroGauge.Forms
             typeof(Brush), new SolidColorBrush(Color.LightGray),
             (gaugeBase, newValue) =>
             {
-                gaugeBase.Gauge.MinorTickBrush = XfGaugeHelper.GetGaugeBrush( (Brush)newValue);
+                gaugeBase.Gauge.MinorTickBrush = XfGaugeHelper.GetGaugeBrush((Brush)newValue);
             });
 
         /// <summary>
@@ -342,7 +339,7 @@ namespace MicroGauge.Forms
             typeof(Brush), new SolidColorBrush(Color.Black),
             (gaugeBase, newValue) =>
             {
-                gaugeBase.Gauge.LabelFontBrush = XfGaugeHelper.GetGaugeBrush( (Brush)newValue);
+                gaugeBase.Gauge.LabelFontBrush = XfGaugeHelper.GetGaugeBrush((Brush)newValue);
             });
 
         /// <summary>
@@ -436,7 +433,7 @@ namespace MicroGauge.Forms
             typeof(Brush), new SolidColorBrush(Color.Black),
             (gaugeBase, newValue) =>
             {
-                gaugeBase.Gauge.ValueFontBrush = XfGaugeHelper.GetGaugeBrush( (Brush)newValue);
+                gaugeBase.Gauge.ValueFontBrush = XfGaugeHelper.GetGaugeBrush((Brush)newValue);
             });
 
         /// <summary>
@@ -463,7 +460,7 @@ namespace MicroGauge.Forms
 
         public static readonly BindableProperty NeedleBrushProperty = Create(nameof(NeedleBrush),
             typeof(Brush), new SolidColorBrush(Color.Black),
-            (gaugeBase, newValue) => { gaugeBase.Gauge.NeedleBrush = XfGaugeHelper.GetGaugeBrush( (Brush)newValue); });
+            (gaugeBase, newValue) => { gaugeBase.Gauge.NeedleBrush = XfGaugeHelper.GetGaugeBrush((Brush)newValue); });
 
         /// <summary>
         ///     NeedleStartWidth
@@ -543,7 +540,7 @@ namespace MicroGauge.Forms
             typeof(Brush), new SolidColorBrush(Color.Transparent),
             (gaugeBase, newValue) =>
             {
-                gaugeBase.Gauge.NeedleOutlineBrush = XfGaugeHelper.GetGaugeBrush( (Brush)newValue);
+                gaugeBase.Gauge.NeedleOutlineBrush = XfGaugeHelper.GetGaugeBrush((Brush)newValue);
             });
 
         /// <summary>
@@ -572,7 +569,7 @@ namespace MicroGauge.Forms
             typeof(Brush), new SolidColorBrush(Color.Transparent),
             (gaugeBase, newValue) =>
             {
-                gaugeBase.Gauge.SetNeedleBrush = XfGaugeHelper.GetGaugeBrush( (Brush)newValue);
+                gaugeBase.Gauge.SetNeedleBrush = XfGaugeHelper.GetGaugeBrush((Brush)newValue);
             });
 
         /// <summary>
@@ -601,7 +598,7 @@ namespace MicroGauge.Forms
             typeof(Brush), new SolidColorBrush(Color.Transparent),
             (gaugeBase, newValue) =>
             {
-                gaugeBase.Gauge.SetNeedleOutlineBrush = XfGaugeHelper.GetGaugeBrush( (Brush)newValue);
+                gaugeBase.Gauge.SetNeedleOutlineBrush = XfGaugeHelper.GetGaugeBrush((Brush)newValue);
             });
 
         /// <summary>

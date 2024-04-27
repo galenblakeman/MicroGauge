@@ -4,7 +4,6 @@ namespace MicroGauge
 {
     public class GaugeBrushStop
     {
-
         public SKColor Color { get; set; }
         public float Offset { get; set; }
 

@@ -125,7 +125,7 @@ public abstract class MauiGaugeBase : SKCanvasView
 
     public static readonly BindableProperty BackingBrushProperty = Create(nameof(BackingBrush),
         typeof(Brush), new SolidColorBrush(Colors.White),
-        (gaugeBase, newValue) => { gaugeBase.Gauge.BackingBrush = MauiGaugeHelper.GetGaugeBrush( (Brush)newValue); });
+        (gaugeBase, newValue) => { gaugeBase.Gauge.BackingBrush = MauiGaugeHelper.GetGaugeBrush((Brush)newValue); });
 
     /// <summary>
     ///     BackingOutlineBrush
@@ -140,7 +140,7 @@ public abstract class MauiGaugeBase : SKCanvasView
         typeof(Brush), new SolidColorBrush(Colors.Black),
         (gaugeBase, newValue) =>
         {
-            gaugeBase.Gauge.BackingOutlineBrush = MauiGaugeHelper.GetGaugeBrush( (Brush)newValue);
+            gaugeBase.Gauge.BackingOutlineBrush = MauiGaugeHelper.GetGaugeBrush((Brush)newValue);
         });
 
     /// <summary>
@@ -167,7 +167,7 @@ public abstract class MauiGaugeBase : SKCanvasView
 
     public static readonly BindableProperty TickBrushProperty = Create(nameof(TickBrush),
         typeof(Brush), new SolidColorBrush(Colors.Black),
-        (gaugeBase, newValue) => { gaugeBase.Gauge.TickBrush = MauiGaugeHelper.GetGaugeBrush( (Brush)newValue); });
+        (gaugeBase, newValue) => { gaugeBase.Gauge.TickBrush = MauiGaugeHelper.GetGaugeBrush((Brush)newValue); });
 
     /// <summary>
     ///     TickStrokeWidth
@@ -193,7 +193,7 @@ public abstract class MauiGaugeBase : SKCanvasView
 
     public static readonly BindableProperty MinorTickBrushProperty = Create(nameof(MinorTickBrush),
         typeof(Brush), new SolidColorBrush(Colors.LightGray),
-        (gaugeBase, newValue) => { gaugeBase.Gauge.MinorTickBrush = MauiGaugeHelper.GetGaugeBrush( (Brush)newValue); });
+        (gaugeBase, newValue) => { gaugeBase.Gauge.MinorTickBrush = MauiGaugeHelper.GetGaugeBrush((Brush)newValue); });
 
     /// <summary>
     ///     MinorTickStrokeWidth
@@ -336,7 +336,7 @@ public abstract class MauiGaugeBase : SKCanvasView
 
     public static readonly BindableProperty LabelFontBrushProperty = Create(nameof(LabelFontBrush),
         typeof(Brush), new SolidColorBrush(Colors.Black),
-        (gaugeBase, newValue) => { gaugeBase.Gauge.LabelFontBrush = MauiGaugeHelper.GetGaugeBrush( (Brush)newValue); });
+        (gaugeBase, newValue) => { gaugeBase.Gauge.LabelFontBrush = MauiGaugeHelper.GetGaugeBrush((Brush)newValue); });
 
     /// <summary>
     ///     LabelFontFamily
@@ -427,7 +427,7 @@ public abstract class MauiGaugeBase : SKCanvasView
 
     public static readonly BindableProperty ValueFontBrushProperty = Create(nameof(ValueFontBrush),
         typeof(Brush), new SolidColorBrush(Colors.Black),
-        (gaugeBase, newValue) => { gaugeBase.Gauge.ValueFontBrush = MauiGaugeHelper.GetGaugeBrush( (Brush)newValue); });
+        (gaugeBase, newValue) => { gaugeBase.Gauge.ValueFontBrush = MauiGaugeHelper.GetGaugeBrush((Brush)newValue); });
 
     /// <summary>
     ///     ValueFontFamily
@@ -453,7 +453,7 @@ public abstract class MauiGaugeBase : SKCanvasView
 
     public static readonly BindableProperty NeedleBrushProperty = Create(nameof(NeedleBrush),
         typeof(Brush), new SolidColorBrush(Colors.Black),
-        (gaugeBase, newValue) => { gaugeBase.Gauge.NeedleBrush = MauiGaugeHelper.GetGaugeBrush( (Brush)newValue); });
+        (gaugeBase, newValue) => { gaugeBase.Gauge.NeedleBrush = MauiGaugeHelper.GetGaugeBrush((Brush)newValue); });
 
     /// <summary>
     ///     NeedleStartWidth
@@ -533,7 +533,7 @@ public abstract class MauiGaugeBase : SKCanvasView
         typeof(Brush), new SolidColorBrush(Colors.Transparent),
         (gaugeBase, newValue) =>
         {
-            gaugeBase.Gauge.NeedleOutlineBrush = MauiGaugeHelper.GetGaugeBrush( (Brush)newValue);
+            gaugeBase.Gauge.NeedleOutlineBrush = MauiGaugeHelper.GetGaugeBrush((Brush)newValue);
         });
 
     /// <summary>
@@ -560,7 +560,7 @@ public abstract class MauiGaugeBase : SKCanvasView
 
     public static readonly BindableProperty SetNeedleBrushProperty = Create(nameof(SetNeedleBrush),
         typeof(Brush), new SolidColorBrush(Colors.Transparent),
-        (gaugeBase, newValue) => { gaugeBase.Gauge.SetNeedleBrush = MauiGaugeHelper.GetGaugeBrush( (Brush)newValue); });
+        (gaugeBase, newValue) => { gaugeBase.Gauge.SetNeedleBrush = MauiGaugeHelper.GetGaugeBrush((Brush)newValue); });
 
     /// <summary>
     ///     SetNeedleOutlineWidth
@@ -588,7 +588,7 @@ public abstract class MauiGaugeBase : SKCanvasView
         typeof(Brush), new SolidColorBrush(Colors.Transparent),
         (gaugeBase, newValue) =>
         {
-            gaugeBase.Gauge.SetNeedleOutlineBrush = MauiGaugeHelper.GetGaugeBrush( (Brush)newValue);
+            gaugeBase.Gauge.SetNeedleOutlineBrush = MauiGaugeHelper.GetGaugeBrush((Brush)newValue);
         });
 
     /// <summary>
@@ -646,7 +646,6 @@ public abstract class MauiGaugeBase : SKCanvasView
     #endregion
 
     #region Helper
-   
 
     /// <summary>
     ///     Create - wrapper Register against this control

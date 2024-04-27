@@ -15,7 +15,7 @@ public class WpfGaugeLinear : WpfGaugeBase
     }
 
     #endregion
-   
+
 
     #region Gauge Specific Properties
 
@@ -84,7 +84,7 @@ public class WpfGaugeLinear : WpfGaugeBase
         typeof(Brush), new SolidColorBrush(Colors.Black),
         (gaugeBase, newValue) =>
         {
-            GetLinear(gaugeBase).ValueBarBrush = WpfGaugeHelper.GetGaugeBrush( (Brush)newValue);
+            GetLinear(gaugeBase).ValueBarBrush = WpfGaugeHelper.GetGaugeBrush((Brush)newValue);
         });
 
     #endregion

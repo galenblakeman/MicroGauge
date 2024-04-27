@@ -16,7 +16,7 @@ public class WpfGaugeRadial : WpfGaugeBase
     }
 
     #endregion
-   
+
 
     #region Gauge Specific Properties
 
@@ -137,7 +137,7 @@ public class WpfGaugeRadial : WpfGaugeBase
         typeof(Brush), new SolidColorBrush(Colors.LightGray),
         (gaugeBase, newValue) =>
         {
-            GetRadial(gaugeBase).NeedlePivotBrush = WpfGaugeHelper.GetGaugeBrush( (Brush)newValue);
+            GetRadial(gaugeBase).NeedlePivotBrush = WpfGaugeHelper.GetGaugeBrush((Brush)newValue);
         });
 
     /// <summary>
@@ -153,7 +153,7 @@ public class WpfGaugeRadial : WpfGaugeBase
         typeof(Brush), new SolidColorBrush(Colors.Black),
         (gaugeBase, newValue) =>
         {
-            GetRadial(gaugeBase).NeedlePivotOutlineBrush = WpfGaugeHelper.GetGaugeBrush( (Brush)newValue);
+            GetRadial(gaugeBase).NeedlePivotOutlineBrush = WpfGaugeHelper.GetGaugeBrush((Brush)newValue);
         });
 
     /// <summary>
@@ -180,10 +180,7 @@ public class WpfGaugeRadial : WpfGaugeBase
 
     public static readonly DependencyProperty RangeBrushProperty = Create(nameof(RangeBrush),
         typeof(Brush), new SolidColorBrush(Colors.Transparent),
-        (gaugeBase, newValue) =>
-        {
-            GetRadial(gaugeBase).RangeBrush = WpfGaugeHelper.GetGaugeBrush((Brush)newValue);
-        });
+        (gaugeBase, newValue) => { GetRadial(gaugeBase).RangeBrush = WpfGaugeHelper.GetGaugeBrush((Brush)newValue); });
 
     /// <summary>
     ///     RangeInnerStartExtent

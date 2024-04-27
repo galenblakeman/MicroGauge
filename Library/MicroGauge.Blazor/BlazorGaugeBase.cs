@@ -118,7 +118,7 @@ public abstract class BlazorGaugeBase : SKGLView
     /// <summary>
     ///     BackingBrush
     /// </summary>
-    private GaugeBrush _backingBrush = new(SKColors.White);
+    private GaugeBrush _backingBrush = GaugeBrushes.White;
 
     [Parameter]
     public GaugeBrush BackingBrush
@@ -135,7 +135,7 @@ public abstract class BlazorGaugeBase : SKGLView
     /// <summary>
     ///     BackingOutlineBrush
     /// </summary>
-    private GaugeBrush _backingOutlineBrush = new(SKColors.Black);
+    private GaugeBrush _backingOutlineBrush = GaugeBrushes.Black;
 
     [Parameter]
     public GaugeBrush BackingOutlineBrush
@@ -166,7 +166,7 @@ public abstract class BlazorGaugeBase : SKGLView
     /// <summary>
     ///     TickBrush
     /// </summary>
-    private GaugeBrush _tickBrush = new(SKColors.Black);
+    private GaugeBrush _tickBrush = GaugeBrushes.Black;
 
     [Parameter]
     public GaugeBrush TickBrush
@@ -197,7 +197,7 @@ public abstract class BlazorGaugeBase : SKGLView
     /// <summary>
     ///     MinorTickBrush
     /// </summary>
-    private GaugeBrush _minorTickBrush = new(SKColors.LightGray);
+    private GaugeBrush _minorTickBrush = GaugeBrushes.LightGray;
 
     [Parameter]
     public GaugeBrush MinorTickBrush
@@ -354,7 +354,7 @@ public abstract class BlazorGaugeBase : SKGLView
     /// <summary>
     ///     FontBrush
     /// </summary>
-    private GaugeBrush _labelFontBrush = new(SKColors.Black);
+    private GaugeBrush _labelFontBrush = GaugeBrushes.Black;
 
     [Parameter]
     public GaugeBrush LabelFontBrush
@@ -455,7 +455,7 @@ public abstract class BlazorGaugeBase : SKGLView
     /// <summary>
     ///     ValueFontBrush
     /// </summary>
-    private GaugeBrush _valueFontBrush = new(SKColors.Black);
+    private GaugeBrush _valueFontBrush = GaugeBrushes.Black;
 
     [Parameter]
     public GaugeBrush ValueFontBrush
@@ -486,7 +486,7 @@ public abstract class BlazorGaugeBase : SKGLView
     /// <summary>
     ///     NeedleBrush
     /// </summary>
-    private GaugeBrush _needleBrush = new(SKColors.Black);
+    private GaugeBrush _needleBrush = GaugeBrushes.Black;
 
     [Parameter]
     public GaugeBrush NeedleBrush
@@ -573,7 +573,7 @@ public abstract class BlazorGaugeBase : SKGLView
     /// <summary>
     ///     NeedleOutlineBrush
     /// </summary>
-    private GaugeBrush _needleOutlineBrush = new(SKColors.Transparent);
+    private GaugeBrush _needleOutlineBrush = GaugeBrushes.Transparent;
 
     [Parameter]
     public GaugeBrush NeedleOutlineBrush
@@ -604,7 +604,7 @@ public abstract class BlazorGaugeBase : SKGLView
     /// <summary>
     ///     SetNeedleBrush
     /// </summary>
-    private GaugeBrush _setNeedleBrush = new(SKColors.Transparent);
+    private GaugeBrush _setNeedleBrush = GaugeBrushes.Transparent;
 
     [Parameter]
     public GaugeBrush SetNeedleBrush
@@ -635,7 +635,7 @@ public abstract class BlazorGaugeBase : SKGLView
     /// <summary>
     ///     SetNeedleOutlineBrush
     /// </summary>
-    private GaugeBrush _setNeedleOutlineBrush = new(SKColors.Transparent);
+    private GaugeBrush _setNeedleOutlineBrush = GaugeBrushes.Transparent;
 
     [Parameter]
     public GaugeBrush SetNeedleOutlineBrush
@@ -706,5 +706,4 @@ public abstract class BlazorGaugeBase : SKGLView
     }
 
     #endregion
-   
 }

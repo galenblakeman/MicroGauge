@@ -14,7 +14,7 @@ namespace MicroGauge.Forms
         }
 
         #endregion
-   
+
 
         #region Gauge Specific Properties
 
@@ -135,7 +135,7 @@ namespace MicroGauge.Forms
             typeof(Brush), new SolidColorBrush(Color.LightGray),
             (gaugeBase, newValue) =>
             {
-                GetRadial(gaugeBase).NeedlePivotBrush = XfGaugeHelper.GetGaugeBrush( (Brush)newValue);
+                GetRadial(gaugeBase).NeedlePivotBrush = XfGaugeHelper.GetGaugeBrush((Brush)newValue);
             });
 
         /// <summary>
@@ -152,7 +152,7 @@ namespace MicroGauge.Forms
             typeof(Brush), new SolidColorBrush(Color.Black),
             (gaugeBase, newValue) =>
             {
-                GetRadial(gaugeBase).NeedlePivotOutlineBrush = XfGaugeHelper.GetGaugeBrush( (Brush)newValue);
+                GetRadial(gaugeBase).NeedlePivotOutlineBrush = XfGaugeHelper.GetGaugeBrush((Brush)newValue);
             });
 
 

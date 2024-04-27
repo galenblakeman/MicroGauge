@@ -33,7 +33,7 @@ namespace MicroGauge
         /// <summary>
         ///     ValueBarBrush - shader for value bar
         /// </summary>
-        public GaugeBrush ValueBarBrush { get; set; } = new GaugeBrush(SKColors.Black);
+        public GaugeBrush ValueBarBrush { get; set; } = GaugeBrushes.Black;
 
 
         /// <summary>

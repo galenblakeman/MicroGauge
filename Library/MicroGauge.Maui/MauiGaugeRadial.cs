@@ -13,7 +13,7 @@ public class MauiGaugeRadial : MauiGaugeBase
     }
 
     #endregion
-   
+
 
     #region Gauge Specific Properties
 
@@ -134,7 +134,7 @@ public class MauiGaugeRadial : MauiGaugeBase
         typeof(Brush), new SolidColorBrush(Colors.LightGray),
         (gaugeBase, newValue) =>
         {
-            GetRadial(gaugeBase).NeedlePivotBrush = MauiGaugeHelper.GetGaugeBrush( (Brush)newValue);
+            GetRadial(gaugeBase).NeedlePivotBrush = MauiGaugeHelper.GetGaugeBrush((Brush)newValue);
         });
 
     /// <summary>
@@ -150,7 +150,7 @@ public class MauiGaugeRadial : MauiGaugeBase
         typeof(Brush), new SolidColorBrush(Colors.Black),
         (gaugeBase, newValue) =>
         {
-            GetRadial(gaugeBase).NeedlePivotOutlineBrush = MauiGaugeHelper.GetGaugeBrush( (Brush)newValue);
+            GetRadial(gaugeBase).NeedlePivotOutlineBrush = MauiGaugeHelper.GetGaugeBrush((Brush)newValue);
         });
 
     /// <summary>
@@ -177,10 +177,7 @@ public class MauiGaugeRadial : MauiGaugeBase
 
     public static readonly BindableProperty RangeBrushProperty = Create(nameof(RangeBrush),
         typeof(Brush), new SolidColorBrush(Colors.Transparent),
-        (gaugeBase, newValue) =>
-        {
-            GetRadial(gaugeBase).RangeBrush = MauiGaugeHelper.GetGaugeBrush((Brush)newValue);
-        });
+        (gaugeBase, newValue) => { GetRadial(gaugeBase).RangeBrush = MauiGaugeHelper.GetGaugeBrush((Brush)newValue); });
 
     /// <summary>
     ///     RangeInnerStartExtent

@@ -65,12 +65,12 @@ namespace MicroGauge
         /// <summary>
         ///     BackingBrush - Backing solid or linear gradient shader
         /// </summary>
-        public GaugeBrush BackingBrush { get; set; } = new GaugeBrush(SKColors.White);
+        public GaugeBrush BackingBrush { get; set; } = GaugeBrushes.White;
 
         /// <summary>
         ///     BackingOutlineBrush - Backing outline solid or linear gradient shader
         /// </summary>
-        public GaugeBrush BackingOutlineBrush { get; set; } = new GaugeBrush(SKColors.Black);
+        public GaugeBrush BackingOutlineBrush { get; set; } = GaugeBrushes.Black;
 
         /// <summary>
         ///     BackingStrokeWidth - Back stroke with for backing edge
@@ -80,7 +80,7 @@ namespace MicroGauge
         /// <summary>
         ///     TickBrush - Tick solid or linear gradient shader
         /// </summary>
-        public GaugeBrush TickBrush { get; set; } = new GaugeBrush(SKColors.Black);
+        public GaugeBrush TickBrush { get; set; } = GaugeBrushes.Black;
 
         /// <summary>
         ///     TickStrokeWidth - Tick Width
@@ -90,7 +90,7 @@ namespace MicroGauge
         /// <summary>
         ///     MinorTickBrush - Minor Tick solid or linear gradient shader
         /// </summary>
-        public GaugeBrush MinorTickBrush { get; set; } = new GaugeBrush(SKColors.LightGray);
+        public GaugeBrush MinorTickBrush { get; set; } = GaugeBrushes.Black;
 
         /// <summary>
         ///     MinorTickStrokeWidth - Minor Tick Width
@@ -150,7 +150,7 @@ namespace MicroGauge
         /// <summary>
         ///     LabelFontBrush - Label font solid or linear gradient shader
         /// </summary>
-        public GaugeBrush LabelFontBrush { get; set; } = new GaugeBrush(SKColors.Black);
+        public GaugeBrush LabelFontBrush { get; set; } = GaugeBrushes.Black;
 
         /// <summary>
         ///     LabelFontFamily - Label Font Family Name
@@ -185,7 +185,7 @@ namespace MicroGauge
         /// <summary>
         ///     ValueFontBrush - Value font solid or linear gradient shader
         /// </summary>
-        public GaugeBrush ValueFontBrush { get; set; } = new GaugeBrush(SKColors.Black);
+        public GaugeBrush ValueFontBrush { get; set; } = GaugeBrushes.Black;
 
         /// <summary>
         ///     ValueFontFamily - Value Font Family Name
@@ -195,7 +195,7 @@ namespace MicroGauge
         /// <summary>
         ///     NeedleBrush - Needle solid or linear gradient shader
         /// </summary>
-        public GaugeBrush NeedleBrush { get; set; } = new GaugeBrush(SKColors.Black);
+        public GaugeBrush NeedleBrush { get; set; } = GaugeBrushes.Black;
 
         /// <summary>
         ///     NeedleStartWidth - width of needle at start
@@ -225,7 +225,7 @@ namespace MicroGauge
         /// <summary>
         ///     NeedleOutlineBrush - Needle outline solid or linear gradient shader
         /// </summary>
-        public GaugeBrush NeedleOutlineBrush { get; set; } = new GaugeBrush(SKColors.Transparent);
+        public GaugeBrush NeedleOutlineBrush { get; set; } = GaugeBrushes.Transparent;
 
         /// <summary>
         ///     SetNeedleValue - Set Needle Value
@@ -240,12 +240,12 @@ namespace MicroGauge
         /// <summary>
         ///     SetNeedleBrush - set needle solid or linear gradient shader
         /// </summary>
-        public GaugeBrush SetNeedleBrush { get; set; } = new GaugeBrush(SKColors.Transparent);
+        public GaugeBrush SetNeedleBrush { get; set; } = GaugeBrushes.Transparent;
 
         /// <summary>
         ///     SetNeedleOutlineBrush - set needle outline solid or linear gradient shader
         /// </summary>
-        public GaugeBrush SetNeedleOutlineBrush { get; set; } = new GaugeBrush(SKColors.Transparent);
+        public GaugeBrush SetNeedleOutlineBrush { get; set; } = GaugeBrushes.Transparent;
 
         /// <summary>
         ///     SetNeedleStartWidth - width of set needle at start
@@ -281,7 +281,6 @@ namespace MicroGauge
         #endregion
 
         #region Helpers
-
 
         /// <summary>
         ///     GetSkShader - wrapper GetSkShader against this control

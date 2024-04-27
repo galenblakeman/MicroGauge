@@ -1,22 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-	<TargetFramework>netstandard2.0</TargetFramework>
-	  <PackageId>MicroGauge</PackageId>
-	  <Version>1.0.0.4</Version>
-	  <Authors>Galen Blakeman</Authors>
-	  <Company></Company>
-	  <PackageDescription>MicroGauge is a .Net library for easily creating customizable radial and linear gauges</PackageDescription>
-	  <PackageProjectUrl>https://github.com/galenblakeman/MicroGauge</PackageProjectUrl>
-	  <PackageReadmeFile>README.md</PackageReadmeFile>
-	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
-	  <PackageTags>skia;skiasharp;c-sharp;dotnet;gauge</PackageTags>
-	  <Copyright>Galen Blakeman</Copyright>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<PackageId>MicroGauge</PackageId>
+		<Version>1.0.0.4</Version>
+		<Authors>Galen Blakeman</Authors>
+		<Company></Company>
+		<PackageDescription>MicroGauge is a .Net library for easily creating customizable radial and linear gauges</PackageDescription>
+		<PackageProjectUrl>https://github.com/galenblakeman/MicroGauge</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageTags>skia;skiasharp;c-sharp;dotnet;gauge</PackageTags>
+		<Copyright>Galen Blakeman</Copyright>
+	</PropertyGroup>
 
-  <ItemGroup>
-	<PackageReference Include="SkiaSharp" Version="2.88.8" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="SkiaSharp" Version="2.88.8" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<None Include="README.md" Pack="true" PackagePath="\" />

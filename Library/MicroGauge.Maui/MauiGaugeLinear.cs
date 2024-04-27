@@ -80,7 +80,7 @@ public class MauiGaugeLinear : MauiGaugeBase
         typeof(Brush), new SolidColorBrush(Colors.Black),
         (gaugeBase, newValue) =>
         {
-            GetLinear(gaugeBase).ValueBarBrush = MauiGaugeHelper.GetGaugeBrush( (Brush)newValue);
+            GetLinear(gaugeBase).ValueBarBrush = MauiGaugeHelper.GetGaugeBrush((Brush)newValue);
         });
 
     #endregion

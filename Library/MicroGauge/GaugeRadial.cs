@@ -53,12 +53,12 @@ namespace MicroGauge
         /// <summary>
         ///     NeedlePivotBrush - background of needle pivot
         /// </summary>
-        public GaugeBrush NeedlePivotBrush { get; set; } = new GaugeBrush(SKColors.LightGray);
+        public GaugeBrush NeedlePivotBrush { get; set; } = GaugeBrushes.LightGray;
 
         /// <summary>
         ///     NeedlePivotOutlineBrush - background of needle pivot outline
         /// </summary>
-        public GaugeBrush NeedlePivotOutlineBrush { get; set; } = new GaugeBrush(SKColors.Black);
+        public GaugeBrush NeedlePivotOutlineBrush { get; set; } = GaugeBrushes.Black;
 
         /// <summary>
         ///     NeedlePivotOutlineWidth - width of needle pivot outline
@@ -68,7 +68,7 @@ namespace MicroGauge
         /// <summary>
         ///     RangeBrush - background drawn behind tick scale
         /// </summary>
-        public GaugeBrush RangeBrush { get; set; } = new GaugeBrush(SKColors.Transparent);
+        public GaugeBrush RangeBrush { get; set; } = GaugeBrushes.Transparent;
 
         /// <summary>
         ///     RangeInnerStartExtent - Drawing range inner boundary start at extent of _radius

@@ -125,7 +125,7 @@ public abstract class WpfGaugeBase : SKElement
 
     public static readonly DependencyProperty BackingBrushProperty = Create(nameof(BackingBrush),
         typeof(Brush), new SolidColorBrush(Colors.White),
-        (gaugeBase, newValue) => { gaugeBase.Gauge.BackingBrush = WpfGaugeHelper.GetGaugeBrush( (Brush)newValue); });
+        (gaugeBase, newValue) => { gaugeBase.Gauge.BackingBrush = WpfGaugeHelper.GetGaugeBrush((Brush)newValue); });
 
     /// <summary>
     ///     BackingOutlineBrush
@@ -140,7 +140,7 @@ public abstract class WpfGaugeBase : SKElement
         typeof(Brush), new SolidColorBrush(Colors.Black),
         (gaugeBase, newValue) =>
         {
-            gaugeBase.Gauge.BackingOutlineBrush = WpfGaugeHelper.GetGaugeBrush( (Brush)newValue);
+            gaugeBase.Gauge.BackingOutlineBrush = WpfGaugeHelper.GetGaugeBrush((Brush)newValue);
         });
 
     /// <summary>
@@ -167,7 +167,7 @@ public abstract class WpfGaugeBase : SKElement
 
     public static readonly DependencyProperty TickBrushProperty = Create(nameof(TickBrush),
         typeof(Brush), new SolidColorBrush(Colors.Black),
-        (gaugeBase, newValue) => { gaugeBase.Gauge.TickBrush = WpfGaugeHelper.GetGaugeBrush( (Brush)newValue); });
+        (gaugeBase, newValue) => { gaugeBase.Gauge.TickBrush = WpfGaugeHelper.GetGaugeBrush((Brush)newValue); });
 
     /// <summary>
     ///     TickStrokeWidth
@@ -193,7 +193,7 @@ public abstract class WpfGaugeBase : SKElement
 
     public static readonly DependencyProperty MinorTickBrushProperty = Create(nameof(MinorTickBrush),
         typeof(Brush), new SolidColorBrush(Colors.LightGray),
-        (gaugeBase, newValue) => { gaugeBase.Gauge.MinorTickBrush = WpfGaugeHelper.GetGaugeBrush( (Brush)newValue); });
+        (gaugeBase, newValue) => { gaugeBase.Gauge.MinorTickBrush = WpfGaugeHelper.GetGaugeBrush((Brush)newValue); });
 
     /// <summary>
     ///     MinorTickStrokeWidth
@@ -336,7 +336,7 @@ public abstract class WpfGaugeBase : SKElement
 
     public static readonly DependencyProperty LabelFontBrushProperty = Create(nameof(LabelFontBrush),
         typeof(Brush), new SolidColorBrush(Colors.Black),
-        (gaugeBase, newValue) => { gaugeBase.Gauge.LabelFontBrush = WpfGaugeHelper.GetGaugeBrush( (Brush)newValue); });
+        (gaugeBase, newValue) => { gaugeBase.Gauge.LabelFontBrush = WpfGaugeHelper.GetGaugeBrush((Brush)newValue); });
 
     /// <summary>
     ///     LabelFontFamily
@@ -427,7 +427,7 @@ public abstract class WpfGaugeBase : SKElement
 
     public static readonly DependencyProperty ValueFontBrushProperty = Create(nameof(ValueFontBrush),
         typeof(Brush), new SolidColorBrush(Colors.Black),
-        (gaugeBase, newValue) => { gaugeBase.Gauge.ValueFontBrush = WpfGaugeHelper.GetGaugeBrush( (Brush)newValue); });
+        (gaugeBase, newValue) => { gaugeBase.Gauge.ValueFontBrush = WpfGaugeHelper.GetGaugeBrush((Brush)newValue); });
 
     /// <summary>
     ///     ValueFontFamily
@@ -453,7 +453,7 @@ public abstract class WpfGaugeBase : SKElement
 
     public static readonly DependencyProperty NeedleBrushProperty = Create(nameof(NeedleBrush),
         typeof(Brush), new SolidColorBrush(Colors.Black),
-        (gaugeBase, newValue) => { gaugeBase.Gauge.NeedleBrush = WpfGaugeHelper.GetGaugeBrush( (Brush)newValue); });
+        (gaugeBase, newValue) => { gaugeBase.Gauge.NeedleBrush = WpfGaugeHelper.GetGaugeBrush((Brush)newValue); });
 
     /// <summary>
     ///     NeedleStartWidth
@@ -533,7 +533,7 @@ public abstract class WpfGaugeBase : SKElement
         typeof(Brush), new SolidColorBrush(Colors.Transparent),
         (gaugeBase, newValue) =>
         {
-            gaugeBase.Gauge.NeedleOutlineBrush = WpfGaugeHelper.GetGaugeBrush( (Brush)newValue);
+            gaugeBase.Gauge.NeedleOutlineBrush = WpfGaugeHelper.GetGaugeBrush((Brush)newValue);
         });
 
     /// <summary>
@@ -560,7 +560,7 @@ public abstract class WpfGaugeBase : SKElement
 
     public static readonly DependencyProperty SetNeedleBrushProperty = Create(nameof(SetNeedleBrush),
         typeof(Brush), new SolidColorBrush(Colors.Transparent),
-        (gaugeBase, newValue) => { gaugeBase.Gauge.SetNeedleBrush = WpfGaugeHelper.GetGaugeBrush( (Brush)newValue); });
+        (gaugeBase, newValue) => { gaugeBase.Gauge.SetNeedleBrush = WpfGaugeHelper.GetGaugeBrush((Brush)newValue); });
 
     /// <summary>
     ///     SetNeedleOutlineWidth
@@ -588,7 +588,7 @@ public abstract class WpfGaugeBase : SKElement
         typeof(Brush), new SolidColorBrush(Colors.Transparent),
         (gaugeBase, newValue) =>
         {
-            gaugeBase.Gauge.SetNeedleOutlineBrush = WpfGaugeHelper.GetGaugeBrush( (Brush)newValue);
+            gaugeBase.Gauge.SetNeedleOutlineBrush = WpfGaugeHelper.GetGaugeBrush((Brush)newValue);
         });
 
     /// <summary>

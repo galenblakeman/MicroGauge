@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using SkiaSharp;
 
 namespace MicroGauge.Blazor;
 
@@ -13,7 +12,7 @@ public class BlazorGaugeLinear : BlazorGaugeBase
     }
 
     #endregion
-   
+
 
     #region Gauge Specific Properties
 
@@ -76,7 +75,7 @@ public class BlazorGaugeLinear : BlazorGaugeBase
     /// <summary>
     ///     ValueBarBrush
     /// </summary>
-    private GaugeBrush _valueBarBrush = new(SKColors.LightGray);
+    private GaugeBrush _valueBarBrush = GaugeBrushes.LightGray;
 
     [Parameter]
     public GaugeBrush ValueBarBrush

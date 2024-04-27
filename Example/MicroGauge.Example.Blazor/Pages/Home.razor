@@ -9,75 +9,69 @@
 {
     readonly GaugeBrush BrushBacking = new(SKColor.Parse("#333333"));
     readonly GaugeBrush BrushBorder = new(SKColor.Parse("#282828"));
-    readonly GaugeBrush BrushWhite = new(SKColor.Parse("#ffffff"));
-    readonly GaugeBrush BrushBlack = new(SKColor.Parse("#000000"));
     readonly GaugeBrush BrushLightBLue = new(SKColor.Parse("#0096ff"));
     readonly GaugeBrush BrushLimeGreen = new(SKColor.Parse("#aaff00"));
-    readonly GaugeBrush BrushRed = new(SKColor.Parse("#ff0000"));
     readonly GaugeBrush BrushGreen = new(SKColor.Parse("#57E700"));
     readonly GaugeBrush BrushYellow = new(SKColor.Parse("#FFE000"));
-    readonly GaugeBrush BrushDimGray = new(SKColor.Parse("#808080"));
     readonly GaugeBrush BrushMidGray = new(SKColor.Parse("#727272"));
     readonly GaugeBrush BrushDarkGray = new(SKColor.Parse("#4d4d4d"));
-    readonly GaugeBrush BrushSilver = new(SKColor.Parse("#c0c0c0"));
-    readonly GaugeBrush BrushCream = new(SKColor.Parse("#FAF9F6"));
     readonly GaugeBrush BrushBurntOrange = new(SKColor.Parse("#f28c28"));
 
     readonly GaugeBrush BrushBlueWhite = new()
-        {
+    {
 
-            GradientStops =
-                [
-                    new GaugeBrushStop(SKColor.Parse("#40FFFFFF"), 0),
+        GradientStops =
+        [
+            new GaugeBrushStop(SKColor.Parse("#40FFFFFF"), 0),
             new GaugeBrushStop(SKColor.Parse("#700067E5"), 0.5f)
-                ]
-        };
+        ]
+    };
 
     readonly GaugeBrush BrushPressure = new()
-        {
+    {
 
-            GradientStops =
-                [
-                    new GaugeBrushStop(SKColor.Parse("#00FFFFFF"), 0),
+        GradientStops =
+        [
+            new GaugeBrushStop(SKColor.Parse("#00FFFFFF"), 0),
             new GaugeBrushStop(SKColor.Parse("#FFFF2020"), 0.65f),
             new GaugeBrushStop(SKColor.Parse("#FFFF2020"), 0.8f)
-                ]
-        };
+        ]
+    };
 
     readonly GaugeBrush BrushGreenYellowRed = new()
-        {
+    {
 
-            GradientStops =
-                [
-                    new GaugeBrushStop(SKColor.Parse("#4000E000"), 0),
+        GradientStops =
+        [
+            new GaugeBrushStop(SKColor.Parse("#4000E000"), 0),
             new GaugeBrushStop(SKColor.Parse("#40E5F000"), 0.4f),
             new GaugeBrushStop(SKColor.Parse("#40FF2020"), 0.8f)
-                ]
-        };
+        ]
+    };
 
     readonly GaugeBrush BrushIceToSun = new()
-        {
+    {
 
-            GradientStops =
-                [
-                    new GaugeBrushStop(SKColor.Parse("#cce5ec"), 0),
+        GradientStops =
+        [
+            new GaugeBrushStop(SKColor.Parse("#cce5ec"), 0),
             new GaugeBrushStop(SKColor.Parse("#88abd1"), 0.3f),
             new GaugeBrushStop(SKColor.Parse("#80a862"), 0.5f),
             new GaugeBrushStop(SKColor.Parse("#FF2020"), 0.8f)
-                ]
-        };
+        ]
+    };
 
     readonly GaugeBrush BrushBattery = new()
-        {
+    {
 
-            GradientStops =
-                [
-                    new GaugeBrushStop(SKColor.Parse("#FF2020"), 0),
+        GradientStops =
+        [
+            new GaugeBrushStop(SKColor.Parse("#FF2020"), 0),
             new GaugeBrushStop(SKColor.Parse("#E5F000"), 0.7f),
             new GaugeBrushStop(SKColor.Parse("#008000"), 0.9f)
 
-                ]
-        };
+        ]
+    };
 
 
 }
@@ -119,11 +113,11 @@
                                            ValueFontBrush="BrushYellow"
                                            ValueFontWeight="SKFontStyleWeight.SemiBold"
                                            ValueLocation="GaugeValueLocation.BottomCenter"
-                                           TickBrush="BrushWhite"
+                                           TickBrush="GaugeBrushes.White"
                                            TickStrokeWidth="2"
                                            TickStartExtent="0.6f"
                                            TickEndExtent="0.7f"
-                                           MinorTickBrush="BrushDimGray"
+                                           MinorTickBrush="GaugeBrushes.Gray"
                                            MinorTickStartExtent="0.65f"
                                            MinorTickEndExtent="0.7f"
                                            MinorTickStrokeWidth="1"
@@ -172,13 +166,13 @@
                                            LabelFormatString="{0:N0}%"
                                            LabelFontFamily="OpenSans"
                                            LabelFontSize="10"
-                                           LabelFontBrush="BrushWhite"
+                                           LabelFontBrush="GaugeBrushes.White"
                                            ValueFormatString="{0:N0}%"
                                            ValueFontFamily="OpenSans"
                                            ValueFontSize="20"
-                                           ValueFontBrush="BrushCream"
+                                           ValueFontBrush="GaugeBrushes.White"
                                            ValueFontWeight="SKFontStyleWeight.SemiBold"
-                                           TickBrush="BrushWhite"
+                                           TickBrush="GaugeBrushes.White"
                                            TickStrokeWidth="1"
                                            TickStartExtent="0.6f"
                                            TickEndExtent="0.7f"
@@ -187,8 +181,8 @@
                                            ScaleEndAngle="330"
                                            NeedleBrush="BrushLightBLue"
                                            NeedlePivotBrush="BrushLightBLue"
-                                           NeedlePivotOutlineBrush="BrushWhite"
-                                           NeedleOutlineBrush="BrushWhite"
+                                           NeedlePivotOutlineBrush="GaugeBrushes.White"
+                                           NeedleOutlineBrush="GaugeBrushes.White"
                                            NeedleOutlineWidth="2"
                                            NeedleStartExtent="-0.2f"
                                            NeedleStartWidth="4"
@@ -220,7 +214,7 @@
                 </div>
                 <div class="row flex-grow-1 ">
                     <div class="col d-flex flex-column gauge-div">
-                        <BlazorGaugeRadial BackingBrush="BrushWhite"
+                        <BlazorGaugeRadial BackingBrush="GaugeBrushes.White"
                                            BackingOutlineBrush="BrushBorder"
                                            BackingStrokeWidth="10"
                                            Value="400"
@@ -232,30 +226,30 @@
                                            LabelExtent=".79f"
                                            LabelFontFamily="OpenSans"
                                            LabelFontSize="10"
-                                           LabelFontBrush="BrushBlack"
+                                           LabelFontBrush="GaugeBrushes.Black"
                                            ValueFormatString="{0:N0} PSI"
                                            ValueFontFamily="OpenSans"
                                            ValueFontSize="20"
-                                           ValueFontBrush="BrushBlack"
+                                           ValueFontBrush="GaugeBrushes.Black"
                                            ValueFontWeight="SKFontStyleWeight.SemiBold"
-                                           TickBrush="BrushBlack"
+                                           TickBrush="GaugeBrushes.Black"
                                            TickStrokeWidth="2"
                                            TickStartExtent="0.6f"
                                            TickEndExtent="0.7f"
-                                           MinorTickBrush="BrushDimGray"
+                                           MinorTickBrush="GaugeBrushes.Gray"
                                            MinorTickStartExtent="0.65f"
                                            MinorTickEndExtent="0.7f"
                                            ScaleStartAngle="210"
                                            ScaleEndAngle="330"
-                                           NeedleBrush="BrushBlack"
-                                           NeedlePivotBrush="BrushSilver"
-                                           NeedlePivotOutlineBrush="BrushBlack"
+                                           NeedleBrush="GaugeBrushes.Black"
+                                           NeedlePivotBrush="GaugeBrushes.Silver"
+                                           NeedlePivotOutlineBrush="GaugeBrushes.Black"
                                            NeedleStartExtent="-0.2f"
                                            NeedleEndExtent="0.71f"
                                            SetNeedleValue="700"
                                            SetNeedleBrush="BrushYellow"
                                            SetNeedleOutlineWidth="2"
-                                           SetNeedleOutlineBrush="BrushBlack"
+                                           SetNeedleOutlineBrush="GaugeBrushes.Black"
                                            SetNeedleStartExtent="0"
                                            SetNeedleEndExtent="0.7f"
                                            SetNeedleStartWidth="3"
@@ -298,17 +292,17 @@
                                            LabelExtent=".8f"
                                            LabelFontFamily="OpenSans"
                                            LabelFontSize="10"
-                                           LabelFontBrush="BrushWhite"
+                                           LabelFontBrush="GaugeBrushes.White"
                                            ValueFormatString="{0:N0} LPM"
                                            ValueFontFamily="OpenSans"
                                            ValueFontSize="16"
-                                           ValueFontBrush="BrushWhite"
+                                           ValueFontBrush="GaugeBrushes.White"
                                            ValueFontWeight="SKFontStyleWeight.SemiBold"
-                                           TickBrush="BrushWhite"
+                                           TickBrush="GaugeBrushes.White"
                                            TickStrokeWidth="2"
                                            TickStartExtent="0.55f"
                                            TickEndExtent="0.65f"
-                                           MinorTickBrush="BrushDimGray"
+                                           MinorTickBrush="GaugeBrushes.Gray"
                                            MinorTickStartExtent="0.45f"
                                            MinorTickEndExtent="0.65f"
                                            ScaleStartAngle="210"
@@ -354,18 +348,18 @@
                                            LabelFormatString="{0:N0}°C"
                                            LabelFontFamily="OpenSans"
                                            LabelFontSize="10"
-                                           LabelFontBrush="BrushWhite"
+                                           LabelFontBrush="GaugeBrushes.White"
                                            ValueExtent="-.10f"
                                            ValueFormatString="{0:N0}°C"
                                            ValueFontFamily="OpenSans"
                                            ValueFontSize="20"
-                                           ValueFontBrush="BrushBlack"
+                                           ValueFontBrush="GaugeBrushes.Black"
                                            ValueFontWeight="SKFontStyleWeight.SemiBold"
-                                           TickBrush="BrushWhite"
+                                           TickBrush="GaugeBrushes.White"
                                            TickStrokeWidth="2"
                                            TickStartExtent="0.6f"
                                            TickEndExtent="0.7f"
-                                           MinorTickBrush="BrushDimGray"
+                                           MinorTickBrush="GaugeBrushes.Gray"
                                            MinorTickStartExtent="0.65f"
                                            MinorTickEndExtent="0.7f"
                                            ScaleStartAngle="180"
@@ -420,27 +414,27 @@
                                            LabelFormatString="{0:N0}%"
                                            LabelFontFamily="OpenSans"
                                            LabelFontSize="10"
-                                           LabelFontBrush="BrushWhite"
+                                           LabelFontBrush="GaugeBrushes.White"
                                            ValueLocation="GaugeValueLocation.BottomCenter"
                                            ValueExtent="0.40f"
                                            ValueFormatString="{0:N0}%"
                                            ValueFontFamily="OpenSans"
                                            ValueFontSize="20"
-                                           ValueFontBrush="BrushWhite"
+                                           ValueFontBrush="GaugeBrushes.White"
                                            ValueFontWeight="SKFontStyleWeight.SemiBold"
-                                           TickBrush="BrushWhite"
+                                           TickBrush="GaugeBrushes.White"
                                            TickStrokeWidth="1"
                                            MinorTickBrush="BrushMidGray"
                                            ValueWidthExtent="0.5f"
                                            TickWidthExtent="0.6f"
                                            MinorTickWidthExtent="0.5f"
-                                           NeedleBrush="BrushWhite"
+                                           NeedleBrush="GaugeBrushes.White"
                                            NeedleStartWidth="12"
                                            NeedleEndWidth="1"
                                            NeedleStartExtent="0.15f"
                                            NeedleEndExtent="0.25f"
                                            SetNeedleValue="60"
-                                           SetNeedleBrush="BrushRed"
+                                           SetNeedleBrush="GaugeBrushes.Red"
                                            SetNeedleStartExtent="0.2f"
                                            SetNeedleEndExtent="0.8f"
                                            SetNeedleStartWidth="2"
@@ -485,15 +479,15 @@
                                            LabelFormatString="{0:N0}%"
                                            LabelFontFamily="OpenSans"
                                            LabelFontSize="10"
-                                           LabelFontBrush="BrushWhite"
+                                           LabelFontBrush="GaugeBrushes.White"
                                            ValueLocation="GaugeValueLocation.BottomCenter"
                                            ValueExtent="0.08f"
                                            ValueFormatString="{0:N0}%"
                                            ValueFontFamily="OpenSans"
                                            ValueFontSize="20"
-                                           ValueFontBrush="BrushWhite"
+                                           ValueFontBrush="GaugeBrushes.White"
                                            ValueFontWeight="SKFontStyleWeight.SemiBold"
-                                           TickBrush="BrushCream"
+                                           TickBrush="GaugeBrushes.White"
                                            TickStrokeWidth="1"
                                            MinorTickBrush="BrushMidGray"
                                            ValueWidthExtent="0.5f"
@@ -542,12 +536,12 @@
                                            LabelFormatString="{0:N0}°"
                                            LabelFontFamily="OpenSans"
                                            LabelFontSize="10"
-                                           LabelFontBrush="BrushWhite"
+                                           LabelFontBrush="GaugeBrushes.White"
                                            ValueExtent="1.15f"
                                            ValueFormatString="{0:N0}°"
                                            ValueFontFamily="OpenSans"
                                            ValueFontSize="20"
-                                           ValueFontBrush="BrushWhite"
+                                           ValueFontBrush="GaugeBrushes.White"
                                            ValueFontWeight="SKFontStyleWeight.SemiBold"
                                            TickBrush="BrushBurntOrange"
                                            TickStrokeWidth="2"

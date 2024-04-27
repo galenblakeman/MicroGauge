@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using SkiaSharp;
+
 // ReSharper disable UnusedMember.Global
 
 namespace MicroGauge
 {
-
     public class GaugeBrush
     {
         public SKPoint StartPoint { get; set; } = new SKPoint(0, 0);
@@ -16,7 +16,6 @@ namespace MicroGauge
         /// </summary>
         public GaugeBrush()
         {
-
         }
 
         /// <summary>
@@ -41,7 +40,7 @@ namespace MicroGauge
         }
 
         /// <summary>
-        /// 	Constructor - List Gradient Stops
+        ///     Constructor - List Gradient Stops
         /// </summary>
         public GaugeBrush(List<GaugeBrushStop> gradientStops)
         {
@@ -49,7 +48,7 @@ namespace MicroGauge
         }
 
         /// <summary>
-        /// 	AddStop - Chainable Add Gradient Stop
+        ///     AddStop - Chainable Add Gradient Stop
         /// </summary>
         public GaugeBrush AddStop(GaugeBrushStop gradientStop)
         {

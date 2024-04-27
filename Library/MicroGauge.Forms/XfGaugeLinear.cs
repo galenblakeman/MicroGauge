@@ -13,7 +13,7 @@ namespace MicroGauge.Forms
         }
 
         #endregion
-       
+
 
         #region Gauge Specific Properties
 
@@ -82,7 +82,7 @@ namespace MicroGauge.Forms
             typeof(Brush), new SolidColorBrush(Color.Black),
             (gaugeBase, newValue) =>
             {
-                GetLinear(gaugeBase).ValueBarBrush = XfGaugeHelper.GetGaugeBrush( (Brush)newValue);
+                GetLinear(gaugeBase).ValueBarBrush = XfGaugeHelper.GetGaugeBrush((Brush)newValue);
             });
 
         #endregion

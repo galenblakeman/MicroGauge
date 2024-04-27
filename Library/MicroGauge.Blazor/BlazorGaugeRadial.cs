@@ -1,6 +1,5 @@
 ﻿using MicroGauge.Constant;
 using Microsoft.AspNetCore.Components;
-using SkiaSharp;
 
 namespace MicroGauge.Blazor;
 
@@ -133,7 +132,7 @@ public class BlazorGaugeRadial : BlazorGaugeBase
     /// <summary>
     ///     NeedlePivotBrush
     /// </summary>
-    private GaugeBrush _needlePivotBrush = new(SKColors.LightGray);
+    private GaugeBrush _needlePivotBrush = GaugeBrushes.LightGray;
 
     [Parameter]
     public GaugeBrush NeedlePivotBrush
@@ -150,7 +149,7 @@ public class BlazorGaugeRadial : BlazorGaugeBase
     /// <summary>
     ///     NeedlePivotOutline
     /// </summary>
-    private GaugeBrush _needlePivotOutlineBrush = new(SKColors.Black);
+    private GaugeBrush _needlePivotOutlineBrush = GaugeBrushes.Black;
 
     [Parameter]
     public GaugeBrush NeedlePivotOutlineBrush
@@ -181,7 +180,7 @@ public class BlazorGaugeRadial : BlazorGaugeBase
     /// <summary>
     ///     RangeBrush
     /// </summary>
-    private GaugeBrush _rangeBrush = new(SKColors.Transparent);
+    private GaugeBrush _rangeBrush = GaugeBrushes.Transparent;
 
     [Parameter]
     public GaugeBrush RangeBrush
