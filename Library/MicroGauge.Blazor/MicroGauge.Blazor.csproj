@@ -5,7 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <PackageId>MicroGauge.Blazor</PackageId>
-        <Version>1.0.0.4</Version>
+        <Version>1.0.0.5</Version>
         <Authors>Galen Blakeman</Authors>
         <Company></Company>
         <PackageDescription>MicroGauge.Blazor is a MicroGauge view library with tags and bindings for customization</PackageDescription>
@@ -24,6 +24,10 @@
 
     <ItemGroup>
       <ProjectReference Include="..\MicroGauge\MicroGauge.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="README.md" Pack="true" PackagePath="\" />
     </ItemGroup>
 
 </Project>

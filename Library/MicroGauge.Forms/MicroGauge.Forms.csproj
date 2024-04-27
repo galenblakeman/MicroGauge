@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<PackageId>MicroGauge.Forms</PackageId>
-		<Version>1.0.0.4</Version>
+		<Version>1.0.0.5</Version>
 		<Authors>Galen Blakeman</Authors>
 		<Company></Company>
 		<PackageDescription>MicroGauge.Forms is a MicroGauge view library with XAML tags and bindings for customization</PackageDescription>
