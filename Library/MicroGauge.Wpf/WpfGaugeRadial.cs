@@ -186,7 +186,7 @@ public class WpfGaugeRadial : WpfGaugeBase
 
     public static readonly DependencyProperty RangeBrushProperty = Create(nameof(RangeBrush),
         typeof(Brush), new SolidColorBrush(Colors.Transparent),
-        (gaugeBase, newValue) => { GetRadial(gaugeBase).RangeBrush = WpfGaugeHelper.GetGaugeBrush((Brush)newValue); });
+        (gaugeBase, newValue) => { GetRadialRange(gaugeBase).Brush = WpfGaugeHelper.GetGaugeBrush((Brush)newValue); });
 
     /// <summary>
     ///     RangeInnerStartExtent
@@ -199,7 +199,7 @@ public class WpfGaugeRadial : WpfGaugeBase
 
     public static readonly DependencyProperty RangeInnerStartExtentProperty = Create(nameof(RangeInnerStartExtent),
         typeof(float), 0f,
-        (gaugeBase, newValue) => { GetRadial(gaugeBase).RangeInnerStartExtent = (float)newValue; });
+        (gaugeBase, newValue) => { GetRadialRange(gaugeBase).InnerStartExtent = (float)newValue; });
 
     /// <summary>
     ///     RangeInnerEndExtent
@@ -212,7 +212,7 @@ public class WpfGaugeRadial : WpfGaugeBase
 
     public static readonly DependencyProperty RangeInnerEndExtentProperty = Create(nameof(RangeInnerEndExtent),
         typeof(float), 0f,
-        (gaugeBase, newValue) => { GetRadial(gaugeBase).RangeInnerEndExtent = (float)newValue; });
+        (gaugeBase, newValue) => { GetRadialRange(gaugeBase).InnerEndExtent = (float)newValue; });
 
     /// <summary>
     ///     RangeOuterStartExtent
@@ -225,7 +225,7 @@ public class WpfGaugeRadial : WpfGaugeBase
 
     public static readonly DependencyProperty RangeOuterStartExtentProperty = Create(nameof(RangeOuterStartExtent),
         typeof(float), 0f,
-        (gaugeBase, newValue) => { GetRadial(gaugeBase).RangeOuterStartExtent = (float)newValue; });
+        (gaugeBase, newValue) => { GetRadialRange(gaugeBase).OuterStartExtent = (float)newValue; });
 
     /// <summary>
     ///     RangeOuterEndExtent
@@ -238,7 +238,18 @@ public class WpfGaugeRadial : WpfGaugeBase
 
     public static readonly DependencyProperty RangeOuterEndExtentProperty = Create(nameof(RangeOuterEndExtent),
         typeof(float), 0f,
-        (gaugeBase, newValue) => { GetRadial(gaugeBase).RangeOuterEndExtent = (float)newValue; });
+        (gaugeBase, newValue) => {
+            GetRadialRange(gaugeBase).OuterEndExtent = (float)newValue; });
+
+
+    /// <summary>
+    ///     Ranges
+    /// </summary>
+    public List<GaugeRadialRange> Ranges
+    {
+        get => GetRadial(this).Ranges;
+        set => GetRadial(this).Ranges = value;
+    }
 
     #endregion
 
@@ -251,6 +262,18 @@ public class WpfGaugeRadial : WpfGaugeBase
     private static GaugeRadial GetRadial(WpfGaugeBase gaugeBase)
     {
         return (GaugeRadial)gaugeBase.Gauge;
+    }
+
+    /// <summary>
+    ///     GetRadialRange - Get Radial Range from gauge base (first range)
+    /// </summary>
+    private static GaugeRadialRange GetRadialRange(WpfGaugeBase gaugeBase)
+    {
+        GaugeRadial radialGauge = GetRadial(gaugeBase);
+        if (radialGauge.Ranges.Count == 1) return radialGauge.Ranges[0];
+        radialGauge.Ranges.Clear();
+        radialGauge.Ranges.Add(new GaugeRadialRange());
+        return radialGauge.Ranges[0];
     }
 
     #endregion

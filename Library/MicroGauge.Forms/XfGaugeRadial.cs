@@ -1,4 +1,5 @@
-﻿using MicroGauge.Constant;
+﻿using System.Collections.Generic;
+using MicroGauge.Constant;
 using Xamarin.Forms;
 
 namespace MicroGauge.Forms
@@ -189,7 +190,7 @@ namespace MicroGauge.Forms
             typeof(Brush), new SolidColorBrush(Color.Transparent),
             (gaugeBase, newValue) =>
             {
-                GetRadial(gaugeBase).RangeBrush = XfGaugeHelper.GetGaugeBrush((Brush)newValue);
+                GetRadialRange(gaugeBase).Brush = XfGaugeHelper.GetGaugeBrush((Brush)newValue);
             });
 
         /// <summary>
@@ -203,7 +204,7 @@ namespace MicroGauge.Forms
 
         public static readonly BindableProperty RangeInnerStartExtentProperty = Create(nameof(RangeInnerStartExtent),
             typeof(float), 0f,
-            (gaugeBase, newValue) => { GetRadial(gaugeBase).RangeInnerStartExtent = (float)newValue; });
+            (gaugeBase, newValue) => { GetRadialRange(gaugeBase).InnerStartExtent = (float)newValue; });
 
         /// <summary>
         ///     RangeInnerEndExtent
@@ -216,7 +217,7 @@ namespace MicroGauge.Forms
 
         public static readonly BindableProperty RangeInnerEndExtentProperty = Create(nameof(RangeInnerEndExtent),
             typeof(float), 0f,
-            (gaugeBase, newValue) => { GetRadial(gaugeBase).RangeInnerEndExtent = (float)newValue; });
+            (gaugeBase, newValue) => { GetRadialRange(gaugeBase).InnerEndExtent = (float)newValue; });
 
         /// <summary>
         ///     RangeOuterStartExtent
@@ -229,7 +230,7 @@ namespace MicroGauge.Forms
 
         public static readonly BindableProperty RangeOuterStartExtentProperty = Create(nameof(RangeOuterStartExtent),
             typeof(float), 0f,
-            (gaugeBase, newValue) => { GetRadial(gaugeBase).RangeOuterStartExtent = (float)newValue; });
+            (gaugeBase, newValue) => { GetRadialRange(gaugeBase).OuterStartExtent = (float)newValue; });
 
         /// <summary>
         ///     RangeOuterEndExtent
@@ -242,7 +243,16 @@ namespace MicroGauge.Forms
 
         public static readonly BindableProperty RangeOuterEndExtentProperty = Create(nameof(RangeOuterEndExtent),
             typeof(float), 0f,
-            (gaugeBase, newValue) => { GetRadial(gaugeBase).RangeOuterEndExtent = (float)newValue; });
+            (gaugeBase, newValue) => { GetRadialRange(gaugeBase).OuterEndExtent = (float)newValue; });
+
+        /// <summary>
+        ///     Ranges
+        /// </summary>
+        public List<GaugeRadialRange> Ranges
+        {
+            get => GetRadial(this).Ranges;
+            set => GetRadial(this).Ranges = value;
+        }
 
         #endregion
 
@@ -255,7 +265,17 @@ namespace MicroGauge.Forms
         {
             return (GaugeRadial)gaugeBase.Gauge;
         }
-
+        /// <summary>
+        ///     GetRadialRange - Get Radial Range from gauge base (first range)
+        /// </summary>
+        private static GaugeRadialRange GetRadialRange(XfGaugeBase gaugeBase)
+        {
+            GaugeRadial radialGauge = GetRadial(gaugeBase);
+            if (radialGauge.Ranges.Count == 1) return radialGauge.Ranges[0];
+            radialGauge.Ranges.Clear();
+            radialGauge.Ranges.Add(new GaugeRadialRange());
+            return radialGauge.Ranges[0];
+        }
         #endregion
     }
 }

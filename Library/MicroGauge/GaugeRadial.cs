@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using MicroGauge.Constant;
 using SkiaSharp;
+
+// ReSharper disable CompareOfFloatsByEqualityOperator
 
 // ReSharper disable PossibleLossOfFraction
 
@@ -69,29 +72,9 @@ namespace MicroGauge
         public float NeedlePivotOutlineWidth { get; set; } = 2f;
 
         /// <summary>
-        ///     RangeBrush - background drawn behind tick scale
+        ///     Ranges - list of radial ranges
         /// </summary>
-        public GaugeBrush RangeBrush { get; set; } = GaugeBrushes.Transparent;
-
-        /// <summary>
-        ///     RangeInnerStartExtent - Drawing range inner boundary start at extent of _radius
-        /// </summary>
-        public float RangeInnerStartExtent { get; set; }
-
-        /// <summary>
-        ///     RangeInnerEndExtent - Drawing range inner boundary end at extent of _radius
-        /// </summary>
-        public float RangeInnerEndExtent { get; set; }
-
-        /// <summary>
-        ///     RangeOuterStartExtent - Drawing range outer boundary start at extent of _radius
-        /// </summary>
-        public float RangeOuterStartExtent { get; set; }
-
-        /// <summary>
-        ///     RangeOuterEndExtent - Drawing range outer boundary end at extent of _radius
-        /// </summary>
-        public float RangeOuterEndExtent { get; set; }
+        public List<GaugeRadialRange> Ranges { get; set; } = new List<GaugeRadialRange>();
 
         /// <summary>
         ///     Fidelity - fidelity of radial angles
@@ -256,24 +239,28 @@ namespace MicroGauge
         /// </summary>
         private void DrawRange()
         {
-            using (var paint = new SKPaint())
+            foreach (var range in Ranges)
             {
-                paint.Style = SKPaintStyle.Fill;
-                paint.IsAntialias = true;
-                paint.Shader = GetSkShader(RangeBrush);
-                using (var path = new SKPath())
+                var startAngle = GetValueAngle(range.StartValue != float.MinValue ? range.StartValue : MinValue);
+                var endAngle = GetValueAngle(range.EndValue != float.MinValue ? range.EndValue : MaxValue);
+                var angleRange = Math.Abs(startAngle - endAngle);
+
+                using (var paint = new SKPaint())
                 {
-                    var startAngle = GetValueAngle(MinValue);
-                    var endAngle = GetValueAngle(MaxValue);
-                    var angleRange = Math.Abs(startAngle - endAngle);
-                    double angleDelta = 0;
-                    var angle = startAngle;
-                    DrawRangeInner(path, angleRange, ref angle, ref angleDelta);
-                    angle += Fidelity;
-                    angleDelta -= Fidelity;
-                    DrawRangeOuter(path, angleRange, ref angle, ref angleDelta);
-                    path.Close();
-                    Canvas.DrawPath(path, paint);
+                    paint.Style = SKPaintStyle.Fill;
+                    paint.IsAntialias = true;
+                    paint.Shader = GetSkShader(range.Brush);
+                    using (var path = new SKPath())
+                    {
+                        double angleDelta = 0;
+                        var angle = startAngle;
+                        DrawRangeInner(range, path, angleRange, ref angle, ref angleDelta);
+                        angle += Fidelity;
+                        angleDelta -= Fidelity;
+                        DrawRangeOuter(range, path, angleRange, ref angle, ref angleDelta);
+                        path.Close();
+                        Canvas.DrawPath(path, paint);
+                    }
                 }
             }
         }
@@ -281,15 +268,16 @@ namespace MicroGauge
         /// <summary>
         ///     DrawRangeInner - sweep forwards for range inner extent
         /// </summary>
-        private void DrawRangeInner(SKPath path, double angleRange, ref double angle, ref double angleDelta)
+        private void DrawRangeInner(GaugeRadialRange range, SKPath path, double angleRange, ref double angle,
+            ref double angleDelta)
         {
-            var innerRatio = (RangeInnerStartExtent - RangeInnerEndExtent) / angleRange;
-            var calcExtent = RangeInnerStartExtent + angleDelta * innerRatio;
+            var innerRatio = (range.InnerStartExtent - range.InnerEndExtent) / angleRange;
+            var calcExtent = range.InnerStartExtent + angleDelta * innerRatio;
             var start = GaugeHelper.GetRadialPoint(_center, Convert.ToSingle(_radius * calcExtent), angle);
             path.MoveTo(start);
             while (angleDelta <= angleRange)
             {
-                calcExtent = RangeInnerStartExtent + angleDelta * innerRatio;
+                calcExtent = range.InnerStartExtent + angleDelta * innerRatio;
                 var point = GaugeHelper.GetRadialPoint(_center, Convert.ToSingle(_radius * calcExtent), angle);
                 path.LineTo(point);
                 angle -= Fidelity;
@@ -300,12 +288,13 @@ namespace MicroGauge
         /// <summary>
         ///     DrawRangeOuter - sweep backwards for range outer extent
         /// </summary>
-        private void DrawRangeOuter(SKPath path, double angleRange, ref double angle, ref double angleDelta)
+        private void DrawRangeOuter(GaugeRadialRange range, SKPath path, double angleRange, ref double angle,
+            ref double angleDelta)
         {
-            var outerRatio = (RangeOuterStartExtent - RangeOuterEndExtent) / angleRange;
+            var outerRatio = (range.OuterStartExtent - range.OuterEndExtent) / angleRange;
             while (angleDelta >= 0)
             {
-                var calcExtent = RangeOuterStartExtent - angleDelta * outerRatio;
+                var calcExtent = range.OuterStartExtent - angleDelta * outerRatio;
                 if (calcExtent > 0)
                 {
                     var point = GaugeHelper.GetRadialPoint(_center, Convert.ToSingle(_radius * calcExtent), angle);

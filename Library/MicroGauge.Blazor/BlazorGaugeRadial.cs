@@ -195,7 +195,7 @@ public class BlazorGaugeRadial : BlazorGaugeBase
         set
         {
             _rangeBrush = value;
-            GetRadial(this).RangeBrush = value;
+            GetRadialRange(this).Brush = value;
             Invalidate();
         }
     }
@@ -206,10 +206,10 @@ public class BlazorGaugeRadial : BlazorGaugeBase
     [Parameter]
     public float RangeInnerStartExtent
     {
-        get => GetRadial(this).RangeInnerStartExtent;
+        get => GetRadialRange(this).InnerStartExtent;
         set
         {
-            GetRadial(this).RangeInnerStartExtent = value;
+            GetRadialRange(this).InnerStartExtent = value;
             Invalidate();
         }
     }
@@ -220,10 +220,10 @@ public class BlazorGaugeRadial : BlazorGaugeBase
     [Parameter]
     public float RangeInnerEndExtent
     {
-        get => GetRadial(this).RangeInnerEndExtent;
+        get => GetRadialRange(this).InnerEndExtent;
         set
         {
-            GetRadial(this).RangeInnerEndExtent = value;
+            GetRadialRange(this).InnerEndExtent = value;
             Invalidate();
         }
     }
@@ -234,10 +234,10 @@ public class BlazorGaugeRadial : BlazorGaugeBase
     [Parameter]
     public float RangeOuterStartExtent
     {
-        get => GetRadial(this).RangeOuterStartExtent;
+        get => GetRadialRange(this).OuterStartExtent;
         set
         {
-            GetRadial(this).RangeOuterStartExtent = value;
+            GetRadialRange(this).OuterStartExtent = value;
             Invalidate();
         }
     }
@@ -248,10 +248,24 @@ public class BlazorGaugeRadial : BlazorGaugeBase
     [Parameter]
     public float RangeOuterEndExtent
     {
-        get => GetRadial(this).RangeOuterEndExtent;
+        get => GetRadialRange(this).OuterEndExtent;
         set
         {
-            GetRadial(this).RangeOuterEndExtent = value;
+            GetRadialRange(this).OuterEndExtent = value;
+            Invalidate();
+        }
+    }
+
+    /// <summary>
+    ///     Ranges
+    /// </summary>
+    [Parameter]
+    public List<GaugeRadialRange> Ranges
+    {
+        get => GetRadial(this).Ranges;
+        set
+        {
+            GetRadial(this).Ranges = value;
             Invalidate();
         }
     }
@@ -268,5 +282,16 @@ public class BlazorGaugeRadial : BlazorGaugeBase
         return (GaugeRadial)gaugeBase.Gauge;
     }
 
+    /// <summary>
+    ///     GetRadialRange - Get Radial Range from gauge base (first range)
+    /// </summary>
+    private static GaugeRadialRange GetRadialRange(BlazorGaugeBase gaugeBase)
+    {
+        GaugeRadial radialGauge = GetRadial(gaugeBase);
+        if (radialGauge.Ranges.Count == 1) return radialGauge.Ranges[0];
+        radialGauge.Ranges.Clear();
+        radialGauge.Ranges.Add(new GaugeRadialRange());
+        return radialGauge.Ranges[0];
+    }
     #endregion
 }
