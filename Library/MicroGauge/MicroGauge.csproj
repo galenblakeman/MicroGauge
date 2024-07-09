@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<PackageId>MicroGauge</PackageId>
-		<Version>1.0.1.0</Version>
+		<Version>1.0.1.1</Version>
 		<Authors>Galen Blakeman</Authors>
 		<Company></Company>
 		<PackageDescription>MicroGauge is a .Net library for easily creating customizable radial and linear gauges</PackageDescription>

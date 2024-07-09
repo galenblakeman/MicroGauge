@@ -7,7 +7,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<PackageId>MicroGauge.Wpf</PackageId>
-		<Version>1.0.1.0</Version>
+		<Version>1.0.1.1</Version>
 		<Authors>Galen Blakeman</Authors>
 		<Company></Company>
 		<PackageDescription>MicroGauge.Wpf is a MicroGauge view library with XAML tags and bindings for customization</PackageDescription>
