@@ -77,3 +77,15 @@
 * RangeInnerEndExtent - Drawing range inner boundary end at extent of radius
 * RangeOuterStartExtent - Drawing range outer boundary start at extent of radius
 * RangeOuterEndExtent - Drawing range outer boundary end at extent of radius
+
+
+## Ranges (Multiple sections behind scale)
+* Ranges - List of GaugeRadialRange
+* GaugeRadialRange: StartValue - Value where range starts
+* GaugeRadialRange: EndValue - Value where range ends
+* GaugeRadialRange: InnerStartExtent - Drawing range inner boundary start at extent of radius
+* GaugeRadialRange: InnerEndExtent - Drawing range inner boundary end at extent of radius
+* GaugeRadialRange: OuterStartExtent - Drawing range outer boundary start at extent of radius
+* GaugeRadialRange: OuterEndExtent - Drawing range outer boundary end at extent of radius
+* GaugeRadialRange: Brush - Guage Brush Color
+* GaugeRadialRange: BrushHex - Hex Color Code to convert to Guage Brush

@@ -3,6 +3,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:microGauge="clr-namespace:MicroGauge.Maui;assembly=MicroGauge.Maui"
+             xmlns:microGaugeBase="clr-namespace:MicroGauge;assembly=MicroGauge"
              x:Class="MicroGauge.Example.Maui.MainPage">
 
     <ContentPage.Resources>
@@ -60,6 +61,7 @@
     <ScrollView>
         <Grid BackgroundColor="#74747c">
             <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -445,7 +447,7 @@
                     BackingBrush="{StaticResource RadialGaugeBacking}"
                     BackingOutlineBrush="{StaticResource RadialGaugeBorder}"
                     BackingStrokeWidth="10"
-                    Margin="50, 35, 50,0"
+                    Margin="50, 35, 50,20"
                     Value="95"
                     MinValue="0"
                     MaxValue="100"
@@ -531,6 +533,87 @@
                     NeedlePivotOutlineBrush="#F28C28"
                     NeedleStartExtent="-0.2"
                     NeedleEndExtent="0.71" />
+
+            <!--Progress-->
+            <Label Grid.Row="4" Grid.Column="0"
+                       Style="{StaticResource ChartLabel}"
+                       Text="Progress"
+                       Margin="0"
+                       VerticalTextAlignment="Start" />
+            <Label Grid.Row="4" Grid.Column="0"
+                       Style="{StaticResource ChartNote}"
+                       Text="(Multiple Solid Ranges)"
+                       Margin="0,16,0,0"
+                       VerticalTextAlignment="Start" />
+
+            <microGauge:MauiGaugeRadial
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    RadialStyle="Half"
+                    BackingBrush="{StaticResource RadialGaugeBacking}"
+                    BackingOutlineBrush="{StaticResource RadialGaugeBorder}"
+                    BackingStrokeWidth="10"
+                    Margin="0, 35, 0,0"
+                    Value="40"
+                    MinValue="0"
+                    MaxValue="100"
+                    TickInterval="25"
+                    MinorTickInterval="25"
+                    LabelInterval="25"
+                    LabelExtent=".85"
+                    LabelFontFamily="Arial"
+                    LabelFontSize="10"
+                    LabelFontBrush="#ffffff"
+                    LabelFontWeight="SemiBold"
+                    LabelFormatString="{}{0:N0} %"
+                    ValueExtent=".60"
+                    ValueFormatString="{}{0:N0} %"
+                    ValueFontFamily="Arial"
+                    ValueFontSize="20"
+                    ValueFontBrush="#ffffff"
+                    ValueFontWeight="SemiBold"
+                    ValueLocation="BottomCenter"
+                    TickBrush="#FFFFFF"
+                    TickStrokeWidth="2"
+                    TickStartExtent="0.49"
+                    TickEndExtent="0.75"
+                    MinorTickBrush="#ffffff"
+                    MinorTickStartExtent="0.60"
+                    MinorTickEndExtent="0.74"
+                    MinorTickStrokeWidth="01"
+                    ScaleStartAngle="180"
+                    ScaleEndAngle="360"
+                    NeedleBrush="#000000"
+                    NeedlePivotBrush="#000000"
+                    NeedlePivotOutlineBrush="#ffffff"
+                    NeedleOutlineBrush="#ffffff"
+                    NeedleOutlineWidth="2"
+                    NeedleStartExtent="-0.2"
+                    NeedleStartWidth="4"
+                    NeedleEndWidth="2">
+                <microGauge:MauiGaugeRadial.Ranges>
+                    <microGaugeBase:GaugeRadialRange
+                            StartValue="0" EndValue="25"
+                            InnerStartExtent="0.5" InnerEndExtent="0.5"
+                            OuterStartExtent="0.74" OuterEndExtent="0.74"
+                            BrushHex="#ee2400" />
+                    <microGaugeBase:GaugeRadialRange
+                            StartValue="25" EndValue="50"
+                            InnerStartExtent="0.5" InnerEndExtent="0.5"
+                            OuterStartExtent="0.74" OuterEndExtent="0.74"
+                            BrushHex="#f3a600" />
+                    <microGaugeBase:GaugeRadialRange
+                            StartValue="50" EndValue="75"
+                            InnerStartExtent="0.5" InnerEndExtent="0.5"
+                            OuterStartExtent="0.74" OuterEndExtent="0.74"
+                            BrushHex="#fcff00" />
+                    <microGaugeBase:GaugeRadialRange
+                            StartValue="75" EndValue="100"
+                            InnerStartExtent="0.5" InnerEndExtent="0.5"
+                            OuterStartExtent="0.74" OuterEndExtent="0.74"
+                            BrushHex="#2e7f00" />
+                </microGauge:MauiGaugeRadial.Ranges>
+            </microGauge:MauiGaugeRadial>
         </Grid>
     </ScrollView>
 

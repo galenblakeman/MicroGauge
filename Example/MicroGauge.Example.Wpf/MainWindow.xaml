@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:microGauge="clr-namespace:MicroGauge.Wpf;assembly=MicroGauge.Wpf"
+        xmlns:microGaugeBase="clr-namespace:MicroGauge;assembly=MicroGauge"
         mc:Ignorable="d" Closing="Window_Closing"
         Title="MicroGauge WPF Examples" Height="1200" Width="800">
     <Window.Resources>
@@ -71,6 +72,7 @@
                     <RowDefinition Height="*" MinHeight="330" />
                     <RowDefinition Height="*" MinHeight="200" MaxHeight="200" />
                     <RowDefinition Height="*" MinHeight="330" />
+                    <RowDefinition Height="*" MinHeight="200" MaxHeight="200" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -520,6 +522,87 @@
                     NeedlePivotOutlineBrush="#F28C28"
                     NeedleStartExtent="-0.2"
                     NeedleEndExtent="0.71" />
+
+                <!--Progress-->
+                <Label Grid.Row="4" Grid.Column="0"
+                       Style="{StaticResource ChartLabel}"
+                       Content="Progress"
+                       Margin="0"
+                       VerticalContentAlignment="Top" />
+                <Label Grid.Row="4" Grid.Column="0"
+                       Style="{StaticResource ChartNote}"
+                       Content="(Multiple Solid Ranges)"
+                       Margin="0,16,0,0"
+                       VerticalContentAlignment="Top" />
+
+                <microGauge:WpfGaugeRadial
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    RadialStyle="Half"
+                    BackingBrush="{StaticResource RadialGaugeBacking}"
+                    BackingOutlineBrush="{StaticResource RadialGaugeBorder}"
+                    BackingStrokeWidth="10"
+                    Margin="40"
+                    Value="40"
+                    MinValue="0"
+                    MaxValue="100"
+                    TickInterval="25"
+                    MinorTickInterval="25"
+                    LabelInterval="25"
+                    LabelExtent=".85"
+                    LabelFontFamily="Arial"
+                    LabelFontSize="10"
+                    LabelFontBrush="#ffffff"
+                    LabelFontWeight="SemiBold"
+                    LabelFormatString="{}{0:N0} %"
+                    ValueExtent=".60"
+                    ValueFormatString="{}{0:N0} %"
+                    ValueFontFamily="Arial"
+                    ValueFontSize="20"
+                    ValueFontBrush="#ffffff"
+                    ValueFontWeight="SemiBold"
+                    ValueLocation="BottomCenter"
+                    TickBrush="#FFFFFF"
+                    TickStrokeWidth="2"
+                    TickStartExtent="0.49"
+                    TickEndExtent="0.75"
+                    MinorTickBrush="#ffffff"
+                    MinorTickStartExtent="0.60"
+                    MinorTickEndExtent="0.74"
+                    MinorTickStrokeWidth="01"
+                    ScaleStartAngle="180"
+                    ScaleEndAngle="360"
+                    NeedleBrush="#000000"
+                    NeedlePivotBrush="#000000"
+                    NeedlePivotOutlineBrush="#ffffff"
+                    NeedleOutlineBrush="#ffffff"
+                    NeedleOutlineWidth="2"
+                    NeedleStartExtent="-0.2"
+                    NeedleStartWidth="4"
+                    NeedleEndWidth="2">
+                    <microGauge:WpfGaugeRadial.Ranges>
+                        <microGaugeBase:GaugeRadialRange
+                            StartValue="0" EndValue="25"
+                            InnerStartExtent="0.5" InnerEndExtent="0.5"
+                            OuterStartExtent="0.74" OuterEndExtent="0.74"
+                            BrushHex="#ee2400" />
+                        <microGaugeBase:GaugeRadialRange
+                            StartValue="25" EndValue="50"
+                            InnerStartExtent="0.5" InnerEndExtent="0.5"
+                            OuterStartExtent="0.74" OuterEndExtent="0.74"
+                            BrushHex="#f3a600" />
+                        <microGaugeBase:GaugeRadialRange
+                            StartValue="50" EndValue="75"
+                            InnerStartExtent="0.5" InnerEndExtent="0.5"
+                            OuterStartExtent="0.74" OuterEndExtent="0.74"
+                            BrushHex="#fcff00" />
+                        <microGaugeBase:GaugeRadialRange
+                            StartValue="75" EndValue="100"
+                            InnerStartExtent="0.5" InnerEndExtent="0.5"
+                            OuterStartExtent="0.74" OuterEndExtent="0.74"
+                            BrushHex="#2e7f00" />
+                    </microGauge:WpfGaugeRadial.Ranges>
+                </microGauge:WpfGaugeRadial>
             </Grid>
         </Grid>
     </ScrollViewer>

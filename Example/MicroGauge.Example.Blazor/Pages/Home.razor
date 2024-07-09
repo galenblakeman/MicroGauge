@@ -73,7 +73,40 @@
         ]
     };
 
+    readonly List<GaugeRadialRange> PressureRanges =
+    [
+        new GaugeRadialRange
+        {
+            StartValue = 0, EndValue = 25,
+            InnerStartExtent = 0.5f, InnerEndExtent = 0.5f,
+            OuterStartExtent = 0.74f, OuterEndExtent = 0.74f,
+            BrushHex = "#ee2400"
+        },
 
+        new GaugeRadialRange
+        {
+            StartValue = 25, EndValue = 50,
+            InnerStartExtent = 0.5f, InnerEndExtent = 0.5f,
+            OuterStartExtent = 0.74f, OuterEndExtent = 0.74f,
+            BrushHex = "#f3a600"
+        },
+
+        new GaugeRadialRange
+        {
+            StartValue = 50, EndValue = 75,
+            InnerStartExtent = 0.5f, InnerEndExtent = 0.5f,
+            OuterStartExtent = 0.74f, OuterEndExtent = 0.74f,
+            BrushHex = "#fcff00"
+        },
+
+        new GaugeRadialRange
+        {
+            StartValue = 75, EndValue = 100,
+            InnerStartExtent = 0.5f, InnerEndExtent = 0.5f,
+            OuterStartExtent = 0.74f, OuterEndExtent = 0.74f,
+            BrushHex = "#2e7f00"
+        }
+    ];
 }
 
 <div class="container gauge-container">
@@ -446,13 +479,130 @@
 
         </div>
     </div>
+<div class="row flex-grow-1 gauge-row">
+    <div class="col-6 d-flex flex-column">
+        <!--Valve-->
+        <div class="container ">
+            <div class="row">
+                <div class="col text-center gauge-label">
+                    Valve
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-center gauge-note">
+                    (Vertical)
+                </div>
+            </div>
+            <div class="row flex-grow-1">
+                <div class="col d-flex flex-column gauge-skinny-container ">
+                    <BlazorGaugeLinear BottomExtent="0.15f"
+                                       TopExtent="0.06f"
+                                       LeftExtent="0.0f"
+                                       RightExtent="0.0f"
+                                       BackingBrush="BrushBacking"
+                                       BackingOutlineBrush="BrushBorder"
+                                       BackingStrokeWidth="10"
+                                       Value="95"
+                                       MinValue="0"
+                                       MaxValue="100"
+                                       TickInterval="10"
+                                       MinorTickInterval="5"
+                                       LabelInterval="10"
+                                       LabelExtent=".74f"
+                                       LabelFormatString="{0:N0}%"
+                                       LabelFontFamily="OpenSans"
+                                       LabelFontSize="10"
+                                       LabelFontBrush="GaugeBrushes.White"
+                                       ValueLocation="GaugeValueLocation.BottomCenter"
+                                       ValueExtent="0.08f"
+                                       ValueFormatString="{0:N0}%"
+                                       ValueFontFamily="OpenSans"
+                                       ValueFontSize="20"
+                                       ValueFontBrush="GaugeBrushes.White"
+                                       ValueFontWeight="SKFontStyleWeight.SemiBold"
+                                       TickBrush="GaugeBrushes.White"
+                                       TickStrokeWidth="1"
+                                       MinorTickBrush="BrushMidGray"
+                                       ValueWidthExtent="0.5f"
+                                       TickWidthExtent="0.6f"
+                                       MinorTickWidthExtent="0.5f"
+                                       IsVertical="true"
+                                       NeedleBrush="BrushGreen"
+                                       NeedleStartWidth="12"
+                                       NeedleEndWidth="1"
+                                       NeedleStartExtent="0.1f"
+                                       NeedleEndExtent="0.25f"
+                                       ValueBarBrush="BrushGreen" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-6 d-flex flex-column">
+        <!--Wind Direction (360)-->
+        <div class="container ">
+            <div class="row">
+                <div class="col text-center gauge-label">
+                    Wind Direction
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-center gauge-note">
+                    (360)
+                </div>
+            </div>
+            <div class="row flex-grow-1 ">
+                <div class="col d-flex flex-column gauge-div">
+                    <BlazorGaugeRadial BottomExtent="0.1f"
+                                       TopExtent="0.0f"
+                                       LeftExtent="0.0f"
+                                       RightExtent="0.0f"
+                                       BackingBrush="BrushBacking"
+                                       BackingOutlineBrush="BrushBorder"
+                                       BackingStrokeWidth="10"
+                                       Value="45"
+                                       MinValue="0"
+                                       MaxValue="360"
+                                       TickInterval="22.5f"
+                                       LabelInterval="45"
+                                       LabelExtent=".8f"
+                                       LabelFormatString="{0:N0}°"
+                                       LabelFontFamily="OpenSans"
+                                       LabelFontSize="10"
+                                       LabelFontBrush="GaugeBrushes.White"
+                                       ValueExtent="1.15f"
+                                       ValueFormatString="{0:N0}°"
+                                       ValueFontFamily="OpenSans"
+                                       ValueFontSize="20"
+                                       ValueFontBrush="GaugeBrushes.White"
+                                       ValueFontWeight="SKFontStyleWeight.SemiBold"
+                                       TickBrush="BrushBurntOrange"
+                                       TickStrokeWidth="2"
+                                       TickStartExtent="0.6f"
+                                       TickEndExtent="0.7f"
+                                       MinorTickBrush="BrushBacking"
+                                       MinorTickStartExtent="0.65f"
+                                       MinorTickEndExtent="0.7f"
+                                       ScaleStartAngle="90"
+                                       ScaleEndAngle="90"
+                                       NeedleBrush="BrushBurntOrange"
+                                       NeedlePivotBrush="BrushDarkGray"
+                                       NeedlePivotOutlineBrush="BrushBurntOrange"
+                                       NeedleStartExtent="-0.2f"
+                                       NeedleEndExtent="0.71f" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
     <div class="row flex-grow-1 gauge-row">
         <div class="col-6 d-flex flex-column">
-            <!--Valve-->
+            <!--Progress-->
             <div class="container ">
                 <div class="row">
                     <div class="col text-center gauge-label">
-                        Valve
+                        Progress
                     </div>
                 </div>
                 <div class="row">
@@ -461,102 +611,70 @@
                     </div>
                 </div>
                 <div class="row flex-grow-1">
-                    <div class="col d-flex flex-column gauge-skinny-container ">
-                        <BlazorGaugeLinear BottomExtent="0.15f"
-                                           TopExtent="0.06f"
-                                           LeftExtent="0.0f"
-                                           RightExtent="0.0f"
+                    <div class="col d-flex flex-column ">
+                        <BlazorGaugeRadial RadialStyle="GaugeRadialStyle.Half"
                                            BackingBrush="BrushBacking"
                                            BackingOutlineBrush="BrushBorder"
                                            BackingStrokeWidth="10"
-                                           Value="95"
+                                           Value="40"
                                            MinValue="0"
                                            MaxValue="100"
-                                           TickInterval="10"
-                                           MinorTickInterval="5"
-                                           LabelInterval="10"
-                                           LabelExtent=".74f"
-                                           LabelFormatString="{0:N0}%"
-                                           LabelFontFamily="OpenSans"
+                                           TickInterval="25"
+                                           MinorTickInterval="25"
+                                           LabelInterval="25"
+                                           LabelExtent=".85f"
+                                           LabelFontFamily="Arial"
                                            LabelFontSize="10"
                                            LabelFontBrush="GaugeBrushes.White"
-                                           ValueLocation="GaugeValueLocation.BottomCenter"
-                                           ValueExtent="0.08f"
+                                           LabelFontWeight="SKFontStyleWeight.SemiBold"
+                                           LabelFormatString="{0:N0}%"
+                                           ValueExtent=".60f"
                                            ValueFormatString="{0:N0}%"
-                                           ValueFontFamily="OpenSans"
+                                           ValueFontFamily="Arial"
                                            ValueFontSize="20"
                                            ValueFontBrush="GaugeBrushes.White"
                                            ValueFontWeight="SKFontStyleWeight.SemiBold"
+                                           ValueLocation="GaugeValueLocation.BottomCenter"
                                            TickBrush="GaugeBrushes.White"
-                                           TickStrokeWidth="1"
-                                           MinorTickBrush="BrushMidGray"
-                                           ValueWidthExtent="0.5f"
-                                           TickWidthExtent="0.6f"
-                                           MinorTickWidthExtent="0.5f"
-                                           IsVertical="true"
-                                           NeedleBrush="BrushGreen"
-                                           NeedleStartWidth="12"
-                                           NeedleEndWidth="1"
-                                           NeedleStartExtent="0.1f"
-                                           NeedleEndExtent="0.25f"
-                                           ValueBarBrush="BrushGreen" />
+                                           TickStrokeWidth="2f"
+                                           TickStartExtent="0.49f"
+                                           TickEndExtent="0.75f"
+                                           MinorTickBrush="GaugeBrushes.White"
+                                           MinorTickStartExtent="0.60f"
+                                           MinorTickEndExtent="0.74f"
+                                           MinorTickStrokeWidth="1"
+                                           ScaleStartAngle="180"
+                                           ScaleEndAngle="360"
+                                           NeedleBrush="GaugeBrushes.Black"
+                                           NeedlePivotBrush="GaugeBrushes.Black"
+                                           NeedlePivotOutlineBrush="GaugeBrushes.White"
+                                           NeedleOutlineBrush="GaugeBrushes.White"
+                                           NeedleOutlineWidth="2f"
+                                           NeedleStartExtent="-0.2f"
+                                           NeedleStartWidth="4f"
+                                           NeedleEndWidth="2"
+                                           Ranges="PressureRanges" />
                     </div>
                 </div>
             </div>
 
         </div>
         <div class="col-6 d-flex flex-column">
-            <!--Wind Direction (360)-->
+            <!--TBD-->
             <div class="container ">
                 <div class="row">
                     <div class="col text-center gauge-label">
-                        Wind Direction
+                       
                     </div>
                 </div>
                 <div class="row">
                     <div class="col text-center gauge-note">
-                        (360)
+                        
                     </div>
                 </div>
                 <div class="row flex-grow-1 ">
                     <div class="col d-flex flex-column gauge-div">
-                        <BlazorGaugeRadial BottomExtent="0.1f"
-                                           TopExtent="0.0f"
-                                           LeftExtent="0.0f"
-                                           RightExtent="0.0f"
-                                           BackingBrush="BrushBacking"
-                                           BackingOutlineBrush="BrushBorder"
-                                           BackingStrokeWidth="10"
-                                           Value="45"
-                                           MinValue="0"
-                                           MaxValue="360"
-                                           TickInterval="22.5f"
-                                           LabelInterval="45"
-                                           LabelExtent=".8f"
-                                           LabelFormatString="{0:N0}°"
-                                           LabelFontFamily="OpenSans"
-                                           LabelFontSize="10"
-                                           LabelFontBrush="GaugeBrushes.White"
-                                           ValueExtent="1.15f"
-                                           ValueFormatString="{0:N0}°"
-                                           ValueFontFamily="OpenSans"
-                                           ValueFontSize="20"
-                                           ValueFontBrush="GaugeBrushes.White"
-                                           ValueFontWeight="SKFontStyleWeight.SemiBold"
-                                           TickBrush="BrushBurntOrange"
-                                           TickStrokeWidth="2"
-                                           TickStartExtent="0.6f"
-                                           TickEndExtent="0.7f"
-                                           MinorTickBrush="BrushBacking"
-                                           MinorTickStartExtent="0.65f"
-                                           MinorTickEndExtent="0.7f"
-                                           ScaleStartAngle="90"
-                                           ScaleEndAngle="90"
-                                           NeedleBrush="BrushBurntOrange"
-                                           NeedlePivotBrush="BrushDarkGray"
-                                           NeedlePivotOutlineBrush="BrushBurntOrange"
-                                           NeedleStartExtent="-0.2f"
-                                           NeedleEndExtent="0.71f" />
+                        
                     </div>
                 </div>
             </div>

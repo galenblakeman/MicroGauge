@@ -3,6 +3,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:microGauge="clr-namespace:MicroGauge.Forms;assembly=MicroGauge.Forms"
+             xmlns:microGaugeBase="clr-namespace:MicroGauge;assembly=MicroGauge"
              x:Class="MicroGauge.Example.Forms.MainPage">
 
     <ContentPage.Resources>
@@ -56,34 +57,36 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <!-- ReSharper all MarkupAttributeTypo -->
-    <StackLayout BackgroundColor="#74747c">
-        <Label HorizontalTextAlignment="Center" VerticalTextAlignment="End"
+    <ScrollView>
+        <StackLayout BackgroundColor="#74747c">
+            <Label HorizontalTextAlignment="Center" VerticalTextAlignment="End"
                Text="MicroGauge Xamarin.Forms Examples" TextColor="White" FontSize="16" Margin="10,50,10,0" />
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="130" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="150" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="150" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <!--WindSpeed-->
-            <Label Grid.Row="0" Grid.Column="0"
+                <!--WindSpeed-->
+                <Label Grid.Row="0" Grid.Column="0"
                    Style="{StaticResource ChartLabel}"
                    Text="Wind Speed"
                    Margin="0"
                    VerticalTextAlignment="Start" />
-            <Label Grid.Row="0" Grid.Column="0"
+                <Label Grid.Row="0" Grid.Column="0"
                    Style="{StaticResource ChartNote}"
                    Text="(No Tail)"
                    Margin="0,16,0,0"
                    VerticalTextAlignment="Start" />
 
-            <microGauge:XfGaugeRadial
+                <microGauge:XfGaugeRadial
                 Grid.Row="0"
                 Grid.Column="0"
                 HorizontalOptions="Center" VerticalOptions="Center"
@@ -131,18 +134,18 @@
                 RangeOuterStartExtent="0.6"
                 RangeOuterEndExtent="0.71" />
 
-            <!--Humidity (No Minor)-->
-            <Label Grid.Row="0" Grid.Column="1"
+                <!--Humidity (No Minor)-->
+                <Label Grid.Row="0" Grid.Column="1"
                    Style="{StaticResource ChartLabel}"
                    Text="Humidity"
                    Margin="0"
                    VerticalTextAlignment="Start" />
-            <Label Grid.Row="0" Grid.Column="1"
+                <Label Grid.Row="0" Grid.Column="1"
                    Style="{StaticResource ChartNote}"
                    Text="(No Minor)"
                    Margin="0,16,0,0"
                    VerticalTextAlignment="Start" />
-            <microGauge:XfGaugeRadial
+                <microGauge:XfGaugeRadial
                 Grid.Row="0"
                 Grid.Column="1"
                 HorizontalOptions="Center" VerticalOptions="Center"
@@ -186,18 +189,18 @@
                 RangeOuterStartExtent="0.6"
                 RangeOuterEndExtent="0.71" />
 
-            <!--Pressure (Set Indicator)-->
-            <Label Grid.Row="1" Grid.Column="0"
+                <!--Pressure (Set Indicator)-->
+                <Label Grid.Row="1" Grid.Column="0"
                    Style="{StaticResource ChartLabel}"
                    Text="Pressure"
                    Margin="0"
                    VerticalTextAlignment="Start" />
-            <Label Grid.Row="1" Grid.Column="0"
+                <Label Grid.Row="1" Grid.Column="0"
                    Style="{StaticResource ChartNote}"
                    Text="(Set Indicator)"
                    Margin="0,16,0,0"
                    VerticalTextAlignment="Start" />
-            <microGauge:XfGaugeRadial
+                <microGauge:XfGaugeRadial
                 Grid.Row="1"
                 Grid.Column="0"
                 HorizontalOptions="Center" VerticalOptions="Center"
@@ -248,18 +251,18 @@
                 RangeOuterEndExtent="0.7" />
 
 
-            <!--Flow Rate (Notch)-->
-            <Label Grid.Row="1" Grid.Column="1"
+                <!--Flow Rate (Notch)-->
+                <Label Grid.Row="1" Grid.Column="1"
                    Style="{StaticResource ChartLabel}"
                    Text="Flow Rate"
                    Margin="0"
                    VerticalTextAlignment="Start" />
-            <Label Grid.Row="1" Grid.Column="1"
+                <Label Grid.Row="1" Grid.Column="1"
                    Style="{StaticResource ChartNote}"
                    Text="(Notch)"
                    Margin="0,16,0,0"
                    VerticalTextAlignment="Start" />
-            <microGauge:XfGaugeRadial
+                <microGauge:XfGaugeRadial
                 Grid.Row="1"
                 Grid.Column="1"
                 HorizontalOptions="Center" VerticalOptions="Center"
@@ -298,18 +301,18 @@
                 NeedleEndExtent="0.71"
                 NeedleEndWidth="3" />
 
-            <!--Temperature (Half)-->
-            <Label Grid.Row="2" Grid.Column="0"
+                <!--Temperature (Half)-->
+                <Label Grid.Row="2" Grid.Column="0"
                    Style="{StaticResource ChartLabel}"
                    Text="Temperature"
                    Margin="0"
                    VerticalTextAlignment="Start" />
-            <Label Grid.Row="2" Grid.Column="0"
+                <Label Grid.Row="2" Grid.Column="0"
                    Style="{StaticResource ChartNote}"
                    Text="(Half)"
                    Margin="0,16,0,0"
                    VerticalTextAlignment="Start" />
-            <microGauge:XfGaugeRadial
+                <microGauge:XfGaugeRadial
                 Grid.Row="2"
                 Grid.Column="0"
                 HorizontalOptions="Center" VerticalOptions="Start"
@@ -360,18 +363,18 @@
                 RangeOuterEndExtent="0.71" />
 
 
-            <!--Battery (Horizontal/Set Indicator)-->
-            <Label Grid.Row="2" Grid.Column="1"
+                <!--Battery (Horizontal/Set Indicator)-->
+                <Label Grid.Row="2" Grid.Column="1"
                    Style="{StaticResource ChartLabel}"
                    Text="Battery"
                    Margin="0"
                    VerticalTextAlignment="Start" />
-            <Label Grid.Row="2" Grid.Column="1"
+                <Label Grid.Row="2" Grid.Column="1"
                    Style="{StaticResource ChartNote}"
                    Text="(Horizontal/Set Indicator)"
                    Margin="0,16,0,0"
                    VerticalTextAlignment="Start" />
-            <microGauge:XfGaugeLinear
+                <microGauge:XfGaugeLinear
                 Grid.Row="2"
                 Grid.Column="1"
                 HorizontalOptions="Center" VerticalOptions="Center"
@@ -420,18 +423,18 @@
                 SetNeedleEndWidth="2"
                 ValueBarBrush="{StaticResource BrushBattery}" />
 
-            <!--Valve-->
-            <Label Grid.Row="3" Grid.Column="0"
+                <!--Valve-->
+                <Label Grid.Row="3" Grid.Column="0"
                    Style="{StaticResource ChartLabel}"
                    Text="Valve"
                    Margin="0"
                    VerticalTextAlignment="Start" />
-            <Label Grid.Row="3" Grid.Column="0"
+                <Label Grid.Row="3" Grid.Column="0"
                    Style="{StaticResource ChartNote}"
                    Text="(Vertical)"
                    Margin="0,16,0,0"
                    VerticalTextAlignment="Start" />
-            <microGauge:XfGaugeLinear
+                <microGauge:XfGaugeLinear
                 Grid.Row="3"
                 Grid.Column="0"
                 HorizontalOptions="Center" VerticalOptions="Center"
@@ -475,18 +478,18 @@
                 NeedleEndExtent="0.25"
                 ValueBarBrush="#57E700" />
 
-            <!--Wind Direction (360)-->
-            <Label Grid.Row="3" Grid.Column="1"
+                <!--Wind Direction (360)-->
+                <Label Grid.Row="3" Grid.Column="1"
                    Style="{StaticResource ChartLabel}"
                    Text="Wind Direction"
                    Margin="0"
                    VerticalTextAlignment="Start" />
-            <Label Grid.Row="3" Grid.Column="1"
+                <Label Grid.Row="3" Grid.Column="1"
                    Style="{StaticResource ChartNote}"
                    Text="(360)"
                    Margin="0,16,0,0"
                    VerticalTextAlignment="Start" />
-            <microGauge:XfGaugeRadial
+                <microGauge:XfGaugeRadial
                 Grid.Row="3"
                 Grid.Column="1"
                 HorizontalOptions="Center" VerticalOptions="Center"
@@ -528,7 +531,91 @@
                 NeedlePivotOutlineBrush="#F28C28"
                 NeedleStartExtent="-0.2"
                 NeedleEndExtent="0.71" />
-        </Grid>
-    </StackLayout>
+
+                <!--Progress-->
+                <Label Grid.Row="4" Grid.Column="0"
+                       Style="{StaticResource ChartLabel}"
+                       Text="Progress"
+                       Margin="0"
+                       VerticalTextAlignment="Start" />
+                <Label Grid.Row="4" Grid.Column="0"
+                       Style="{StaticResource ChartNote}"
+                       Text="(Multiple Solid Ranges)"
+                       Margin="0,16,0,0"
+                       VerticalTextAlignment="Start" />
+
+                <microGauge:XfGaugeRadial
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    HorizontalOptions="Center" VerticalOptions="Start"
+                    HeightRequest="150" WidthRequest="300"
+                    RadialStyle="Half"
+                    BackingBrush="{StaticResource RadialGaugeBacking}"
+                    BackingOutlineBrush="{StaticResource RadialGaugeBorder}"
+                    BackingStrokeWidth="10"
+                    Margin="0, 35, 0,50"
+                    Value="40"
+                    MinValue="0"
+                    MaxValue="100"
+                    TickInterval="25"
+                    MinorTickInterval="25"
+                    LabelInterval="25"
+                    LabelExtent=".85"
+                    LabelFontFamily="Arial"
+                    LabelFontSize="10"
+                    LabelFontBrush="#ffffff"
+                    LabelFontWeight="SemiBold"
+                    LabelFormatString="{}{0:N0} %"
+                    ValueExtent=".60"
+                    ValueFormatString="{}{0:N0} %"
+                    ValueFontFamily="Arial"
+                    ValueFontSize="20"
+                    ValueFontBrush="#ffffff"
+                    ValueFontWeight="SemiBold"
+                    ValueLocation="BottomCenter"
+                    TickBrush="#FFFFFF"
+                    TickStrokeWidth="2"
+                    TickStartExtent="0.49"
+                    TickEndExtent="0.75"
+                    MinorTickBrush="#ffffff"
+                    MinorTickStartExtent="0.60"
+                    MinorTickEndExtent="0.74"
+                    MinorTickStrokeWidth="01"
+                    ScaleStartAngle="180"
+                    ScaleEndAngle="360"
+                    NeedleBrush="#000000"
+                    NeedlePivotBrush="#000000"
+                    NeedlePivotOutlineBrush="#ffffff"
+                    NeedleOutlineBrush="#ffffff"
+                    NeedleOutlineWidth="2"
+                    NeedleStartExtent="-0.2"
+                    NeedleStartWidth="4"
+                    NeedleEndWidth="2">
+                    <microGauge:XfGaugeRadial.Ranges>
+                        <microGaugeBase:GaugeRadialRange
+                            StartValue="0" EndValue="25"
+                            InnerStartExtent="0.5" InnerEndExtent="0.5"
+                            OuterStartExtent="0.74" OuterEndExtent="0.74"
+                            BrushHex="#ee2400" />
+                        <microGaugeBase:GaugeRadialRange
+                            StartValue="25" EndValue="50"
+                            InnerStartExtent="0.5" InnerEndExtent="0.5"
+                            OuterStartExtent="0.74" OuterEndExtent="0.74"
+                            BrushHex="#f3a600" />
+                        <microGaugeBase:GaugeRadialRange
+                            StartValue="50" EndValue="75"
+                            InnerStartExtent="0.5" InnerEndExtent="0.5"
+                            OuterStartExtent="0.74" OuterEndExtent="0.74"
+                            BrushHex="#fcff00" />
+                        <microGaugeBase:GaugeRadialRange
+                            StartValue="75" EndValue="100"
+                            InnerStartExtent="0.5" InnerEndExtent="0.5"
+                            OuterStartExtent="0.74" OuterEndExtent="0.74"
+                            BrushHex="#2e7f00" />
+                    </microGauge:XfGaugeRadial.Ranges>
+                </microGauge:XfGaugeRadial>
+            </Grid>
+        </StackLayout>
+    </ScrollView>
 
 </ContentPage>
