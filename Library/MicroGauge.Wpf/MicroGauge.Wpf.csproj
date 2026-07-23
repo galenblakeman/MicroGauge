@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net8.0-windows</TargetFramework>
+		<TargetFramework>net10.0-windows</TargetFramework>
 		<UseWindowsForms>true</UseWindowsForms>
 		<UseWPF>true</UseWPF>
 		<ImplicitUsings>enable</ImplicitUsings>
@@ -19,7 +19,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="SkiaSharp.Views.WPF" Version="2.88.8" />
+		<PackageReference Include="SkiaSharp.Views.WPF" Version="3.119.1" />
 	</ItemGroup>
 
 	<ItemGroup>

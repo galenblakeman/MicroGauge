@@ -33,10 +33,9 @@ namespace MicroGauge
         /// <summary>
         ///     GetTextBounds - Measure text to get bounds
         /// </summary>
-        public static SKRect GetTextBounds(SKPaint paint, string text)
+        public static SKRect GetTextBounds(SKFont font, string text)
         {
-            var textBounds = new SKRect();
-            paint.MeasureText(text, ref textBounds);
+            font.MeasureText(text, out var textBounds);
             return textBounds;
         }
 

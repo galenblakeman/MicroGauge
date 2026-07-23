@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net10.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <PackageId>MicroGauge.Blazor</PackageId>
@@ -18,8 +18,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="SkiaSharp.Views.Blazor" Version="2.88.8" />
-      <PackageReference Include="System.Drawing.Common" Version="8.0.4" />
+      <PackageReference Include="SkiaSharp.Views.Blazor" Version="3.119.1" />
     </ItemGroup>
 
     <ItemGroup>

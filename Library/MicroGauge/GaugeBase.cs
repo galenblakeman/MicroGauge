@@ -362,10 +362,6 @@ namespace MicroGauge
             paint.IsAntialias = true;
             paint.Shader = GetSkShader(LabelFontBrush);
             paint.IsStroke = false;
-            paint.TextAlign = SKTextAlign.Center;
-            paint.TextSize = LabelFontSize;
-            paint.Typeface = SKTypeface.FromFamilyName(LabelFontFamily, LabelFontWeight,
-                SKFontStyleWidth.Expanded, SKFontStyleSlant.Upright);
         }
 
         /// <summary>
@@ -376,10 +372,46 @@ namespace MicroGauge
             paint.IsAntialias = true;
             paint.Shader = GetSkShader(ValueFontBrush);
             paint.IsStroke = false;
-            paint.TextAlign = SKTextAlign.Center;
-            paint.TextSize = ValueFontSize;
-            paint.Typeface = SKTypeface.FromFamilyName(ValueFontFamily, ValueFontWeight,
-                SKFontStyleWidth.Expanded, SKFontStyleSlant.Upright);
+        }
+
+        private SKFont _labelFont;
+        private string _labelFontKey;
+
+        /// <summary>
+        ///     GetLabelFont - cached font for label text
+        /// </summary>
+        protected SKFont GetLabelFont()
+        {
+            var key = $"{LabelFontFamily}|{(int)LabelFontWeight}|{LabelFontSize}";
+            if (_labelFont == null || _labelFontKey != key)
+            {
+                _labelFont?.Dispose();
+                _labelFont = new SKFont(SKTypeface.FromFamilyName(LabelFontFamily, LabelFontWeight,
+                    SKFontStyleWidth.Expanded, SKFontStyleSlant.Upright), LabelFontSize);
+                _labelFontKey = key;
+            }
+
+            return _labelFont;
+        }
+
+        private SKFont _valueFont;
+        private string _valueFontKey;
+
+        /// <summary>
+        ///     GetValueFont - cached font for value text
+        /// </summary>
+        protected SKFont GetValueFont()
+        {
+            var key = $"{ValueFontFamily}|{(int)ValueFontWeight}|{ValueFontSize}";
+            if (_valueFont == null || _valueFontKey != key)
+            {
+                _valueFont?.Dispose();
+                _valueFont = new SKFont(SKTypeface.FromFamilyName(ValueFontFamily, ValueFontWeight,
+                    SKFontStyleWidth.Expanded, SKFontStyleSlant.Upright), ValueFontSize);
+                _valueFontKey = key;
+            }
+
+            return _valueFont;
         }
 
         /// <summary>

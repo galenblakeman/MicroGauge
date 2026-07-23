@@ -429,11 +429,12 @@ namespace MicroGauge
             if (i > 0 && Math.Abs(angle - ScaleStartAngle) < 0.01) return true;
             var labelPoint = GaugeHelper.GetRadialPoint(_center, _radius * LabelExtent, angle);
             var label = GetLabelFormattedValue(MinValue + i * LabelInterval);
+            var font = GetLabelFont();
             if (RadialStyle != GaugeRadialStyle.Half)
-                labelPoint.Y += GaugeHelper.GetTextBounds(paint, label).Height / 2;
+                labelPoint.Y += GaugeHelper.GetTextBounds(font, label).Height / 2;
             else
-                labelPoint.Y -= GaugeHelper.GetTextBounds(paint, label).Height / 2;
-            Canvas.DrawText(label, labelPoint, paint);
+                labelPoint.Y -= GaugeHelper.GetTextBounds(font, label).Height / 2;
+            Canvas.DrawText(label, labelPoint, SKTextAlign.Center, font, paint);
             return false;
         }
 
@@ -464,8 +465,9 @@ namespace MicroGauge
                 }
 
                 var valueStr = GetValueFormattedValue(Convert.ToSingle(Value));
-                point.Y += GaugeHelper.GetTextBounds(paint, valueStr).Height / 2;
-                Canvas.DrawText(valueStr, point, paint);
+                var font = GetValueFont();
+                point.Y += GaugeHelper.GetTextBounds(font, valueStr).Height / 2;
+                Canvas.DrawText(valueStr, point, SKTextAlign.Center, font, paint);
             }
         }
 

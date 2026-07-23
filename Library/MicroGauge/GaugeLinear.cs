@@ -257,9 +257,10 @@ namespace MicroGauge
             var angle = GetBarAngle();
             var point = GetTickPoint(tickSpacing, i);
             var label = GetLabelFormattedValue(MinValue + i * LabelInterval);
-            point.Y += GaugeHelper.GetTextBounds(paint, label).Height / 2;
+            var font = GetLabelFont();
+            point.Y += GaugeHelper.GetTextBounds(font, label).Height / 2;
             var labelPoint = GaugeHelper.GetRadialPoint(point, _barWidth * LabelExtent / 2, angle);
-            Canvas.DrawText(label, labelPoint, paint);
+            Canvas.DrawText(label, labelPoint, SKTextAlign.Center, font, paint);
         }
 
         /// <summary>
@@ -313,8 +314,9 @@ namespace MicroGauge
                     }
 
                 var valueStr = GetValueFormattedValue(Convert.ToSingle(Value));
-                point.Y += GaugeHelper.GetTextBounds(paint, valueStr).Height / 2;
-                Canvas.DrawText(valueStr, point, paint);
+                var font = GetValueFont();
+                point.Y += GaugeHelper.GetTextBounds(font, valueStr).Height / 2;
+                Canvas.DrawText(valueStr, point, SKTextAlign.Center, font, paint);
             }
         }
 
