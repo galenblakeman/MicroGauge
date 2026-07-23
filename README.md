@@ -6,7 +6,7 @@
 * Linear Gauges: Implement vertical or horizontal orientations to meet interface needs. 
 * Customization: Configure backing, scale, tick (minor/major), label, value, needle, and range via attributes. 
 * Cross-Platform Compatibility: Works with all the platforms that [SkiaSharp](https://github.com/mono/SkiaSharp) supports. 
-* Framework: Xamarin, Maui, WPF, and Blazor libraries are provided with tags and bindings for customization.
+* Framework: MAUI, WPF, and Blazor libraries are provided with tags and bindings for customization (.NET 10, SkiaSharp 3).
 
 ---
 ## Gallery
@@ -16,7 +16,7 @@
 ## Nuget Packages
 [![NuGet Version](https://img.shields.io/nuget/v/MicroGauge?style=flat-square&logo=nuget&label=MicroGauge)](https://www.nuget.org/packages/MicroGauge/)
 
-[![NuGet Version](https://img.shields.io/nuget/v/MicroGauge.Forms?style=flat-square&logo=nuget&label=MicroGauge.Forms)](https://www.nuget.org/packages/MicroGauge.Forms/)
+[![NuGet Version](https://img.shields.io/nuget/v/MicroGauge.Forms?style=flat-square&logo=nuget&label=MicroGauge.Forms)](https://www.nuget.org/packages/MicroGauge.Forms/) *(legacy, frozen at 1.0.1.x)*
 
 [![NuGet Version](https://img.shields.io/nuget/v/MicroGauge.Maui?style=flat-square&logo=nuget&label=MicroGauge.Maui)](https://www.nuget.org/packages/MicroGauge.Maui/)
 
@@ -31,42 +31,10 @@
 * [Linear Gauge](https://github.com/galenblakeman/MicroGauge/blob/master/Doc/LinearGaugeTag.md)
 
 ---
-##  Xamarin.Forms Usage
-###  Nuget Package Install
+##  Xamarin.Forms (Legacy)
 
-```Dotenv
-dotnet add package MicroGauge.Forms
-```
+Xamarin.Forms reached end-of-life in May 2024. The [MicroGauge.Forms](https://www.nuget.org/packages/MicroGauge.Forms/) package remains available on NuGet frozen at version 1.0.1.x (SkiaSharp 2.x) for legacy applications, but it is no longer part of this repository and will not receive updates. See the [1.0.1.1 tag](https://github.com/galenblakeman/MicroGauge/tree/f2c6732) for its source and examples.
 
-###  Namespace Attribute
-
-```XML
-xmlns:microGauge="clr-namespace:MicroGauge.Forms;assembly=MicroGauge.Forms"
-```
-
-###  XAML
-
-```XML
-<microGauge:XfGaugeRadial Value="15"  NeedleBrush="#008000" />
-<microGauge:XfGaugeLinear Value="15"  NeedleBrush="#008000" />
-```
-
-###  C#
-
-```C#
-XfGaugeRadial radialGauge = new XfGaugeRadial
-{
-    Value = 15.0, NeedleBrush = new SolidColorBrush(Color.Green)
-};
-XfGaugeLinear linearGauge = new XfGaugeLinear
-{
-    Value = 15.0, NeedleBrush = new SolidColorBrush(Color.Green)
-};
-```
-
-###  Examples
-* Project: [MicroGauge.Example.Forms](https://github.com/galenblakeman/MicroGauge/tree/master/Example/MicroGauge.Example.Forms)
-* Bindings: [MainPage.xaml](https://github.com/galenblakeman/MicroGauge/blob/master/Example/MicroGauge.Example.Forms/MicroGauge.Example.Forms/MainPage.xaml)  
 ---
 
 ##  .Net MAUI Usage
