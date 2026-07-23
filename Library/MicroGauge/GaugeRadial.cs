@@ -476,7 +476,7 @@ namespace MicroGauge
         private void CalcDimensions()
         {
             var verticalPadding = SurfaceHeight * TopExtent + SurfaceHeight * BottomExtent;
-            var horizontalPadding = SurfaceWidth * LeftExtent + SurfaceHeight * RightExtent;
+            var horizontalPadding = SurfaceWidth * LeftExtent + SurfaceWidth * RightExtent;
             var maxPadding = Math.Max(verticalPadding, horizontalPadding);
             if (RadialStyle != GaugeRadialStyle.Half)
             {
