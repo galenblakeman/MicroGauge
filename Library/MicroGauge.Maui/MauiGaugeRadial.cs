@@ -264,9 +264,7 @@ public class MauiGaugeRadial : MauiGaugeBase
     private static GaugeRadialRange GetRadialRange(MauiGaugeBase gaugeBase)
     {
         GaugeRadial radialGauge = GetRadial(gaugeBase);
-        if (radialGauge.Ranges.Count == 1) return radialGauge.Ranges[0];
-        radialGauge.Ranges.Clear();
-        radialGauge.Ranges.Add(new GaugeRadialRange());
+        if (radialGauge.Ranges.Count == 0) radialGauge.Ranges.Add(new GaugeRadialRange());
         return radialGauge.Ranges[0];
     }
     #endregion
