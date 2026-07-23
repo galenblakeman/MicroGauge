@@ -244,6 +244,7 @@ namespace MicroGauge
                 var startAngle = GetValueAngle(range.StartValue != float.MinValue ? range.StartValue : MinValue);
                 var endAngle = GetValueAngle(range.EndValue != float.MinValue ? range.EndValue : MaxValue);
                 var angleRange = Math.Abs(startAngle - endAngle);
+                if (angleRange <= 0) continue;
 
                 using (var paint = new SKPaint())
                 {
@@ -311,6 +312,7 @@ namespace MicroGauge
         /// </summary>
         private void DrawTicks(int tickCount, bool isMajor)
         {
+            if (tickCount < 2) return;
             using (var paint = new SKPaint())
             {
                 paint.Style = SKPaintStyle.Stroke;
@@ -406,6 +408,7 @@ namespace MicroGauge
         private void DrawLabelNumbers()
         {
             var majorTicks = GaugeHelper.GetTicks(MinValue, MaxValue, LabelInterval);
+            if (majorTicks < 2) return;
             var sliceAngle = GetAngleRange(ScaleStartAngle, ScaleEndAngle) / (majorTicks - 1);
             using (var paint = new SKPaint())
             {

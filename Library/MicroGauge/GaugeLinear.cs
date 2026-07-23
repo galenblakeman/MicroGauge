@@ -166,6 +166,7 @@ namespace MicroGauge
         /// </summary>
         private void DrawTicks(int numberTicks, bool isMajor)
         {
+            if (numberTicks < 2) return;
             using (var paint = new SKPaint())
             {
                 paint.Style = SKPaintStyle.Stroke;
@@ -238,6 +239,7 @@ namespace MicroGauge
         private void DrawLabelNumbers()
         {
             var majorTicks = GaugeHelper.GetTicks(MinValue, MaxValue, LabelInterval);
+            if (majorTicks < 2) return;
             double tickSpacing = _barLength / (majorTicks - 1);
 
             using (var paint = new SKPaint())

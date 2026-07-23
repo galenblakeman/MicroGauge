@@ -15,6 +15,7 @@ namespace MicroGauge
         /// <returns></returns>
         public static int GetTicks(float min, float max, float interval)
         {
+            if (interval <= 0 || max <= min) return 0;
             var rawNumberTicks = (max - min) / interval;
             return Convert.ToInt32(Math.Round(rawNumberTicks)) + 1;
         }
