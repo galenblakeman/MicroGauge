@@ -286,6 +286,130 @@ namespace MicroGauge
         /// </summary>
         public double BackgroundImageRotation { get; set; }
 
+        /// <summary>
+        ///     EnableStaticCaching - cache static layers (backing, image, ranges, ticks, labels)
+        ///     as pictures replayed on each draw, so value updates only redraw the needle.
+        ///     Static state changes are detected automatically; brushes are tracked by
+        ///     reference, so after mutating a brush in place call InvalidateStaticLayers.
+        /// </summary>
+        public bool EnableStaticCaching { get; set; } = true;
+
+        #endregion
+
+        #region Static layer cache
+
+        private SKPicture _underLayer;
+        private SKPicture _overLayer;
+        private long _cacheSignature;
+        private int _cacheWidth;
+        private int _cacheHeight;
+
+        /// <summary>
+        ///     InvalidateStaticLayers - drop cached static layers so the next draw re-records them
+        /// </summary>
+        public void InvalidateStaticLayers()
+        {
+            _underLayer?.Dispose();
+            _underLayer = null;
+            _overLayer?.Dispose();
+            _overLayer = null;
+        }
+
+        /// <summary>
+        ///     DrawWithCache - replay cached under/over layers around the dynamic draw,
+        ///     re-recording them when the signature or surface size changes
+        /// </summary>
+        protected void DrawWithCache(long signature, Action drawUnder, Action drawDynamic, Action drawOver)
+        {
+            if (!EnableStaticCaching)
+            {
+                drawUnder();
+                drawDynamic();
+                drawOver();
+                return;
+            }
+
+            if (_underLayer == null || signature != _cacheSignature ||
+                _cacheWidth != SurfaceWidth || _cacheHeight != SurfaceHeight)
+            {
+                InvalidateStaticLayers();
+                _underLayer = RecordLayer(drawUnder);
+                _overLayer = RecordLayer(drawOver);
+                _cacheSignature = signature;
+                _cacheWidth = SurfaceWidth;
+                _cacheHeight = SurfaceHeight;
+            }
+
+            Canvas.DrawPicture(_underLayer);
+            drawDynamic();
+            Canvas.DrawPicture(_overLayer);
+        }
+
+        /// <summary>
+        ///     RecordLayer - record a draw action into a picture by temporarily
+        ///     redirecting Canvas to a recording canvas
+        /// </summary>
+        private SKPicture RecordLayer(Action draw)
+        {
+            using (var recorder = new SKPictureRecorder())
+            {
+                var realCanvas = Canvas;
+                Canvas = recorder.BeginRecording(SKRect.Create(SurfaceWidth, SurfaceHeight));
+                try
+                {
+                    draw();
+                }
+                finally
+                {
+                    Canvas = realCanvas;
+                }
+
+                return recorder.EndRecording();
+            }
+        }
+
+        /// <summary>
+        ///     HashCombine - fold a value's hash into a running signature
+        /// </summary>
+        protected static long HashCombine(long hash, object value)
+        {
+            return hash * 31 + (value?.GetHashCode() ?? 0);
+        }
+
+        /// <summary>
+        ///     ComputeBaseStaticSignature - signature of shared state that affects the static layers
+        /// </summary>
+        protected long ComputeBaseStaticSignature()
+        {
+            long hash = 17;
+            hash = HashCombine(hash, TopExtent);
+            hash = HashCombine(hash, BottomExtent);
+            hash = HashCombine(hash, LeftExtent);
+            hash = HashCombine(hash, RightExtent);
+            hash = HashCombine(hash, BackingBrush);
+            hash = HashCombine(hash, BackingOutlineBrush);
+            hash = HashCombine(hash, BackingStrokeWidth);
+            hash = HashCombine(hash, BackgroundImage);
+            hash = HashCombine(hash, BackgroundImageOpacity);
+            hash = HashCombine(hash, BackgroundImageRotation);
+            hash = HashCombine(hash, TickBrush);
+            hash = HashCombine(hash, TickStrokeWidth);
+            hash = HashCombine(hash, MinorTickBrush);
+            hash = HashCombine(hash, MinorTickStrokeWidth);
+            hash = HashCombine(hash, TickInterval);
+            hash = HashCombine(hash, MinorTickInterval);
+            hash = HashCombine(hash, MinValue);
+            hash = HashCombine(hash, MaxValue);
+            hash = HashCombine(hash, LabelInterval);
+            hash = HashCombine(hash, LabelExtent);
+            hash = HashCombine(hash, LabelFormatString);
+            hash = HashCombine(hash, LabelFontSize);
+            hash = HashCombine(hash, LabelFontWeight);
+            hash = HashCombine(hash, LabelFontBrush);
+            hash = HashCombine(hash, LabelFontFamily);
+            return hash;
+        }
+
         #endregion
 
         #region Draw
@@ -484,6 +608,7 @@ namespace MicroGauge
             _valueTypeface?.Dispose();
             _valueTypeface = null;
             _valueFontKey = null;
+            InvalidateStaticLayers();
         }
 
         /// <summary>

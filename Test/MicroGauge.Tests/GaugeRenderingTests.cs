@@ -143,6 +143,55 @@ public class GaugeRenderingTests
     }
 
     [Fact]
+    public void CachedReplayMatchesFirstRender()
+    {
+        using var gauge = new GaugeRadial
+        {
+            Value = 42,
+            Ranges = { MakeRange("#2E7D32", 0, 40), MakeRange("#C62828", 75, 100) }
+        };
+        using var first = GaugeRenderer.Render(gauge, 300, 300);
+        gauge.Value = 55;
+        gauge.Value = 42;
+        using var replayed = GaugeRenderer.Render(gauge, 300, 300);
+        AssertIdentical(first, replayed);
+    }
+
+    [Fact]
+    public void StaticCacheInvalidatesOnPropertyChange()
+    {
+        using var cached = new GaugeRadial { Value = 42, Ranges = { MakeRange("#2E7D32", 0, 40) } };
+        using (GaugeRenderer.Render(cached, 300, 300))
+        {
+        }
+
+        cached.TickBrush = GaugeBrushes.Red;
+        cached.Ranges[0].BrushHex = "#C62828";
+        cached.InvalidateStaticLayers(); // in-place range brush mutation is by-reference, needs explicit invalidate
+        using var afterChange = GaugeRenderer.Render(cached, 300, 300);
+
+        using var fresh = new GaugeRadial
+        {
+            Value = 42, TickBrush = GaugeBrushes.Red,
+            Ranges = { MakeRange("#C62828", 0, 40) }
+        };
+        using var freshRender = GaugeRenderer.Render(fresh, 300, 300);
+        AssertIdentical(afterChange, freshRender);
+    }
+
+    private static void AssertIdentical(SKImage expected, SKImage actual)
+    {
+        using var e = SKBitmap.FromImage(expected);
+        using var a = SKBitmap.FromImage(actual);
+        Assert.Equal(e.Width, a.Width);
+        Assert.Equal(e.Height, a.Height);
+        for (var y = 0; y < e.Height; y++)
+        for (var x = 0; x < e.Width; x++)
+            if (e.GetPixel(x, y) != a.GetPixel(x, y))
+                Assert.Fail($"Pixel mismatch at ({x},{y})");
+    }
+
+    [Fact]
     public void DisposedGaugeRendersAgain()
     {
         var gauge = new GaugeRadial { Value = 42 };

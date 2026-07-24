@@ -103,16 +103,48 @@ namespace MicroGauge
             Canvas.Clear();
             //DebugFillCanvas(SKColors.Green);
             CalcDimensions();
-            DrawGaugeArea();
-            DrawBackgroundImage();
-            DrawRange();
-            var minorTicks = GaugeHelper.GetTicks(MinValue, MaxValue, MinorTickInterval);
-            DrawTicks(minorTicks, false);
-            var majorTicks = GaugeHelper.GetTicks(MinValue, MaxValue, TickInterval);
-            DrawTicks(majorTicks, true);
-            DrawNeedle();
-            DrawLabelNumbers();
+            DrawWithCache(ComputeStaticSignature(),
+                drawUnder: () =>
+                {
+                    DrawGaugeArea();
+                    DrawBackgroundImage();
+                    DrawRange();
+                    var minorTicks = GaugeHelper.GetTicks(MinValue, MaxValue, MinorTickInterval);
+                    DrawTicks(minorTicks, false);
+                    var majorTicks = GaugeHelper.GetTicks(MinValue, MaxValue, TickInterval);
+                    DrawTicks(majorTicks, true);
+                },
+                drawDynamic: DrawNeedle,
+                drawOver: DrawLabelNumbers);
             DrawValueLabel();
+        }
+
+        /// <summary>
+        ///     ComputeStaticSignature - signature of state affecting the cached static layers
+        /// </summary>
+        private long ComputeStaticSignature()
+        {
+            var hash = ComputeBaseStaticSignature();
+            hash = HashCombine(hash, RadialStyle);
+            hash = HashCombine(hash, ScaleStartAngle);
+            hash = HashCombine(hash, ScaleEndAngle);
+            hash = HashCombine(hash, TickStartExtent);
+            hash = HashCombine(hash, TickEndExtent);
+            hash = HashCombine(hash, MinorTickStartExtent);
+            hash = HashCombine(hash, MinorTickEndExtent);
+            hash = HashCombine(hash, Ranges.Count);
+            foreach (var range in Ranges)
+            {
+                hash = HashCombine(hash, range.Brush);
+                hash = HashCombine(hash, range.StartValue);
+                hash = HashCombine(hash, range.EndValue);
+                hash = HashCombine(hash, range.InnerStartExtent);
+                hash = HashCombine(hash, range.InnerEndExtent);
+                hash = HashCombine(hash, range.OuterStartExtent);
+                hash = HashCombine(hash, range.OuterEndExtent);
+            }
+
+            return hash;
         }
 
         /// <summary>
