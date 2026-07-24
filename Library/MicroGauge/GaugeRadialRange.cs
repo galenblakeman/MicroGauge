@@ -24,14 +24,14 @@ namespace MicroGauge
         }
 
         /// <summary>
-        ///     StartValue - value range start
+        ///     StartValue - value range start (null uses gauge MinValue)
         /// </summary>
-        public float StartValue { get; set; } = float.MinValue;
+        public float? StartValue { get; set; }
 
         /// <summary>
-        ///     EndValue - value range end
+        ///     EndValue - value range end (null uses gauge MaxValue)
         /// </summary>
-        public float EndValue { get; set; } = float.MinValue;
+        public float? EndValue { get; set; }
 
         /// <summary>
         ///     InnerStartExtent - Drawing range inner boundary start at extent of _radius

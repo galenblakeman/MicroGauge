@@ -10,6 +10,11 @@ namespace MicroGauge
     public static class GaugeHelper
     {
         /// <summary>
+        ///     MaxTicks - tick counts beyond this are treated as degenerate input and draw nothing
+        /// </summary>
+        private const float MaxTicks = 10000f;
+
+        /// <summary>
         ///     GetTicks - intervals fit between the minimum and maximum values, plus one for the starting tick
         /// </summary>
         /// <returns></returns>
@@ -17,6 +22,7 @@ namespace MicroGauge
         {
             if (interval <= 0 || max <= min) return 0;
             var rawNumberTicks = (max - min) / interval;
+            if (rawNumberTicks > MaxTicks) return 0;
             return Convert.ToInt32(Math.Round(rawNumberTicks)) + 1;
         }
 

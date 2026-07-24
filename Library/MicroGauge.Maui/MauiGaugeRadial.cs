@@ -243,7 +243,11 @@ public class MauiGaugeRadial : MauiGaugeBase
     public List<GaugeRadialRange> Ranges
     {
         get => GetRadial(this).Ranges;
-        set => GetRadial(this).Ranges = value;
+        set
+        {
+            GetRadial(this).Ranges = value;
+            InvalidateSurface();
+        }
     }
 
     #endregion

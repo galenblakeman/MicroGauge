@@ -245,8 +245,8 @@ namespace MicroGauge
         {
             foreach (var range in Ranges)
             {
-                var startAngle = GetValueAngle(range.StartValue != float.MinValue ? range.StartValue : MinValue);
-                var endAngle = GetValueAngle(range.EndValue != float.MinValue ? range.EndValue : MaxValue);
+                var startAngle = GetValueAngle(range.StartValue ?? MinValue);
+                var endAngle = GetValueAngle(range.EndValue ?? MaxValue);
                 var angleRange = Math.Abs(startAngle - endAngle);
                 if (angleRange <= 0) continue;
 

@@ -248,7 +248,11 @@ public class WpfGaugeRadial : WpfGaugeBase
     public List<GaugeRadialRange> Ranges
     {
         get => GetRadial(this).Ranges;
-        set => GetRadial(this).Ranges = value;
+        set
+        {
+            GetRadial(this).Ranges = value;
+            InvalidateVisual();
+        }
     }
 
     #endregion
