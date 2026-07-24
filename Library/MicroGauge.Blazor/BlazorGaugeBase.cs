@@ -12,7 +12,7 @@ namespace MicroGauge.Blazor;
 /// <summary>
 ///     BlazorGaugeBase - abstract class with shared common properties and methods
 /// </summary>
-public abstract class BlazorGaugeBase : SKGLView
+public abstract class BlazorGaugeBase : SKGLView, IDisposable
 {
     /// <summary>
     ///     Gauge - Wrapped MicroGauge
@@ -25,6 +25,43 @@ public abstract class BlazorGaugeBase : SKGLView
     protected BlazorGaugeBase()
     {
         OnPaintSurface += DrawContent;
+    }
+
+    private bool _suppressInvalidate;
+
+    /// <summary>
+    ///     SetParametersAsync - batch parameter updates into a single invalidation
+    /// </summary>
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        _suppressInvalidate = true;
+        try
+        {
+            await base.SetParametersAsync(parameters);
+        }
+        finally
+        {
+            _suppressInvalidate = false;
+        }
+
+        Invalidate();
+    }
+
+    /// <summary>
+    ///     InvalidateGauge - request a repaint unless batched by SetParametersAsync
+    /// </summary>
+    protected internal void InvalidateGauge()
+    {
+        if (!_suppressInvalidate) Invalidate();
+    }
+
+    /// <summary>
+    ///     Dispose - release cached gauge resources, then run SKGLView cleanup
+    /// </summary>
+    public new void Dispose()
+    {
+        Gauge?.Dispose();
+        base.Dispose();
     }
 
 
@@ -64,7 +101,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.BottomExtent = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -78,7 +115,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.TopExtent = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -92,7 +129,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.LeftExtent = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -106,7 +143,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.RightExtent = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -120,7 +157,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.Value = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -137,7 +174,7 @@ public abstract class BlazorGaugeBase : SKGLView
         {
             _backingBrush = value;
             Gauge.BackingBrush = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -154,7 +191,7 @@ public abstract class BlazorGaugeBase : SKGLView
         {
             _backingOutlineBrush = value;
             Gauge.BackingOutlineBrush = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -168,7 +205,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.BackingStrokeWidth = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -185,7 +222,7 @@ public abstract class BlazorGaugeBase : SKGLView
         {
             _tickBrush = value;
             Gauge.TickBrush = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -199,7 +236,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.TickStrokeWidth = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -216,7 +253,7 @@ public abstract class BlazorGaugeBase : SKGLView
         {
             _minorTickBrush = value;
             Gauge.MinorTickBrush = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -230,7 +267,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.MinorTickStrokeWidth = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -244,7 +281,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.TickInterval = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -258,7 +295,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.MinorTickInterval = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -272,7 +309,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.MinValue = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -286,7 +323,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.MaxValue = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -300,7 +337,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.LabelInterval = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -314,7 +351,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.LabelExtent = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -328,7 +365,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.LabelFormatString = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -342,7 +379,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.LabelFontSize = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -356,7 +393,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.LabelFontWeight = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -373,7 +410,7 @@ public abstract class BlazorGaugeBase : SKGLView
         {
             _labelFontBrush = value;
             Gauge.LabelFontBrush = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -387,7 +424,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.LabelFontFamily = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -401,7 +438,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.ValueLocation = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -415,7 +452,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.ValueExtent = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -429,7 +466,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.ValueFormatString = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -443,7 +480,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.ValueFontSize = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -457,7 +494,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.ValueFontWeight = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -474,7 +511,7 @@ public abstract class BlazorGaugeBase : SKGLView
         {
             _valueFontBrush = value;
             Gauge.ValueFontBrush = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -488,7 +525,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.ValueFontFamily = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -505,7 +542,7 @@ public abstract class BlazorGaugeBase : SKGLView
         {
             _needleBrush = value;
             Gauge.NeedleBrush = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -519,7 +556,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.NeedleStartWidth = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -533,7 +570,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.NeedleEndWidth = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -547,7 +584,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.NeedleStartExtent = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -561,7 +598,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.NeedleEndExtent = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -575,7 +612,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.NeedleOutlineWidth = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -592,7 +629,7 @@ public abstract class BlazorGaugeBase : SKGLView
         {
             _needleOutlineBrush = value;
             Gauge.NeedleOutlineBrush = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -606,7 +643,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.SetNeedleValue = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -623,7 +660,7 @@ public abstract class BlazorGaugeBase : SKGLView
         {
             _setNeedleBrush = value;
             Gauge.SetNeedleBrush = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -637,7 +674,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.SetNeedleOutlineWidth = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -654,7 +691,7 @@ public abstract class BlazorGaugeBase : SKGLView
         {
             _setNeedleOutlineBrush = value;
             Gauge.SetNeedleOutlineBrush = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -668,7 +705,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.SetNeedleStartWidth = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -682,7 +719,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.SetNeedleEndWidth = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -696,7 +733,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.SetNeedleStartExtent = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -710,7 +747,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.SetNeedleEndExtent = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -725,7 +762,7 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.BackgroundImage = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -739,7 +776,21 @@ public abstract class BlazorGaugeBase : SKGLView
         set
         {
             Gauge.BackgroundImageOpacity = value;
-            Invalidate();
+            InvalidateGauge();
+        }
+    }
+
+    /// <summary>
+    ///     BackgroundImageRotation - rotation of background image in degrees about the gauge center
+    /// </summary>
+    [Parameter]
+    public double BackgroundImageRotation
+    {
+        get => Gauge.BackgroundImageRotation;
+        set
+        {
+            Gauge.BackgroundImageRotation = value;
+            InvalidateGauge();
         }
     }
 

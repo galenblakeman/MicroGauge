@@ -8,9 +8,10 @@ using SkiaSharp;
 namespace MicroGauge
 {
     /// <summary>
-    ///     GaugeBase - abstract class with shared common properties and methods
+    ///     GaugeBase - abstract class with shared common properties and methods.
+    ///     Dispose releases cached fonts; BackgroundImage is owned by the caller.
     /// </summary>
-    public abstract class GaugeBase
+    public abstract class GaugeBase : IDisposable
     {
         #region Properties
 
@@ -280,6 +281,11 @@ namespace MicroGauge
         /// </summary>
         public float BackgroundImageOpacity { get; set; } = 1f;
 
+        /// <summary>
+        ///     BackgroundImageRotation - rotation of background image in degrees about the gauge center
+        /// </summary>
+        public double BackgroundImageRotation { get; set; }
+
         #endregion
 
         #region Draw
@@ -378,6 +384,13 @@ namespace MicroGauge
             var matrix = SKMatrix.CreateScale(scale, scale);
             matrix.TransX = targetX + (targetWidth - BackgroundImage.Width * scale) / 2;
             matrix.TransY = targetY + (targetHeight - BackgroundImage.Height * scale) / 2;
+            if (Math.Abs(BackgroundImageRotation) > 0.001)
+            {
+                var rotation = SKMatrix.CreateRotationDegrees(Convert.ToSingle(BackgroundImageRotation),
+                    targetX + targetWidth / 2, targetY + targetHeight / 2);
+                matrix = SKMatrix.Concat(rotation, matrix);
+            }
+
             var sampling = new SKSamplingOptions(SKFilterMode.Linear, SKMipmapMode.Linear);
             paint.IsAntialias = true;
             paint.Style = SKPaintStyle.Fill;
@@ -409,6 +422,7 @@ namespace MicroGauge
         }
 
         private SKFont _labelFont;
+        private SKTypeface _labelTypeface;
         private string _labelFontKey;
 
         /// <summary>
@@ -420,8 +434,10 @@ namespace MicroGauge
             if (_labelFont == null || _labelFontKey != key)
             {
                 _labelFont?.Dispose();
-                _labelFont = new SKFont(SKTypeface.FromFamilyName(LabelFontFamily, LabelFontWeight,
-                    SKFontStyleWidth.Expanded, SKFontStyleSlant.Upright), LabelFontSize);
+                _labelTypeface?.Dispose();
+                _labelTypeface = SKTypeface.FromFamilyName(LabelFontFamily, LabelFontWeight,
+                    SKFontStyleWidth.Expanded, SKFontStyleSlant.Upright);
+                _labelFont = new SKFont(_labelTypeface, LabelFontSize);
                 _labelFontKey = key;
             }
 
@@ -429,6 +445,7 @@ namespace MicroGauge
         }
 
         private SKFont _valueFont;
+        private SKTypeface _valueTypeface;
         private string _valueFontKey;
 
         /// <summary>
@@ -440,12 +457,33 @@ namespace MicroGauge
             if (_valueFont == null || _valueFontKey != key)
             {
                 _valueFont?.Dispose();
-                _valueFont = new SKFont(SKTypeface.FromFamilyName(ValueFontFamily, ValueFontWeight,
-                    SKFontStyleWidth.Expanded, SKFontStyleSlant.Upright), ValueFontSize);
+                _valueTypeface?.Dispose();
+                _valueTypeface = SKTypeface.FromFamilyName(ValueFontFamily, ValueFontWeight,
+                    SKFontStyleWidth.Expanded, SKFontStyleSlant.Upright);
+                _valueFont = new SKFont(_valueTypeface, ValueFontSize);
                 _valueFontKey = key;
             }
 
             return _valueFont;
+        }
+
+        /// <summary>
+        ///     Dispose - release cached fonts and typefaces; safe to reuse the gauge
+        ///     afterwards (caches rebuild on next draw). BackgroundImage is not disposed
+        ///     because it is supplied and owned by the caller.
+        /// </summary>
+        public void Dispose()
+        {
+            _labelFont?.Dispose();
+            _labelFont = null;
+            _labelTypeface?.Dispose();
+            _labelTypeface = null;
+            _labelFontKey = null;
+            _valueFont?.Dispose();
+            _valueFont = null;
+            _valueTypeface?.Dispose();
+            _valueTypeface = null;
+            _valueFontKey = null;
         }
 
         /// <summary>
@@ -459,9 +497,9 @@ namespace MicroGauge
                     ? Convert.ToString(value, CultureInfo.InvariantCulture)
                     : string.Format(LabelFormatString, value);
             }
-            catch (Exception ex)
+            catch (FormatException)
             {
-                return ex.Message;
+                return Convert.ToString(value, CultureInfo.InvariantCulture);
             }
         }
 
@@ -477,9 +515,9 @@ namespace MicroGauge
                     ? Convert.ToString(value, CultureInfo.InvariantCulture)
                     : string.Format(ValueFormatString, value);
             }
-            catch (Exception ex)
+            catch (FormatException)
             {
-                return ex.Message;
+                return Convert.ToString(value, CultureInfo.InvariantCulture);
             }
         }
 

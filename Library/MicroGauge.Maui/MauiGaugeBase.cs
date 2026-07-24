@@ -24,6 +24,15 @@ public abstract class MauiGaugeBase : SKCanvasView
     /// </summary>
     public GaugeBase Gauge { get; protected init; } = null!;
 
+    /// <summary>
+    ///     Constructor - release cached gauge resources when the view unloads
+    ///     (caches rebuild automatically if the view is reloaded)
+    /// </summary>
+    protected MauiGaugeBase()
+    {
+        Unloaded += (_, _) => Gauge?.Dispose();
+    }
+
     #region Draw
 
     /// <summary>
@@ -694,6 +703,19 @@ public abstract class MauiGaugeBase : SKCanvasView
     public static readonly BindableProperty BackgroundImageOpacityProperty = Create(nameof(BackgroundImageOpacity),
         typeof(float), 1f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.BackgroundImageOpacity = (float)newValue; });
+
+    /// <summary>
+    ///     BackgroundImageRotation - rotation of background image in degrees about the gauge center
+    /// </summary>
+    public double BackgroundImageRotation
+    {
+        get => (double)GetValue(BackgroundImageRotationProperty);
+        set => SetValue(BackgroundImageRotationProperty, value);
+    }
+
+    public static readonly BindableProperty BackgroundImageRotationProperty = Create(
+        nameof(BackgroundImageRotation), typeof(double), 0d,
+        (gaugeBase, newValue) => { gaugeBase.Gauge.BackgroundImageRotation = (double)newValue; });
 
     #endregion
 

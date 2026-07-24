@@ -32,7 +32,7 @@ public class BlazorGaugeLinear : BlazorGaugeBase
         set
         {
             GetLinear(this).IsVertical = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -46,7 +46,7 @@ public class BlazorGaugeLinear : BlazorGaugeBase
         set
         {
             GetLinear(this).ValueWidthExtent = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -60,7 +60,7 @@ public class BlazorGaugeLinear : BlazorGaugeBase
         set
         {
             GetLinear(this).TickWidthExtent = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -74,7 +74,7 @@ public class BlazorGaugeLinear : BlazorGaugeBase
         set
         {
             GetLinear(this).MinorTickWidthExtent = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -91,7 +91,7 @@ public class BlazorGaugeLinear : BlazorGaugeBase
         {
             _valueBarBrush = value;
             GetLinear(this).ValueBarBrush = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 

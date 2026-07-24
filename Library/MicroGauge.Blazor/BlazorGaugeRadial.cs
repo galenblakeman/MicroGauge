@@ -33,7 +33,7 @@ public class BlazorGaugeRadial : BlazorGaugeBase
         set
         {
             GetRadial(this).RadialStyle = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -47,7 +47,7 @@ public class BlazorGaugeRadial : BlazorGaugeBase
         set
         {
             GetRadial(this).ScaleStartAngle = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -61,7 +61,7 @@ public class BlazorGaugeRadial : BlazorGaugeBase
         set
         {
             GetRadial(this).ScaleEndAngle = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -75,7 +75,7 @@ public class BlazorGaugeRadial : BlazorGaugeBase
         set
         {
             GetRadial(this).TickStartExtent = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -89,7 +89,7 @@ public class BlazorGaugeRadial : BlazorGaugeBase
         set
         {
             GetRadial(this).TickEndExtent = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -103,7 +103,7 @@ public class BlazorGaugeRadial : BlazorGaugeBase
         set
         {
             GetRadial(this).MinorTickStartExtent = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -117,7 +117,7 @@ public class BlazorGaugeRadial : BlazorGaugeBase
         set
         {
             GetRadial(this).MinorTickEndExtent = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -131,7 +131,7 @@ public class BlazorGaugeRadial : BlazorGaugeBase
         set
         {
             GetRadial(this).NeedlePivotEndExtent = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -148,7 +148,7 @@ public class BlazorGaugeRadial : BlazorGaugeBase
         {
             _needlePivotBrush = value;
             GetRadial(this).NeedlePivotBrush = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -165,7 +165,7 @@ public class BlazorGaugeRadial : BlazorGaugeBase
         {
             _needlePivotOutlineBrush = value;
             GetRadial(this).NeedlePivotOutlineBrush = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -179,7 +179,7 @@ public class BlazorGaugeRadial : BlazorGaugeBase
         set
         {
             GetRadial(this).NeedlePivotOutlineWidth = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -196,7 +196,7 @@ public class BlazorGaugeRadial : BlazorGaugeBase
         {
             _rangeBrush = value;
             GetRadialRange(this).Brush = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -210,7 +210,7 @@ public class BlazorGaugeRadial : BlazorGaugeBase
         set
         {
             GetRadialRange(this).InnerStartExtent = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -224,7 +224,7 @@ public class BlazorGaugeRadial : BlazorGaugeBase
         set
         {
             GetRadialRange(this).InnerEndExtent = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -238,7 +238,7 @@ public class BlazorGaugeRadial : BlazorGaugeBase
         set
         {
             GetRadialRange(this).OuterStartExtent = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -252,7 +252,7 @@ public class BlazorGaugeRadial : BlazorGaugeBase
         set
         {
             GetRadialRange(this).OuterEndExtent = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 
@@ -266,7 +266,7 @@ public class BlazorGaugeRadial : BlazorGaugeBase
         set
         {
             GetRadial(this).Ranges = value;
-            Invalidate();
+            InvalidateGauge();
         }
     }
 

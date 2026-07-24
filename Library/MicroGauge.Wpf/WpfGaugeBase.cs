@@ -25,6 +25,15 @@ public abstract class WpfGaugeBase : SKElement
     /// </summary>
     public GaugeBase Gauge { get; protected init; } = null!;
 
+    /// <summary>
+    ///     Constructor - release cached gauge resources when the element unloads
+    ///     (caches rebuild automatically if the element is reloaded)
+    /// </summary>
+    protected WpfGaugeBase()
+    {
+        Unloaded += (_, _) => Gauge?.Dispose();
+    }
+
     #region Draw
 
     /// <summary>
@@ -697,6 +706,19 @@ public abstract class WpfGaugeBase : SKElement
     public static readonly DependencyProperty BackgroundImageOpacityProperty = Create(nameof(BackgroundImageOpacity),
         typeof(float), 1f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.BackgroundImageOpacity = (float)newValue; });
+
+    /// <summary>
+    ///     BackgroundImageRotation - rotation of background image in degrees about the gauge center
+    /// </summary>
+    public double BackgroundImageRotation
+    {
+        get => (double)GetValue(BackgroundImageRotationProperty);
+        set => SetValue(BackgroundImageRotationProperty, value);
+    }
+
+    public static readonly DependencyProperty BackgroundImageRotationProperty = Create(
+        nameof(BackgroundImageRotation), typeof(double), 0d,
+        (gaugeBase, newValue) => { gaugeBase.Gauge.BackgroundImageRotation = (double)newValue; });
 
     #endregion
 
