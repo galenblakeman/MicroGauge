@@ -270,6 +270,16 @@ namespace MicroGauge
         /// </summary>
         public float SetNeedleEndExtent { get; set; } = 0.71f;
 
+        /// <summary>
+        ///     BackgroundImage - image drawn over the backing, clipped to the gauge shape
+        /// </summary>
+        public SKImage BackgroundImage { get; set; }
+
+        /// <summary>
+        ///     BackgroundImageOpacity - opacity of background image (0 to 1)
+        /// </summary>
+        public float BackgroundImageOpacity { get; set; } = 1f;
+
         #endregion
 
         #region Draw
@@ -356,6 +366,27 @@ namespace MicroGauge
             }
         }
 
+
+        /// <summary>
+        ///     SetBackgroundImagePaint - shader that cover-scales BackgroundImage onto the target rect,
+        ///     modulated by BackgroundImageOpacity
+        /// </summary>
+        protected void SetBackgroundImagePaint(SKPaint paint, float targetX, float targetY,
+            float targetWidth, float targetHeight)
+        {
+            var scale = Math.Max(targetWidth / BackgroundImage.Width, targetHeight / BackgroundImage.Height);
+            var matrix = SKMatrix.CreateScale(scale, scale);
+            matrix.TransX = targetX + (targetWidth - BackgroundImage.Width * scale) / 2;
+            matrix.TransY = targetY + (targetHeight - BackgroundImage.Height * scale) / 2;
+            var sampling = new SKSamplingOptions(SKFilterMode.Linear, SKMipmapMode.Linear);
+            paint.IsAntialias = true;
+            paint.Style = SKPaintStyle.Fill;
+            paint.Shader = BackgroundImage.ToShader(SKShaderTileMode.Clamp, SKShaderTileMode.Clamp,
+                sampling, matrix);
+            var opacity = BackgroundImageOpacity < 0f ? 0f :
+                BackgroundImageOpacity > 1f ? 1f : BackgroundImageOpacity;
+            paint.Color = SKColors.White.WithAlpha((byte)(opacity * 255));
+        }
 
         /// <summary>
         ///     SetLabelPaint

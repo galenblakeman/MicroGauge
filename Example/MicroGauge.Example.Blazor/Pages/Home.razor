@@ -2,11 +2,54 @@
 @using MicroGauge.Blazor
 @using MicroGauge.Constant
 @using SkiaSharp
+@inject HttpClient Http
 
 <PageTitle>MicroGauge Blazor Examples</PageTitle>
 @* ReSharper disable InconsistentNaming *@
 @code
 {
+    SKImage? AluminiumTexture;
+    SKImage? CopperTexture;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var aluminium = await Http.GetByteArrayAsync("aluminium_texture_radial.png");
+        AluminiumTexture = SKImage.FromEncodedData(aluminium);
+        var copper = await Http.GetByteArrayAsync("copper_texture_plain.png");
+        CopperTexture = SKImage.FromEncodedData(copper);
+    }
+
+    readonly GaugeBrush BrushInk = new(SKColor.Parse("#1A1A1A"));
+    readonly GaugeBrush BrushInkMinor = new(SKColor.Parse("#5A5A5A"));
+    readonly GaugeBrush BrushPivotDark = new(SKColor.Parse("#2F2F2F"));
+
+    readonly List<GaugeRadialRange> WindSpeedRanges =
+    [
+        new GaugeRadialRange
+        {
+            StartValue = 0, EndValue = 15,
+            InnerStartExtent = 0.6f, InnerEndExtent = 0.6f,
+            OuterStartExtent = 0.71f, OuterEndExtent = 0.71f,
+            BrushHex = "#2E7D32"
+        },
+
+        new GaugeRadialRange
+        {
+            StartValue = 15, EndValue = 22,
+            InnerStartExtent = 0.6f, InnerEndExtent = 0.6f,
+            OuterStartExtent = 0.71f, OuterEndExtent = 0.71f,
+            BrushHex = "#F9A825"
+        },
+
+        new GaugeRadialRange
+        {
+            StartValue = 22, EndValue = 30,
+            InnerStartExtent = 0.6f, InnerEndExtent = 0.6f,
+            OuterStartExtent = 0.71f, OuterEndExtent = 0.71f,
+            BrushHex = "#C62828"
+        }
+    ];
+
     readonly GaugeBrush BrushBacking = new(SKColor.Parse("#333333"));
     readonly GaugeBrush BrushBorder = new(SKColor.Parse("#282828"));
     readonly GaugeBrush BrushLightBLue = new(SKColor.Parse("#0096ff"));
@@ -121,7 +164,7 @@
                 </div>
                 <div class="row">
                     <div class="col text-center gauge-note">
-                        (No Tail)
+                        (Counterweight Tail)
                     </div>
                 </div>
                 <div class="row flex-grow-1 ">
@@ -129,6 +172,7 @@
                         <BlazorGaugeRadial BackingBrush="BrushBacking"
                                            BackingOutlineBrush="BrushBorder"
                                            BackingStrokeWidth="10"
+                                           BackgroundImage="AluminiumTexture!"
                                            Value="15f"
                                            MinValue="0"
                                            MaxValue="30"
@@ -137,36 +181,34 @@
                                            LabelExtent=".85f"
                                            LabelFontFamily="OpenSans"
                                            LabelFontSize="10"
-                                           LabelFontBrush="BrushYellow"
+                                           LabelFontBrush="BrushInk"
                                            LabelFontWeight="SKFontStyleWeight.SemiBold"
                                            ValueExtent=".60f"
                                            ValueFormatString="{0:N0} MPH"
                                            ValueFontFamily="OpenSans"
                                            ValueFontSize="20"
-                                           ValueFontBrush="BrushYellow"
+                                           ValueFontBrush="BrushInk"
                                            ValueFontWeight="SKFontStyleWeight.SemiBold"
                                            ValueLocation="GaugeValueLocation.BottomCenter"
-                                           TickBrush="GaugeBrushes.White"
+                                           TickBrush="BrushInk"
                                            TickStrokeWidth="2"
                                            TickStartExtent="0.6f"
                                            TickEndExtent="0.7f"
-                                           MinorTickBrush="GaugeBrushes.Gray"
+                                           MinorTickBrush="BrushInkMinor"
                                            MinorTickStartExtent="0.65f"
                                            MinorTickEndExtent="0.7f"
                                            MinorTickStrokeWidth="1"
                                            ScaleStartAngle="210"
                                            ScaleEndAngle="330"
-                                           NeedleBrush="BrushYellow"
-                                           NeedlePivotBrush="BrushDarkGray"
-                                           NeedlePivotOutlineBrush="BrushYellow"
-                                           NeedlePivotEndExtent="0.15f"
+                                           NeedleBrush="BrushInk"
+                                           NeedlePivotBrush="BrushPivotDark"
+                                           NeedlePivotOutlineBrush="BrushInk"
+                                           NeedlePivotEndExtent="0.07f"
+                                           NeedleStartExtent="-0.18f"
+                                           NeedleStartWidth="5"
                                            NeedleEndExtent="0.71f"
-                                           NeedleEndWidth="3"
-                                           RangeBrush="BrushGreenYellowRed"
-                                           RangeInnerStartExtent="0.6f"
-                                           RangeInnerEndExtent="0.6f"
-                                           RangeOuterStartExtent="0.6f"
-                                           RangeOuterEndExtent="0.71f" />
+                                           NeedleEndWidth="2.5f"
+                                           Ranges="WindSpeedRanges" />
                     </div>
                 </div>
             </div>
@@ -437,6 +479,8 @@
                                            BackingBrush="BrushBacking"
                                            BackingOutlineBrush="BrushBorder"
                                            BackingStrokeWidth="10"
+                                           BackgroundImage="CopperTexture!"
+                                           BackgroundImageOpacity="0.85f"
                                            Value="90"
                                            MinValue="0"
                                            MaxValue="100"

@@ -82,6 +82,7 @@ namespace MicroGauge
             //DebugFillCanvas(SKColors.Green);
             CalcDimensions();
             DrawGaugeArea();
+            DrawBackgroundImage();
             DrawValueBar();
             var minorTicks = GaugeHelper.GetTicks(MinValue, MaxValue, MinorTickInterval);
             DrawTicks(minorTicks, false);
@@ -119,6 +120,28 @@ namespace MicroGauge
                 paint.Shader = GetSkShader(BackingBrush);
                 DrawBar(paint, start, width, length);
                 //DebugCircleAtPoint(start, SKColors.White);
+            }
+        }
+
+        /// <summary>
+        ///     DrawBackgroundImage - draw background image over the backing bar
+        /// </summary>
+        private void DrawBackgroundImage()
+        {
+            if (BackgroundImage == null || BackgroundImageOpacity <= 0) return;
+            using (var paint = new SKPaint())
+            {
+                SetBackgroundImagePaint(paint, 0, 0, SurfaceWidth, SurfaceHeight);
+                var width = IsVertical ? Convert.ToSingle(SurfaceWidth) : Convert.ToSingle(SurfaceHeight);
+                var length = IsVertical ? Convert.ToSingle(SurfaceHeight) : Convert.ToSingle(SurfaceWidth);
+                var start = new SKPoint(_start.X, _start.Y);
+                if (IsVertical)
+                    start.Y -= BackingStrokeWidth / 2;
+                else
+                    start.X += BackingStrokeWidth / 2;
+                width -= BackingStrokeWidth;
+                length -= BackingStrokeWidth;
+                DrawBar(paint, start, width, length);
             }
         }
 

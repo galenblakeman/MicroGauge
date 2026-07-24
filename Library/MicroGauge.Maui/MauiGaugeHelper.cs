@@ -9,6 +9,26 @@ namespace MicroGauge.Maui;
 public static class MauiGaugeHelper
 {
     /// <summary>
+    ///     GetSkImageFromPath - load an SKImage from a file path
+    ///     (relative paths resolve to the app data directory)
+    /// </summary>
+    public static SKImage? GetSkImageFromPath(string? imagePath)
+    {
+        if (string.IsNullOrWhiteSpace(imagePath)) return null;
+        try
+        {
+            var path = Path.IsPathRooted(imagePath)
+                ? imagePath
+                : Path.Combine(FileSystem.AppDataDirectory, imagePath);
+            return File.Exists(path) ? SKImage.FromEncodedData(path) : null;
+        }
+        catch (Exception)
+        {
+            return null;
+        }
+    }
+
+    /// <summary>
     ///     GetGaugeBrush
     /// </summary>
     public static GaugeBrush GetGaugeBrush(Brush sourceBrush)

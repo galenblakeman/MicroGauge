@@ -714,5 +714,34 @@ public abstract class BlazorGaugeBase : SKGLView
         }
     }
 
+    /// <summary>
+    ///     BackgroundImage - image drawn over the backing, clipped to the gauge shape
+    ///     (load via SKImage.FromEncodedData, e.g. from HttpClient bytes)
+    /// </summary>
+    [Parameter]
+    public SKImage BackgroundImage
+    {
+        get => Gauge.BackgroundImage;
+        set
+        {
+            Gauge.BackgroundImage = value;
+            Invalidate();
+        }
+    }
+
+    /// <summary>
+    ///     BackgroundImageOpacity - opacity of background image (0 to 1)
+    /// </summary>
+    [Parameter]
+    public float BackgroundImageOpacity
+    {
+        get => Gauge.BackgroundImageOpacity;
+        set
+        {
+            Gauge.BackgroundImageOpacity = value;
+            Invalidate();
+        }
+    }
+
     #endregion
 }

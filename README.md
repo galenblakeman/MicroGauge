@@ -4,9 +4,10 @@
 ## Key Features
 * Radial Gauges: Choose from full-circle, half-circle, and fitted styles to meet design aesthetics. 
 * Linear Gauges: Implement vertical or horizontal orientations to meet interface needs. 
-* Customization: Configure backing, scale, tick (minor/major), label, value, needle, and range via attributes. 
+* Customization: Configure backing, scale, tick (minor/major), label, value, needle, and range via attributes.
+* Background Images: Style gauge faces with textures or images, clipped to the gauge shape (concept credit: [tsoriano64](https://github.com/tsoriano64/MicroGauge)). 
 * Cross-Platform Compatibility: Works with all the platforms that [SkiaSharp](https://github.com/mono/SkiaSharp) supports. 
-* Framework: MAUI, WPF, and Blazor libraries are provided with tags and bindings for customization (.NET 10, SkiaSharp 3).
+* Framework: MAUI, WPF, and Blazor libraries are provided with tags and bindings for customization (.NET 10, SkiaSharp 4).
 
 ---
 ## Gallery

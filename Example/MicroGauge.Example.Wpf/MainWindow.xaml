@@ -87,7 +87,7 @@
                        VerticalContentAlignment="Top" />
                 <Label Grid.Row="0" Grid.Column="0"
                        Style="{StaticResource ChartNote}"
-                       Content="(No Tail)"
+                       Content="(Counterweight Tail)"
                        Margin="0,16,0,0"
                        VerticalContentAlignment="Top" />
 
@@ -97,6 +97,7 @@
                     BackingBrush="{StaticResource RadialGaugeBacking}"
                     BackingOutlineBrush="{StaticResource RadialGaugeBorder}"
                     BackingStrokeWidth="10"
+                    BackgroundImagePath="Resources/aluminium_texture_radial.png"
                     Margin="40"
                     Value="15"
                     MinValue="0"
@@ -106,36 +107,51 @@
                     LabelExtent=".85"
                     LabelFontFamily="Arial"
                     LabelFontSize="10"
-                    LabelFontBrush="#FFE000"
+                    LabelFontBrush="#1A1A1A"
                     LabelFontWeight="SemiBold"
                     ValueExtent=".60"
                     ValueFormatString="{}{0:N0} MPH"
                     ValueFontFamily="Arial"
                     ValueFontSize="20"
-                    ValueFontBrush="#FFE000"
+                    ValueFontBrush="#1A1A1A"
                     ValueFontWeight="SemiBold"
                     ValueLocation="BottomCenter"
-                    TickBrush="#FFFFFF"
+                    TickBrush="#1A1A1A"
                     TickStrokeWidth="2"
                     TickStartExtent="0.6"
                     TickEndExtent="0.7"
-                    MinorTickBrush="#808080"
+                    MinorTickBrush="#5A5A5A"
                     MinorTickStartExtent="0.65"
                     MinorTickEndExtent="0.7"
                     MinorTickStrokeWidth="1"
                     ScaleStartAngle="210"
                     ScaleEndAngle="330"
-                    NeedleBrush="#FFE000"
-                    NeedlePivotBrush="#4d4d4d"
-                    NeedlePivotOutlineBrush="#FFE000"
-                    NeedlePivotEndExtent="0.15"
+                    NeedleBrush="#1A1A1A"
+                    NeedlePivotBrush="#2F2F2F"
+                    NeedlePivotOutlineBrush="#1A1A1A"
+                    NeedlePivotEndExtent="0.07"
+                    NeedleStartExtent="-0.18"
+                    NeedleStartWidth="5"
                     NeedleEndExtent="0.71"
-                    NeedleEndWidth="3"
-                    RangeBrush="{StaticResource BrushGreenYellowRed}"
-                    RangeInnerStartExtent="0.6"
-                    RangeInnerEndExtent="0.6"
-                    RangeOuterStartExtent="0.6"
-                    RangeOuterEndExtent="0.71" />
+                    NeedleEndWidth="2.5">
+                    <microGauge:WpfGaugeRadial.Ranges>
+                        <microGaugeBase:GaugeRadialRange
+                            StartValue="0" EndValue="15"
+                            InnerStartExtent="0.6" InnerEndExtent="0.6"
+                            OuterStartExtent="0.71" OuterEndExtent="0.71"
+                            BrushHex="#2E7D32" />
+                        <microGaugeBase:GaugeRadialRange
+                            StartValue="15" EndValue="22"
+                            InnerStartExtent="0.6" InnerEndExtent="0.6"
+                            OuterStartExtent="0.71" OuterEndExtent="0.71"
+                            BrushHex="#F9A825" />
+                        <microGaugeBase:GaugeRadialRange
+                            StartValue="22" EndValue="30"
+                            InnerStartExtent="0.6" InnerEndExtent="0.6"
+                            OuterStartExtent="0.71" OuterEndExtent="0.71"
+                            BrushHex="#C62828" />
+                    </microGauge:WpfGaugeRadial.Ranges>
+                </microGauge:WpfGaugeRadial>
 
                 <!--Humidity (No Minor)-->
                 <Label Grid.Row="0" Grid.Column="1"
@@ -380,6 +396,8 @@
                     BackingBrush="{StaticResource RadialGaugeBacking}"
                     BackingOutlineBrush="{StaticResource RadialGaugeBorder}"
                     BackingStrokeWidth="10"
+                    BackgroundImagePath="Resources/copper_texture_plain.png"
+                    BackgroundImageOpacity="0.85"
                     Margin="10, 35, 10,0"
                     Value="90"
                     MinValue="0"

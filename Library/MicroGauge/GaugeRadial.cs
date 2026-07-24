@@ -104,6 +104,7 @@ namespace MicroGauge
             //DebugFillCanvas(SKColors.Green);
             CalcDimensions();
             DrawGaugeArea();
+            DrawBackgroundImage();
             DrawRange();
             var minorTicks = GaugeHelper.GetTicks(MinValue, MaxValue, MinorTickInterval);
             DrawTicks(minorTicks, false);
@@ -150,6 +151,20 @@ namespace MicroGauge
                 default:
                     Canvas.DrawCircle(_center, radius, paint);
                     break;
+            }
+        }
+
+        /// <summary>
+        ///     DrawBackgroundImage - draw background image clipped to the gauge shape
+        /// </summary>
+        private void DrawBackgroundImage()
+        {
+            if (BackgroundImage == null || BackgroundImageOpacity <= 0) return;
+            using (var paint = new SKPaint())
+            {
+                SetBackgroundImagePaint(paint, _center.X - _radius, _center.Y - _radius,
+                    _radius * 2, _radius * 2);
+                DrawGaugeArea(paint, _radius - BackingStrokeWidth);
             }
         }
 

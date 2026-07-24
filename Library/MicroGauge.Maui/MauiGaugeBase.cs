@@ -652,6 +652,49 @@ public abstract class MauiGaugeBase : SKCanvasView
         typeof(float), 0.71f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.SetNeedleEndExtent = (float)newValue; });
 
+    /// <summary>
+    ///     BackgroundImage - image drawn over the backing, clipped to the gauge shape (programmatic)
+    /// </summary>
+    public SKImage BackgroundImage
+    {
+        get => Gauge.BackgroundImage;
+        set
+        {
+            Gauge.BackgroundImage = value;
+            InvalidateSurface();
+        }
+    }
+
+    /// <summary>
+    ///     BackgroundImagePath - file path to background image
+    ///     (relative paths resolve to the app data directory)
+    /// </summary>
+    public string BackgroundImagePath
+    {
+        get => (string)GetValue(BackgroundImagePathProperty);
+        set => SetValue(BackgroundImagePathProperty, value);
+    }
+
+    public static readonly BindableProperty BackgroundImagePathProperty = Create(nameof(BackgroundImagePath),
+        typeof(string), null!,
+        (gaugeBase, newValue) =>
+        {
+            gaugeBase.Gauge.BackgroundImage = MauiGaugeHelper.GetSkImageFromPath((string)newValue)!;
+        });
+
+    /// <summary>
+    ///     BackgroundImageOpacity - opacity of background image (0 to 1)
+    /// </summary>
+    public float BackgroundImageOpacity
+    {
+        get => (float)GetValue(BackgroundImageOpacityProperty);
+        set => SetValue(BackgroundImageOpacityProperty, value);
+    }
+
+    public static readonly BindableProperty BackgroundImageOpacityProperty = Create(nameof(BackgroundImageOpacity),
+        typeof(float), 1f,
+        (gaugeBase, newValue) => { gaugeBase.Gauge.BackgroundImageOpacity = (float)newValue; });
+
     #endregion
 
     #region Helper

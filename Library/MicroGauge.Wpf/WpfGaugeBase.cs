@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using MicroGauge.Constant;
 using SkiaSharp;
 using SkiaSharp.Views.Desktop;
@@ -651,6 +652,51 @@ public abstract class WpfGaugeBase : SKElement
     public static readonly DependencyProperty SetNeedleEndExtentProperty = Create(nameof(SetNeedleEndExtent),
         typeof(float), 0.71f,
         (gaugeBase, newValue) => { gaugeBase.Gauge.SetNeedleEndExtent = (float)newValue; });
+
+    /// <summary>
+    ///     BackgroundImageSource - image source drawn over the backing, clipped to the gauge shape
+    /// </summary>
+    public ImageSource BackgroundImageSource
+    {
+        get => (ImageSource)GetValue(BackgroundImageSourceProperty);
+        set => SetValue(BackgroundImageSourceProperty, value);
+    }
+
+    public static readonly DependencyProperty BackgroundImageSourceProperty = Create(nameof(BackgroundImageSource),
+        typeof(ImageSource), null!,
+        (gaugeBase, newValue) =>
+        {
+            gaugeBase.Gauge.BackgroundImage = WpfGaugeHelper.GetSkImage(newValue as BitmapSource)!;
+        });
+
+    /// <summary>
+    ///     BackgroundImagePath - file path to background image (relative paths resolve to app base directory)
+    /// </summary>
+    public string BackgroundImagePath
+    {
+        get => (string)GetValue(BackgroundImagePathProperty);
+        set => SetValue(BackgroundImagePathProperty, value);
+    }
+
+    public static readonly DependencyProperty BackgroundImagePathProperty = Create(nameof(BackgroundImagePath),
+        typeof(string), null!,
+        (gaugeBase, newValue) =>
+        {
+            gaugeBase.Gauge.BackgroundImage = WpfGaugeHelper.GetSkImageFromPath((string)newValue)!;
+        });
+
+    /// <summary>
+    ///     BackgroundImageOpacity - opacity of background image (0 to 1)
+    /// </summary>
+    public float BackgroundImageOpacity
+    {
+        get => (float)GetValue(BackgroundImageOpacityProperty);
+        set => SetValue(BackgroundImageOpacityProperty, value);
+    }
+
+    public static readonly DependencyProperty BackgroundImageOpacityProperty = Create(nameof(BackgroundImageOpacity),
+        typeof(float), 1f,
+        (gaugeBase, newValue) => { gaugeBase.Gauge.BackgroundImageOpacity = (float)newValue; });
 
     #endregion
 

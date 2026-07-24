@@ -11,6 +11,9 @@
 
   <ItemGroup>
     <Content Include="gauge.ico" />
+    <Content Include="Resources\**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

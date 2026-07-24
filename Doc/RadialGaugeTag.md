@@ -12,6 +12,12 @@
 * BackingOutlineBrush - Backing outline solid or linear gradient brush
 * BackingStrokeWidth - Stroke with for backing edge
 
+## Background Image (Image drawn over the backing, clipped to the gauge shape)
+* BackgroundImage - SKImage drawn cover-scaled and centered over the backing (all platforms, programmatic)
+* BackgroundImageOpacity - Opacity of background image, 0 to 1 (default 1)
+* BackgroundImageSource - WPF only: any BitmapSource/ImageSource to use as background
+* BackgroundImagePath - WPF and MAUI: file path to image (WPF resolves relative paths against the app base directory; MAUI against the app data directory - for bundled MAUI assets load an SKImage from FileSystem.OpenAppPackageFileAsync and set BackgroundImage instead)
+
 ## Scale (Angle and range)
 * ScaleStartAngle - start angle of scale
 * ScaleEndAngle - stop angle of scale
