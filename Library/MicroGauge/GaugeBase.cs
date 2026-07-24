@@ -330,27 +330,30 @@ namespace MicroGauge
         {
             if (startWidth < 0.25) startWidth = 0.25f;
             if (endWidth < 0.25) endWidth = 0.25f;
-            using (var path = new SKPath())
-            {
-                var p1 = GaugeHelper.GetRadialPoint(start, startWidth, angle + 90);
-                var p2 = GaugeHelper.GetRadialPoint(start, startWidth, angle - 90);
-                var p3 = GaugeHelper.GetRadialPoint(end, endWidth, angle - 90);
-                var p4 = GaugeHelper.GetRadialPoint(end, endWidth, angle + 90);
-                DrawPoly(paint, path, p1, p2, p3, p4);
-            }
+            var p1 = GaugeHelper.GetRadialPoint(start, startWidth, angle + 90);
+            var p2 = GaugeHelper.GetRadialPoint(start, startWidth, angle - 90);
+            var p3 = GaugeHelper.GetRadialPoint(end, endWidth, angle - 90);
+            var p4 = GaugeHelper.GetRadialPoint(end, endWidth, angle + 90);
+            DrawPoly(paint, p1, p2, p3, p4);
         }
 
         /// <summary>
         ///     DrawPoly - Draw poly with 4 points
         /// </summary>
-        protected void DrawPoly(SKPaint paint, SKPath path, SKPoint p1, SKPoint p2, SKPoint p3, SKPoint p4)
+        protected void DrawPoly(SKPaint paint, SKPoint p1, SKPoint p2, SKPoint p3, SKPoint p4)
         {
-            path.MoveTo(p1);
-            path.LineTo(p2);
-            path.LineTo(p3);
-            path.LineTo(p4);
-            path.Close();
-            Canvas.DrawPath(path, paint);
+            using (var builder = new SKPathBuilder())
+            {
+                builder.MoveTo(p1);
+                builder.LineTo(p2);
+                builder.LineTo(p3);
+                builder.LineTo(p4);
+                builder.Close();
+                using (var path = builder.Detach())
+                {
+                    Canvas.DrawPath(path, paint);
+                }
+            }
         }
 
 

@@ -5,7 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <PackageId>MicroGauge.Blazor</PackageId>
-        <Version>1.1.0</Version>
+        <Version>1.1.0.1</Version>
         <Authors>Galen Blakeman</Authors>
         <Company></Company>
         <PackageDescription>MicroGauge.Blazor is a MicroGauge view library with tags and bindings for customization</PackageDescription>
@@ -14,11 +14,18 @@
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageTags>skia;skiasharp;c-sharp;dotnet;gauge;blazor</PackageTags>
         <Copyright>Galen Blakeman</Copyright>
-
+        <!-- BL0007: parameter setters intentionally forward to the wrapped Gauge and repaint -->
+        <NoWarn>$(NoWarn);BL0007</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="SkiaSharp.Views.Blazor" Version="3.119.1" />
+        <!-- Browser-only library: SKGLView requires the browser platform -->
+        <SupportedPlatform Remove="@(SupportedPlatform)" />
+        <SupportedPlatform Include="browser" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="SkiaSharp.Views.Blazor" Version="4.150.1" />
     </ItemGroup>
 
     <ItemGroup>

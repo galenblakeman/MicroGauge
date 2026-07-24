@@ -140,24 +140,21 @@ namespace MicroGauge
         /// </summary>
         private void DrawBar(SKPaint paint, SKPoint start, float width, float length)
         {
-            using (var path = new SKPath())
+            if (IsVertical)
             {
-                if (IsVertical)
-                {
-                    var p1 = GaugeHelper.GetRadialPoint(start, width / 2, 180);
-                    var p2 = GaugeHelper.GetRadialPoint(p1, length, 90);
-                    var p3 = GaugeHelper.GetRadialPoint(p2, width, 0);
-                    var p4 = GaugeHelper.GetRadialPoint(p3, length, 270);
-                    DrawPoly(paint, path, p1, p2, p3, p4);
-                }
-                else
-                {
-                    var p1 = GaugeHelper.GetRadialPoint(start, width / 2, 90);
-                    var p2 = GaugeHelper.GetRadialPoint(p1, length, 0);
-                    var p3 = GaugeHelper.GetRadialPoint(p2, width, 270);
-                    var p4 = GaugeHelper.GetRadialPoint(p3, length, 180);
-                    DrawPoly(paint, path, p1, p2, p3, p4);
-                }
+                var p1 = GaugeHelper.GetRadialPoint(start, width / 2, 180);
+                var p2 = GaugeHelper.GetRadialPoint(p1, length, 90);
+                var p3 = GaugeHelper.GetRadialPoint(p2, width, 0);
+                var p4 = GaugeHelper.GetRadialPoint(p3, length, 270);
+                DrawPoly(paint, p1, p2, p3, p4);
+            }
+            else
+            {
+                var p1 = GaugeHelper.GetRadialPoint(start, width / 2, 90);
+                var p2 = GaugeHelper.GetRadialPoint(p1, length, 0);
+                var p3 = GaugeHelper.GetRadialPoint(p2, width, 270);
+                var p4 = GaugeHelper.GetRadialPoint(p3, length, 180);
+                DrawPoly(paint, p1, p2, p3, p4);
             }
         }
 

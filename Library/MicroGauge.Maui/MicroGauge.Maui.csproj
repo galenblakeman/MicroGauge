@@ -10,7 +10,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<PackageId>MicroGauge.Maui</PackageId>
-		<Version>1.1.0</Version>
+		<Version>1.1.0.1</Version>
 		<Authors>Galen Blakeman</Authors>
 		<Company></Company>
 		<PackageDescription>MicroGauge.Maui is a MicroGauge view library with XAML tags and bindings for customization</PackageDescription>
@@ -28,9 +28,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-		<PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="3.119.1" />
-		<PackageReference Include="SkiaSharp.Views.Maui.Core" Version="3.119.1" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.90" />
+		<PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="4.150.1" />
+		<PackageReference Include="SkiaSharp.Views.Maui.Core" Version="4.150.1" />
 	</ItemGroup>
 
 	<ItemGroup>

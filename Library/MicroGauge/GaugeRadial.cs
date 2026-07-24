@@ -158,7 +158,7 @@ namespace MicroGauge
         /// </summary>
         private void DrawGaugeFitted(SKPaint paint, float radius, float anglePadding)
         {
-            using (var path = new SKPath())
+            using (var builder = new SKPathBuilder())
             {
                 var startAngle = GetValueAngle(MinValue);
                 var endAngle = GetValueAngle(MaxValue);
@@ -169,19 +169,19 @@ namespace MicroGauge
                 if (anglePadding > 0)
                 {
                     point = GaugeHelper.GetRadialPoint(_center, Convert.ToSingle(radius), angle + anglePadding);
-                    path.MoveTo(point);
+                    builder.MoveTo(point);
                 }
                 else
                 {
                     point = GaugeHelper.GetRadialPoint(_center, radius, angle);
-                    path.MoveTo(point);
+                    builder.MoveTo(point);
                 }
 
 
                 while (angleDelta <= angleRange)
                 {
                     point = GaugeHelper.GetRadialPoint(_center, Convert.ToSingle(radius), angle);
-                    path.LineTo(point);
+                    builder.LineTo(point);
                     angle -= Fidelity;
                     angleDelta += Fidelity;
                 }
@@ -189,26 +189,30 @@ namespace MicroGauge
                 if (anglePadding > 0)
                 {
                     angle += Fidelity;
-                    DrawFittedNotch(radius, anglePadding, angle, path, startAngle);
+                    DrawFittedNotch(radius, anglePadding, angle, builder, startAngle);
                     DrawFittedNotchLine(radius, anglePadding, angle, startAngle);
                 }
 
-                path.Close();
-                Canvas.DrawPath(path, paint);
+                builder.Close();
+                using (var path = builder.Detach())
+                {
+                    Canvas.DrawPath(path, paint);
+                }
             }
         }
 
         /// <summary>
         ///     DrawFittedNotch - Notch portion of fitted gauge
         /// </summary>
-        private void DrawFittedNotch(float radius, float anglePadding, double angle, SKPath path, double startAngle)
+        private void DrawFittedNotch(float radius, float anglePadding, double angle, SKPathBuilder builder,
+            double startAngle)
         {
             var point = GaugeHelper.GetRadialPoint(_center, Convert.ToSingle(radius), angle - anglePadding);
-            path.LineTo(point);
+            builder.LineTo(point);
             point = GaugeHelper.GetRadialPoint(_center, Convert.ToSingle(radius / 2), angle - anglePadding);
-            path.LineTo(point);
+            builder.LineTo(point);
             point = GaugeHelper.GetRadialPoint(_center, Convert.ToSingle(radius / 2), startAngle + anglePadding);
-            path.LineTo(point);
+            builder.LineTo(point);
         }
 
         /// <summary>
@@ -251,16 +255,19 @@ namespace MicroGauge
                     paint.Style = SKPaintStyle.Fill;
                     paint.IsAntialias = true;
                     paint.Shader = GetSkShader(range.Brush);
-                    using (var path = new SKPath())
+                    using (var builder = new SKPathBuilder())
                     {
                         double angleDelta = 0;
                         var angle = startAngle;
-                        DrawRangeInner(range, path, angleRange, ref angle, ref angleDelta);
+                        DrawRangeInner(range, builder, angleRange, ref angle, ref angleDelta);
                         angle += Fidelity;
                         angleDelta -= Fidelity;
-                        DrawRangeOuter(range, path, angleRange, ref angle, ref angleDelta);
-                        path.Close();
-                        Canvas.DrawPath(path, paint);
+                        DrawRangeOuter(range, builder, angleRange, ref angle, ref angleDelta);
+                        builder.Close();
+                        using (var path = builder.Detach())
+                        {
+                            Canvas.DrawPath(path, paint);
+                        }
                     }
                 }
             }
@@ -269,18 +276,18 @@ namespace MicroGauge
         /// <summary>
         ///     DrawRangeInner - sweep forwards for range inner extent
         /// </summary>
-        private void DrawRangeInner(GaugeRadialRange range, SKPath path, double angleRange, ref double angle,
+        private void DrawRangeInner(GaugeRadialRange range, SKPathBuilder builder, double angleRange, ref double angle,
             ref double angleDelta)
         {
             var innerRatio = (range.InnerStartExtent - range.InnerEndExtent) / angleRange;
             var calcExtent = range.InnerStartExtent + angleDelta * innerRatio;
             var start = GaugeHelper.GetRadialPoint(_center, Convert.ToSingle(_radius * calcExtent), angle);
-            path.MoveTo(start);
+            builder.MoveTo(start);
             while (angleDelta <= angleRange)
             {
                 calcExtent = range.InnerStartExtent + angleDelta * innerRatio;
                 var point = GaugeHelper.GetRadialPoint(_center, Convert.ToSingle(_radius * calcExtent), angle);
-                path.LineTo(point);
+                builder.LineTo(point);
                 angle -= Fidelity;
                 angleDelta += Fidelity;
             }
@@ -289,7 +296,7 @@ namespace MicroGauge
         /// <summary>
         ///     DrawRangeOuter - sweep backwards for range outer extent
         /// </summary>
-        private void DrawRangeOuter(GaugeRadialRange range, SKPath path, double angleRange, ref double angle,
+        private void DrawRangeOuter(GaugeRadialRange range, SKPathBuilder builder, double angleRange, ref double angle,
             ref double angleDelta)
         {
             var outerRatio = (range.OuterStartExtent - range.OuterEndExtent) / angleRange;
@@ -299,7 +306,7 @@ namespace MicroGauge
                 if (calcExtent > 0)
                 {
                     var point = GaugeHelper.GetRadialPoint(_center, Convert.ToSingle(_radius * calcExtent), angle);
-                    path.LineTo(point);
+                    builder.LineTo(point);
                 }
 
                 angle += Fidelity;
