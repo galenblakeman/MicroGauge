@@ -95,6 +95,20 @@ public class BlazorGaugeLinear : BlazorGaugeBase
         }
     }
 
+    /// <summary>
+    ///     Ranges
+    /// </summary>
+    [Parameter]
+    public List<GaugeLinearRange> Ranges
+    {
+        get => GetLinear(this).Ranges;
+        set
+        {
+            GetLinear(this).Ranges = value;
+            InvalidateGauge();
+        }
+    }
+
     #endregion
 
     #region Helper

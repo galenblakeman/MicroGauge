@@ -89,6 +89,19 @@ public class MauiGaugeLinear : MauiGaugeBase
             GetLinear(gaugeBase).ValueBarBrush = MauiGaugeHelper.GetGaugeBrush((Brush)newValue);
         });
 
+    /// <summary>
+    ///     Ranges
+    /// </summary>
+    public List<GaugeLinearRange> Ranges
+    {
+        get => GetLinear(this).Ranges;
+        set
+        {
+            GetLinear(this).Ranges = value;
+            InvalidateSurface();
+        }
+    }
+
     #endregion
 
     #region Helper

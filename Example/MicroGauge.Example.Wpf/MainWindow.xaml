@@ -443,7 +443,7 @@
                        VerticalContentAlignment="Top" />
                 <Label Grid.Row="3" Grid.Column="0"
                        Style="{StaticResource ChartNote}"
-                       Content="(Vertical)"
+                       Content="(Vertical/Ranges)"
                        Margin="0,35,0,0"
                        VerticalContentAlignment="Top" />
                 <microGauge:WpfGaugeLinear
@@ -487,7 +487,20 @@
                     NeedleEndWidth="1"
                     NeedleStartExtent="0.1"
                     NeedleEndExtent="0.25"
-                    ValueBarBrush="#57E700" />
+                    ValueBarBrush="#57E700">
+                    <microGauge:WpfGaugeLinear.Ranges>
+                        <microGaugeBase:GaugeLinearRange
+                            StartValue="80" EndValue="100"
+                            InnerStartExtent="0.3" InnerEndExtent="0.3"
+                            OuterStartExtent="0.5" OuterEndExtent="0.5"
+                            BrushHex="#C62828" />
+                        <microGaugeBase:GaugeLinearRange
+                            StartValue="60" EndValue="80"
+                            InnerStartExtent="0.3" InnerEndExtent="0.3"
+                            OuterStartExtent="0.5" OuterEndExtent="0.5"
+                            BrushHex="#F9A825" />
+                    </microGauge:WpfGaugeLinear.Ranges>
+                </microGauge:WpfGaugeLinear>
 
                 <!--Wind Direction (360)-->
                 <Label Grid.Row="3" Grid.Column="1"

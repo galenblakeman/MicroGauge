@@ -93,6 +93,19 @@ public class WpfGaugeLinear : WpfGaugeBase
             GetLinear(gaugeBase).ValueBarBrush = WpfGaugeHelper.GetGaugeBrush((Brush)newValue);
         });
 
+    /// <summary>
+    ///     Ranges
+    /// </summary>
+    public List<GaugeLinearRange> Ranges
+    {
+        get => GetLinear(this).Ranges;
+        set
+        {
+            GetLinear(this).Ranges = value;
+            InvalidateVisual();
+        }
+    }
+
     #endregion
 
 

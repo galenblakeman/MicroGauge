@@ -20,6 +20,17 @@
 * BackgroundImageSource - WPF only: any BitmapSource/ImageSource to use as background
 * BackgroundImagePath - WPF and MAUI: file path to image (WPF resolves relative paths against the app base directory; MAUI against the app data directory - for bundled MAUI assets load an SKImage from FileSystem.OpenAppPackageFileAsync and set BackgroundImage instead)
 
+## Ranges (Colored sections along the bar)
+* Ranges - List of GaugeLinearRange
+* GaugeLinearRange: StartValue - Value where range starts (null uses gauge MinValue)
+* GaugeLinearRange: EndValue - Value where range ends (null uses gauge MaxValue)
+* GaugeLinearRange: InnerStartExtent - Inner boundary at range start, signed fraction of bar width from centerline (bar edges at -0.5 and 0.5)
+* GaugeLinearRange: InnerEndExtent - Inner boundary at range end
+* GaugeLinearRange: OuterStartExtent - Outer boundary at range start
+* GaugeLinearRange: OuterEndExtent - Outer boundary at range end (unequal start/end extents produce a wedge)
+* GaugeLinearRange: Brush - Gauge Brush Color
+* GaugeLinearRange: BrushHex - Hex Color Code to convert to Gauge Brush
+
 ## Scale (Angle and range)
 * MinValue - Min value that corresponds to start
 * MaxValue - Max value that corresponds to start

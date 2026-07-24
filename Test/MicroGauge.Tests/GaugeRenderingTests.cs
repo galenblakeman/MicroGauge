@@ -89,6 +89,39 @@ public class GaugeRenderingTests
     }
 
     [Fact]
+    public void LinearWithRanges()
+    {
+        using var gauge = new GaugeLinear
+        {
+            Value = 61, ValueBarBrush = GaugeBrushes.Blue, ValueWidthExtent = 0.4f,
+            TopExtent = 0.2f, BottomExtent = 0.2f, LeftExtent = 0.08f, RightExtent = 0.08f,
+            Ranges =
+            {
+                new GaugeLinearRange
+                {
+                    BrushHex = "#2E7D32", StartValue = 0, EndValue = 70,
+                    InnerStartExtent = 0.3f, InnerEndExtent = 0.3f,
+                    OuterStartExtent = 0.5f, OuterEndExtent = 0.5f
+                },
+                new GaugeLinearRange
+                {
+                    BrushHex = "#C62828", StartValue = 70, EndValue = 100,
+                    InnerStartExtent = 0.3f, InnerEndExtent = 0.3f,
+                    OuterStartExtent = 0.5f, OuterEndExtent = 0.5f
+                },
+                new GaugeLinearRange
+                {
+                    BrushHex = "#F9A825", StartValue = 0, EndValue = 100,
+                    InnerStartExtent = -0.5f, InnerEndExtent = -0.3f,
+                    OuterStartExtent = -0.5f, OuterEndExtent = -0.5f
+                }
+            }
+        };
+        using var image = GaugeRenderer.Render(gauge, 500, 150);
+        GoldenImage.Assert(image, "linear-ranges");
+    }
+
+    [Fact]
     public void DegenerateInputsDoNotThrow()
     {
         using var gauge = new GaugeRadial

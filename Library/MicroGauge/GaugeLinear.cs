@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using MicroGauge.Constant;
 using SkiaSharp;
 
@@ -37,6 +38,11 @@ namespace MicroGauge
         ///     ValueBarBrush - shader for value bar
         /// </summary>
         public GaugeBrush ValueBarBrush { get; set; } = GaugeBrushes.Black;
+
+        /// <summary>
+        ///     Ranges - list of linear ranges
+        /// </summary>
+        public List<GaugeLinearRange> Ranges { get; set; } = new List<GaugeLinearRange>();
 
 
         /// <summary>
@@ -83,6 +89,7 @@ namespace MicroGauge
             CalcDimensions();
             DrawGaugeArea();
             DrawBackgroundImage();
+            DrawRanges();
             DrawValueBar();
             var minorTicks = GaugeHelper.GetTicks(MinValue, MaxValue, MinorTickInterval);
             DrawTicks(minorTicks, false);
@@ -142,6 +149,34 @@ namespace MicroGauge
                 width -= BackingStrokeWidth;
                 length -= BackingStrokeWidth;
                 DrawBar(paint, start, width, length);
+            }
+        }
+
+        /// <summary>
+        ///     DrawRanges - Draw range sections along the bar using extents
+        /// </summary>
+        private void DrawRanges()
+        {
+            foreach (var range in Ranges)
+            {
+                var startPosition = Convert.ToSingle(GetValuePosition(range.StartValue ?? MinValue));
+                var endPosition = Convert.ToSingle(GetValuePosition(range.EndValue ?? MaxValue));
+                if (endPosition <= startPosition) continue;
+
+                using (var paint = new SKPaint())
+                {
+                    paint.Style = SKPaintStyle.Fill;
+                    paint.IsAntialias = true;
+                    paint.Shader = GetSkShader(range.Brush);
+                    var angle = GetBarAngle();
+                    var startCenter = GetBarCenterlinePoint(startPosition);
+                    var endCenter = GetBarCenterlinePoint(endPosition);
+                    var p1 = GaugeHelper.GetRadialPoint(startCenter, _barWidth * range.InnerStartExtent, angle);
+                    var p2 = GaugeHelper.GetRadialPoint(endCenter, _barWidth * range.InnerEndExtent, angle);
+                    var p3 = GaugeHelper.GetRadialPoint(endCenter, _barWidth * range.OuterEndExtent, angle);
+                    var p4 = GaugeHelper.GetRadialPoint(startCenter, _barWidth * range.OuterStartExtent, angle);
+                    DrawPoly(paint, p1, p2, p3, p4);
+                }
             }
         }
 
@@ -397,6 +432,20 @@ namespace MicroGauge
                 point.X += location;
                 point.Y += _barWidth / 2;
             }
+
+            return point;
+        }
+
+        /// <summary>
+        ///     GetBarCenterlinePoint - point on the bar centerline at a position along its length
+        /// </summary>
+        private SKPoint GetBarCenterlinePoint(float location)
+        {
+            var point = new SKPoint(_barStart.X, _barStart.Y);
+            if (IsVertical)
+                point.Y -= location;
+            else
+                point.X += location;
 
             return point;
         }
