@@ -57,6 +57,7 @@
 
 ## Needle (Main Value Needle)
 * NeedleBrush - Needle solid or linear gradient brush
+* NeedleAnimationDuration - WPF/MAUI/Blazor: milliseconds for the needle to ease to a new value with cubic ease-out (0 = instant, default)
 * NeedleStartWidth - Width of needle at start
 * NeedleEndWidth - Width of needle at end
 * NeedleStartExtent - Needle start as extent of width

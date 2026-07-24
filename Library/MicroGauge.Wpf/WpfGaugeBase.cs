@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using MicroGauge.Constant;
 using SkiaSharp;
 using SkiaSharp.Views.Desktop;
@@ -131,7 +132,57 @@ public abstract class WpfGaugeBase : SKElement
 
     public static readonly DependencyProperty ValueProperty = Create(nameof(Value),
         typeof(double), 0.0,
-        (gaugeBase, newValue) => { gaugeBase.Gauge.Value = (double)newValue; });
+        (gaugeBase, newValue) => { gaugeBase.AnimateValue((double)newValue); });
+
+    /// <summary>
+    ///     NeedleAnimationDuration - milliseconds for the needle to ease to a new value (0 = instant)
+    /// </summary>
+    public double NeedleAnimationDuration
+    {
+        get => (double)GetValue(NeedleAnimationDurationProperty);
+        set => SetValue(NeedleAnimationDurationProperty, value);
+    }
+
+    public static readonly DependencyProperty NeedleAnimationDurationProperty = Create(
+        nameof(NeedleAnimationDuration), typeof(double), 0d, (_, _) => { });
+
+    private DispatcherTimer? _animationTimer;
+
+    /// <summary>
+    ///     AnimateValue - ease the gauge value to a target with cubic ease-out,
+    ///     or jump directly when NeedleAnimationDuration is 0
+    /// </summary>
+    private void AnimateValue(double target)
+    {
+        _animationTimer?.Stop();
+        var duration = NeedleAnimationDuration;
+        if (duration <= 0 || !IsLoaded)
+        {
+            Gauge.Value = target;
+            return;
+        }
+
+        var from = Gauge.Value;
+        var start = DateTime.UtcNow;
+        _animationTimer = new DispatcherTimer(DispatcherPriority.Render)
+        {
+            Interval = TimeSpan.FromMilliseconds(16)
+        };
+        _animationTimer.Tick += (_, _) =>
+        {
+            var t = (DateTime.UtcNow - start).TotalMilliseconds / duration;
+            if (t >= 1)
+            {
+                t = 1;
+                _animationTimer?.Stop();
+            }
+
+            var eased = 1 - Math.Pow(1 - t, 3);
+            Gauge.Value = from + (target - from) * eased;
+            InvalidateVisual();
+        };
+        _animationTimer.Start();
+    }
 
     /// <summary>
     ///     BackingBrush

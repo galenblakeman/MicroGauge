@@ -130,7 +130,44 @@ public abstract class MauiGaugeBase : SKCanvasView
 
     public static readonly BindableProperty ValueProperty = Create(nameof(Value),
         typeof(double), 0.0,
-        (gaugeBase, newValue) => { gaugeBase.Gauge.Value = (double)newValue; });
+        (gaugeBase, newValue) => { gaugeBase.AnimateValue((double)newValue); });
+
+    /// <summary>
+    ///     NeedleAnimationDuration - milliseconds for the needle to ease to a new value (0 = instant)
+    /// </summary>
+    public double NeedleAnimationDuration
+    {
+        get => (double)GetValue(NeedleAnimationDurationProperty);
+        set => SetValue(NeedleAnimationDurationProperty, value);
+    }
+
+    public static readonly BindableProperty NeedleAnimationDurationProperty = Create(
+        nameof(NeedleAnimationDuration), typeof(double), 0d, (_, _) => { });
+
+    private const string NeedleAnimationHandle = "MicroGaugeNeedleValue";
+
+    /// <summary>
+    ///     AnimateValue - ease the gauge value to a target with cubic ease-out,
+    ///     or jump directly when NeedleAnimationDuration is 0
+    /// </summary>
+    private void AnimateValue(double target)
+    {
+        this.AbortAnimation(NeedleAnimationHandle);
+        var duration = NeedleAnimationDuration;
+        if (duration <= 0)
+        {
+            Gauge.Value = target;
+            return;
+        }
+
+        var from = Gauge.Value;
+        var animation = new Animation(v =>
+        {
+            Gauge.Value = v;
+            InvalidateSurface();
+        }, from, target, Easing.CubicOut);
+        animation.Commit(this, NeedleAnimationHandle, 16, (uint)duration);
+    }
 
     /// <summary>
     ///     BackingBrush

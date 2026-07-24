@@ -60,6 +60,7 @@ public abstract class BlazorGaugeBase : SKGLView, IDisposable
     /// </summary>
     public new void Dispose()
     {
+        _animationCts?.Cancel();
         Gauge?.Dispose();
         base.Dispose();
     }
@@ -156,9 +157,59 @@ public abstract class BlazorGaugeBase : SKGLView, IDisposable
         get => Gauge.Value;
         set
         {
-            Gauge.Value = value;
+            AnimateValue(value);
             InvalidateGauge();
         }
+    }
+
+    /// <summary>
+    ///     NeedleAnimationDuration - milliseconds for the needle to ease to a new value (0 = instant)
+    /// </summary>
+    [Parameter]
+    public double NeedleAnimationDuration { get; set; }
+
+    private CancellationTokenSource? _animationCts;
+
+    /// <summary>
+    ///     AnimateValue - ease the gauge value to a target with cubic ease-out,
+    ///     or jump directly when NeedleAnimationDuration is 0
+    /// </summary>
+    private void AnimateValue(double target)
+    {
+        _animationCts?.Cancel();
+        if (NeedleAnimationDuration <= 0)
+        {
+            Gauge.Value = target;
+            return;
+        }
+
+        _animationCts = new CancellationTokenSource();
+        _ = RunValueAnimation(Gauge.Value, target, NeedleAnimationDuration, _animationCts.Token);
+    }
+
+    private async Task RunValueAnimation(double from, double target, double duration, CancellationToken token)
+    {
+        var start = DateTime.UtcNow;
+        while (!token.IsCancellationRequested)
+        {
+            var t = (DateTime.UtcNow - start).TotalMilliseconds / duration;
+            if (t >= 1) break;
+            var eased = 1 - Math.Pow(1 - t, 3);
+            Gauge.Value = from + (target - from) * eased;
+            Invalidate();
+            try
+            {
+                await Task.Delay(16, token);
+            }
+            catch (TaskCanceledException)
+            {
+                return;
+            }
+        }
+
+        if (token.IsCancellationRequested) return;
+        Gauge.Value = target;
+        Invalidate();
     }
 
     /// <summary>
