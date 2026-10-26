@@ -26,13 +26,48 @@ public abstract class WpfGaugeBase : SKElement
     /// </summary>
     public GaugeBase Gauge { get; protected init; } = null!;
 
+    private SKImage? _ownedBackgroundImage;
+    private bool _backgroundImageFromPath;
+
     /// <summary>
     ///     Constructor - release cached gauge resources when the element unloads
     ///     (caches rebuild automatically if the element is reloaded)
     /// </summary>
     protected WpfGaugeBase()
     {
-        Unloaded += (_, _) => Gauge?.Dispose();
+        Unloaded += (_, _) =>
+        {
+            _animationTimer?.Stop();
+            _animationTimer = null;
+            Gauge.Value = Value;
+            Gauge?.Dispose();
+            ReleaseOwnedBackgroundImage();
+        };
+        Loaded += (_, _) =>
+        {
+            if (_ownedBackgroundImage is not null || Gauge.BackgroundImage is not null) return;
+            if (_backgroundImageFromPath && !string.IsNullOrWhiteSpace(BackgroundImagePath))
+                ReplaceOwnedBackgroundImage(WpfGaugeHelper.GetSkImageFromPath(BackgroundImagePath));
+            else if (!_backgroundImageFromPath && BackgroundImageSource is BitmapSource source)
+                ReplaceOwnedBackgroundImage(WpfGaugeHelper.GetSkImage(source));
+        };
+    }
+
+    private void ReleaseOwnedBackgroundImage()
+    {
+        if (_ownedBackgroundImage is null) return;
+        Gauge.InvalidateStaticLayers();
+        if (ReferenceEquals(Gauge.BackgroundImage, _ownedBackgroundImage))
+            Gauge.BackgroundImage = null!;
+        _ownedBackgroundImage.Dispose();
+        _ownedBackgroundImage = null;
+    }
+
+    private void ReplaceOwnedBackgroundImage(SKImage? image)
+    {
+        ReleaseOwnedBackgroundImage();
+        _ownedBackgroundImage = image;
+        Gauge.BackgroundImage = image!;
     }
 
     #region Draw
@@ -156,7 +191,7 @@ public abstract class WpfGaugeBase : SKElement
     {
         _animationTimer?.Stop();
         var duration = NeedleAnimationDuration;
-        if (duration <= 0 || !IsLoaded)
+        if (duration <= 0 || !double.IsFinite(duration) || !IsLoaded)
         {
             Gauge.Value = target;
             return;
@@ -726,7 +761,8 @@ public abstract class WpfGaugeBase : SKElement
         typeof(ImageSource), null!,
         (gaugeBase, newValue) =>
         {
-            gaugeBase.Gauge.BackgroundImage = WpfGaugeHelper.GetSkImage(newValue as BitmapSource)!;
+            gaugeBase._backgroundImageFromPath = false;
+            gaugeBase.ReplaceOwnedBackgroundImage(WpfGaugeHelper.GetSkImage(newValue as BitmapSource));
         });
 
     /// <summary>
@@ -742,7 +778,8 @@ public abstract class WpfGaugeBase : SKElement
         typeof(string), null!,
         (gaugeBase, newValue) =>
         {
-            gaugeBase.Gauge.BackgroundImage = WpfGaugeHelper.GetSkImageFromPath((string)newValue)!;
+            gaugeBase._backgroundImageFromPath = true;
+            gaugeBase.ReplaceOwnedBackgroundImage(WpfGaugeHelper.GetSkImageFromPath((string)newValue));
         });
 
     /// <summary>

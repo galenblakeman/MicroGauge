@@ -27,6 +27,36 @@ public class GaugeRenderingTests
     }
 
     [Fact]
+    public void RadialRangeInnerEdgeInterpolatesTowardEndExtent()
+    {
+        using var gauge = new GaugeRadial
+        {
+            BackingBrush = GaugeBrushes.Transparent,
+            BackingOutlineBrush = GaugeBrushes.Transparent,
+            TickInterval = 0,
+            MinorTickInterval = 0,
+            LabelInterval = 0,
+            NeedleBrush = GaugeBrushes.Transparent,
+            Ranges =
+            {
+                new GaugeRadialRange
+                {
+                    Brush = GaugeBrushes.Red,
+                    InnerStartExtent = 0.2f,
+                    InnerEndExtent = 0.6f,
+                    OuterStartExtent = 0.8f,
+                    OuterEndExtent = 0.8f
+                }
+            }
+        };
+
+        using var image = GaugeRenderer.Render(gauge, 400, 400);
+        using var bitmap = SKBitmap.FromImage(image);
+        Assert.Equal(0, bitmap.GetPixel(200, 140).Alpha); // 0.3 radius at the range midpoint
+        Assert.Equal(SKColors.Red, bitmap.GetPixel(200, 100)); // 0.5 radius remains in the range
+    }
+
+    [Fact]
     public void RadialHalf()
     {
         using var gauge = new GaugeRadial

@@ -24,13 +24,42 @@ public abstract class MauiGaugeBase : SKCanvasView
     /// </summary>
     public GaugeBase Gauge { get; protected init; } = null!;
 
+    private SKImage? _ownedBackgroundImage;
+
     /// <summary>
     ///     Constructor - release cached gauge resources when the view unloads
     ///     (caches rebuild automatically if the view is reloaded)
     /// </summary>
     protected MauiGaugeBase()
     {
-        Unloaded += (_, _) => Gauge?.Dispose();
+        Unloaded += (_, _) =>
+        {
+            Gauge?.Dispose();
+            ReleaseOwnedBackgroundImage();
+        };
+        Loaded += (_, _) =>
+        {
+            if (_ownedBackgroundImage is null && Gauge.BackgroundImage is null &&
+                !string.IsNullOrWhiteSpace(BackgroundImagePath))
+                ReplaceOwnedBackgroundImage(MauiGaugeHelper.GetSkImageFromPath(BackgroundImagePath));
+        };
+    }
+
+    private void ReleaseOwnedBackgroundImage()
+    {
+        if (_ownedBackgroundImage is null) return;
+        Gauge.InvalidateStaticLayers();
+        if (ReferenceEquals(Gauge.BackgroundImage, _ownedBackgroundImage))
+            Gauge.BackgroundImage = null!;
+        _ownedBackgroundImage.Dispose();
+        _ownedBackgroundImage = null;
+    }
+
+    private void ReplaceOwnedBackgroundImage(SKImage? image)
+    {
+        ReleaseOwnedBackgroundImage();
+        _ownedBackgroundImage = image;
+        Gauge.BackgroundImage = image!;
     }
 
     #region Draw
@@ -706,6 +735,7 @@ public abstract class MauiGaugeBase : SKCanvasView
         get => Gauge.BackgroundImage;
         set
         {
+            ReleaseOwnedBackgroundImage();
             Gauge.BackgroundImage = value;
             InvalidateSurface();
         }
@@ -725,7 +755,7 @@ public abstract class MauiGaugeBase : SKCanvasView
         typeof(string), null!,
         (gaugeBase, newValue) =>
         {
-            gaugeBase.Gauge.BackgroundImage = MauiGaugeHelper.GetSkImageFromPath((string)newValue)!;
+            gaugeBase.ReplaceOwnedBackgroundImage(MauiGaugeHelper.GetSkImageFromPath((string)newValue));
         });
 
     /// <summary>

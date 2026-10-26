@@ -326,7 +326,7 @@ namespace MicroGauge
         private void DrawRangeInner(GaugeRadialRange range, SKPathBuilder builder, double angleRange, ref double angle,
             ref double angleDelta)
         {
-            var innerRatio = (range.InnerStartExtent - range.InnerEndExtent) / angleRange;
+            var innerRatio = (range.InnerEndExtent - range.InnerStartExtent) / angleRange;
             var calcExtent = range.InnerStartExtent + angleDelta * innerRatio;
             var start = GaugeHelper.GetRadialPoint(_center, Convert.ToSingle(_radius * calcExtent), angle);
             builder.MoveTo(start);
