@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Desktop" Version="12.1.4" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="12.1.4" />
+    <PackageReference Include="SkiaSharp" Version="4.150.1" />
+    <ProjectReference Include="..\..\Library\MicroGauge.Avalonia\MicroGauge.Avalonia.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\MicroGauge.Example.Wpf\Resources\aluminium_texture_radial.png"
+             Link="Assets\aluminium_texture_radial.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\MicroGauge.Example.Wpf\Resources\copper_texture_plain.png"
+             Link="Assets\copper_texture_plain.png" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

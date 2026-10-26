@@ -1,0 +1,241 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:g="clr-namespace:MicroGauge.Avalonia;assembly=MicroGauge.Avalonia"
+        x:Class="MicroGauge.Example.Avalonia.MainWindow"
+        Title="MicroGauge Avalonia Examples" Width="920" Height="850" MinWidth="760">
+  <Window.Resources>
+    <SolidColorBrush x:Key="Backing" Color="#333333" />
+    <SolidColorBrush x:Key="Border" Color="#282828" />
+    <LinearGradientBrush x:Key="HumidityRange" StartPoint="0%,50%" EndPoint="100%,50%">
+      <GradientStop Color="#40FFFFFF" Offset="0" />
+      <GradientStop Color="#700067E5" Offset="0.5" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="PressureRange" StartPoint="0%,50%" EndPoint="100%,50%">
+      <GradientStop Color="#00FFFFFF" Offset="0" />
+      <GradientStop Color="#FFFF2020" Offset="0.65" />
+      <GradientStop Color="#FFFF2020" Offset="0.8" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="TemperatureRange" StartPoint="0%,50%" EndPoint="100%,50%">
+      <GradientStop Color="#CCE5EC" Offset="0" />
+      <GradientStop Color="#88ABD1" Offset="0.3" />
+      <GradientStop Color="#80A862" Offset="0.5" />
+      <GradientStop Color="#FF2020" Offset="0.8" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="BatteryBar" StartPoint="0%,50%" EndPoint="100%,50%">
+      <GradientStop Color="#FF2020" Offset="0" />
+      <GradientStop Color="#E5F000" Offset="0.7" />
+      <GradientStop Color="#00E000" Offset="1" />
+    </LinearGradientBrush>
+  </Window.Resources>
+
+  <ScrollViewer Background="#74747C">
+    <StackPanel Margin="20" Spacing="14">
+      <TextBlock Text="MicroGauge Avalonia Examples" Foreground="White"
+                 FontSize="25" FontWeight="Bold" HorizontalAlignment="Center" />
+      <StackPanel Margin="24,0" Spacing="4">
+        <TextBlock Text="Wind Speed live value" Foreground="White" FontSize="13" />
+        <Slider x:Name="ValueSlider" Minimum="0" Maximum="30" Value="15" />
+      </StackPanel>
+
+      <Grid ColumnDefinitions="*,*" RowDefinitions="340,340,250,350,250"
+            ColumnSpacing="12" RowSpacing="12">
+        <!-- Wind Speed: texture, counterweight tail, three ranges -->
+        <Grid Grid.Row="0" Grid.Column="0" RowDefinitions="42,*">
+          <StackPanel HorizontalAlignment="Center">
+            <TextBlock Text="Wind Speed" Foreground="White" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" />
+            <TextBlock Text="(Counterweight Tail)" Foreground="White" FontSize="12" HorizontalAlignment="Center" />
+          </StackPanel>
+          <g:AvaloniaGaugeRadial x:Name="WindSpeedGauge" Grid.Row="1" Margin="24,0"
+              BackingBrush="{StaticResource Backing}" BackingOutlineBrush="{StaticResource Border}"
+              BackingStrokeWidth="10" BackgroundImagePath="Assets/aluminium_texture_radial.png"
+              Value="{Binding #ValueSlider.Value}" NeedleAnimationDuration="250"
+              MinValue="0" MaxValue="30" TickInterval="5" LabelInterval="5"
+              LabelExtent="0.85" LabelFontFamily="Arial" LabelFontSize="10"
+              LabelFontBrush="#1A1A1A" ValueFormatString="{}{0:N0} MPH"
+              ValueFontFamily="Arial" ValueFontSize="20" ValueFontBrush="#1A1A1A"
+              TickBrush="#1A1A1A" TickStrokeWidth="2" MinorTickBrush="#5A5A5A"
+              MinorTickStrokeWidth="1" NeedleBrush="#1A1A1A"
+              NeedlePivotBrush="#2F2F2F" NeedlePivotOutlineBrush="#1A1A1A"
+              NeedlePivotEndExtent="0.07" NeedleStartExtent="-0.18"
+              NeedleStartWidth="5" NeedleEndWidth="2.5" />
+        </Grid>
+
+        <!-- Humidity: no minor ticks, gradient range -->
+        <Grid Grid.Row="0" Grid.Column="1" RowDefinitions="42,*">
+          <StackPanel HorizontalAlignment="Center">
+            <TextBlock Text="Humidity" Foreground="White" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" />
+            <TextBlock Text="(No Minor)" Foreground="White" FontSize="12" HorizontalAlignment="Center" />
+          </StackPanel>
+          <g:AvaloniaGaugeRadial Grid.Row="1" Margin="24,0"
+              BackingBrush="{StaticResource Backing}" BackingOutlineBrush="#1E272E"
+              BackingStrokeWidth="7" Value="50" MinValue="0" MaxValue="100"
+              TickInterval="10" MinorTickInterval="10" LabelInterval="10"
+              LabelFormatString="{}{0:N0}%" LabelFontBrush="White"
+              ValueFormatString="{}{0:N0}%" ValueFontBrush="#FAF9F6"
+              TickBrush="White" MinorTickBrush="#727272"
+              NeedleBrush="#0096FF" NeedlePivotBrush="#0096FF"
+              NeedlePivotOutlineBrush="White" NeedleOutlineBrush="White"
+              NeedleOutlineWidth="2" NeedleStartExtent="-0.2"
+              RangeBrush="{StaticResource HumidityRange}"
+              RangeInnerStartExtent="0.6" RangeInnerEndExtent="0.6"
+              RangeOuterStartExtent="0.6" RangeOuterEndExtent="0.71" />
+        </Grid>
+
+        <!-- Pressure: set indicator and gradient danger band -->
+        <Grid Grid.Row="1" Grid.Column="0" RowDefinitions="42,*">
+          <StackPanel HorizontalAlignment="Center">
+            <TextBlock Text="Pressure" Foreground="White" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" />
+            <TextBlock Text="(Set Indicator)" Foreground="White" FontSize="12" HorizontalAlignment="Center" />
+          </StackPanel>
+          <g:AvaloniaGaugeRadial Grid.Row="1" Margin="24,0"
+              BackingBrush="White" BackingOutlineBrush="{StaticResource Border}"
+              BackingStrokeWidth="10" Value="400" MinValue="0" MaxValue="1000"
+              TickInterval="100" MinorTickInterval="50" LabelInterval="100"
+              LabelExtent="0.79" LabelFontBrush="Black"
+              ValueFormatString="{}{0:N0} PSI" ValueFontBrush="Black"
+              TickBrush="Black" TickStrokeWidth="2" MinorTickBrush="#808080"
+              NeedleBrush="Black" NeedlePivotBrush="#C0C0C0"
+              NeedlePivotOutlineBrush="Black" NeedleStartExtent="-0.2"
+              SetNeedleValue="700" SetNeedleBrush="Yellow"
+              SetNeedleOutlineWidth="2" SetNeedleOutlineBrush="Black"
+              SetNeedleEndExtent="0.7" SetNeedleStartWidth="3" SetNeedleEndWidth="2"
+              RangeBrush="{StaticResource PressureRange}"
+              RangeInnerStartExtent="0.6" RangeInnerEndExtent="0.6"
+              RangeOuterStartExtent="0.7" RangeOuterEndExtent="0.7" />
+        </Grid>
+
+        <!-- Flow Rate: notched backing -->
+        <Grid Grid.Row="1" Grid.Column="1" RowDefinitions="42,*">
+          <StackPanel HorizontalAlignment="Center">
+            <TextBlock Text="Flow Rate" Foreground="White" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" />
+            <TextBlock Text="(Notch)" Foreground="White" FontSize="12" HorizontalAlignment="Center" />
+          </StackPanel>
+          <g:AvaloniaGaugeRadial Grid.Row="1" Margin="24,0"
+              RadialStyle="Notch" BackingBrush="{StaticResource Backing}"
+              BackingOutlineBrush="{StaticResource Border}" BackingStrokeWidth="10"
+              Value="4000" MinValue="0" MaxValue="10000"
+              TickInterval="1000" MinorTickInterval="500" LabelInterval="1000"
+              LabelExtent="0.8" LabelFontBrush="White"
+              ValueFormatString="{}{0:N0} LPM" ValueFontBrush="White"
+              TickBrush="White" TickStrokeWidth="2"
+              TickStartExtent="0.55" TickEndExtent="0.65"
+              MinorTickBrush="#808080" MinorTickStartExtent="0.45" MinorTickEndExtent="0.65"
+              NeedleBrush="#0096FF" NeedlePivotBrush="#4D4D4D"
+              NeedlePivotOutlineBrush="#0096FF" NeedleStartExtent="-0.2" />
+        </Grid>
+
+        <!-- Temperature: half gauge with gradient band -->
+        <Grid Grid.Row="2" Grid.Column="0" RowDefinitions="42,*">
+          <StackPanel HorizontalAlignment="Center">
+            <TextBlock Text="Temperature" Foreground="White" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" />
+            <TextBlock Text="(Half)" Foreground="White" FontSize="12" HorizontalAlignment="Center" />
+          </StackPanel>
+          <g:AvaloniaGaugeRadial Grid.Row="1" Margin="8,0"
+              RadialStyle="Half" BackingBrush="{StaticResource Backing}"
+              BackingOutlineBrush="{StaticResource Border}" BackingStrokeWidth="10"
+              Value="30" MinValue="-20" MaxValue="40" TickInterval="10"
+              MinorTickInterval="5" LabelInterval="10" LabelExtent="0.8"
+              LabelFormatString="{}{0:N0}°C" LabelFontBrush="White"
+              ValueExtent="-0.10" ValueFormatString="{}{0:N0}°C" ValueFontBrush="Black"
+              TickBrush="White" TickStrokeWidth="2" MinorTickBrush="#808080"
+              ScaleStartAngle="180" ScaleEndAngle="360"
+              NeedleBrush="#AAFF00" NeedlePivotBrush="#AAFF00"
+              NeedlePivotOutlineBrush="#AAFF00" NeedlePivotOutlineWidth="0"
+              NeedlePivotEndExtent="0.25" NeedleStartWidth="2" NeedleEndWidth="1"
+              RangeBrush="{StaticResource TemperatureRange}"
+              RangeInnerStartExtent="0.6" RangeInnerEndExtent="0.6"
+              RangeOuterStartExtent="0.6" RangeOuterEndExtent="0.71" />
+        </Grid>
+
+        <!-- Battery: horizontal, texture, set indicator -->
+        <Grid Grid.Row="2" Grid.Column="1" RowDefinitions="42,*">
+          <StackPanel HorizontalAlignment="Center">
+            <TextBlock Text="Battery" Foreground="White" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" />
+            <TextBlock Text="(Horizontal / Set Indicator)" Foreground="White" FontSize="12" HorizontalAlignment="Center" />
+          </StackPanel>
+          <g:AvaloniaGaugeLinear Grid.Row="1" Margin="8,0"
+              TopExtent="0" BottomExtent="0" LeftExtent="0.06" RightExtent="0.06"
+              BackingBrush="{StaticResource Backing}" BackingOutlineBrush="{StaticResource Border}"
+              BackingStrokeWidth="10" BackgroundImagePath="Assets/copper_texture_plain.png"
+              BackgroundImageOpacity="0.85" Value="90" MinValue="0" MaxValue="100"
+              TickInterval="10" MinorTickInterval="5" LabelInterval="20"
+              LabelExtent="0.74" LabelFormatString="{}{0:N0}%"
+              LabelFontBrush="White" ValueExtent="0.4"
+              ValueFormatString="{}{0:N0}%" ValueFontBrush="White"
+              TickBrush="White" MinorTickBrush="#727272"
+              ValueWidthExtent="0.5" TickWidthExtent="0.6" MinorTickWidthExtent="0.5"
+              NeedleBrush="White" NeedleStartWidth="12" NeedleEndWidth="1"
+              NeedleStartExtent="0.15" NeedleEndExtent="0.25"
+              SetNeedleValue="60" SetNeedleBrush="Red"
+              SetNeedleStartExtent="0.2" SetNeedleEndExtent="0.8"
+              SetNeedleStartWidth="2" SetNeedleEndWidth="2"
+              ValueBarBrush="{StaticResource BatteryBar}" />
+        </Grid>
+
+        <!-- Valve: vertical bar with warning ranges -->
+        <Grid Grid.Row="3" Grid.Column="0" RowDefinitions="42,*">
+          <StackPanel HorizontalAlignment="Center">
+            <TextBlock Text="Valve" Foreground="White" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" />
+            <TextBlock Text="(Vertical / Ranges)" Foreground="White" FontSize="12" HorizontalAlignment="Center" />
+          </StackPanel>
+          <g:AvaloniaGaugeLinear x:Name="ValveGauge" Grid.Row="1"
+              Width="170" HorizontalAlignment="Center"
+              TopExtent="0.06" BottomExtent="0.15"
+              BackingBrush="{StaticResource Backing}" BackingOutlineBrush="{StaticResource Border}"
+              BackingStrokeWidth="10" Value="95" MinValue="0" MaxValue="100"
+              TickInterval="10" MinorTickInterval="5" LabelInterval="10"
+              LabelExtent="0.74" LabelFormatString="{}{0:N0}%"
+              LabelFontBrush="White" ValueExtent="0.08"
+              ValueFormatString="{}{0:N0}%" ValueFontBrush="White"
+              TickBrush="#FFFDD0" MinorTickBrush="#727272"
+              ValueWidthExtent="0.5" TickWidthExtent="0.6" MinorTickWidthExtent="0.5"
+              IsVertical="True" NeedleBrush="#57E700"
+              NeedleStartWidth="12" NeedleEndWidth="1"
+              NeedleStartExtent="0.1" NeedleEndExtent="0.25"
+              ValueBarBrush="#57E700" />
+        </Grid>
+
+        <!-- Wind Direction: full circle -->
+        <Grid Grid.Row="3" Grid.Column="1" RowDefinitions="42,*">
+          <StackPanel HorizontalAlignment="Center">
+            <TextBlock Text="Wind Direction" Foreground="White" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" />
+            <TextBlock Text="(360°)" Foreground="White" FontSize="12" HorizontalAlignment="Center" />
+          </StackPanel>
+          <g:AvaloniaGaugeRadial Grid.Row="1" Margin="24,0"
+              BottomExtent="0.1" TopExtent="0" LeftExtent="0" RightExtent="0"
+              BackingBrush="{StaticResource Backing}" BackingOutlineBrush="{StaticResource Border}"
+              BackingStrokeWidth="10" Value="45" MinValue="0" MaxValue="360"
+              TickInterval="22.5" LabelInterval="45" LabelExtent="0.8"
+              LabelFormatString="{}{0:N0}°" LabelFontBrush="White"
+              ValueExtent="1.15" ValueFormatString="{}{0:N0}°" ValueFontBrush="White"
+              TickBrush="#F28C28" TickStrokeWidth="2" MinorTickBrush="{StaticResource Backing}"
+              ScaleStartAngle="90" ScaleEndAngle="90"
+              NeedleBrush="#F28C28" NeedlePivotBrush="#4D4D4D"
+              NeedlePivotOutlineBrush="#F28C28" NeedleStartExtent="-0.2" />
+        </Grid>
+
+        <!-- Progress: half gauge with four solid ranges -->
+        <Grid Grid.Row="4" Grid.Column="0" RowDefinitions="42,*">
+          <StackPanel HorizontalAlignment="Center">
+            <TextBlock Text="Progress" Foreground="White" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" />
+            <TextBlock Text="(Multiple Solid Ranges)" Foreground="White" FontSize="12" HorizontalAlignment="Center" />
+          </StackPanel>
+          <g:AvaloniaGaugeRadial x:Name="ProgressGauge" Grid.Row="1" Margin="8,0"
+              RadialStyle="Half" BackingBrush="{StaticResource Backing}"
+              BackingOutlineBrush="{StaticResource Border}" BackingStrokeWidth="10"
+              Value="40" MinValue="0" MaxValue="100"
+              TickInterval="25" MinorTickInterval="25" LabelInterval="25"
+              LabelFormatString="{}{0:N0} %" LabelFontBrush="White"
+              ValueFormatString="{}{0:N0} %" ValueFontBrush="White"
+              TickBrush="White" TickStrokeWidth="2"
+              TickStartExtent="0.49" TickEndExtent="0.75"
+              MinorTickBrush="White" MinorTickStartExtent="0.6" MinorTickEndExtent="0.74"
+              ScaleStartAngle="180" ScaleEndAngle="360"
+              NeedleBrush="Black" NeedlePivotBrush="Black"
+              NeedlePivotOutlineBrush="White" NeedleOutlineBrush="White"
+              NeedleOutlineWidth="2" NeedleStartExtent="-0.2" />
+        </Grid>
+      </Grid>
+    </StackPanel>
+  </ScrollViewer>
+</Window>

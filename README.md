@@ -7,7 +7,7 @@
 * Customization: Configure backing, scale, tick (minor/major), label, value, needle, and range via attributes.
 * Background Images: Style gauge faces with textures or images, clipped to the gauge shape (concept credit: [tsoriano64](https://github.com/tsoriano64/MicroGauge)). 
 * Cross-Platform Compatibility: Works with all the platforms that [SkiaSharp](https://github.com/mono/SkiaSharp) supports. 
-* Framework: MAUI, WPF, and Blazor libraries are provided with tags and bindings for customization (.NET 10, SkiaSharp 4).
+* Framework: MAUI, WPF, Blazor, and Avalonia libraries are provided with tags and bindings for customization (.NET 10, SkiaSharp 4).
 
 ---
 ## Gallery
@@ -25,11 +25,27 @@
 
 [![NuGet Version](https://img.shields.io/nuget/v/MicroGauge.Blazor?style=flat-square&logo=nuget&label=MicroGauge.Blazor)](https://www.nuget.org/packages/MicroGauge.Blazor/)
 
+MicroGauge.Avalonia is included in this solution; publish it after its first release is validated.
+
 ---
 ## Tag Reference
 
 * [Radial Gauge](https://github.com/galenblakeman/MicroGauge/blob/master/Doc/RadialGaugeTag.md)
 * [Linear Gauge](https://github.com/galenblakeman/MicroGauge/blob/master/Doc/LinearGaugeTag.md)
+
+---
+## Avalonia Usage
+
+The `MicroGauge.Avalonia` project targets Avalonia 12.1 and SkiaSharp 4.150.1. Reference `SkiaSharp` 4.150.1 explicitly in your Avalonia app and see the [Avalonia package README](Library/MicroGauge.Avalonia/README.md) for the control API.
+
+```xml
+xmlns:microGauge="clr-namespace:MicroGauge.Avalonia;assembly=MicroGauge.Avalonia"
+
+<microGauge:AvaloniaGaugeRadial Value="{Binding Speed}" NeedleBrush="#008000" />
+<microGauge:AvaloniaGaugeLinear Value="{Binding Speed}" ValueBarBrush="#008000" />
+```
+
+The example app is in `Example/MicroGauge.Example.Avalonia`.
 
 ---
 ##  Xamarin.Forms (Legacy)
