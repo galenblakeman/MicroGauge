@@ -3,7 +3,7 @@
 Avalonia radial and linear controls backed by the MicroGauge SkiaSharp renderer. This package targets .NET 10 and Avalonia 12.1.4 and requires Avalonia's Skia renderer. The project explicitly references SkiaSharp 4.150.1; keep the host app's SkiaSharp reference on the same version.
 
 ```xml
-<PackageReference Include="MicroGauge.Avalonia" Version="1.1.0.1" />
+<PackageReference Include="MicroGauge.Avalonia" Version="1.1.0.2" />
 <PackageReference Include="SkiaSharp" Version="4.150.1" />
 ```
 

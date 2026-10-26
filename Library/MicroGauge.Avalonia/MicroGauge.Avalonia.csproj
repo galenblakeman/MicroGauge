@@ -4,7 +4,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <PackageId>MicroGauge.Avalonia</PackageId>
-    <Version>1.1.0.1</Version>
+    <Version>1.1.0.2</Version>
     <Authors>Galen Blakeman</Authors>
     <PackageDescription>MicroGauge controls for Avalonia</PackageDescription>
     <PackageProjectUrl>https://github.com/galenblakeman/MicroGauge</PackageProjectUrl>
